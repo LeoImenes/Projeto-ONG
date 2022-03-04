@@ -1,0 +1,52 @@
+@import url("../../Global/globalHeaderMenu.css");
+.menuJS {
+    height: 90%;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 80%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.container p {
+    font-size: 2rem;
+}
+
+.infoAssistido {
+    background-color: #e5e5e5;
+    height: 60%;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.addAssistido {
+    background-color: #e5e5e5;
+    height: 60%;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.addAssistido:hover,
+.infoAssistido:hover {
+    box-shadow: none;
+    padding: 0 0 10px 5px;
+    cursor: pointer;
+}

@@ -1,0 +1,150 @@
+p,
+h2 {
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+    width: 100px
+}
+
+.menuimg {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+
+.nav-bar {
+    list-style: none;
+    width: 95vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar :first-child {
+    align-self: center;
+}
+
+.menuJS {
+    width: 10%;
+    height: 100%;
+    background-color: #e5e5e5;
+    position: fixed;
+    opacity: 0.9
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+    list-style: none;
+}
+
+.menuitens {
+    height: 100%;
+}
+
+.userimg {
+    width: 70px
+}
+
+.useritens {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    list-style: none
+}
+
+.pages {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3vh;
+}
+
+.pageList {
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.imgitens {
+    height: 100%;
+    width: 100%;
+}
+
+.imglist {
+    list-style: none;
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.config {
+    padding-top: 5px;
+}
+
+.config:hover,
+.logout:hover {
+    cursor: pointer;
+}
+
+.config,
+.logout {
+    width: 25px;
+}
+
+.useritens li:first-child {
+    cursor: pointer;
+    margin-left: 75%;
+    margin-bottom: 10%;
+}
+
+ul {
+    list-style: none;
+}
+
+input {
+    border: none;
+    width: 20%;
+    height: 2em;
+    border-bottom: 1.5px solid black;
+    justify-content: flex-start;
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
+}

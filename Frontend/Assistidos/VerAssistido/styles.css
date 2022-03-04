@@ -1,0 +1,49 @@
+@import url("../../Global/globalHeaderMenu.css");
+body {
+    overflow: auto;
+}
+
+#user {
+    width: 100px
+}
+
+.container {
+    background-color: #e5e5e5;
+}
+
+.card {
+    background-color: #a5b2c4;
+}
+
+.assistido {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.foto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.dadosAssistido {
+    text-align: center;
+}
+
+.dadosAssistido ul {
+    width: 100%;
+    height: 3.9vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.familia {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    border-left: 1px solid #e5e5e5;
+}

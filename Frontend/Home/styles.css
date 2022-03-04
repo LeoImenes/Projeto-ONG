@@ -1,0 +1,77 @@
+@import url('../Global/globalHeader.css');
+a {
+    text-decoration: none;
+    color: black;
+}
+
+section {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.uppercards {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+    margin-bottom: 50vh;
+}
+
+.lower-cards {
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-top: 25vh;
+}
+
+.cardReceitas,
+.cardDespesas {
+    height: 10;
+    padding: 7vh 10vw 7vh 10vw;
+    background-color: #e5e5e5;
+    text-align: center;
+    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.582);
+}
+
+.cardAssistido,
+.cardFuncionario,
+.cardAssistencia {
+    height: 10;
+    padding: 7vh 5vw 7vh 5vw;
+    background-color: #e5e5e5;
+    text-align: center;
+    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.582);
+}
+
+.lower-cards :hover {
+    box-shadow: none;
+    background-color: gray;
+    padding: auto;
+    cursor: pointer;
+}
+
+.uppercards :hover {
+    box-shadow: none;
+    background-color: gray;
+    padding: auto;
+    cursor: pointer;
+}
+
+@media (max-width:760px) and (max-height:1080px) {}

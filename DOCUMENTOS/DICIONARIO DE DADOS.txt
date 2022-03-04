@@ -1,0 +1,343 @@
+DICIONARIO DE DADOS (JSON)
+
+FUNCIONARIO
+POST/cadastrar
+{
+"foto" : "./imagem.png",
+"matricula" : "0001",
+"nome_completo" : "Florinda Nipomuceno",
+"rg" : "222232341",
+"cpf" : "11122233344",
+"data_nascimento" : "2001-12-31",
+"cargo" : "Secretária",
+"sexo" : "f",
+"data_admissao" : "2020-01-01",
+"data_demissao" : null,
+"email" : "florinda@gmail.com",
+"senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
+"status" : true
+}
+
+PUT/matricula
+{
+"foto" : "./imagem.png",
+"matricula" : "0001",
+"nome_completo" : "Florinda Nipomuceno",
+"rg" : "222232341",
+"cpf" : "11122233344",
+"data_nascimento" : "2001-12-31",
+"cargo" : "Secretária",
+"sexo" : "f",
+"data_admissao" : "2020-01-01",
+"data_demissao" : null,
+"email" : "florinda@gmail.com",
+"senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
+"status" : false
+}
+
+GET/all
+{
+"matricula" : "0001",
+"nome_completo" : "Florinda Nipomuceno",
+"data_nascimento" : "2001-12-31",
+"cargo" : "Secretária",
+"data_admissao" : "2020-01-01",
+"data_demissao" : null,
+"email" : "florinda@gmail.com",
+"status" : true
+}
+
+ASSISTIDO
+
+POST/cadastrar
+{
+"id_saude" : 1,
+"id_familiar" : 1,
+"id_funcionario" : 1,
+"id_drogas" : 1,
+"nome_completo" : "Adenilson  dos Santos Bueno",
+"nome_social" : "Adenilson",
+"rg" : "1122233355",
+"cpf" : "11122233344",
+"data_nascimento" : "2022-01-01",
+"estado_civil" : "Solteiro",
+"natural" : "Jaguariuna",
+"sexo" : "M",
+"cartao_cidadao : "001122334455",
+"cartao_sus" : "00112233445566",
+"foto" : "./imagem/foto.png",
+"foto_depois" : "./imagem/foto2.png"",
+"relatorio" : ""
+}
+
+PUT/id_assistido
+{
+"id_saude" : 1,
+"id_familiar" : 1,
+"id_funcionario" : 1,
+"id_drogas" : 1,
+"nome_completo" : "Adenilson  dos Santos Bueno",
+"nome_social" : "Adenilson",
+"rg" : "1122233355",
+"cpf" : "11122233344",
+"data_nascimento" : "2022-01-01",
+"estado_civil" : "Solteiro",
+"natural" : "Jaguariuna",
+"sexo" : "M",
+"cartao_cidadao : "001122334455",
+"cartao_sus" : "00112233445566",
+"foto" : "./imagem/foto.png",
+"foto_depois" : "./imagem/foto2.png"",
+"relatorio" : ""
+}
+
+GET/id_assistido
+{
+"id_saude" : 1,
+"id_familiar" : 1,
+"id_funcionario" : 1,
+"id_drogas" : 1,
+"nome_completo" : "Adenilson  dos Santos Bueno",
+"nome_social" : "Adenilson",
+"rg" : "1122233355",
+"cpf" : "11122233344",
+"data_nascimento" : "2022-01-01",
+"estado_civil" : "Solteiro",
+"natural" : "Jaguariuna",
+"sexo" : "M",
+"cartao_cidadao : "001122334455",
+"cartao_sus" : "00112233445566",
+"foto" : "./imagem/foto.png",
+"foto_depois" : "./imagem/foto2.png"",
+"relatorio" : ""
+}
+
+GET/ASSISTIDO/all
+{
+ASSISTIDO {
+	"nome_completo" : "Adenilson  dos Santos Bueno",
+	"nome_social" : "Adenilson",
+	"data_nascimento" : "2022-01-01",
+	"estado_civil" : "Solteiro",
+	"natural" : "Jaguariuna",
+	"sexo" : "M",
+	"foto" : "./imagem/foto.png",
+	{
+	 {
+	"nome_completo" : "Adenilson  dos Santos Bueno",
+	"nome_social" : "Adenilson",
+	"data_nascimento" : "2022-01-01",
+	"estado_civil" : "Solteiro",
+	"natural" : "Jaguariuna",
+	"sexo" : "M",
+	"foto" : "./imagem/foto.png",
+	{
+}
+
+FAMILIAR
+
+POST/cadastrar
+{
+"nome_completo" : "MARIA DA SILVA",
+"rg" : "1122233344455",
+"parentesco : "MAE",
+"telefone" : "1938383838",
+"email" : "",
+"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP"
+}
+
+PUT/id_familiar
+{
+"nome_completo" : "MARIA DA SILVA",
+"rg" : "1122233344455",
+"parentesco : "MAE",
+"telefone" : "1938383838",
+"email" : "",
+"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP"
+}
+
+GET/id_familiar
+{
+"nome_completo" : "MARIA DA SILVA",
+"rg" : "1122233344455",
+"parentesco : "MAE",
+"telefone" : "1938383838",
+"email" : "",
+"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP""
+}
+
+GET/FAMILIAR/all
+{
+"nome_completo" : "MARIA DA SILVA",
+"parentesco : "MAE",
+"telefone" : "1938383838",
+"email" : "",
+"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP""
+}
+
+SAUDE
+
+GET/id_saude
+{
+"diabete" : true,
+"hipertencao" : false,
+"depressao" : false,
+"sindrome_do_panico" : false,
+"outro" : ""
+}
+
+SUBSTANCIAPSICOATIVA
+
+GET/id_drogas
+{
+alcool : true,
+nicotina : tre,
+cocaina : false,
+crak : fase,
+maconha : fase,
+ox : false,
+}
+
+ASSSITENCIA
+
+POST/assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : ""
+}
+
+PUT/id_assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : ""
+}
+
+GET/id_assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : """
+}
+
+ALIMENTACAO
+
+GET/id_aliementacao
+{
+"cafe_manha" : true,
+"almoco" : true,
+"cafe_tarde" : true,
+"ceia" : true
+}
+
+COVID19
+
+GET/id_covid
+{
+"temperatura" : 35,
+"mascara" : true,
+"tosse" : false,
+"cansaco" : false
+}
+
+REGISTRO DE ATENDIMENTO
+
+POST/id_atendimento
+{
+"id_assistido" : 1
+"id_funcionario" : 1
+"creas" : "RELATORIO DAS OCORRENCIAS DO ASSISTIDO",
+"encaminhamento" :  "CAPS",
+"profissional" :  "PISICOLOGO"
+}
+
+ENCAMINHAMENTO
+
+POST/id_atendimento
+{
+"data" : "2022-01-01",
+"assistido" : 1,
+"instituicao" : "CENTRO DE PROTEÇÃO DO ADOLECENTE"
+}
+
+FINANCEIRO
+
+POST/financeiro
+{
+id_funcionario : 001,
+data : "2022-01-01",
+tipo : "RECEITA",
+descricao : "DOACÇÃO",
+valor : 100,00
+}
+
+PUT/id_lancamento
+{
+id_funcionario : 001,
+data : "2022-01-01",
+tipo : "RECEITA",
+descricao : "DOACÇÃO",
+valor : 100,00
+}
+
+GET/id_lancamento
+{
+id_funcionario : 001,
+data : "2022-01-01",
+tipo : "RECEITA",
+descricao : "DOACÇÃO",
+valor : 100,00
+}
+
+GET/FINANCEIRO/all
+{
+id_funcionario : 001,
+data : "2022-01-01",
+tipo : "RECEITA",
+descricao : "DOACÇÃO",
+valor : 100,00
+}
+
+GET/tipo
+{
+tipo : "RECEITA",
+descricao : "DOACÇÃO",
+valolr : 100,00
+}
+
+
+

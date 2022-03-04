@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <ul class="nav-bar">
+                <li><img src="../../Assets/icones/hamburger.png" alt="Menu" class="menuimg" id="menu" onclick="showMenu()"></li>
+                <li><img src="../../Assets/icones/logo.png" alt="Logo" class="logo"></li>
+        </div>
+
+    </header>
+    <div class="menuJS">
+        <ul class="menuitens">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">X</li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p>Usuario</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li>
+                        <p>Assistencia</p>
+                    </li>
+                    <li>
+                        <p>Funcionario</p>
+                    </li>
+                    <li>
+                        <p>Lançametos</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+        </ul>
+    </div>
+    <section>
+        <div class="container">
+            <div class="card">
+                <div class="Assiscard">
+                    <h1>Cadastrar Assistido</h1>
+                    <div class="formAssis">
+
+                        <div class="inputs">
+
+                            <input type="text" placeholder="Nome Completo...">
+                            <input type="text" placeholder="Nome Social...">
+                            <input type="text" placeholder="RG...">
+                            <input type="text" placeholder="CPF...">
+
+                            <input type="text" placeholder="Nascimento...">
+                            <input type="text" placeholder="Estado civil...">
+                            <input type="text" placeholder="Naturalidade...">
+                            <input type="text" placeholder="Cartão cidadão...">
+                            <input type="text" placeholder="Cartão do SUS...">
+                            <div class="Sex">
+                                <p><b>Sexo:</b></p>
+                                <ul class="sexstyle">
+                                    <li>
+                                        <input type="checkbox" name="" id="">
+
+                                    </li>
+                                    <li>
+                                        <p> Masculino</p>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="" id="">
+                                    </li>
+                                    <li>
+                                        <p>Feminino</p>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="" id="">
+
+                                    </li>
+                                    <li>
+                                        <p>Outro</p>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                            <div class="outros">
+                                <div class="pscoativos" onclick="showPsco()">
+                                    <p><b>Piscoativos:</b></p>
+                                    <div class="listadrogas">
+                                        <ul>
+                                            <li>Álcool</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Nicotina</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Cocaína</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Crack</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Maconha</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Ox</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="saude">
+                                    <p><b>Problemas de saude:</b></p>
+                                    <div class="listadoencas">
+                                        <ul>
+                                            <li style="margin-right: 5px">Sind. do Pânico</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Hipertensão</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Depressão</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Diabetes</li>
+                                            <li><input type="checkbox" name="" id=""></li>
+                                        </ul>
+                                        <ul>
+                                            <li>Outro:</li>
+                                            <li style="width: 100%;"><input type="text" name="" id=""></li>
+                                        </ul>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="acompanhamento">
+                                    <p><b>Acompanhamento:</b></p>
+                                    <div class="acocontent">
+                                        <ul class="aclist">
+                                            <ul>
+                                                <li>Psiquiatra</li>
+                                                <li><input type="checkbox" name=""></li>
+                                            </ul>
+                                            <ul>
+                                                <li>CREAS</li>
+                                                <li><input type="checkbox" name=""></li>
+                                            </ul>
+                                            <ul>
+                                                <li>Programa Social</li>
+                                                <li><input type="checkbox" name=""></li>
+                                            </ul>
+                                            <ul>
+                                                <li>Outros:</li>
+                                                <li><input type="text" name=""></li>
+                                            </ul>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="Famcard">
+                    <div class="userform">
+                        <ul>
+                            <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
+                            <li>
+                                <p>Adicionar Foto </p>
+                                <p>📸</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="familia">
+                        <h1>Familiar</h1>
+                    </div>
+                    <div class="famform">
+                        <input type="text" placeholder="Nome Completo...">
+                        <input type="text" placeholder="Parentesco...">
+                        <input type="text" placeholder="Telefone...">
+                        <input type="text" placeholder="E-mail...">
+                        <input type="text" placeholder="Endereço...">
+
+
+                    </div>
+                    <div class="anexo">
+                        <ul>
+                            <li>
+                                <p>Anexar arquivo do Assistido</p>
+                            </li>
+                            <li><input type="file" name="" id=""></li>
+                        </ul>
+                    </div>
+                    <input type="button" value="Salvar" class="btn">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script src="../../Global/menu.js"></script>
+<script src="script.js"></script>
+
+</html>

@@ -1,0 +1,578 @@
+@import url("../../Global/globalHeaderMenu.css");
+section {
+    width: 100vw;
+    height: 100vh;
+}
+
+.menuJS {
+    height: 90%;
+}
+
+.foto {
+    width: 100px
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.card {
+    width: 95%;
+    height: 80%;
+    display: flex;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Assiscard {
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid black;
+}
+
+.formAssis {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputs {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: flex-start;
+}
+
+.inputs input {
+    display: flex;
+    width: 25%;
+    margin-right: 20px;
+}
+
+.Sex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin-bottom: 2rem
+}
+
+.Sex ul {
+    height: 100%;
+    display: flex;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+}
+
+.Sex ul input[type="checkbox"] {
+    height: 20px;
+    width: 20px
+}
+
+.Sex ul li {
+    margin-right: 0.5rem;
+}
+
+.sexstyle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sexstyle li {
+    width: 20%;
+}
+
+.sexstyle li:nth-child(2),
+.sexstyle li:nth-child(4) {
+    margin-right: 2em
+}
+
+.outros {
+    display: flex;
+    width: 40%;
+    height: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.aclist,
+.listadrogas,
+.listadoencas {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.outros ul input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    margin-bottom: 5px;
+}
+
+.outros li {
+    margin-right: 2rem
+}
+
+.listadoencas ul:nth-child(5),
+.aclist ul:nth-child(4) {
+    display: flex;
+    width: 100%;
+}
+
+.listadoencas ul:nth-child(5) input,
+.aclist ul:nth-child(4) input {
+    width: 100%
+}
+
+.listadoencas ul,
+.aclist ul,
+.listadrogas ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.listadoencas li,
+.aclist li,
+.listadrogas li {
+    width: 30%;
+    text-align: center;
+    justify-content: space-evenly
+}
+
+.Famcard {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.userform {
+    display: flex;
+    align-self: flex-start;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.userform ul {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.famform {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: center;
+}
+
+.famform input {
+    display: flex;
+    width: 25%;
+    margin-right: 20px;
+}
+
+.anexo ul {
+    width: 100%;
+    text-align: center;
+}
+
+.anexo ul li:first-child {
+    margin-bottom: 1rem;
+}
+
+.anexo input {
+    width: 100%;
+}
+
+.btn {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font: 1.2em sans-serif;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn:hover {
+    background-color: #166B8A;
+    box-shadow: none;
+    transition: all 0.25s;
+    padding: 0 0px 0px 7px;
+}
+
+@media (max-width: 1074px) {
+    section {
+        width: 100vw;
+        height: 100vh;
+    }
+    .foto {
+        width: 100px
+    }
+    .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        margin-top: 2rem;
+        justify-content: center;
+    }
+    .card {
+        width: 95%;
+        height: 80%;
+        display: flex;
+        box-shadow: none;
+    }
+    .Assiscard {
+        width: 50%;
+        height: 100%;
+        border-right: 1px solid black;
+    }
+    .formAssis {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .inputs {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+        align-self: flex-start;
+    }
+    .inputs input {
+        display: flex;
+        width: 25%;
+        margin-right: 20px;
+    }
+    .Sex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+        margin-bottom: 2rem
+    }
+    .Sex ul {
+        height: 100%;
+        display: flex;
+        margin-top: 1vh;
+        margin-bottom: 3vh;
+    }
+    .Sex ul input[type="checkbox"] {
+        height: 20px;
+        width: 20px
+    }
+    .Sex ul li {
+        margin-right: 0.5rem;
+    }
+    .sexstyle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sexstyle li {
+        width: 20%;
+    }
+    .sexstyle li:nth-child(2),
+    .sexstyle li:nth-child(4) {
+        margin-right: 2em
+    }
+    .outros {
+        display: flex;
+        width: 40%;
+        height: 30%;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .aclist,
+    .listadrogas,
+    .listadoencas {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 10%;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+    }
+    .outros ul input[type="checkbox"] {
+        height: 20px;
+        width: 20px;
+        margin-bottom: 5px;
+    }
+    .outros li {
+        margin-right: 2rem
+    }
+    .listadoencas ul:nth-child(5),
+    .aclist ul:nth-child(4) {
+        display: flex;
+        width: 100%;
+    }
+    .listadoencas ul:nth-child(5) input,
+    .aclist ul:nth-child(4) input {
+        width: 100%
+    }
+    .listadoencas ul,
+    .aclist ul,
+    .listadrogas ul {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+    }
+    .listadoencas li,
+    .aclist li,
+    .listadrogas li {
+        width: 30%;
+        text-align: center;
+        justify-content: space-evenly
+    }
+    .Famcard {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .userform {
+        display: flex;
+        align-self: flex-start;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1rem;
+    }
+    .userform ul {
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        width: 40%;
+        justify-content: space-around;
+    }
+    .famform {
+        width: 100%;
+        height: 25%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+        align-self: center;
+    }
+    .famform input {
+        display: flex;
+        width: 25%;
+        margin-right: 20px;
+    }
+    .anexo ul {
+        width: 100%;
+        text-align: center;
+    }
+    .anexo ul li:first-child {
+        margin-bottom: 1rem;
+    }
+    .anexo input {
+        width: 100%;
+    }
+    .btn {
+        width: 10vw;
+        height: 5vh;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        font: 1.2em sans-serif;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+    .btn:hover {
+        box-shadow: none;
+        transition: all 0.25s;
+        padding: 0 0px 0px 7px;
+    }
+}
+
+@media (max-width: 974px) {
+    body {
+        overflow: auto;
+    }
+    section {
+        width: 100vw;
+        height: 100vh;
+    }
+    .foto {
+        width: 50px
+    }
+    .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        margin-top: 2rem;
+        justify-content: center;
+    }
+    .card {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        box-shadow: none;
+        flex-direction: column;
+        align-items: center
+    }
+    .Assiscard {
+        width: 100%;
+        height: 100%;
+        border-right: none;
+    }
+    .formAssis {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .inputs {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+        align-self: flex-start;
+    }
+    .inputs input {
+        display: flex;
+        width: 50%;
+        margin-right: 20px;
+    }
+    .Sex {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 70%;
+        margin-bottom: 50%;
+        text-align: flex-start;
+    }
+    .Sex ul {
+        height: 100%;
+        display: flex;
+        margin-top: 1vh;
+        margin-bottom: 5vh;
+    }
+    .Sex ul input[type="checkbox"] {
+        height: 20px;
+        width: 20px
+    }
+    .Sex ul li {
+        margin-right: 0.5rem;
+    }
+    .sexstyle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sexstyle li {
+        width: 20%;
+    }
+    .sexstyle li:nth-child(2),
+    .sexstyle li:nth-child(4) {
+        margin-right: 2em
+    }
+    .outros {
+        display: flex;
+        flex-direction: column;
+    }
+    .Famcard {
+        margin-top: 20%;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .userform {
+        display: flex;
+        align-self: flex-start;
+        width: 100%;
+        height: 30%;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .userform ul {
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        width: 40%;
+        height: 100%;
+        justify-content: space-around;
+    }
+    .famform {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+        align-self: center;
+        margin-bottom: 20%;
+    }
+    .famform input {
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin-right: 20px;
+    }
+    .anexo {
+        height: 100%;
+    }
+    .anexo ul {
+        width: 100%;
+        display: flex;
+    }
+    .anexo ul li:first-child {
+        margin-bottom: 1rem;
+    }
+    .anexo input {
+        width: 100%;
+    }
+    .btn {
+        width: 50%;
+        height: 5vh;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        font: 1.2em sans-serif;
+        box-shadow: none
+    }
+}

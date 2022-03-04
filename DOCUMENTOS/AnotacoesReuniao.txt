@@ -1,0 +1,13 @@
+O que espera do sistema?
+
+- Controlar a quantidade de consumo de alimentação(agora ou futuramente)
+- Relatório diário: quais serviços o assistido recebe
+- Custos com aluguel e outras contas (Controle financeiro)
+- Deixar um campo para observacoes na area do assistido (A recepção não
+ terá direito de ver essas observações da assistente social e do psicólogo)
+- CREAS(Data que chegou, como chegou e as pretenções dele, além das orientações que foram dadas ao assistido, se mandou p/ o caps),
+ é um relatório
+- CAPS(Encaminhamentos para tratamento de usuários e acompanhamento psicológico para moradores de jaguariúna) só faz o encaminhamento
+- Adicionar uma aba acompanhamentos em que a assistente social anota para onde o assistido foi encaminhado)
+Campos : data, assistido(nome) e encaminhamento(para onde)
+

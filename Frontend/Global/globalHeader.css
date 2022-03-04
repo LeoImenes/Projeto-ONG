@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky
+}
+
+.nav-bar {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-bar :nth-child(2),
+:nth-child(3) {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar :nth-child(2) :nth-child(1) {
+    margin-right: 2.5vw;
+}
+
+.nav-bar :nth-child(3) :nth-child(1) {
+    margin-right: 100%
+}
+
+.img-user {
+    width: 50px;
+}
+
+.logo {
+    width: 150px
+}
+
+.img-gear,
+.img-logout {
+    width: 30px;
+}
+
+p,
+h2 {
+    font-size: 24px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.img-gear:hover,
+.img-logout:hover {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+input {
+    border: none;
+    width: 20%;
+    height: 2em;
+    border-bottom: 1.5px solid black;
+    justify-content: flex-start;
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
+}
