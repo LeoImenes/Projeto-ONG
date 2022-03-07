@@ -1,13 +1,48 @@
-import React, { useState} from 'react';
-import { StyleSheet,Text, View, Image, TextInput} from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { StyleSheet,Text, View, Image, TextInput, ToastAndroid} from 'react-native';
 
 import global from "../../Global/Style"
+import md5 from 'md5';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}) {
   const [recupSenha, setRecupSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const recuperarSenha = () => {
     setRecupSenha(true);
+  }
+
+  useEffect(async() => {
+    if(await AsyncStorage.getItem('userdata') !== null) {
+      navigation.navigate("Home");
+    }
+  }, [])
+
+  const autenticar = () => {
+    let funcionario = {
+      email: email,
+      senha: senha
+    }
+
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json"
+      },
+      "body": JSON.stringify(funcionario),
+    })
+    .then(resp => {return resp.json()})
+    .then(async data => {
+      if(data.length > 0) {
+        await AsyncStorage.setItem('userdata', JSON.stringify(data[0]));
+        navigation.navigate('Home');
+      }else {
+          ToastAndroid.show('Email ou Senha Invalidos', ToastAndroid.SHORT);
+      }
+    })
+    .catch(err => { console.log(err) });
   }
 
   return (
@@ -24,10 +59,10 @@ export default function Login({navigation}) {
           :
           <View style={css.cardLogin}>
             <Text style={css.title}>LOGIN</Text>
-            <TextInput placeholder={"Matrícula..."} style={css.input}></TextInput>
-            <TextInput placeholder={"Senha..."} style={css.input}></TextInput>
+            <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={css.input}/>
+            <TextInput secureTextEntry={true} placeholder="Senha" value={senha} onChangeText={setSenha} style={css.input}/>
             <Text style={css.button} onPress={() => {recuperarSenha()}}>Esqueci a senha</Text>
-            <Text style={global.buttonText} onPress={() => { navigation.navigate("Home")}}>Entrar</Text>
+            <Text style={global.buttonText} onPress={() => autenticar()}>Entrar</Text>
         </View>
       }
     </View>
