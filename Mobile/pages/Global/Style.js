@@ -55,10 +55,11 @@ export default StyleSheet.create({
         borderBottomColor: 'black',
         borderBottomWidth: 2,
         alignItems: 'center',
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
         flexDirection: "row",
         alignSelf: "center",
-        marginTop: "5%"
+        marginTop: "5%",
+        padding: 15
       },
       buttonText:{
         color:"blue",
