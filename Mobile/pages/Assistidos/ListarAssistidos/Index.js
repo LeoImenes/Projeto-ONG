@@ -4,6 +4,20 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'rea
 import global from "../../Global/Style"
 
 export default function ListarAssistidos({navigation}){
+    const[lista, setLista] = useState([]);
+
+    useEffect(() => {
+        Listar();
+     }, []);
+
+    const Listar = () => {
+      fetch(`http://10.87.207.27:3000/assistidos`)
+    .then(resp => {return resp.json()})
+    .then(data => {
+        setLista(data);
+    })
+    .catch(err => { console.log(err) });
+  }
     return(
         <View style={global.body}>
             <Image style={global.image} source={require("../../assets/logo.png")}/>

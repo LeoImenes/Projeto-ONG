@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 import global from "../../Global/Style"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ListarFuncionario({navigation}){
     const[lista, setLista] = useState([]);
@@ -27,7 +28,7 @@ export default function ListarFuncionario({navigation}){
                     {
                         lista.map((item,index) => {
                             return(
-                                <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario")}} key={index}>
+                                <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
                                     <Image source={require("../../assets/user.png")} style={global.imageUser}/>
                                     <View style={css.cardTxt}>
                                         <Text style={global.textInfo}>{item.nome_completo}</Text>
