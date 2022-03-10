@@ -19,12 +19,12 @@
                 <div class="cardForm">
                     <h2>Login</h2>
                     <form>
-                        <input type="text" placeholder="Matrícula">
-                        <input type="password" placeholder="Senha">
+                        <input type="text" placeholder="Matrícula" name="email" class="email">
+                        <input type="password" placeholder="Senha" name="senha" class="senha">
                         <div class="rec-senha">
                             <p style="color: blue;">Esqueci minha senha </p>
                         </div>
-                        <button type="submit" class="btnLog" onClick="entrar">Entrar</button>
+                        <button type="button" class="btnLog" onClick="conectar()">Entrar</button>
                     </form>
                 </div>
             </div>
@@ -32,5 +32,6 @@
     </section>
 
 </body>
+<script src="script.js"></script>
 
 </html>

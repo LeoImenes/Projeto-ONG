@@ -148,3 +148,9 @@ input {
 input:focus {
     outline: none;
 }
+
+@media (max-width: 1366px) {
+    .menuJS {
+        height: 90%;
+    }
+}

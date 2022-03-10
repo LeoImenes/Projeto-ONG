@@ -6,7 +6,7 @@ function list() {
             data.forEach(fun => {
                 var divimg = document.createElement("div")
                 var divnome = document.createElement("div")
-                var card = document.querySelector(".card")
+                var cont = document.querySelector(".content")
                 var img = document.createElement("img");
                 var cardfuncionario = document.createElement("div");
                 var nome = document.createElement("h1");
@@ -30,7 +30,7 @@ function list() {
                 divnome.appendChild(matricula)
                 cardfuncionario.appendChild(divimg)
                 cardfuncionario.appendChild(divnome)
-                card.appendChild(cardfuncionario)
+                cont.appendChild(cardfuncionario)
             })
         })
 }
