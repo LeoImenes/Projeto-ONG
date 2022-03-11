@@ -5,7 +5,7 @@ import global from "../../Global/Style"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function MeuPerfil({navigation}){
-    const [funcionario, setFuncionario] = useState("");
+    const [funcionario, setFuncionario] = useState({});
 
     useEffect(() => {
         getUser()
@@ -15,12 +15,12 @@ export default function MeuPerfil({navigation}){
         let value = await AsyncStorage.getItem('userdata');
         if(value !== null) {
             value = JSON.parse(value);
-            setFuncionario(value);
 
             fetch(`http://10.87.207.27:3000/funcionarios/${value.id_funcionario}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                console.log(data);
+                // console.log(data);
+                setFuncionario(data[0])
             })
             .catch( err => { console.log(err) })
         }
@@ -38,11 +38,7 @@ export default function MeuPerfil({navigation}){
     return(
         <View style={global.body}>
             <Image style={global.image} source={require("../../assets/logo.png")}/>
-            {
-                funcionario.map((item, index) => {
-                    return(
-                        <View>
-                            <View style={{
+            <View style={{
                                 width: "100%",
                                 height: "20%",
                                 display: "flex",
@@ -51,42 +47,37 @@ export default function MeuPerfil({navigation}){
                                 justifyContent: "space-evenly"
                                 }}>
                                 <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                                <Text style={global.textInfo}>Matrícula: {item.matricula}</Text>
-                            </View>
-                        </View>
-                    )
-                })
-            }
-            
+                                <Text style={global.textInfo}>Matrícula: {funcionario.matricula}</Text>
+            </View>
             <View style={css.scrollView}>
                 <ScrollView>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{funcionario.nome_completo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>RG:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{funcionario.rg}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>CPF:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{funcionario.cpf}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nascimento:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{formatDate(new Date(funcionario.data_nascimento))}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cargo:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{funcionario.cargo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Sexo:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{funcionario.sexo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Data admissão:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{formatDate(new Date(funcionario.data_admissao))}</Text>
                     </View>
                 </ScrollView>
             </View>

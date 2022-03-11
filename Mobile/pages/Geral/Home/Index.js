@@ -9,7 +9,7 @@ export default function Home({navigation}) {
   return (
     <View style={global.body}>
       <View style={css.header}>
-        <Feather name="menu" size={35} color="black" />
+        <Feather onPress={() => { navigation.openDrawer() }} name="menu" size={35} color="black" />
         <View style={{width: "30%"}}>
           <Text style={css.textLogo}>CASA ACOLHEDORA IRMÃ ANTÔNIA</Text>
         </View>
