@@ -1,0 +1,436 @@
+DICIONARIO DE DADOS (JSON)
+
+/* FUNCIONARIO */
+//CADASTRAR FUNCIONARIO
+POST/cadastrar_funcionario
+{
+"foto" : "./imagem1.png",
+"matricula" : "0001",
+"nome_completo" : "Douglas Roberto",
+"rg" : "222232341",
+"cpf" : "11122233344",
+"data_nascimento" : "1980-12-31",
+"sexo" : "M",
+"estado_civil" : "Casada",
+"cargo" : "Gerente",
+"data_admissao" : "2020-08-30",
+"data_demissao" : null,
+"email" : "douglas@casairmaantonia.org",
+"senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
+"status" : true
+"data_cadastro" : "01/04/2021",
+}
+
+{
+"foto" : "./imagem2.png",
+"matricula" : "0002",
+"nome_completo" : "Rafaela da Silva",
+"rg" : "222232341",
+"cpf" : "11122233344",
+"data_nascimento" : "1980-12-31",
+"sexo" : "F",
+"estado_civil" : "Solteiro",
+"cargo" : "Scretaria",
+"data_admissao" : "2020-01-01",
+"data_demissao" : true,
+"email" : "rafaela@casairmaantonia.org",
+"senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
+"status" : true
+"data_cadastro" : "01/04/2021",
+}
+
+//ATUALIZAR FUNCIONARIO
+PUT/atualizar_funcionario/2
+{
+"foto" : "./imagem2.png",
+"matricula" : "0002",
+"nome_completo" : "Rafaela da Silva",
+"rg" : "222232341",
+"cpf" : "11122233344",
+"data_nascimento" : "1980-12-31",
+"sexo" : "F",
+"estado_civil" : "Solteira",
+"cargo" : "Scretaria",
+"data_admissao" : "2020-01-01",
+"data_demissao" : 2022-01-30,
+"email" : "rafaela@casairmaantonia.org",
+"senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
+"status" : false
+}
+
+//LISTAR TODOS FUNCIONARIO
+GET/funcionarios
+[
+	{
+	"foto" : "./imagem1.png",
+	"matricula" : "0001",
+	"nome_completo" : "Douglas Roberto",
+	"status" : true
+	}
+	{
+	"foto" : "./imagem2.png",
+	"matricula" : "0002",
+	"nome_completo" : "Rafaela da Silva",
+	"status" : false
+	}
+
+]
+
+/* ASSISTIDO */
+//CADASTAR ASSISTIDO
+POST/cadastrar_assistido
+	{
+	"id_saude" : 1,
+	"id_familiar" : 1,
+	"id_funcionario" : 1,
+	"nome_completo" : "Adenilson  dos Santos Bueno",
+	"nome_social" : "Adenilson",
+	"rg" : "1122233355",
+	"cpf" : "11122233344",
+	"data_nascimento" : "2022-01-01",
+	"estado_civil" : "Casado",
+	"natural" : "Jaguariuna",
+	"sexo" : "M",
+	"cartao_cidadao : "001122334455",
+	"cartao_sus" : "00112233445566",
+	"foto_antes" : "./imagem/foto1.png",
+	"foto_depois" : "./imagem/foto2.png"",
+	"relatorio" : "Adenilson foi acolhido na casa em 01/04/2021, onde ele recebeu os primeiros atendimentos, banho, roupas, alimentação, permaneceu na casa até a data 07/03/2022, onde o mesmo retornou para sua familia e socidade, integro e limpo".,
+	"data_cadastro" : "01/04/2021",
+	"documentos_anexo" : "rg.pdf", "cpf.pdf",
+	}
+
+	{
+	"id_saude" : 2,
+	"id_familiar" : 2,
+	"id_funcionario" : 2,
+	"nome_completo" : "Amauri Valter da Silva ",
+	"nome_social" : "Amauri",
+	"rg" : "1122233355",
+	"cpf" : "11122233344",
+	"data_nascimento" : "1980-01-01",
+	"estado_civil" : "Solteiro",
+	"natural" : "Jaguariuna",
+	"sexo" : "M",
+	"cartao_cidadao : "001122334455",
+	"cartao_sus" : "00112233445566",
+	"foto_antes" : "./imagem/foto1.png",
+	"foto_depois" : "./imagem/foto2.png"",
+	"relatorio" : "Amauri foi acolhido na casa em 01/04/2021.,
+	"data_cadastro" : "01/04/2021",
+	"documentos_anexo" : "",
+	}
+	
+//ATUALIZAR ASSISTIDO
+PUT/atualizar_assistido/2
+	{"id_saude" : 2,
+	"id_familiar" : 2,
+	"id_funcionario" : 2,
+	"nome_completo" : "Amauri Valter da Silva",
+	"nome_social" : "Amauri",
+	"rg" : "1122233355",
+	"cpf" : "11122233344",
+	"data_nascimento" : "1980-01-01",
+	"estado_civil" : "Solteiro",
+	"natural" : "Jaguariuna",
+	"sexo" : "M",
+	"cartao_cidadao : "001122334455",
+	"cartao_sus" : "00112233445566",
+	"foto_antes" : "./imagem/foto1.png",
+	"foto_depois" : "./imagem/foto3.png"",
+	"relatorio" : "Amauri foi acolhido na casa em 01/04/2021, onde ele recebeu os primeiros atendimentos, banho, roupas, alimentação, Amauri, esta passando por um processo de tratamento, pisicologigo.
+	"documentos_anexo" : "rg.pdf", "cpf.pdf",
+	}
+
+//LISTAR TODOS OS ASSISTIDOS
+GET/assistidos
+[
+	{
+	"nome_completo" : "Adenilson  dos Santos Bueno",
+	"foto_antes" : "./imagem/foto1.png",
+	},
+	{
+	"nome_completo" : "Amauri Valter da Silva",
+	"foto_antes" : "./imagem/foto1.png",
+	},
+]
+
+/* FAMILIAR */
+//CADASTAR FAMILIAR
+POST/cadastrar
+{
+"id_assistido" : 1,
+"nome_completo" : "MARIA DA SILVA",
+"rg" : "1122233344455",
+"parentesco : "MAE",
+"telefone" : "1938383838",
+"email" : "",
+"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP"
+}
+
+/* CADASTAR FAMILIAR */
+POST/cadastar_familiar
+	{
+	"id_assistido" : 1,
+	"nome_completo" : "MARIA DA SILVA",
+	"rg" : "1122233344455",
+	"parentesco : "MAE",
+	"telefone" : "1938383838",
+	"email" : "",
+	"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP"
+	},
+	{
+	"id_assistido" : 2,
+	"nome_completo" : "João da Silva",
+	"rg" : "1122233344455",
+	"parentesco : "Irmão",
+	"telefone" : "1938383838",
+	"email" : "",
+	"endereco" : "RUA ANGELO, 120, CENTRO, JAGUARIUNA/SP",
+	},
+	
+//ATUALIZAR FAMILIAR
+PUT/id_familiar/1
+	{
+	"id_assistido" : 1,
+	"nome_completo" : "MARIA DA SILVA",
+	"rg" : "1122233344455",
+	"parentesco : "MAE",
+	"telefone" : "1938383838",
+	"email" : "",
+	"endereco" : "AV. MOREIRAS, 12, CENTRO, CAMPINAS/SP"
+	},
+
+//LISTAR FAMILIAR
+GET/familiar
+[
+	{
+	"id_assistido" : 1,
+	"nome_completo" : "MARIA DA SILVA",
+	"rg" : "1122233344455",
+	"parentesco : "MAE",
+	"telefone" : "1938383838",
+	"email" : "",
+	"endereco" : "RUA SEM FIN, 12, CENTRO, JAGUARIUNA/SP"
+	},
+	{
+	"id_assistido" : 2,
+	"nome_completo" : "João da Silva",
+	"rg" : "1122233344455",
+	"parentesco : "Irmão",
+	"telefone" : "1938383838",
+	"email" : "",
+	"endereco" : "RUA ANGELO, 120, CENTRO, JAGUARIUNA/SP",
+	},
+]
+
+/* LANÇAR ASSISTENCIA */
+POST/assistencia
+	{
+	"data" : "Date",
+	"id_assistido" : 1,
+	"id_funcionario" 2,
+	"solicitacoes" : [];
+	}
+
+/* SAUDE */
+POST/saude
+	{
+	"id_assistido" : 1
+	"tipo" : 1	
+	},
+
+"diabete" : true,
+"hipertencao" : false,
+"depressao" : false,
+"sindrome_do_panico" : false,
+"alcool" : true,
+"nicotina" : tre,
+"cocaina" : false,
+"crak" : fase,
+"maconha" : fase,
+"ox" : false,
+
+}
+
+ASSSITENCIA
+
+POST/assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : ""
+}
+
+PUT/id_assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : ""
+}
+
+GET/id_assistencia
+{
+"id_assistido" : 1,
+"id_funcionario" : 1, 
+"id_covid19" : 1,
+"id_alimentacao" : 1,	
+"data" : 2022-01-01,
+"roupas" : true,
+"sapatos" : true,
+"kit_higiene" : true,
+"banho" : true,
+"pernoite" : true,
+"abrigo" : true,
+"passagem" : false,
+"cesta_basica" : true,
+"outros" : """
+}
+
+ALIMENTACAO
+
+GET/id_aliementacao
+{
+"cafe_manha" : true,
+"almoco" : true,
+"cafe_tarde" : true,
+"ceia" : true
+}
+
+COVID19
+
+GET/id_covid
+{
+"temperatura" : 35,
+"mascara" : true,
+"tosse" : false,
+"cansaco" : false
+}
+
+REGISTRO DE ATENDIMENTO
+
+POST/id_atendimento
+{
+"id_assistido" : 1
+"id_funcionario" : 1
+"creas" : "RELATORIO DAS OCORRENCIAS DO ASSISTIDO",
+"encaminhamento" :  "CAPS",
+"profissional" :  "PISICOLOGO"
+}
+
+ENCAMINHAMENTO
+
+POST/id_atendimento
+	{
+	"data" : "2022-01-01",
+	"assistido" : 1,
+	"instituicao" : "CENTRO DE PROTEÇÃO DO ADOLECENTE"
+	}
+
+/* FINANCEIRO */
+//CADASTAR FINANCEIRO
+POST/financeiro
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	descricao : "DOACÇÃO",
+	valor : 100,00
+	},
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	descricao : "RIFA OVO DE PASCOA",
+	valor : 300,00
+	},
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	descricao : "ENERGIA",
+	valor : 100,00
+	},
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	descricao : "TELEFONE",
+	valor : 100,00
+	}
+
+//CONSULTAR FINACEIRO
+GET/data
+[
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	descricao : "DOACÇÃO",
+	valor : 100,00
+	},
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	descricao : "RIFA OVO DE PASCOA",
+	valor : 300,00
+	},
+	{
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	descricao : "ENERGIA",
+	valor : 100,00
+	},
+	id_funcionario : 001,
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	descricao : "TELEFONE",
+	valor : 100,00
+	}
+]
+
+GET/tipo
+[
+	{
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	valor : 100,00
+	},
+	{
+	data : "2022-01-01",
+	tipo : "RECEITA",
+	valor : 300,00
+	},
+	{
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	valor : 100,00
+	},
+	data : "2022-01-01",
+	tipo : "DESPESA",
+	valor : 100,00
+	}
+]
