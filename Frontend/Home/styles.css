@@ -1,4 +1,4 @@
-@import url('../Global/globalHeader.css');
+@import url("../Global/globalHeader.css");
 a {
     text-decoration: none;
     color: black;
@@ -11,7 +11,6 @@ section {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: #fff;
     align-items: center;
     justify-content: center;
 }
@@ -36,8 +35,8 @@ section {
 .lower-cards {
     position: absolute;
     display: flex;
-    width: 100vw;
-    justify-content: space-evenly;
+    width: 70%;
+    justify-content: space-around;
     margin-top: 25vh;
 }
 
@@ -47,7 +46,9 @@ section {
     padding: 7vh 10vw 7vh 10vw;
     background-color: #e5e5e5;
     text-align: center;
-    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.582);
+    box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .cardAssistido,
@@ -57,7 +58,9 @@ section {
     padding: 7vh 5vw 7vh 5vw;
     background-color: #e5e5e5;
     text-align: center;
-    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.582);
+    box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .lower-cards :hover {
@@ -65,6 +68,9 @@ section {
     background-color: gray;
     padding: auto;
     cursor: pointer;
+    transition: all 0.5s;
+    background-color: #166b8a;
+    color: #fff
 }
 
 .uppercards :hover {
@@ -72,6 +78,9 @@ section {
     background-color: gray;
     padding: auto;
     cursor: pointer;
+    transition: all 0.5s;
+    background-color: #166b8a;
+    color: #fff
 }
 
-@media (max-width:760px) and (max-height:1080px) {}
+@media (max-width: 760px) and (max-height: 1080px) {}

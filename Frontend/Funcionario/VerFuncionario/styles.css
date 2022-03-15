@@ -1,4 +1,39 @@
-img {
+@import url("../../Global/globalHeaderMenu.css");
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #221d1d;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    background-color: #49bb1c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardFuncionario {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: aqua;
+}
+
+.fotoFunc {
+    width: 30%;
+    height: 30%;
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+    background-color: rgb(9, 59, 43);
+}
+
+.funcimg {
     border-radius: 50%;
     width: 100px;
     height: 100px

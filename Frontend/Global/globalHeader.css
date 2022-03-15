@@ -7,12 +7,15 @@
 
 header {
     height: 20vh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    background-color: #166b8a;
     border-bottom: 1px solid #e5e5e5;
-    position: sticky
+    position: sticky;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .nav-bar {
@@ -21,6 +24,15 @@ header {
     justify-content: space-around;
     align-items: center;
     list-style: none;
+}
+
+.nav-bar li:first-child {
+    width: 15%;
+    color: #000000;
+    flex-wrap: wrap;
+    display: flex;
+    text-align: center;
+    font-weight: bold;
 }
 
 .nav-bar :nth-child(2),

@@ -58,35 +58,51 @@
                     <div class="formAssis">
 
                         <div class="inputs">
-
-                            <input type="text" placeholder="Nome Completo...">
-                            <input type="text" placeholder="Nome Social...">
-                            <input type="text" placeholder="RG...">
-                            <input type="text" placeholder="CPF...">
-
-                            <input type="text" placeholder="Nascimento...">
-                            <input type="text" placeholder="Estado civil...">
-                            <input type="text" placeholder="Naturalidade...">
-                            <input type="text" placeholder="Cartão cidadão...">
-                            <input type="text" placeholder="Cartão do SUS...">
+                            <div class="nome-Completo">
+                                <input type="text" placeholder="Nome Completo..." class="nome">
+                            </div>
+                            <div class="nome-social">
+                                <input type="text" placeholder="Nome Social..." class="nome-soc">
+                            </div>
+                            <div class="Rg">
+                                <input type="text" placeholder="RG..." class="rg">
+                            </div>
+                            <div class="cpf">
+                                <input type="text" placeholder="CPF..." class="cpf">
+                            </div>
+                            <div class="Nascimento">
+                                <input type="text" placeholder="Nascimento..." class="nasc">
+                            </div>
+                            <div class="estado">
+                                <input type="text" placeholder="Estado civil..." class="estado">
+                            </div>
+                            <div class="Naturalidade">
+                                <input type="text" placeholder="Naturalidade..." class="naturalidade">
+                            </div>
+                            <div class="CartãoCidadao">
+                                <input type="text" placeholder="Cartão cidadão..." class="cartCid">
+                            </div>
+                            <div class="CartãoSus">
+                                <input type="text" placeholder="Cartão do SUS..." class="cartSus">
+                            </div>
                             <div class="Sex">
                                 <p><b>Sexo:</b></p>
                                 <ul class="sexstyle">
                                     <li>
-                                        <input type="checkbox" name="" id="">
+                                        <input type="checkbox" name="" id="Masculino">
 
                                     </li>
                                     <li>
                                         <p> Masculino</p>
                                     </li>
                                     <li>
-                                        <input type="checkbox" name="" id="">
+                                        <input type="checkbox" name="" id="Feminino">
                                     </li>
                                     <li>
                                         <p>Feminino</p>
                                     </li>
                                     <li>
-                                        <input type="checkbox" name="" id="">
+                                        <input type="checkbox" name="" id="Outro">
 
                                     </li>
                                     <li>
@@ -102,27 +118,27 @@
                                     <div class="listadrogas">
                                         <ul>
                                             <li>Álcool</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Álcool"></li>
                                         </ul>
                                         <ul>
                                             <li>Nicotina</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Nicotina"></li>
                                         </ul>
                                         <ul>
                                             <li>Cocaína</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Cocaína"></li>
                                         </ul>
                                         <ul>
                                             <li>Crack</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Crack"></li>
                                         </ul>
                                         <ul>
                                             <li>Maconha</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Maconha"></li>
                                         </ul>
                                         <ul>
                                             <li>Ox</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Ox"></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,19 +147,19 @@
                                     <div class="listadoencas">
                                         <ul>
                                             <li style="margin-right: 5px">Sind. do Pânico</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Sind. do Pânico"></li>
                                         </ul>
                                         <ul>
                                             <li>Hipertensão</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Hipertensão"></li>
                                         </ul>
                                         <ul>
                                             <li>Depressão</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Depressão"></li>
                                         </ul>
                                         <ul>
                                             <li>Diabetes</li>
-                                            <li><input type="checkbox" name="" id=""></li>
+                                            <li><input type="checkbox" name="" id="Diabetes"></li>
                                         </ul>
                                         <ul>
                                             <li>Outro:</li>
@@ -214,7 +230,7 @@
                             <li><input type="file" name="" id=""></li>
                         </ul>
                     </div>
-                    <input type="button" value="Salvar" class="btn">
+                    <input type="button" value="Salvar" class="btn" onclick="cadastrarAssistido()">
 
                 </div>
             </div>
