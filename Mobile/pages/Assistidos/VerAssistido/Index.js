@@ -3,7 +3,18 @@ import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity}
 
 import global from "../../Global/Style"
 
-export default function VerAssistido({navigation}){
+export default function VerAssistido({navigation, route}){
+    const {item} = route.params;
+
+    const formatDate = (nasc) => {
+        let dia = nasc.getDate();
+        dia = (dia < 10) ? "0" + dia : dia;
+        let mes = nasc.getMonth() + 1;
+        mes = (mes < 10) ? "0" + mes : mes;
+        let ano = nasc.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+     }
+
     return(
         <View style={global.body}>
             <Image style={global.image} source={require("../../assets/logo.png")}/>
@@ -21,65 +32,65 @@ export default function VerAssistido({navigation}){
                 <ScrollView>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.nome_completo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome social:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.nome_social}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>RG:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.rg}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>CPF:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.cpf}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nascimento:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{formatDate(new Date(item.data_nascimento))}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Naturalidade:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.naturalidade}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Sexo:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.sexo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Estado civíl:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.estado_civil}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cartão cidadão:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.cartao_cidadao}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cartão do SUS:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.cartao_sus}</Text>
                     </View>
-                    <Text style={css.title}>Dados do Familiar</Text>
+                    {/* <Text style={css.title}>Dados do Familiar</Text>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Parentesco:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Telefone:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>E-mail:</Text>
-                        <Text style={global.textInfo}>Info</Text>
+                        <Text style={global.textInfo}>{item.}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Endereço:</Text>
-                        <Text style={global.textInfo}>Info</Text>
-                    </View>
+                        <Text style={global.textInfo}>{item.}</Text>
+                    </View> */}
                     <TouchableOpacity>
                         <Text style={css.button}>Adicionar observações</Text>
                     </TouchableOpacity>

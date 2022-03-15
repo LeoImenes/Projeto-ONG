@@ -19,7 +19,6 @@ export default function MeuPerfil({navigation}){
             fetch(`http://10.87.207.27:3000/funcionarios/${value.id_funcionario}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                // console.log(data);
                 setFuncionario(data[0])
             })
             .catch( err => { console.log(err) })
