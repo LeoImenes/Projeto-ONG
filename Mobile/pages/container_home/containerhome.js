@@ -28,7 +28,13 @@ export default function ContainerHome() {
               </DrawerContentScrollView>
             )
           }}>
-            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Home" component={Home} options={{
+                drawerLabel: () => null,
+                title: null,
+                drawerIcon: () => null,
+                drawerItemStyle: { height: 0 }
+            }} />
+            <Drawer.Screen name="MeuPerfil" component={MeuPerfil} />
             <Drawer.Screen name="Assistido" component={Assistido} options={{
                 drawerLabel: () => null,
                 title: null,
@@ -66,12 +72,6 @@ export default function ContainerHome() {
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="ListarFuncionario" component={ListarFuncionario} options={{
-                drawerLabel: () => null,
-                title: null,
-                drawerIcon: () => null,
-                drawerItemStyle: { height: 0 }
-            }} />
-            <Drawer.Screen name="MeuPerfil" component={MeuPerfil} options={{
                 drawerLabel: () => null,
                 title: null,
                 drawerIcon: () => null,

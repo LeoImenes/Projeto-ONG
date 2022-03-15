@@ -7,9 +7,6 @@ export default function Funcionario({navigation}){
     return(
         <View style={global.body}>
             <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("MeuPerfil")}}>
-                <Text style={css.title}>Meu perfil</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("ListarFuncionario")}}>
                 <Text style={css.title}>Listar funcionários</Text>
             </TouchableOpacity>

@@ -23,48 +23,18 @@ export default function ListarAssistidos({navigation}){
             <Image style={global.image} source={require("../../assets/logo.png")}/>
             <View style={css.scrollView}>
                 <ScrollView>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido")}}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View>
-                            <Text style={global.textInfo}>Nome</Text>
-                            <Text style={global.textInfo}>Documento</Text>
-                        </View>
-                    </TouchableOpacity>
+                    {
+                        lista.map((item, index) => {
+                            return(
+                                <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerAssistido", {item})}} key={index}>
+                                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+                                    <View>
+                                        <Text style={global.textInfo}>{item.nome_completo}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
                 </ScrollView>
             </View>
         </View>

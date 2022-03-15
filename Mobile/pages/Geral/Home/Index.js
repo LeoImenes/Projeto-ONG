@@ -25,10 +25,7 @@ export default function Home({navigation}) {
             <Text style={css.title}>Funcionário</Text>
           </TouchableOpacity>
           <TouchableOpacity style={global.card}>
-            <Text style={css.title}>Receitas</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={global.card}>
-            <Text style={css.title}>Despesas</Text>
+            <Text style={css.title}>Financeiro</Text>
           </TouchableOpacity>
       </ScrollView>
     </View>

@@ -32,7 +32,7 @@ POST/cadastrar_funcionario
 "estado_civil" : "Solteiro",
 "cargo" : "Scretaria",
 "data_admissao" : "2020-01-01",
-"data_demissao" : true,
+"data_demissao" : "",
 "email" : "rafaela@casairmaantonia.org",
 "senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
 "status" : true
@@ -52,7 +52,7 @@ PUT/atualizar_funcionario/2
 "estado_civil" : "Solteira",
 "cargo" : "Scretaria",
 "data_admissao" : "2020-01-01",
-"data_demissao" : 2022-01-30,
+"data_demissao" : "2022-01-30",
 "email" : "rafaela@casairmaantonia.org",
 "senha" : "e8d95a51f3af4a3b134bf6bb680a213a",
 "status" : false
@@ -80,9 +80,6 @@ GET/funcionarios
 //CADASTAR ASSISTIDO
 POST/cadastrar_assistido
 	{
-	"id_saude" : 1,
-	"id_familiar" : 1,
-	"id_funcionario" : 1,
 	"nome_completo" : "Adenilson  dos Santos Bueno",
 	"nome_social" : "Adenilson",
 	"rg" : "1122233355",
@@ -91,35 +88,35 @@ POST/cadastrar_assistido
 	"estado_civil" : "Casado",
 	"natural" : "Jaguariuna",
 	"sexo" : "M",
-	"cartao_cidadao : "001122334455",
-	"cartao_sus" : "00112233445566",
+	"cartao_cidadao : "023482",
+	"cartao_sus" : "1658254216900011",
 	"foto_antes" : "./imagem/foto1.png",
 	"foto_depois" : "./imagem/foto2.png"",
-	"relatorio" : "Adenilson foi acolhido na casa em 01/04/2021, onde ele recebeu os primeiros atendimentos, banho, roupas, alimentação, permaneceu na casa até a data 07/03/2022, onde o mesmo retornou para sua familia e socidade, integro e limpo".,
 	"data_cadastro" : "01/04/2021",
-	"documentos_anexo" : "rg.pdf", "cpf.pdf",
+	"id_funcionario" : 1,
+	"lgpg" : true
 	}
-
+	
+	"relatorio" : "Adenilson foi acolhido na casa em 01/04/2021, onde ele recebeu os primeiros atendimentos, banho, roupas, alimentação, permaneceu na casa até a data 07/03/2022, onde o mesmo retornou para sua familia e socidade, integro e limpo".,
+	"relatorio" : "Amauri foi acolhido na casa em 01/04/2021.,
 	{
-	"id_saude" : 2,
-	"id_familiar" : 2,
-	"id_funcionario" : 2,
-	"nome_completo" : "Amauri Valter da Silva ",
-	"nome_social" : "Amauri",
+	"nome_completo" : "Adenilson  dos Santos Bueno",
+	"nome_social" : "Adenilson",
 	"rg" : "1122233355",
 	"cpf" : "11122233344",
-	"data_nascimento" : "1980-01-01",
-	"estado_civil" : "Solteiro",
+	"data_nascimento" : "2022-01-01",
+	"estado_civil" : "Casado",
 	"natural" : "Jaguariuna",
 	"sexo" : "M",
-	"cartao_cidadao : "001122334455",
-	"cartao_sus" : "00112233445566",
+	"cartao_cidadao : "023482",
+	"cartao_sus" : "1658254216900011",
 	"foto_antes" : "./imagem/foto1.png",
 	"foto_depois" : "./imagem/foto2.png"",
-	"relatorio" : "Amauri foi acolhido na casa em 01/04/2021.,
 	"data_cadastro" : "01/04/2021",
-	"documentos_anexo" : "",
+	"id_funcionario" : 1,
+	"lgpg" : true
 	}
+	
 	
 //ATUALIZAR ASSISTIDO
 PUT/atualizar_assistido/2
