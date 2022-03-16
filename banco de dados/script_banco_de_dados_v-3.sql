@@ -12,15 +12,15 @@ CREATE TABLE assistidos(
 	rg VARCHAR(15),
 	cpf VARCHAR(15) UNIQUE,
 	antecedente_criminal VARCHAR(50),
-	data_nascimento DATETIME NOT NULL,
+	data_nascimento DATE NOT NULL,
 	estado_civil VARCHAR(15) NOT NULL,
 	naturalidade VARCHAR(20),
 	sexo VARCHAR(12) NOT NULL,
 	cartao_cidadao VARCHAR(10),
 	cartao_sus VARCHAR(20),
-	foto_antes LONGBLOB,
-	data_cadastro DATETIME,
-	foto_depois LONGBLOB
+	foto_antes LONGTEXT,
+	data_cadastro DATE,
+	foto_depois LONGTEXT
 ); 
 
 
@@ -35,7 +35,7 @@ CREATE TABLE saude(
 	id_saude INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_assistido INTEGER NOT NULL,
 	id_comorbidade INTEGER NOT NULL,
-	data_de_registro DATETIME,
+	data_de_registro DATE,
 	
 	CONSTRAINT fk_assistido FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_comorbidade FOREIGN KEY (id_comorbidade) REFERENCES comorbidades(id_comorbidade) ON DELETE CASCADE ON UPDATE CASCADE 
@@ -59,7 +59,7 @@ CREATE TABLE familiarAssistido(
 	id_familiarAssistido INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	id_assistido INTEGER NOT NULL,
 	id_familiar INTEGER NOT NULL,
-	data_cadastro DATETIME NOT NULL,
+	data_cadastro DATE NOT NULL,
 	
 	
 	CONSTRAINT fk_assistido02 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -71,7 +71,7 @@ CREATE TABLE DocsAssistidos(
 	id_doc INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_assistido INTEGER NOT NULL,
 	documento LONGTEXT NOT NULL,
-	data_cadastro DATETIME NOT NULL,
+	data_cadastro DATE NOT NULL,
 	
 	CONSTRAINT fk_assistido03 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -82,7 +82,7 @@ CREATE TABLE relatorios(
 	id_assistido INTEGER NOT NULL,
 	id_funcionario INTEGER NOT NULL, 
 	relatorio TEXT NOT NULL,
-	data_relatorio DATETIME NOT NULL,
+	data_relatorio DATE NOT NULL,
 	
 	CONSTRAINT fk_assistido04 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -90,17 +90,17 @@ CREATE TABLE relatorios(
 
 CREATE TABLE funcionarios(
 	id_funcionario INTEGER PRIMARY KEY AUTO_INCREMENT,
-	foto LONGBLOB,
+	foto LONGTEXT,
 	matricula VARCHAR(10) NOT NULL UNIQUE,
 	nome_completo VARCHAR(40) NOT NULL,
 	rg VARCHAR(15) NOT NULL,
 	cpf VARCHAR(15) NOT NULL UNIQUE UNIQUE,
-	data_nascimento DATETIME NOT NULL,
+	data_nascimento DATE NOT NULL,
 	estado_civil VARCHAR(20) NOT NULL,
 	cargo VARCHAR(50) NOT NULL,
 	sexo VARCHAR(12) NOT NULL,
-	data_admissao DATETIME NOT NULL,
-	data_demissao DATETIME,
+	data_admissao DATE NOT NULL,
+	data_demissao DATE,
 	email VARCHAR(30) NOT NULL UNIQUE,
 	senha VARCHAR(50) NOT NULL,
 	status BOOLEAN NOT NULL
@@ -113,7 +113,7 @@ CREATE TABLE encaminhamentos(
 	id_funcionario INTEGER NOT NULL,
 	id_assistido INTEGER NOT NULL,
 	encaminhamento VARCHAR(100) NOT NULL,
-	data_registro DATETIME NOT NULL,
+	data_registro DATE NOT NULL,
 	
 	CONSTRAINT fk_funcionario04 FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_assistido05 FOREIGN KEY (id_assistido) REFERENCES assistidos (id_assistido) ON DELETE CASCADE ON UPDATE CASCADE
@@ -131,7 +131,7 @@ CREATE TABLE assistencias(
 	id_assistido INTEGER NOT NULL,
 	id_funcionario INTEGER NOT NULL,
 	solicitacao VARCHAR(100) NOT NULL,
-	data_registro DATETIME NOT NULL,
+	data_registro DATE NOT NULL,
 	
 	CONSTRAINT fk_assistido06 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,	
 	CONSTRAINT fk_funcionario05 FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE

@@ -1,9 +1,6 @@
-
-
-
 	INSERT INTO comorbidades VALUES
 		(DEFAULT,"HIV",1),
-		(DEFAULT,"Hypertenção",1),
+		(DEFAULT,"Hipertenção",1),
 		(DEFAULT,"Diabetes",1),
 		(DEFAULT,"Depressão",1),
 		(DEFAULT,"Maconha",0),

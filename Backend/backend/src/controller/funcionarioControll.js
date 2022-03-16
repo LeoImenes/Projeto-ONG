@@ -3,21 +3,45 @@ const { con } = require('../database/Connection')
 
 const modeloFuncionario = require('../model/funcionarioModel')
 
-const getAll = (req, res) => {
-    let string = 'select * from funcionario'
-    con.query(string, (err, result) => {
-        result.forEach((item, index) => {
-            delete item.senha
-            delete item.status
-        });
+// atualização do método POST
+const postFuncionario = (req, res) => {
 
-        res.json(result)
+    let foto = (req.body.foto === undefined) ? "" : req.body.foto
+    let status = (req.body.data_demissao === "") ? 1 : 0
+    let string = `insert into funcionarios(foto,matricula,nome_completo,rg,cpf,data_nascimento,estado_civil,cargo,sexo,data_admissao,email,senha,status) values ?;`
+    let values = [
+
+        [
+            foto,
+            req.body.matricula,
+            req.body.nome_completo,
+            req.body.rg,
+            req.body.cpf,
+            req.body.data_nascimento,
+            req.body.estado_civil,
+            req.body.cargo,
+            req.body.sexo,
+            req.body.data_admissao,
+            req.body.email,
+            req.body.senha,
+            status]
+
+    ]
+    con.query(string, [values], (err, result) => {
+
+        if (err == null) {
+            res.status(200).json({ ...req.body, id: result.insertId });
+        } else {
+            res.status(400).json({ err: err.message });
+        }
     })
 }
 
+// Método de login atualizado
+
 const login = (req, res) => {
     if(req.body.email !== undefined && req.body.senha !== undefined){
-        let string = `select * from funcionario where email = '${req.body.email}' and senha = '${req.body.senha}'`
+        let string = `select * from funcionarios where email = '${req.body.email}' and senha = '${req.body.senha}'`
         con.query(string, (err, result) => {
 
             if(err === null){
@@ -39,6 +63,7 @@ const login = (req, res) => {
                         delete item.data_admissao
                         delete item.data_demissao
                         delete item.email
+                        delete item.estado_civil
                     });
                     res.json(result[0]).end()
                 }
@@ -55,74 +80,7 @@ const login = (req, res) => {
     }
 }
 
-const getMatricula = (req, res) => {
-
-    let string = 'select * from funcionario where matricula =' + req.params.matricula_funcionario
-    con.query(string, (err, result) => {
-
-        if(err === null){
-            if(result.length == 0){
-                res.status(404).end()
-            }else{
-                result.forEach((item, index) => {
-                    delete item.senha
-                    delete item.status
-                });
-                res.json(result)
-            }
-        }else{
-            res.status(404).json({err: err.message})
-        }
-    })
-}
-
-const postFuncionario = (req, res) => {
-    let foto = (req.body.foto === undefined) ? "" : req.body.foto
-    let status = (req.body.data_demissao === "") ? 1 : 0
-    let string = `insert into funcionario(foto,matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values ?;`
-    let values = [
-
-        [
-            foto,
-            req.body.matricula,
-            req.body.nome_completo,
-            req.body.rg,
-            req.body.cpf,
-            req.body.data_nascimento,
-            req.body.cargo,
-            req.body.sexo,
-            req.body.data_admissao,
-            req.body.email,
-            req.body.senha,
-            status]
-
-    ]
-    con.query(string, [values], (err, result) => {
-
-        if (err == null) {
-            res.status(200).json({ ...req.body, id: result.insertId });
-        } else {
-            res.status(400).json({ err: err.message });
-        }
-    })
-}
-
-const updateFotoFuncionario = (req,res) => {
-
-    let cpf = req.body.cpf
-    let foto = req.body.foto
-    let string = `update funcionario set foto = '${foto}' where cpf = '${cpf}'`
-
-    con.query(string,(err, result) => {
-        if (err == null) {
-            res.status(200).json({ ...req.body });
-        } else {
-            res.status(400).json({ err: err.message });
-        }
-    })
-
-}
-
+// Método update atualizado 
 
 const updateFuncionario = (req, res) => {
 
@@ -173,9 +131,78 @@ const updateFuncionario = (req, res) => {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+const getAll = (req, res) => {
+    let string = 'select * from funcionarios'
+    con.query(string, (err, result) => {
+        result.forEach((item, index) => {
+            delete item.senha
+            delete item.status
+        });
+
+        res.json(result)
+    })
+}
+
+
+
+const getMatricula = (req, res) => {
+
+    let string = 'select * from funcionarios where matricula =' + req.params.matricula_funcionario
+    con.query(string, (err, result) => {
+
+        if(err === null){
+            if(result.length == 0){
+                res.status(404).end()
+            }else{
+                result.forEach((item, index) => {
+                    delete item.senha
+                    delete item.status
+                });
+                res.json(result)
+            }
+        }else{
+            res.status(404).json({err: err.message})
+        }
+    })
+}
+
+
+
+const updateFotoFuncionario = (req,res) => {
+
+    let cpf = req.body.cpf
+    let foto = req.body.foto
+    let string = `update funcionarios set foto = '${foto}' where cpf = '${cpf}'`
+
+    con.query(string,(err, result) => {
+        if (err == null) {
+            res.status(200).json({ ...req.body });
+        } else {
+            res.status(400).json({ err: err.message });
+        }
+    })
+
+}
+
+
+
+
 const deletarFuncionario = (req, res) => {
 
-    let string = `delete from funcionario where id_funcionario = ${req.params.matricula};`
+    let string = `delete from funcionarios where id_funcionario = ${req.params.matricula};`
 
     con.query(string, (err, result) => {
         if (err == null) {

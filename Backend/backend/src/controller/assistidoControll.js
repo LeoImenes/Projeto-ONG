@@ -386,6 +386,25 @@ const updateFotoDepoisAssistido = (req, res) => {
 
 }
 
+// novos métodos de requisição
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = {
