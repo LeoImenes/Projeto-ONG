@@ -1,71 +1,49 @@
-p,
-h2 {
-    font-size: 14px;
-    font-weight: normal;
-    font-family: 'Open Sans', sans-serif;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    overflow: hidden;
-}
-
-header {
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.logo {
-    width: 100px
-}
-
-.menuimg {
-    width: 100%;
-    height: 30px;
-    cursor: pointer;
-}
-
-.nav-bar {
-    list-style: none;
-    width: 95vw;
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav-bar :first-child {
-    align-self: center;
-}
-
+@import url("../../Global/globalHeader.css");
 .menuJS {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuJS img {
+    width: 30px;
+    height: 30px;
+}
+
+.menuJS:hover {
+    background-color: #166B8A;
+}
+
+.menucontent {
+    background-color: #166B8A;
+    height: 90%;
     width: 10%;
-    height: 100%;
-    background-color: #e5e5e5;
-    position: fixed;
-    opacity: 0.9
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 30px;
 }
 
 .user {
+    width: 100%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 20%;
-    width: 100%;
-    list-style: none;
-}
-
-.menuitens {
-    height: 100%;
-}
-
-.userimg {
-    width: 70px
+    background-color: #166B8A;
+    border-top-right-radius: 40px;
 }
 
 .useritens {
@@ -73,84 +51,75 @@ header {
     height: 100%;
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
-    justify-content: space-evenly;
-    list-style: none
+    justify-content: space-around
+}
+
+.useritens h2 {
+    position: absolute;
+    top: 2%;
+    left: 80%;
+}
+
+.userimg {
+    width: 70px;
 }
 
 .pages {
-    height: 45%;
-    width: 100%;
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 3vh;
+    background-color: aliceblue;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .pageList {
-    list-style: none;
-    width: 100%;
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-evenly;
 }
 
 .imgitens {
-    height: 100%;
+    background-color: #166B8A;
     width: 100%;
+    height: 20%;
+    border-bottom-right-radius: 30px;
 }
 
 .imglist {
-    list-style: none;
-    height: 30%;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-evenly;
 }
 
-.config {
-    padding-top: 5px;
+.imglist img {
+    width: 30px
 }
 
-.config:hover,
-.logout:hover {
-    cursor: pointer;
+.Assistencia,
+.Funcionario,
+.Lancamentos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 15%;
+    border-bottom: 0.5px solid black;
 }
 
-.config,
-.logout {
-    width: 25px;
-}
-
-.useritens li:first-child {
-    cursor: pointer;
-    margin-left: 75%;
-    margin-bottom: 10%;
-}
-
-ul {
-    list-style: none;
-}
-
-input {
-    border: none;
-    width: 20%;
-    height: 2em;
-    border-bottom: 1.5px solid black;
-    justify-content: flex-start;
-    background-color: transparent;
-}
-
-input:focus {
-    outline: none;
-}
-
-@media (max-width: 1366px) {
-    .menuJS {
-        height: 90%;
+@media (max-width:1366px) {
+    .pages p {
+        font-size: 14px
     }
 }

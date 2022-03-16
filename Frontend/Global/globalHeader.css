@@ -34,8 +34,7 @@ header {
     color: #166B8A;
 }
 
-.nav-bar :nth-child(2),
-:nth-child(3) {
+.nav-bar :nth-child(2) :nth-child(3) {
     display: flex;
     align-items: center;
 }
