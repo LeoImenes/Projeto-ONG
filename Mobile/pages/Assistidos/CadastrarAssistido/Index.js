@@ -72,9 +72,9 @@ export default function CadastrarAssistido({navigation}){
       }
 
     return(
-        <View style={global.body}>
+        <View style={global.body} onLoad={getFunc()}>
+            
             <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <Text onPress={() => {getFunc()}}>Hiiiiii</Text>
             <View style={css.scrollView}>
                 <ScrollView>
                     <Text style={css.title}>Dados Pessoais</Text>

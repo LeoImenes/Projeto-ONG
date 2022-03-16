@@ -20,6 +20,7 @@ export default function MeuPerfil({navigation}){
             .then(resp => {return resp.json()})
             .then(data => {
                 setFuncionario(data[0])
+                console.log(data[0].foto)
             })
             .catch( err => { console.log(err) })
         }
@@ -45,7 +46,7 @@ export default function MeuPerfil({navigation}){
                                 alignItems: "center",
                                 justifyContent: "space-evenly"
                                 }}>
-                                <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+                                <Image source={{uri: funcionario.foto}} style={global.imageUser}/>
                                 <Text style={global.textInfo}>Matrícula: {funcionario.matricula}</Text>
             </View>
             <View style={css.scrollView}>
