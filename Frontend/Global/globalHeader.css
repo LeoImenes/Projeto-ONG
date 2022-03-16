@@ -6,13 +6,11 @@
 }
 
 header {
-    height: 20vh;
-    width: 100vw;
+    height: 10vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    background-color: #166b8a;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 2px solid #e5e5e5;
     position: sticky;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -20,19 +18,20 @@ header {
 
 .nav-bar {
     display: flex;
-    width: 100vw;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: flex-end;
     align-items: center;
     list-style: none;
 }
 
 .nav-bar li:first-child {
-    width: 15%;
+    width: 100%;
     color: #000000;
     flex-wrap: wrap;
     display: flex;
     text-align: center;
     font-weight: bold;
+    color: #166B8A;
 }
 
 .nav-bar :nth-child(2),
