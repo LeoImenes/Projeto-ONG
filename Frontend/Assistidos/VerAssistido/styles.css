@@ -116,3 +116,121 @@ section {
     padding: 0 0px 0px 7px;
     color: white;
 }
+
+.menuJS {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuJS img {
+    width: 30px;
+    height: 30px;
+}
+
+.menuJS:hover {
+    background-color: #166B8A;
+}
+
+.menucontent {
+    background-color: #e5e5e5;
+    height: 90%;
+    width: 10%;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 30px;
+}
+
+.user {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #166B8A;
+    border-top-right-radius: 40px;
+}
+
+.useritens {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around
+}
+
+.useritens h2 {
+    position: absolute;
+    top: 2%;
+    left: 80%;
+}
+
+.userimg {
+    width: 70px;
+}
+
+.pages {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pageList {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.imgitens {
+    background-color: #166B8A;
+    width: 100%;
+    height: 20%;
+    border-bottom-right-radius: 30px;
+}
+
+.imglist {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.imglist img {
+    width: 30px
+}
+
+.Assistencia,
+.Funcionario,
+.Lancamentos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 20%;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}

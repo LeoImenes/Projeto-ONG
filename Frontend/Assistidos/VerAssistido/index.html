@@ -23,8 +23,47 @@
     </header>
 
     <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p>Usuario</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li class="Assistencia">
+                        <p>Assistencia</p>
+                    </li>
+                    <li class="Funcionario">
+                        <p>Funcionario</p>
+                    </li>
+                    <li class="Lancamentos">
+                        <p>Lançametos</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+            </ul>
+        </div>
+        </div>
+
         <div class="container">
             <div class="card">
+
                 <div class="cardAssistido">
                     <div class="fotos">
                         <ul>
@@ -161,6 +200,6 @@
     </section>
 
 </body>
-<script src="../../Global/menu.js"></script>
+<script src="menu.js"></script>
 
 </html>
