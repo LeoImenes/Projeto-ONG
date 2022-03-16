@@ -16,7 +16,7 @@ export default function Login({navigation}) {
 
   useEffect(async() => {
     if(await AsyncStorage.getItem('userdata') !== null) {
-      navigation.navigate("Home");
+      navigation.navigate("ContainerHome");
     }
   }, [])
 
