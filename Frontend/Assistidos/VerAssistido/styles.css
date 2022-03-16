@@ -1,7 +1,7 @@
 @import url("../../Global/globalHeaderMenu.css");
 #assistidoAntes,
 #assistidoDepois {
-    width: 100px;
+    width: 150px;
 }
 
 section {
@@ -25,13 +25,13 @@ section {
 
 .fotos {
     width: 15%;
-}
-
-.fotos {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 19px;
 }
 
 .cardAssistido {
@@ -48,47 +48,39 @@ section {
 }
 
 .dadosPessoais {
-    display: flex;
-    flex-wrap: wrap;
-    width: 70%;
+    width: 50%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-evenly;
 }
 
 .dadosPessoais h1 {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center
+    font-weight: bold;
 }
 
 .dadosPessoais ul {
-    width: 70%;
-    height: 7%;
     display: flex;
-    align-items: center;
+    width: 70%;
     justify-content: space-between;
-    margin-left: 10%
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid black;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .dadosPessoais :first-child {
-    width: 60%;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.dadosPessoais li {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+    font-weight: bold;
 }
 
 .dadosExtras {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     height: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -101,7 +93,7 @@ section {
 }
 
 .saude h2 {
-    font-size: 16px
+    font-size: 20px
 }
 
 .saude ul {
@@ -131,15 +123,16 @@ section {
     flex-direction: column;
     justify-content: center;
     border: 1px solid black;
-    display: none;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .dadosFamilia ul {
     display: flex;
     width: 100%;
-    height: 80%;
+    height: 20%;
     align-items: center;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .dadosFamilia li {
@@ -152,11 +145,38 @@ section {
 .doencas {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 30%;
+    height: 150px;
     justify-content: space-around;
     align-items: center;
     text-align: center;
+    border: 1px solid black;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+}
+
+.acompanhamento ul,
+.pscoativo ul,
+.doencas ul {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2rem;
+    overflow-y: scroll;
+    font-size: 20px;
+    display: none;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.acompanhamento li,
+.pscoativo li,
+.doencas li {
+    margin-bottom: 1.5rem;
 }
 
 .acompanhamento img,
@@ -165,9 +185,39 @@ section {
     width: 10px;
 }
 
+.acompanhamento h1,
+.pscoativo h1,
+.doencas h1 {
+    background-color: whitesmoke;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #166B8A;
+    border-radius: 10px;
+}
+
 .btn {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     width: 15vw;
-    height: 10vh;
+    height: 5vh;
     border: none;
     cursor: pointer;
     background-color: white;
