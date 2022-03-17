@@ -4,6 +4,10 @@ a {
     color: black;
 }
 
+.userimg {
+    width: 50px;
+}
+
 section {
     display: flex;
     align-self: center;

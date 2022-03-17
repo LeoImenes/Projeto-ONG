@@ -54,6 +54,7 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    border-right: 2px solid #e5e5e5;
 }
 
 .dadosPessoais h1 {
@@ -75,33 +76,6 @@ section {
     font-weight: bold;
 }
 
-.dadosExtras {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.saude {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-}
-
-.saude h2 {
-    font-size: 20px
-}
-
-.saude ul {
-    display: flex;
-    font-size: 14px;
-    margin-top: 1rem
-}
-
 .familia {
     display: flex;
     flex-direction: column;
@@ -114,6 +88,15 @@ section {
 
 .familia img {
     width: 15px;
+}
+
+.dadosExtras {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .dadosFamilia {
@@ -138,6 +121,24 @@ section {
 .dadosFamilia li {
     width: 100%;
     margin-right: 1rem;
+}
+
+.saude {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.saude h2 {
+    font-size: 20px
+}
+
+.saude ul {
+    display: flex;
+    font-size: 14px;
+    margin-top: 1rem
 }
 
 .acompanhamento,
@@ -238,8 +239,217 @@ section {
     transform: rotate(180deg);
 }
 
+.styleBall-bottom-right {
+    position: fixed;
+    width: 11%;
+    background-color: #166B8A;
+    height: 150px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 0%;
+    z-index: -1;
+    left: 79%;
+    bottom: 13.5%;
+    opacity: 0.4;
+}
+
+.styleBall-bottom-left {
+    position: fixed;
+    background-color: #166B8A;
+    width: 11%;
+    height: 150px;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 0%;
+    z-index: -1;
+    right: 79%;
+    bottom: 13.5%;
+    opacity: 0.4;
+}
+
+.styleBall-top-left {
+    position: fixed;
+    background-color: #166B8A;
+    width: 11%;
+    height: 150px;
+    border-bottom-right-radius: 50%;
+    z-index: -1;
+    right: 79%;
+    top: 18.5%;
+    opacity: 0.4;
+}
+
 @media (max-width: 1366px) {
-    p {
+    p,
+    h2,
+    h1 {
+        font-size: 12px;
+        font-weight: normal;
+        font-family: 'Open Sans', sans-serif;
+    }
+    header h2 {
+        font-size: 20px
+    }
+    .container {
+        width: 80%;
+        height: 80%;
+    }
+    .dadosPessoais {
+        width: 50%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid #e5e5e5;
+    }
+    #assistidoAntes,
+    #assistidoDepois {
+        width: 100px;
+    }
+    .fotos img {
+        width: 50px;
+    }
+    .dadosPessoais h1 {
+        font-weight: bold;
+        font-size: 16px
+    }
+    .dadosPessoais ul {
+        display: flex;
+        width: 70%;
+        height: 20%;
+        justify-content: space-between;
+        text-align: center;
+        padding: .5rem;
+        margin-top: 0.5rem;
+        border: 1px solid black;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .dadosPessoais :first-child {
+        font-weight: bold;
+    }
+    .dadosExtras {
+        font-size: 12px;
+    }
+    .acompanhamento,
+    .pscoativo,
+    .doencas {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        height: 50px;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        border: 1px solid black;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 10px;
+    }
+    .acompanhamento ul,
+    .pscoativo ul,
+    .doencas ul {
+        font-size: 12px;
+    }
+    .dadosFamilia {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid black;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .dadosFamilia ul {
+        display: flex;
+        width: 100%;
+        height: 20%;
+        align-items: center;
         font-size: 14px;
+        font-weight: bold;
+    }
+    .dadosFamilia li {
+        width: 100%;
+        margin-right: 1rem;
+    }
+    .familia h1 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .familia img {
+        width: 13px;
+    }
+    .saude {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+    .saude h2 {
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .saude img {
+        width: 5px;
+    }
+    .saude ul {
+        display: flex;
+        font-size: 14px;
+        margin-top: 1rem
+    }
+    .acompanhamento,
+    .pscoativo,
+    .doencas {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        height: 100px;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        border: 1px solid black;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 10px;
+    }
+    .acompanhamento ul,
+    .pscoativo ul,
+    .doencas ul {
+        background-color: whitesmoke;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 2rem;
+        overflow-y: scroll;
+        font-size: 12px;
+        font-weight: bold;
+        display: none;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+    .acompanhamento img,
+    .pscoativo img,
+    .doencas img {
+        width: 10px;
+    }
+    .acompanhamento h1,
+    .pscoativo h1,
+    .doencas h1 {
+        background-color: whitesmoke;
+    }
+     ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Track */
+     ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+    /* Handle */
+     ::-webkit-scrollbar-thumb {
+        background: #166B8A;
+        border-radius: 10px;
     }
 }
