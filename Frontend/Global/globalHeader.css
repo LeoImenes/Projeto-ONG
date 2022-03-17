@@ -16,6 +16,11 @@ header {
     border-bottom-right-radius: 50px;
 }
 
+header h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
 .nav-bar {
     display: flex;
     width: 100%;
@@ -90,7 +95,7 @@ input:focus {
     outline: none;
 }
 
-@media (max-width:1366px) {
+@media (max-width:1669px) {
     header h2 {
         font-size: 20px
     }

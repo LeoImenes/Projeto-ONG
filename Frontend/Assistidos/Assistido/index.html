@@ -13,16 +13,24 @@
     <header>
         <div class="header">
             <ul class="nav-bar">
-                <li><img src="../../Assets/icones/hamburger.png" alt="Menu" class="menuimg" id="menu" onclick="showMenu()"></li>
-                <li><img src="../../Assets/icones/logo.png" alt="Logo" class="logo"></li>
+                <li>
+                    <h2>Casa Acolhedora Irmã Antonia</h2>
+                </li>
+
+            </ul>
         </div>
 
     </header>
-    <div class="menuJS">
-        <ul class="menuitens">
+    <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
             <div class="user">
                 <ul class="useritens">
-                    <li onclick="closeMenu()">X</li>
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
                     <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
                     <li>
                         <p>Usuario</p>
@@ -31,13 +39,13 @@
             </div>
             <div class="pages">
                 <ul class="pageList">
-                    <li>
+                    <li class="Assistencia">
                         <p>Assistencia</p>
                     </li>
-                    <li>
+                    <li class="Funcionario">
                         <p>Funcionario</p>
                     </li>
-                    <li>
+                    <li class="Lancamentos">
                         <p>Lançametos</p>
                     </li>
                 </ul>
@@ -48,10 +56,8 @@
                     <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
                 </ul>
             </div>
-        </ul>
-    </div>
-
-    <section>
+            </ul>
+        </div>
         <div class="container">
             <div class="infoAssistido">
                 <p>Informações do Assistido</p>
