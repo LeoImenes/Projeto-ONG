@@ -12,7 +12,7 @@ function list() {
                 var cont = document.querySelector(".content")
                 var img = document.createElement("img");
                 var cardfuncionario = document.createElement("div");
-                var nome = document.createElement("h1");
+                var nomeFun = document.createElement("h1");
                 var matricula = document.createElement("h3");
 
                 names.push(fun.nome_completo)
@@ -37,11 +37,11 @@ function list() {
                     matricula.style.color = `red`
                 }
 
-                nome.innerHTML = `${fun.nome_completo}`
+                nomeFun.innerHTML = `${fun.nome_completo}`
 
 
                 divimg.appendChild(img)
-                divnome.appendChild(nome)
+                divnome.appendChild(nomeFun)
                 divnome.appendChild(matricula)
                 cardfuncionario.appendChild(divimg)
                 cardfuncionario.appendChild(divnome)
@@ -54,4 +54,12 @@ function list() {
         })
 }
 
-function buscar() {}
+function buscar() {
+    let input = document.getElementById("inp").value.toLowerCase();
+    let filtro = document.querySelectorAll("h1");
+    let card = document.querySelectorAll(".cardFuncionario")
+
+    filtro.forEach((item, index) => {
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
+    })
+}

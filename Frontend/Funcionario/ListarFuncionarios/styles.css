@@ -3,36 +3,38 @@ body {
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;
-}
-
-.content {
-    height: 450px;
-    width: 40%;
+    height: 90vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    overflow-y: scroll;
-    box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    justify-content: center;
 }
 
 .card {
-    width: 100%;
-    height: 90%;
+    width: 70%;
+    height: 80%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+    box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    overflow-y: scroll;
 }
 
 .cardFuncionario {
     width: 100%;
-    height: 100%;
+    height: 200px;
     display: flex;
     justify-content: space-around;
-    background-color: beige;
     align-items: center;
     border-bottom: 1px solid #050404;
     text-align: center;
@@ -58,7 +60,30 @@ body {
 }
 
 input {
-    width: 100%;
+    width: 30%;
+    height: 10%
+}
+
+.input {
+    width: 70%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}
+
+.input h1 {
+    width: 25%;
+    font-size: 2rem;
+    text-align: center;
+    color: #166B8A;
+    font-weight: bold;
+}
+
+.input img {
+    width: 50px;
+    height: 50px;
+    margin-left: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -79,4 +104,10 @@ input {
  ::-webkit-scrollbar-thumb {
     background: #166B8A;
     border-radius: 10px;
+}
+
+@media (max-width: 1366px) {
+    body {
+        overflow: hidden;
+    }
 }
