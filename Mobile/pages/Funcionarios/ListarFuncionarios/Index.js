@@ -29,10 +29,10 @@ export default function ListarFuncionario({navigation}){
                         lista.map((item,index) => {
                             return(
                                 <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
-                                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+                                    <Image source={(item.foto !== null) ? {uri: item.foto} : require("../../assets/user.png")} style={global.imageUser}/>
                                     <View style={css.cardTxt}>
                                         <Text style={global.textInfo}>{item.nome_completo}</Text>
-                                        <Text style={global.textInfo}>{item.matricula}</Text>
+                                        <Text style={(item.status === 0) ? {color: "red", fontSize: 18} : {color: "green", fontSize: 18}}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
                                     </View>
                                 </TouchableOpacity> 
                             )

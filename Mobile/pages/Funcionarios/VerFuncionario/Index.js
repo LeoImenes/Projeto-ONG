@@ -19,7 +19,7 @@ export default function VerFuncionario({navigation, route}){
         <View style={global.body}>
             <Image style={global.image} source={require("../../assets/logo.png")}/>
             <View style={css.imageAlign}>
-                <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+                <Image source={{uri:item.foto}} style={global.imageUser}/>
                 <Text style={global.textInfo}>Matrícula: {item.matricula}</Text>
             </View>
             <View style={css.scrollView}>

@@ -40,9 +40,6 @@ export default function CadastrarAssistido({navigation}){
 
     const cadastrar = () => {
         let assistido = {
-            // id_saude: ,
-            // id_familiar: ,
-            // id_droga: ,
             id_funcionario: idFunc,
             nome_completo: nome,
             nome_social: nomeSocial,
