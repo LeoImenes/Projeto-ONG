@@ -14,6 +14,14 @@
     height: 50px;
 }
 
+li h2 {
+    cursor: pointer;
+}
+
+li h2:hover {
+    color: #fff;
+}
+
 .userimg {
     width: 50px
 }
@@ -91,6 +99,11 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.pageList li:hover {
+    background-color: lightgray;
+    box-shadow: 4px 5px 5px 4px rgba(0, 0, 0, 0.288);
 }
 
 .imgitens {
