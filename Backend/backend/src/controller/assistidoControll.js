@@ -6,7 +6,7 @@ const assistidoModelo = require('../model/assistidoModel')
 
 const getAll = (req,res) => {
 
-    let string = `select * from assistido`
+    let string = `select * from assistidos`
 
     con.query(string, (err, result) => {
 
@@ -23,7 +23,7 @@ const getAll = (req,res) => {
 
 const getID = (req, res) => {
 
-    let string = `select * from assistido where id_assistido = ${req.params.id_assistido}`
+    let string = `select * from assistidos where id_assistido = ${req.params.id_assistido}`
 
     con.query(string, (err, result) => {
 
@@ -41,7 +41,7 @@ const getID = (req, res) => {
 const buscarAssistidoNomeCompleto = (req,res) => {
 
     let  nome_completo = req.params.nome_completo
-    let stringNomeCompleto = `select * from assistido where nome_completo = '${nome_completo}';`
+    let stringNomeCompleto = `select * from assistidos where nome_completo = '${nome_completo}';`
 
     con.query(stringNomeCompleto, (err, result) => {
 
@@ -58,7 +58,7 @@ const buscarAssistidoNomeCompleto = (req,res) => {
 const buscarAssistidoCPF = (req,res) => {
 
     let cpf = req.params.cpf 
-    let stringCPF = `select * from assistido where cpf = '${cpf}'`
+    let stringCPF = `select * from assistidos where cpf = '${cpf}'`
 
     console.log(cpf)
 
@@ -82,7 +82,7 @@ const buscarAssistidoCPF = (req,res) => {
     const buscarAssistidoRG = (req,res) => {
 
         let rg = req.params.rg
-        let stringRG = `select * from assistido where rg = '${req.params.rg}'`
+        let stringRG = `select * from assistidos where rg = '${req.params.rg}'`
 
         if(rg !== undefined){
 
@@ -105,52 +105,17 @@ const buscarAssistidoCPF = (req,res) => {
 const postAssistido = (req,res) => {
 
     // Campos referentes a tabela de assistidos do banco de dados 
-    let id_saude 
-    let id_familiar
-    let id_droga 
     let nome_social
     let rg 
     let cpf 
     let naturalidade
     let cartao_cidadao
     let cartao_sus
-    let foto 
+    let foto_antes 
     let foto_depois
-    let relatorio
 
-    //Campos relacionados a tabela saúde do banco de dados
-    let hiv 
-    let hipertensao
-    let diabetes
-    let depressao
-    let maconha 
-    let cocaina 
-    let crack 
-    let ox 
-    let alcool 
-
-
-    if(req.body.id_saude === undefined){
-        id_saude = null
-    }
-    else{
-        id_saude = req.body.id_saude
-    }
-
-    if(req.body.id_familiar === undefined){
-        id_familiar = null
-    }
-    else{
-        id_familiar = req.body.id_familiar
-    }
-
-    if(req.body.id_droga === undefined){
-        id_droga = null
-    }
-    else{
-        id_droga = req.body.id_droga
-    }
-
+   
+   
     if(req.body.nome_social === undefined){
         nome_social = null
     }
@@ -194,10 +159,10 @@ const postAssistido = (req,res) => {
     }
 
     if(req.body.foto === undefined){
-        foto = null
+        foto_antes = null
     }
     else{
-        foto = req.body.foto
+        foto_antes = req.body.foto
     }
     if(req.body.foto_depois === undefined){
         foto_depois = null
@@ -206,85 +171,15 @@ const postAssistido = (req,res) => {
         foto_depois = req.body.foto_depois
     }
 
-    if(req.body.relatorio === undefined){
-        relatorio = null
-    }
-    else{
-        relatorio = req.body.relatorio
-    }
 
-
-    // Preenchendo as variaveis referentes a saúde do assistido
-    if(req.body.hiv === undefined){
-        hiv = null
-    }
-    else{
-        hiv = req.body.hiv
-    }
-    if(req.body.hipertensao === undefined){
-        hipertensao = null
-    }
-    else{
-        hipertensao = req.body.hipertensao
-    }
-    if(req.body.diabetes === undefined){
-        diabetes = null
-    }
-    else{
-        diabetes = req.body.diabetes
-    }
-    if(req.body.depressao === undefined){
-        depressao = null
-    }
-    else{
-        depressao = req.body.depressao
-    }
-    if(req.body.maconha === undefined){
-        maconha = null
-    }
-    else{
-        maconha = req.body.maconha
-    }
-    if(req.body.cocaina === undefined){
-        cocaina = null
-    }
-    else{
-        cocaina = req.body.cocaina
-    }
-    if(req.body.crack === undefined){
-        crack = null
-    }
-    else{
-        crack = req.body.crack
-    }
-    if(req.body.ox === undefined){
-        ox = null
-    }
-    else{
-        ox = req.body.ox
-    }
-    if(req.body.alcool === undefined){
-        alcool = null
-    }
-    else{
-        alcool = req.body.alcool
-    }
-
-
-
-
-    let string = `insert into assistido(id_saude, id_familiar, id_droga, id_funcionario, nome_completo, nome_social, rg,
-        cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto, foto_depois, relatorio)
+    let string = `insert into assistidos(id_funcionario, nome_completo, nome_social, rg,
+        cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
         values ?;`
 
     let stringSaude = `insert into saude (id_assistido, id_comorbidade) values = ?;`
 
     let values = [
         [
-
-            id_saude,
-            id_familiar,
-            id_droga,
             req.body.id_funcionario,
             req.body.nome_completo,
             nome_social,
@@ -296,9 +191,8 @@ const postAssistido = (req,res) => {
             req.body.sexo,
             cartao_cidadao,
             cartao_sus,
-            foto,
-            foto_depois,
-            relatorio
+            foto_antes,
+            foto_depois
 
         ]
         
@@ -324,7 +218,7 @@ const postAssistido = (req,res) => {
             // 08 - OX
             // 09 - Álcool
 
-            console.log(id_gerado)
+            // console.log(id_gerado)
         }
         else{
             res.status(400).json({err: err.message})
@@ -338,7 +232,7 @@ const updateFotoAssistido = (req,res) => {
 
     let foto = req.body.foto
     let id_assistido = req.body.id_assistido
-    let string = `update assistido set foto = '${foto}' where id_assistido = ${id_assistido}`
+    let string = `update assistidos set foto = '${foto}' where id_assistido = ${id_assistido}`
 
     if(req.body.foto !== undefined && req.body.id_assistido !== undefined){
 
@@ -364,7 +258,7 @@ const updateFotoDepoisAssistido = (req, res) => {
     let foto_depois = req.body.foto_depois 
     let id_assistido = req.body.id_assistido
 
-    let string = `update assistido set foto_depois = '${foto_depois}' where id_assistido = ${id_assistido}`
+    let string = `update assistidos set foto_depois = '${foto_depois}' where id_assistido = ${id_assistido}`
 
     if(req.body.id_assistido !== undefined && req.body.foto_depois !== undefined){
 
@@ -387,6 +281,93 @@ const updateFotoDepoisAssistido = (req, res) => {
 }
 
 // novos métodos de requisição
+
+
+
+
+const getAssistSaude = (req,res) => {
+
+    let string = `select * from vw_saude;`
+
+
+    con.query(string, (err,result) => {
+        if(err == null){
+            res.status(200).json(result).end()
+        }
+        else{
+            res.status(400).json({err: err.message})
+        }
+    })
+
+}
+
+
+const getSaudeID = (req,res) => {
+
+    let id_assistido = req.params.id_assistido
+    let string = `select * from vw_saude02 where id_assistido = ${id_assistido}`
+
+    if(id_assistido !== undefined){
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+                res.status(200).json(result).end()
+            }else{
+                res.status(400).json({err: err.message})
+            }
+        })
+
+
+    }
+    else{
+        res.status(400).json({"err": "informe o id_assistido"})
+    }
+}
+
+
+const postSaude = (req,res) => {
+
+    let id_assistido = req.body.id_assistido
+    let id_comorbidade = req.body.id_comorbidade
+    let string = `insert into saude (id_assistido,id_comorbidade,data_de_registro) values (${id_assistido},${id_comorbidade},curdate())`
+
+    if(id_assistido !== undefined && id_comorbidade !== undefined){
+
+        con.query(string, (err, result) => {
+            if(err === null){
+
+                //res.status(200).json(result).end()
+
+                let id = result.insertId
+
+                console.log(id)
+
+                let stringSaude = `select * from vw_saude02 where id_saude = ${id}`
+
+                con.query(stringSaude, (err, result) => {
+                    if(err === null){
+                        res.status(200).json(result[0]).end()
+                    }
+                    else{
+                        res.status(400).json({err: err.message})
+                    }
+                })
+            }
+            else{
+                res.status(400).json({err: err.message})
+            }
+        })
+    }
+
+    else{
+        res.status(400).json({"err": "informe os campos de id_assistido e id_comorbidade"})
+    }
+
+}
+
+
+
 
 
 
@@ -415,5 +396,8 @@ module.exports = {
     buscarAssistidoRG,
     postAssistido,
     updateFotoAssistido,
-    updateFotoDepoisAssistido
+    updateFotoDepoisAssistido,
+    getAssistSaude,
+    getSaudeID,
+    postSaude
 }

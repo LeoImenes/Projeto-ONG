@@ -48,10 +48,9 @@ CREATE TABLE familiares(
 	id_familiar INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	nome_completo VARCHAR(40),
 	rg VARCHAR(15),
-	parentesco VARCHAR(12),
 	telefone VARCHAR(15),
 	email VARCHAR(20),
-	endereco VARCHAR(40)
+	endereco VARCHAR(100)
 );
 
 
@@ -60,6 +59,7 @@ CREATE TABLE familiarAssistido(
 	id_assistido INTEGER NOT NULL,
 	id_familiar INTEGER NOT NULL,
 	data_cadastro DATE NOT NULL,
+	parentesco VARCHAR(12),
 	
 	
 	CONSTRAINT fk_assistido02 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,
