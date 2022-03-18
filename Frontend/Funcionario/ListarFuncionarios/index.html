@@ -22,9 +22,7 @@
         </div>
 
     </header>
-
-
-    <section>
+    <section onload="getfunc()">
         <div class="menuJS down" onclick="abrirMenu()">
             <img src="../../Assets/icones/hamburger.png" alt="Teste">
         </div>
@@ -36,7 +34,7 @@
                     </li>
                     <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
                     <li>
-                        <p>Usuario</p>
+                        <p class="Username">Usuario</p>
                     </li>
                 </ul>
             </div>
@@ -49,7 +47,7 @@
                         <p>Funcionario</p>
                     </li>
                     <li class="Lancamentos">
-                        <p>Lançametos</p>
+                        <p>Financeiro</p>
                     </li>
                 </ul>
             </div>
@@ -66,48 +64,14 @@
                 <div class="input">
                     <input type="text" name="" id="inp" placeholder="Pesquisar Funcionario" onkeyup="buscar()">
                     <ul>
-                        <img src="../../Assets/icones/AZ.png" alt="" srcset="" class="orderAZ">
-                        <img src="../../Assets/icones/ZA.png" alt="" srcset="" class="orderZA">
+                        <input type="checkbox" name="" id="ati" onchange="buscarAtivos()">
+                        <p>Ativos</p>
+                        <input type="checkbox" name="" id="ina" onchange="buscarInativos()">
+                        <p>Inativos</p>
                     </ul>
                 </div>
                 <div class="content">
-                    <div class="cardFuncionario">
-                        <div class="fotoUsuario">
-                            <img src="../../Assets/icones/user.png" alt="" class="fotoUsuario">
-                        </div>
-                        <div class="nome">
-                            <h1>Jose</h1>
-                            <h3>Inativo</h3>
-                        </div>
-                    </div>
-                    <div class="cardFuncionario">
-                        <div class="fotoUsuario">
-                            <img src="" alt="" srcset="">
-                        </div>
-                        <div class="nome">
-                            <h1>Samanta</h1>
-                            <h3>Inativo</h3>
-                        </div>
-                    </div>
-                    <div class="cardFuncionario">
-                        <div class="fotoUsuario">
-                            <img src="" alt="" srcset="">
-                        </div>
-                        <div class="nome">
-                            <h1>Roberto</h1>
-                            <h3>Inativo</h3>
-                        </div>
-                    </div>
-                    <div class="cardFuncionario">
-                        <div class="fotoUsuario">
-                            <img src="" alt="" srcset="">
-                        </div>
-                        <div class="nome">
-                            <h1>Jade</h1>
-                            <h3>Inativo</h3>
 
-                        </div>
-                    </div>
                 </div>
             </div>
     </section>

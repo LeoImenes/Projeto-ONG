@@ -63,3 +63,40 @@ function buscar() {
         (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
     })
 }
+
+function buscarInativos() {
+    let filtro = document.querySelectorAll("h3");
+    let card = document.querySelectorAll(".cardFuncionario")
+    let inativo = document.getElementById("ina")
+
+    if (inativo.checked == 1) {
+        inativo.value = "i"
+        filtro.forEach((item, index) => {
+            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
+        })
+    } else {
+        filtro.forEach((item, index) => {
+            card[index].style.display = "flex";
+        })
+    }
+}
+
+
+function buscarAtivos() {
+    let filtro = document.querySelectorAll("h3");
+    let card = document.querySelectorAll(".cardFuncionario")
+    let ativo = document.getElementById("ati")
+
+    if (ativo.checked == 1) {
+
+        ativo.value = "a"
+        filtro.forEach((item, index) => {
+            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
+        })
+    } else {
+        filtro.forEach((item, index) => {
+            card[index].style.display = "flex";
+        })
+    }
+
+}

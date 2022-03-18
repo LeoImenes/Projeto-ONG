@@ -9,10 +9,6 @@ a {
     left: 0%;
 }
 
-.userimg {
-    width: 50px;
-}
-
 section {
     display: flex;
     align-self: center;
@@ -100,7 +96,7 @@ section {
     height: 150px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 20%;
+    border-bottom-right-radius: 30px;
     z-index: 1;
     left: 74%;
     bottom: 9%;

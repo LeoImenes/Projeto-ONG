@@ -17,9 +17,6 @@ function abrirMenu() {
         menuContent.style.transition = "all 0.5s linear";
         menuImg.style.display = "none";
     }
-
-
-
 }
 
 function closeMenu() {
