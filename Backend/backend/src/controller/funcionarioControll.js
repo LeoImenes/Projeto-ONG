@@ -52,8 +52,6 @@ const login = (req, res) => {
                     result.forEach((item, index) => {
                         delete item.senha
                         delete item.status
-                        delete item.foto
-                        delete item.matricula
                         delete item.nome_completo
                         delete item.rg
                         delete item.cpf
