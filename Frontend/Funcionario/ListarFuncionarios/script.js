@@ -1,4 +1,7 @@
 function list() {
+    let input = document.querySelector('input');
+    let filterText = input.value
+    let names = []
     var body = document.querySelector(body)
     fetch("http://10.87.207.27:3000/funcionarios")
         .then(response => { return response.json() })
@@ -9,12 +12,16 @@ function list() {
                 var cont = document.querySelector(".content")
                 var img = document.createElement("img");
                 var cardfuncionario = document.createElement("div");
-                var nome = document.createElement("h1");
+                var nomeFun = document.createElement("h1");
                 var matricula = document.createElement("h3");
+
+                names.push(fun.nome_completo)
+                console.log(names)
 
                 cardfuncionario.className = "cardFuncionario"
                 img.className = "fotoUsuario"
                 divimg.className = "img"
+                divnome.className = "nome"
 
                 if (fun.foto == null) {
                     img.src = "../../Assets/icones/user.png"
@@ -22,15 +29,37 @@ function list() {
                     img.src = fun.foto
                 }
 
-                nome.innerHTML = `${fun.nome_completo}`
-                matricula.innerHTML = `${fun.matricula}`
+                if (!fun.status == 0) {
+                    matricula.innerHTML = `Ativo`
+                    matricula.style.color = `green`
+                } else {
+                    matricula.innerHTML = `Inativo`
+                    matricula.style.color = `red`
+                }
+
+                nomeFun.innerHTML = `${fun.nome_completo}`
+
 
                 divimg.appendChild(img)
-                divnome.appendChild(nome)
+                divnome.appendChild(nomeFun)
                 divnome.appendChild(matricula)
                 cardfuncionario.appendChild(divimg)
                 cardfuncionario.appendChild(divnome)
                 cont.appendChild(cardfuncionario)
+
+
             })
+
+
         })
+}
+
+function buscar() {
+    let input = document.getElementById("inp").value.toLowerCase();
+    let filtro = document.querySelectorAll("h1");
+    let card = document.querySelectorAll(".cardFuncionario")
+
+    filtro.forEach((item, index) => {
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
+    })
 }
