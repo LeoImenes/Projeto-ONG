@@ -104,6 +104,8 @@ li h2:hover {
 .pageList li:hover {
     background-color: lightgray;
     box-shadow: 4px 5px 5px 4px rgba(0, 0, 0, 0.288);
+    border-radius: 5px;
+    border-bottom: transparent;
 }
 
 .imgitens {
@@ -127,6 +129,7 @@ li h2:hover {
 }
 
 .Assistencia,
+.Assistido,
 .Funcionario,
 .Lancamentos {
     display: flex;

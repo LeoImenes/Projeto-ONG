@@ -10,7 +10,6 @@ function list() {
                 var img = document.createElement("img");
                 var cardassistido = document.createElement("div");
                 var nome = document.createElement("h1");
-                var matricula = document.createElement("h3");
 
                 cardassistido.className = "cardAssistido"
                 img.className = "fotoUsuario"
@@ -23,7 +22,6 @@ function list() {
                 }
 
                 nome.innerHTML = `${fun.nome_completo}`
-                matricula.innerHTML = `${fun.matricula}`
 
                 divimg.appendChild(img)
                 divnome.appendChild(nome)

@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../Global/globalHeaderMenu.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body onload="list()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -21,6 +22,8 @@
         </div>
 
     </header>
+
+
     <section>
         <div class="menuJS down" onclick="abrirMenu()">
             <img src="../../Assets/icones/hamburger.png" alt="Teste">
@@ -60,14 +63,56 @@
         </div>
         <div class="container">
             <div class="card">
+                <div class="input">
+                    <input type="text" name="" id="inp" placeholder="Pesquisar Assistido" onkeyup="buscar()">
+                    <ul>
+                        <img src="../../Assets/icones/AZ.png" alt="" srcset="" class="orderAZ">
+                        <img src="../../Assets/icones/ZA.png" alt="" srcset="" class="orderZA">
+                    </ul>
+                </div>
                 <div class="content">
+                    <div class="cardAssistido">
+                        <div class="fotoUsuario">
+                            <img src="../../Assets/icones/user.png" alt="" class="fotoUsuario">
+                        </div>
+                        <div class="nome">
+                            <h1>Jose</h1>
+                            <h3>Inativo</h3>
+                        </div>
+                    </div>
+                    <div class="cardAssistido">
+                        <div class="fotoUsuario">
+                            <img src="" alt="" srcset="">
+                        </div>
+                        <div class="nome">
+                            <h1>Samanta</h1>
+                            <h3>Inativo</h3>
+                        </div>
+                    </div>
+                    <div class="cardAssistido">
+                        <div class="fotoUsuario">
+                            <img src="" alt="" srcset="">
+                        </div>
+                        <div class="nome">
+                            <h1>Roberto</h1>
+                            <h3>Inativo</h3>
+                        </div>
+                    </div>
+                    <div class="cardAssistido">
+                        <div class="fotoUsuario">
+                            <img src="" alt="" srcset="">
+                        </div>
+                        <div class="nome">
+                            <h1>Jade</h1>
+                            <h3>Inativo</h3>
 
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 </body>
-</body>
 <script src="../../Global/menu.js"></script>
+<script src="script.js"></script>
 
 </html>

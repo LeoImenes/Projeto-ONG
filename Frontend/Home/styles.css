@@ -1,7 +1,12 @@
-@import url("../Global/globalHeader.css");
+@import url("../Global/globalHeaderMenu.css");
 a {
     text-decoration: none;
     color: black;
+}
+
+.menucontent {
+    top: 0%;
+    left: 0%;
 }
 
 .userimg {
@@ -14,9 +19,19 @@ section {
     justify-self: center;
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: 90%;
     align-items: center;
     justify-content: center;
+}
+
+.cards-container {
+    width: 70%;
+    height: 80%;
+    background-color: #166b8a;
+    display: flex;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cards {
@@ -24,7 +39,7 @@ section {
     height: 100%;
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -32,7 +47,8 @@ section {
 .uppercards {
     display: flex;
     justify-content: space-evenly;
-    width: 100vw;
+    width: 100%;
+    margin-top: 10vh;
     margin-bottom: 50vh;
 }
 
@@ -44,10 +60,11 @@ section {
     margin-top: 25vh;
 }
 
-.cardReceitas,
-.cardDespesas {
+.cardAssistido,
+.cardFuncionario,
+.cardAssistencia {
     height: 10;
-    padding: 7vh 10vw 7vh 10vw;
+    padding: 7vh 5vw 7vh 5vw;
     background-color: #e5e5e5;
     text-align: center;
     box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
@@ -55,9 +72,7 @@ section {
     border-bottom-right-radius: 30px;
 }
 
-.cardAssistido,
-.cardFuncionario,
-.cardAssistencia {
+.cardLancamento {
     height: 10;
     padding: 7vh 5vw 7vh 5vw;
     background-color: #e5e5e5;
@@ -85,6 +100,33 @@ section {
     transition: all 0.5s;
     background-color: #166b8a;
     color: #fff
+}
+
+.styleBall-bottom-right {
+    position: fixed;
+    width: 11%;
+    background-color: white;
+    height: 150px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 20%;
+    z-index: 1;
+    left: 74%;
+    bottom: 9%;
+    opacity: 0.4;
+}
+
+.styleBall-bottom-left {
+    position: fixed;
+    background-color: white;
+    width: 11%;
+    height: 150px;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 0%;
+    z-index: 1;
+    right: 74%;
+    bottom: 9%;
+    opacity: 0.4;
 }
 
 @media (max-width: 760px) and (max-height: 1080px) {}
