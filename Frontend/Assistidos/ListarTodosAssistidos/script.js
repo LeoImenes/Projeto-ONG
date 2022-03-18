@@ -1,0 +1,36 @@
+function list() {
+    var body = document.querySelector(body)
+    fetch("http://10.87.207.27:3000/assistidos")
+        .then(response => { return response.json() })
+        .then(data => {
+            data.forEach(fun => {
+                var divimg = document.createElement("div")
+                var divnome = document.createElement("div")
+                var cont = document.querySelector(".content")
+                var img = document.createElement("img");
+                var cardassistido = document.createElement("div");
+                var nome = document.createElement("h1");
+
+                cardassistido.className = "cardAssistido"
+                img.className = "fotoUsuario"
+                divimg.className = "img"
+
+                if (fun.foto == null) {
+                    img.src = "../../Assets/icones/user.png"
+                } else {
+                    img.src = fun.btoa(fun.foto)
+                }
+
+                nome.innerHTML = `${fun.nome_completo}`
+
+                divimg.appendChild(img)
+                divnome.appendChild(nome)
+                divnome.appendChild(matricula)
+                cardfuncionario.appendChild(divimg)
+                cardfuncionario.appendChild(divnome)
+                cont.appendChild(cardassistido)
+
+
+            })
+        })
+}
