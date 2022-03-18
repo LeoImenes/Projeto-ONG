@@ -64,6 +64,16 @@
                     <h1>Cadastrar Assistido</h1>
                     <div class="formAssis">
 
+                        <div class="userform">
+                            <ul>
+                                <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
+                                <li>
+                                    <p>Adicionar Foto </p>
+                                    <p>📸</p>
+                                </li>
+                            </ul>
+                        </div>
+
                         <div class="inputs">
                             <div class="inputDados">
                                 <div class="nome-Completo">
@@ -121,104 +131,73 @@
                                 </ul>
 
                             </div>
-                            <div class="outros">
-                                <div class="pscoativos" onclick="showPsco()">
-                                    <p><b>Piscoativos:</b></p>
-                                    <div class="listadrogas">
-                                        <ul>
-                                            <li>Álcool</li>
-                                            <li><input type="checkbox" name="" id="Álcool"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Nicotina</li>
-                                            <li><input type="checkbox" name="" id="Nicotina"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Cocaína</li>
-                                            <li><input type="checkbox" name="" id="Cocaína"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Crack</li>
-                                            <li><input type="checkbox" name="" id="Crack"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Maconha</li>
-                                            <li><input type="checkbox" name="" id="Maconha"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Ox</li>
-                                            <li><input type="checkbox" name="" id="Ox"></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="saude">
-                                    <p><b>Problemas de saude:</b></p>
-                                    <div class="listadoencas">
-                                        <ul>
-                                            <li style="margin-right: 5px">Sind. do Pânico</li>
-                                            <li><input type="checkbox" name="" id="Sind. do Pânico"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Hipertensão</li>
-                                            <li><input type="checkbox" name="" id="Hipertensão"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Depressão</li>
-                                            <li><input type="checkbox" name="" id="Depressão"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Diabetes</li>
-                                            <li><input type="checkbox" name="" id="Diabetes"></li>
-                                        </ul>
-                                        <ul>
-                                            <li>Outro:</li>
-                                            <li style="width: 100%;"><input type="text" name="" id=""></li>
-                                        </ul>
-
-                                    </div>
 
 
-                                </div>
-                                <div class="acompanhamento">
-                                    <p><b>Acompanhamento:</b></p>
-                                    <div class="acocontent">
-                                        <ul class="aclist">
-                                            <ul>
-                                                <li>Psiquiatra</li>
-                                                <li><input type="checkbox" name=""></li>
-                                            </ul>
-                                            <ul>
-                                                <li>CREAS</li>
-                                                <li><input type="checkbox" name=""></li>
-                                            </ul>
-                                            <ul>
-                                                <li>Programa Social</li>
-                                                <li><input type="checkbox" name=""></li>
-                                            </ul>
-                                            <ul>
-                                                <li>Outros:</li>
-                                                <li><input type="text" name=""></li>
-                                            </ul>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
-
                     </div>
 
                 </div>
                 <div class="Famcard">
-                    <div class="userform">
-                        <ul>
-                            <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
-                            <li>
-                                <p>Adicionar Foto </p>
-                                <p>📸</p>
-                            </li>
-                        </ul>
+                    <div class="outros">
+                        <div class="pscoativos" onclick="showPsco()">
+                            <p><b>Piscoativos<img src="../../Assets/icones/down-chevron.png" alt="" class="pscArrow" onclick="menuDownPsco() "></b></p>
+                            <div class="listadrogas">
+                                <ul>
+                                    <li>Álcool</li>
+                                    <li><input type="checkbox" name="" id="Álcool"></li>
+                                </ul>
+                                <ul>
+                                    <li>Nicotina</li>
+                                    <li><input type="checkbox" name="" id="Nicotina"></li>
+                                </ul>
+                                <ul>
+                                    <li>Cocaína</li>
+                                    <li><input type="checkbox" name="" id="Cocaína"></li>
+                                </ul>
+                                <ul>
+                                    <li>Crack</li>
+                                    <li><input type="checkbox" name="" id="Crack"></li>
+                                </ul>
+                                <ul>
+                                    <li>Maconha</li>
+                                    <li><input type="checkbox" name="" id="Maconha"></li>
+                                </ul>
+                                <ul>
+                                    <li>Ox</li>
+                                    <li><input type="checkbox" name="" id="Ox"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="saude">
+                            <p><b>Problemas de saude<img src="../../Assets/icones/down-chevron.png" alt="" class="doArrow" onclick="menuDownDoenca()"></b></p>
+                            <div class="listadoencas">
+                                <ul>
+                                    <li style="margin-right: 5px">Sind. do Pânico</li>
+                                    <li><input type="checkbox" name="" id="Sind. do Pânico"></li>
+                                </ul>
+                                <ul>
+                                    <li>Hipertensão</li>
+                                    <li><input type="checkbox" name="" id="Hipertensão"></li>
+                                </ul>
+                                <ul>
+                                    <li>Depressão</li>
+                                    <li><input type="checkbox" name="" id="Depressão"></li>
+                                </ul>
+                                <ul>
+                                    <li>Diabetes</li>
+                                    <li><input type="checkbox" name="" id="Diabetes"></li>
+                                </ul>
+                                <ul>
+                                    <li>Outro:</li>
+                                    <li style="width: 100%;"><input type="text" name="" id=""></li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
                     </div>
+
                     <div class="familia">
                         <h1>Familiar</h1>
                     </div>
@@ -252,6 +231,7 @@
 
 </body>
 <script src="../../Global/menu.js"></script>
+<script src="../../Global/menuData.js"></script>
 <script src="script.js"></script>
 
 </html>
