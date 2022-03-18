@@ -82,24 +82,15 @@ section {
     border-bottom-right-radius: 30px;
 }
 
-.lower-cards :hover {
-    box-shadow: none;
-    background-color: gray;
-    padding: auto;
-    cursor: pointer;
-    transition: all 0.5s;
-    background-color: #166b8a;
-    color: #fff
-}
-
+.lower-cards :hover,
 .uppercards :hover {
     box-shadow: none;
     background-color: gray;
     padding: auto;
     cursor: pointer;
     transition: all 0.5s;
-    background-color: #166b8a;
-    color: #fff
+    background-color: #005c7e;
+    color: #fff;
 }
 
 .styleBall-bottom-right {

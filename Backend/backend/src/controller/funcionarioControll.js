@@ -149,7 +149,6 @@ const getAll = (req, res) => {
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
             delete item.senha
-            delete item.status
         });
 
         res.json(result)

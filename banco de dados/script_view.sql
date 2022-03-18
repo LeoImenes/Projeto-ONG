@@ -25,19 +25,24 @@ inner join comorbidades c on s.id_comorbidade = c.id_comorbidade WHERE a.id_assi
 -- view
 CREATE VIEW vw_saude AS
 select a.id_assistido, a.id_funcionario, a.nome_completo, a.nome_social, a.rg, a.cpf, a.antecedente_criminal, a.data_nascimento, a.estado_civil, a.naturalidade,
-a.sexo, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois, a.data_cadastro, s.data_de_registro, c.comorbidade, c.tipo
+a.sexo, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois, a.data_cadastro, s.id_saude, s.data_de_registro, c.comorbidade, c.tipo
 from assistidos a inner join saude s on a.id_assistido = s.id_assistido
 inner join comorbidades c on s.id_comorbidade = c.id_comorbidade;
 
 CREATE VIEW vw_saude02 AS
-select a.nome_completo, a.nome_social, s.data_de_registro, c.comorbidade, c.tipo
+select a.id_assistido, a.nome_completo, a.nome_social, s.data_de_registro, c.comorbidade, c.tipo, s.id_saude
 from assistidos a inner join saude s on a.id_assistido = s.id_assistido
 inner join comorbidades c on s.id_comorbidade = c.id_comorbidade;
 
 
 CREATE VIEW vw_familiar AS
 select a.id_assistido, a.id_funcionario, a.nome_completo, a.nome_social, a.rg, a.cpf, a.antecedente_criminal, a.data_nascimento, a.estado_civil, a.naturalidade,
-a.sexo, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois, a.data_cadastro AS data_cadastro_assistido, fa.data_cadastro, f.nome_completo AS nome_familiar,f.rg AS rg_familiar, f.parentesco, f.telefone, f.email, f.endereco
+a.sexo, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois, a.data_cadastro AS data_cadastro_assistido, fa.data_cadastro, f.nome_completo AS nome_familiar,f.rg AS rg_familiar, fa.parentesco, f.telefone, f.email, f.endereco
+from assistidos a inner join familiarassistido fa on a.id_assistido = fa.id_assistido
+inner join familiares f on fa.id_familiar = f.id_familiar;
+
+CREATE VIEW vw_familiar02 AS
+select a.nome_completo, a.nome_social, a.rg, a.cpf, a.antecedente_criminal, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois,f.nome_completo AS nome_familiar,f.rg AS rg_familiar, fa.parentesco, f.telefone, f.email, f.endereco
 from assistidos a inner join familiarassistido fa on a.id_assistido = fa.id_assistido
 inner join familiares f on fa.id_familiar = f.id_familiar;
 
