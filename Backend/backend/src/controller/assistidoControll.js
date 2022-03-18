@@ -28,7 +28,7 @@ const getID = (req, res) => {
     con.query(string, (err, result) => {
 
         if(err == null){
-            res.json(result)
+            res.json(result[0])
         }
         else{
             res.status(400).json({err: err.message})
@@ -176,8 +176,6 @@ const postAssistido = (req,res) => {
         cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
         values ?;`
 
-    let stringSaude = `insert into saude (id_assistido, id_comorbidade) values = ?;`
-
     let values = [
         [
             req.body.id_funcionario,
@@ -225,6 +223,17 @@ const postAssistido = (req,res) => {
         }
     })
 
+}
+
+
+
+const updateAssistido = (req,res) => {
+
+
+
+
+
+    
 }
 
 
@@ -285,46 +294,17 @@ const updateFotoDepoisAssistido = (req, res) => {
 
 
 
-const getAssistSaude = (req,res) => {
-
-    let string = `select * from vw_saude;`
 
 
-    con.query(string, (err,result) => {
-        if(err == null){
-            res.status(200).json(result).end()
-        }
-        else{
-            res.status(400).json({err: err.message})
-        }
-    })
-
-}
 
 
-const getSaudeID = (req,res) => {
-
-    let id_assistido = req.params.id_assistido
-    let string = `select * from vw_saude02 where id_assistido = ${id_assistido}`
-
-    if(id_assistido !== undefined){
-
-        con.query(string, (err,result) => {
-
-            if(err === null){
-                res.status(200).json(result).end()
-            }else{
-                res.status(400).json({err: err.message})
-            }
-        })
 
 
-    }
-    else{
-        res.status(400).json({"err": "informe o id_assistido"})
-    }
-}
 
+// CRUD SAÚDE
+
+
+// POST SAÚDE  
 
 const postSaude = (req,res) => {
 
@@ -366,12 +346,98 @@ const postSaude = (req,res) => {
 
 }
 
+// GET SAÚDE POR ID_FUNCIONARIO
+
+const getSaudeID = (req,res) => {
+
+    let id_assistido = req.params.id_assistido
+    let string = `select * from vw_saude02 where id_assistido = ${id_assistido}`
+
+    if(id_assistido !== undefined){
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+                res.status(200).json(result).end()
+            }else{
+                res.status(400).json({err: err.message})
+            }
+        })
+
+
+    }
+    else{
+        res.status(400).json({"err": "informe o id_assistido"})
+    }
+}
+
+// GET SAÚDE (LISTAR TODOS)
+
+const getAssistSaude = (req,res) => {
+
+    let string = `select * from vw_saude;`
+
+
+    con.query(string, (err,result) => {
+        if(err == null){
+            res.status(200).json(result).end()
+        }
+        else{
+            res.status(400).json({err: err.message})
+        }
+    })
+
+}
+
+
+const updateSaude = (req,res) => {
+
+    let string = `update saude set id_comorbidade = ${req.body.id_comorbidade}, data_de_registro = CURDATE() where id_saude = ${req.body.id_saude}`
+
+    if(req.body.id_saude !== undefined && req.body.id_comorbidade !== undefined){
+
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+
+                // res.status(200).json(result)
+
+                let id_saude = req.body.id_saude
+
+                let stringBusca = `select * from vw_saude02 where id_saude = ${id_saude}`
+
+                con.query(stringBusca, (err02, result02) => {
+
+                    if(err02 === null){
+
+                        res.status(200).json(result02)
+
+                    }
+                    else{
+                        res.status(400).json({err: err.message})
+                    }
+                })
+
+
+            }
+            else{
+                res.status(400).json({err: err.message})
+            }
+
+        })
+
+    }
+
+    else{
+        res.status(400).json({"err": "informe a comorbidade e o id_saude"})
+    }
 
 
 
 
 
-
+}
 
 
 
@@ -399,5 +465,6 @@ module.exports = {
     updateFotoDepoisAssistido,
     getAssistSaude,
     getSaudeID,
-    postSaude
+    postSaude,
+    updateSaude
 }
