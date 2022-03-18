@@ -9,78 +9,116 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="dadosFunc()">
+<body onload="{dadosFunc(), getFunc()}">
     <header>
         <div class="header">
             <ul class="nav-bar">
-                <li><img src="../../Assets/icones/hamburger.png" alt="Menu" class="menuimg" id="menu" onclick="showMenu()"></li>
-                <li><img src="../../Assets/icones/logo.png" alt="Logo" class="logo"></li>
+                <li>
+                    <h2>Casa Acolhedora Irmã Antonia</h2>
+                </li>
+
+            </ul>
         </div>
 
-    </header <section>
-
-
-    <div class="container">
-        <div class="card">
-            <div class="container">
-                <div class="card">
-                    <div class="cardFuncionario">
-                        <div class="FotoFunc">
-                            <img src="../../Assets/icones/user.png" alt="" srcset="" class="funcimg">
-                        </div>
-                        <div class="dadosFunc">
-                            <ul>
-                                <ul class="nome">
-                                    <li></li>
-                                    <li></li>
+    </header>
+    <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p class="Username">Usuario</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li class="Assistencia">
+                        <p>Assistencia</p>
+                    </li>
+                    <li class="Funcionario">
+                        <p>Funcionario</p>
+                    </li>
+                    <li class="Lancamentos">
+                        <p>Financeiro</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="card">
+                <div class="container">
+                    <div class="card">
+                        <div class="cardFuncionario">
+                            <div class="FotoFunc">
+                                <img src="../../Assets/icones/user.png" alt="" srcset="" class="funcimg">
+                            </div>
+                            <div class="dadosFunc">
+                                <ul>
+                                    <ul class="nome">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="matricla">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="rg">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="cpf">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="data_nascimento">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="cargo">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="sexo">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="data_admissao">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="data_demissao">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="email">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="status">
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
                                 </ul>
-                                <ul class="matricla">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="rg">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="cpf">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="data_nascimento">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="cargo">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="sexo">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="data_admissao">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="data_demissao">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="email">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <ul class="status">
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            </section>
+    </section>
 </body>
 <script src="../../Global/menu.js"></script>
 <script src="index.js"></script>

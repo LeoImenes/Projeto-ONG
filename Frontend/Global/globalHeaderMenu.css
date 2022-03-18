@@ -23,7 +23,9 @@ li h2:hover {
 }
 
 .userimg {
-    width: 50px
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
 }
 
 .ham {
@@ -38,7 +40,7 @@ li h2:hover {
 .menucontent {
     background-color: #166B8A;
     height: 90%;
-    width: 10%;
+    width: 12%;
     position: absolute;
     top: 10%;
     left: 0%;
@@ -67,17 +69,13 @@ li h2:hover {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    justify-content: space-around
+    justify-content: space-evenly
 }
 
 .useritens h2 {
     position: absolute;
     top: 2%;
     left: 80%;
-}
-
-.userimg {
-    width: 70px;
 }
 
 .pages {

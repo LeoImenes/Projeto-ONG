@@ -17,6 +17,7 @@ body {
     justify-content: space-evenly;
     flex-direction: column;
     box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
 }
 
 .content {
@@ -32,7 +33,8 @@ body {
 
 .cardFuncionario {
     width: 100%;
-    height: 200px;
+    height: 100%;
+    padding: 6vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -50,8 +52,8 @@ body {
 }
 
 .fotoUsuario {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 
@@ -65,11 +67,18 @@ input {
 }
 
 .input {
-    width: 70%;
+    width: 90%;
     height: 30%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center
+}
+
+.input ul {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
 }
 
 .input h1 {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body onload="getfunc()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -33,7 +33,7 @@
                     </li>
                     <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
                     <li>
-                        <p>Usuario</p>
+                        <p class="Username">Usuario</p>
                     </li>
                 </ul>
             </div>
@@ -45,11 +45,8 @@
                     <li class="Funcionario">
                         <p>Funcionario</p>
                     </li>
-                    <li class="Assistido">
-                        <p>Assistido</p>
-                    </li>
                     <li class="Lancamentos">
-                        <p>Lançametos</p>
+                        <p>Financeiro</p>
                     </li>
                 </ul>
             </div>
@@ -73,5 +70,6 @@
 
 </body>
 <script src="../../Global/menu.js"></script>
+<script src="../../Global/menuData.js"></script>
 
 </html>
