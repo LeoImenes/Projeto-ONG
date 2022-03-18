@@ -37,7 +37,7 @@ export default function Login({navigation}) {
     .then(async data => {
       if(data.id_funcionario !== undefined) {
         await AsyncStorage.setItem('userdata', JSON.stringify(data));
-        navigation.navigate('Home');
+        navigation.navigate('ContainerHome');
       }else {
           ToastAndroid.show('Email ou Senha Invalidos', ToastAndroid.SHORT);
       }
@@ -63,9 +63,7 @@ export default function Login({navigation}) {
             <TextInput secureTextEntry={true} placeholder="Senha" value={senha} onChangeText={setSenha} style={css.input}/>
             <Text style={css.button} onPress={() => {recuperarSenha()}}>Esqueci a senha</Text>
             <Text style={global.buttonText} onPress={() => autenticar()}>Entrar</Text>
-            {/* <Text style={global.buttonText} onPress={() => navigation.navigate("Home")}>Entrar</Text> */}
-            {/* <Text style={global.buttonText} onPress={() => console.log(email, senha)}>Entrar</Text>  */}
-        </View>
+          </View>
       }
     </View>
   );

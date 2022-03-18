@@ -5,7 +5,7 @@ import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const fruits = ['Apples', 'Oranges', 'Pears']
@@ -70,7 +70,7 @@ export default function CadastrarAssistido({navigation}){
 
     return(
         <View style={global.body} onLoad={getFunc()}>
-            
+            <Ionicons name="return-down-back-sharp" size={24} color="black" />
             <Image style={global.image} source={require("../../assets/logo.png")}/>
             <View style={css.scrollView}>
                 <ScrollView>

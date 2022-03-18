@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 
 import global from "../../Global/Style"
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 export default function ListarAssistidos({navigation}){
     const[lista, setLista] = useState([]);
@@ -21,9 +21,13 @@ export default function ListarAssistidos({navigation}){
 
     useEffect(() => {
         Listar();
+    },[])
+
+    useEffect(() => {
         if (searchText === ''){
             setLista(dados);
         } else {
+            console.log("teste")
             setLista(
                 dados.filter(item => (item.nome_completo.toLowerCase().indexOf(searchText.toLowerCase()) > -1))
             )
@@ -33,6 +37,7 @@ export default function ListarAssistidos({navigation}){
     return(
         <View style={css.body}>
             <View style={css.filtro}>
+                <Ionicons name="return-down-back-sharp" size={24} color="white" onPress={() => { navigation.navigate("Assistido")}}/>
                 <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={css.pesquisa} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
                 <TouchableOpacity onPress={() => {ordenar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
@@ -73,7 +78,7 @@ const css = StyleSheet.create({
         alignItems: "center",
     },
     filtro:{
-        width: "90%",
+        width: "100%",
         height: "10%",
         display: "flex",
         flexDirection: "row",

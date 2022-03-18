@@ -1,8 +1,10 @@
 import { createDrawerNavigator , DrawerContentScrollView, DrawerItemList, DrawerItem} from '@react-navigation/drawer';
-
+import { useState, useEffect } from 'react';
+import {View, Text, Image} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import global from '../Global/Style'
 
-import Home from '../Geral/Home/Index';
+
 import Assistido from "../Assistidos/Assistido/Index"
 import CadastrarAssistido from '../Assistidos/CadastrarAssistido/Index';
 import ListarAssistidos from '../Assistidos/ListarAssistidos/Index';
@@ -12,75 +14,121 @@ import Funcionario from '../Funcionarios/Funcionario/Index';
 import ListarFuncionario from '../Funcionarios/ListarFuncionarios/Index';
 import MeuPerfil from '../Funcionarios/MeuPerfil/Index';
 import VerFuncionario from '../Funcionarios/VerFuncionario/Index';
+import Home from '../Geral/Home/Index';
 
 const Drawer = createDrawerNavigator();
 
 export default function ContainerHome() {
+
+    const[foto, setFoto] = useState(null);
+    const[nome, setNome] = useState(null);
+
+    useEffect(async() => {
+        let value = await AsyncStorage.getItem('userdata');
+        if(value !== null) {
+            value = JSON.parse(value);
+
+            fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            .then(resp => {return resp.json()})
+            .then(data => {
+                setFoto(data[0].foto);
+                setNome(data[0].nome_completo);
+            })
+            .catch( err => { console.log(err) })
+        }
+    }, [])
+
     return (
-        <Drawer.Navigator useLegacyImplementation={true} screenOptions={{ headerShown: false }} drawerContent={props => {
+        <Drawer.Navigator useLegacyImplementation={true} screenOptions={{ headerShown: false,  
+            drawerStyle: {
+                backgroundColor: '#166B8A',
+                width: 200,
+                height: 450, 
+                borderTopRightRadius: 50,
+                borderBottomRightRadius: 50,
+            } }} drawerContent={props => {
             return (
               <DrawerContentScrollView {...props}>
+                <View style={{alignItems: "center", width: "100%", height: 200}}>
+                    <Image source={(foto !== null) ? {uri: foto} : require("../assets/user.png")} style={global.imageUser}/>
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, marginTop: 10}}>{nome}</Text>
+                </View>
                 <DrawerItemList {...props} />
-                <DrawerItem label="Sair" onPress={async () => { 
-                    await AsyncStorage.removeItem('userdata');
-                    props.navigation.navigate("Login") 
-                }} />
+                <DrawerItem labelStyle={{color: 'white', fontWeight: 'bold', fontSize: 16}} style={{borderBottomWidth: 1, borderBottomColor: "white"}} label="Sair" onPress={async () => {     
+                        await AsyncStorage.removeItem('userdata');
+                        props.navigation.navigate("Login");
+                    }} />
               </DrawerContentScrollView>
             )
-          }}>
+          }}
+            options={{
+                drawerContentContainerStyle: { width: 0 }
+            }}
+          >
             <Drawer.Screen name="Home" component={Home} options={{
                 drawerLabel: () => null,
                 title: null,
                 drawerIcon: () => null,
                 drawerItemStyle: { height: 0 }
             }} />
-            <Drawer.Screen name="MeuPerfil" component={MeuPerfil} />
+            <Drawer.Screen name="Meu Perfil" component={MeuPerfil} options={{
+                    drawerLabel: "Meu Perfil",
+                    drawerLabelStyle: {color:'white', fontWeight: 'bold', fontSize: 16}
+                }}/>
             <Drawer.Screen name="Assistido" component={Assistido} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="CadastrarAssistido" component={CadastrarAssistido} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="VerAssistido" component={VerAssistido} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="CadastrarFuncionario" component={CadastrarFuncionario} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="Funcionario" component={Funcionario} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="ListarFuncionario" component={ListarFuncionario} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
             <Drawer.Screen name="VerFuncionario" component={VerFuncionario} options={{
-                drawerLabel: () => null,
+                drawerLabel: () => {return (null)},
                 title: null,
                 drawerIcon: () => null,
+                drawerLabelStyle: {color:'white', fontWeight: 'bold', height: 0},
                 drawerItemStyle: { height: 0 }
             }} />
         </Drawer.Navigator>

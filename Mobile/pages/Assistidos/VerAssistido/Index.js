@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
+import { Ionicons } from '@expo/vector-icons';
 
 export default function VerAssistido({navigation, route}){
     const {item} = route.params;
@@ -17,6 +18,7 @@ export default function VerAssistido({navigation, route}){
 
     return(
         <View style={global.body}>
+            <Ionicons name="return-down-back-sharp" size={24} color="black" />
             <Image style={global.image} source={require("../../assets/logo.png")}/>
             <View style={css.images}>
                 <View>
