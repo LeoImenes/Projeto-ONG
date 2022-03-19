@@ -40,8 +40,6 @@ function cadastrarAssistido() {
         alert("Selecione pelo menos um campo")
     }
 
-
-
     let data = JSON.stringify({
         "id_funcionario": 3,
         "nome_completo": nome.value,
@@ -56,17 +54,44 @@ function cadastrarAssistido() {
     })
 
     fetch("http://10.87.207.27:3000/assistidos", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
         .then(response => { return response.json() })
         .then(data => {
             console.log(data)
         })
+}
 
+function showMenu() {
+    let menuPsco = document.querySelector(".listadrogas")
+    let menuimgPsco = document.querySelector(".pscArrow")
+    menuPsco.classList.toggle("psDown")
+    menuimgPsco.style.transform = "rotate(0deg)"
+    
+    if (menuPsco.classList.contains("psDown")) {
+        menuPsco.style.display = "flex";
+        menuimgPsco.style.transform = "rotate(180deg)"
+    } else {
+        menuPsco.style.display = "none"
+        menuimgPsco.style.transform = "rotate(0deg)"
+    }
+}
 
-
+function showMenuDoenca(){
+    let menuDoenca = document.querySelector(".listadoencas")
+    let menuimgDoen = document.querySelector(".doArrow")
+    menuDoenca.classList.toggle("doDown")
+    menuimgDoen.style.transform = "rotate(0deg)"
+    
+    if (menuDoenca.classList.contains("doDown")) {
+        menuDoenca.style.display = "flex";
+        menuimgDoen.style.transform = "rotate(180deg)"
+    } else {
+        menuDoenca.style.display = "none"
+        menuimgDoen.style.transform = "rotate(0deg)"
+    }
 }
