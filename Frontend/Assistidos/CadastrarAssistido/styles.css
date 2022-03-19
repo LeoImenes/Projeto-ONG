@@ -57,7 +57,7 @@ section {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 90%;
     align-items: center;
     justify-content: space-around
 }
@@ -78,14 +78,16 @@ section {
 }
 
 .inputDados {
-    background-color: transparent;
-    width: 70%;
-    height: 40%;
+    width: 80%;
+    height: 50%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     align-self: center;
+    background-color: rgba(22, 107, 138, 0.2);
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
 }
 
 .inputDados input {
@@ -159,7 +161,7 @@ section {
     display: flex;
     align-self: flex-start;
     align-items: center;
-    width: 100%;
+    width: 50%;
     justify-content: space-around;
 }
 
@@ -187,17 +189,17 @@ section {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-
 .listadoencas ul,
-.listadrogas ul{
-    width:100%;
+.listadrogas ul {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
 }
+
 .listadoencas li,
-.listadrogas li{
-    width:100%;
+.listadrogas li {
+    width: 100%;
     margin-bottom: 1rem
 }
 
@@ -210,8 +212,8 @@ li input[type="checkbox"] {
 .saude {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 100px;
+    width: 45%;
+    height: 200px;
     justify-content: space-around;
     align-items: center;
     text-align: center;
@@ -220,30 +222,61 @@ li input[type="checkbox"] {
     border-bottom-left-radius: 10px;
 }
 
+.familia {
+    width: 70%;
+    height: 30%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    background-color: rgba(22, 107, 138, 0.2);
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.familia h1 {
+    font-weight: bold;
+}
+
+.famform {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: flex-start;
+}
+
+.famform ul {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.famform input {
+    width: 25%;
+    display: flex;
+    margin-right: 20px;
+    border-bottom: 1px solid;
+}
+
 .pscoativos img,
 .saude img {
     width: 15px;
     margin-left: 1rem;
 }
 
-.famform {
+.anexo {
     width: 100%;
-    height: 25%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: center;
-    align-self: center;
+    text-align: center;
 }
 
-.famform  {
-    display: flex;
-    width: 25%;
-    margin-right: 20px;
-}
-
-.anexo ul {
-    width: 100%;
+.anexo input {
+    width: 50%;
     text-align: center;
 }
 
@@ -251,8 +284,9 @@ li input[type="checkbox"] {
     margin-bottom: 1rem;
 }
 
-.anexo t {
+.anexo p {
     width: 100%;
+    font-weight: bold;
 }
 
 .btn {
@@ -277,12 +311,12 @@ li input[type="checkbox"] {
     position: fixed;
     width: 11%;
     background-color: #166B8A;
-    height: 150px;
+    height: 20%;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 0%;
     z-index: -1;
-    left: 79%;
-    bottom: 7.3%;
+    left: 80%;
+    bottom: 5%;
     opacity: 0.2;
 }
 
@@ -290,12 +324,12 @@ li input[type="checkbox"] {
     position: fixed;
     background-color: #166B8A;
     width: 11%;
-    height: 150px;
+    height: 20%;
     border-top-right-radius: 50%;
     border-bottom-left-radius: 0%;
     z-index: -1;
-    right: 79%;
-    bottom: 7.3%;
+    right: 80%;
+    bottom: 5%;
     opacity: 0.2;
 }
 
@@ -303,134 +337,24 @@ li input[type="checkbox"] {
     position: fixed;
     background-color: #166B8A;
     width: 11%;
-    height: 150px;
+    height: 20%;
     border-bottom-right-radius: 50%;
     z-index: -1;
-    right: 79%;
-    top: 12.62%;
+    right: 80%;
+    top: 11%;
     opacity: 0.2;
 }
 
-
-/* @media (max-width: 1623px) {
-    body {
-        overflow: scroll;
-    }
-    .styleBall-bottom-right {
-        position: fixed;
-        width: 11%;
-        background-color: #166B8A;
-        height: 150px;
-        border-top-left-radius: 50%;
-        border-bottom-left-radius: 0%;
-        z-index: -1;
-        left: 84%;
-        bottom: 5.2%;
-        opacity: 0.2;
-    }
-    .styleBall-bottom-left {
-        position: fixed;
-        background-color: #166B8A;
-        width: 11%;
-        height: 150px;
-        border-top-right-radius: 50%;
-        border-bottom-left-radius: 0%;
-        z-index: -1;
-        right: 84%;
-        bottom: 5.2%;
-        opacity: 0.2;
-    }
-    .styleBall-top-left {
-        position: fixed;
-        background-color: #166B8A;
-        width: 11%;
-        height: 150px;
-        border-bottom-right-radius: 50%;
-        z-index: -1;
-        right: 84%;
-        top: 14.9%;
-        opacity: 0.2;
-    }
-    p,
-    h2,
-    h1 {
-        font-size: 14px;
-        font-weight: normal;
-        font-family: 'Open Sans', sans-serif;
-    }
-    section {
-        width: 100vw;
-        height: 100vh;
-    }
-    .foto {
-        width: 100px
-    }
-    .container {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        margin-top: 2rem;
-        justify-content: center;
-    }
-    .card {
-        width: 90%;
-        height: 80%;
-        display: flex;
-    }
-    .Assiscard {
-        width: 50%;
-        height: 100%;
-        border-right: 1px solid black;
-    }
-    .formAssis {
-        display: flex;
-        height: 100%;
-        width: 100%;
-        align-items: center;
-    }
-    .ts {
-        width: 100%;
-        height: 80%;
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        align-items: center;
-        align-self: flex-start;
-    }
-    .inputs input {
-        display: flex;
-        margin-right: 20px;
-    }
+@media (max-width: 1623px) {
     .inputDados {
-        background-color: transparent;
-        width: 95%;
-        height: 50%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-    }
-    .Assiscard h1 {
-        height: 10%;
-        font-weight: bold;
+        width: 100%
     }
     .Sex {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 70%;
+        width: 100%;
         margin-bottom: 2rem
-    }
-    .Sex ul {
-        height: 100%;
-        display: flex;
-        margin-top: 1vh;
-        margin-bottom: 3vh;
-    }
-    .Sex ul input[type="checkbox"] {
-        height: 20px;
-        width: 20px
     }
     .Sex ul li {
         margin-right: 0.5rem;
@@ -444,110 +368,28 @@ li input[type="checkbox"] {
     .sexstyle li {
         width: 20%;
     }
-    .sexstyle li:nth-child(2),
-    .sexstyle li:nth-child(4) {
-        margin-right: 2em
-    }
-    .Famcard {
-        width: 50%;
-        height: 100%;
+    .pscoativos,
+    .saude {
         display: flex;
+        flex-direction: column;
+        width: 45%;
+        height: 100px;
         justify-content: space-around;
-    }
-    .userform {
-        display: flex;
-        align-self: flex-start;
-        width: 100%;
         align-items: center;
-        justify-content: center;
-        margin-left: 1rem;
-    }
-    .userform ul {
-        display: flex;
-        align-self: flex-start;
-        align-items: center;
-        width: 40%;
-        justify-content: space-around;
-    }
-    .famform {
-        width: 100%;
-        height: 20%;
-        display: flex;
-    }
-    .familia h1 {
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .famform input {
-        display: flex;
-        width: 25%;
-        margin-right: 20px;
-    }
-    .anexo ul {
-        width: 100%;
         text-align: center;
+        border: 1px solid black;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 10px;
     }
-    .anexo ul li:first-child {
-        margin-bottom: 1rem;
+    .familia {
+        width: 90%;
     }
-    .anexo input {
-        width: 100%;
-    }
-    .btn {
-        width: 10vw;
-        height: 7vh;
-        border: 1px solid #e5e5e5;
-        cursor: pointer;
-        background-color: transparent;
-        font: 1.2em sans-serif;
-        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-    }
-    .btn:hover {
-        box-shadow: none;
-        transition: all 0.25s;
-        padding: 0 0px 0px 7px;
+    .familia input {
+        width: 40%;
     }
 }
 
-/* @media (max-width: 1075px) {
-    .styleBall-bottom-right {
-        position: fixed;
-        width: 11%;
-        background-color: #166B8A;
-        height: 150px;
-        border-top-left-radius: 50%;
-        border-bottom-left-radius: 0%;
-        z-index: -1;
-        left: 84%;
-        bottom: 5.8%;
-        opacity: 0.2;
-        display: none;
-    }
-    .styleBall-bottom-left {
-        position: fixed;
-        background-color: #166B8A;
-        width: 11%;
-        height: 150px;
-        border-top-right-radius: 50%;
-        border-bottom-left-radius: 0%;
-        z-index: -1;
-        right: 84%;
-        bottom: 5.8%;
-        opacity: 0.2;
-        display: none;
-    }
-    .styleBall-top-left {
-        position: fixed;
-        background-color: #166B8A;
-        width: 11%;
-        height: 150px;
-        border-bottom-right-radius: 50%;
-        z-index: -1;
-        right: 84%;
-        top: 14.2%;
-        opacity: 0.2;
-        display: none;
-    }
+@media (max-width: 1075px) {
     p,
     h2,
     h1 {
@@ -560,9 +402,8 @@ li input[type="checkbox"] {
         height: 100vh;
     }
     .inputDados {
-        background-color: transparent;
-        width: 90%;
-        height: 40%;
+        width: 100%;
+        height: 50%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -570,7 +411,7 @@ li input[type="checkbox"] {
         align-self: center;
     }
     .foto {
-        width: 100px
+        width: 50px
     }
     .container {
         height: 100%;
@@ -578,12 +419,6 @@ li input[type="checkbox"] {
         display: flex;
         margin-top: 2rem;
         justify-content: center;
-    }
-    .card {
-        width: 95%;
-        height: 80%;
-        display: flex;
-        box-shadow: none;
     }
     .Assiscard {
         width: 50%;
@@ -608,7 +443,7 @@ li input[type="checkbox"] {
     }
     .inputs input {
         display: flex;
-        width: 25%;
+        width: 70%;
         margin-right: 20px;
     }
     .Sex {
@@ -666,9 +501,12 @@ li input[type="checkbox"] {
         width: 40%;
         justify-content: space-around;
     }
+    .familia {
+        width: 90%;
+    }
     .famform {
         width: 100%;
-        height: 25%;
+        height: 100%;
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
@@ -677,11 +515,29 @@ li input[type="checkbox"] {
     }
     .famform input {
         display: flex;
-        width: 25%;
+        width: 40%;
         margin-right: 20px;
     }
-    .anexo ul {
+    .pscoativos,
+    .saude {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        height: 100px;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        border: 1px solid black;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 10px;
+    }
+    .anexo {
+        display: flex;
         width: 100%;
+        justify-content: center;
+    }
+    .anexo ul {
+        width: 70%;
         text-align: center;
     }
     .anexo ul li:first-child {
@@ -704,4 +560,4 @@ li input[type="checkbox"] {
         transition: all 0.25s;
         padding: 0 0px 0px 7px;
     }
-} */
+}
