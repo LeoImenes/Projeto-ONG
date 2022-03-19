@@ -297,7 +297,11 @@ section {
     opacity: 0.2;
 }
 
-@media (max-width: 1623px) {
+
+/* @media (max-width: 1623px) {
+    body {
+        overflow: scroll;
+    }
     .styleBall-bottom-right {
         position: fixed;
         width: 11%;
@@ -686,4 +690,4 @@ section {
         transition: all 0.25s;
         padding: 0 0px 0px 7px;
     }
-}
+} */
