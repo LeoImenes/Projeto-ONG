@@ -4,7 +4,11 @@ console.log(funcionario)
 
 function getfunc() {
     let user = document.querySelector(".Username");
-    let foto = document.querySelector(".userimg")
+    let foto = document.querySelector(".userimg");
+    user.innerHTML = funcionario.nome_completo
+    foto.src = funcionario.foto
+
+
     fetch(`http://10.87.207.27:3000/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {

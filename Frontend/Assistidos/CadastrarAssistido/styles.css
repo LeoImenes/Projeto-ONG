@@ -159,40 +159,63 @@ section {
     display: flex;
     align-self: flex-start;
     align-items: center;
-    width: 40%;
+    width: 100%;
     justify-content: space-around;
 }
 
 .outros {
     display: flex;
-    width: 80%;
-    height: 30%;
+    width: 100%;
+    height: 35%;
     justify-content: space-around;
     align-items: center;
 }
 
 .listadrogas,
 .listadoencas {
-    display: flex;
-    flex-direction: column;
+    background-color: whitesmoke;
     width: 100%;
-    height: 200px;
-    align-items: center;
+    display: flex;
     justify-content: space-between;
-    text-align: center;
+    flex-direction: column;
+    padding: 2rem;
     overflow-y: scroll;
-    display: none
+    font-size: 12px;
+    display: none;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.listadoencas ul,
+.listadrogas ul{
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.listadoencas li,
+.listadrogas li{
+    width:100%;
+    margin-bottom: 1rem
+}
+
+li input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
 }
 
 .pscoativos,
 .saude {
-    border: 1px solid black;
-    width: 40%;
-    height: 70%;
     display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100px;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
     text-align: center;
+    border: 1px solid black;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 10px;
 }
@@ -201,16 +224,6 @@ section {
 .saude img {
     width: 15px;
     margin-left: 1rem;
-}
-
-.outros ul input[type="checkbox"] {
-    height: 20px;
-    width: 20px;
-    margin-bottom: 5px;
-}
-
-.outros li {
-    margin-right: 2rem
 }
 
 .famform {
@@ -223,7 +236,7 @@ section {
     align-self: center;
 }
 
-.famform input {
+.famform  {
     display: flex;
     width: 25%;
     margin-right: 20px;
@@ -238,7 +251,7 @@ section {
     margin-bottom: 1rem;
 }
 
-.anexo input {
+.anexo t {
     width: 100%;
 }
 
@@ -250,6 +263,7 @@ section {
     background-color: transparent;
     font: 1.2em sans-serif;
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
 }
 
 .btn:hover {
@@ -307,7 +321,7 @@ section {
         border-bottom-left-radius: 0%;
         z-index: -1;
         left: 84%;
-        bottom: 5.8%;
+        bottom: 5.2%;
         opacity: 0.2;
     }
     .styleBall-bottom-left {
@@ -319,7 +333,7 @@ section {
         border-bottom-left-radius: 0%;
         z-index: -1;
         right: 84%;
-        bottom: 5.8%;
+        bottom: 5.2%;
         opacity: 0.2;
     }
     .styleBall-top-left {
@@ -330,7 +344,7 @@ section {
         border-bottom-right-radius: 50%;
         z-index: -1;
         right: 84%;
-        top: 14.2%;
+        top: 14.9%;
         opacity: 0.2;
     }
     p,
@@ -370,7 +384,7 @@ section {
         width: 100%;
         align-items: center;
     }
-    .inputs {
+    .ts {
         width: 100%;
         height: 80%;
         display: flex;
@@ -386,7 +400,7 @@ section {
     .inputDados {
         background-color: transparent;
         width: 95%;
-        height: 40%;
+        height: 50%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -394,7 +408,7 @@ section {
         align-self: center;
     }
     .Assiscard h1 {
-        height: 7%;
+        height: 10%;
         font-weight: bold;
     }
     .Sex {
@@ -477,8 +491,8 @@ section {
     }
     .btn {
         width: 10vw;
-        height: 5vh;
-        border: none;
+        height: 7vh;
+        border: 1px solid #e5e5e5;
         cursor: pointer;
         background-color: transparent;
         font: 1.2em sans-serif;
@@ -491,7 +505,7 @@ section {
     }
 }
 
-@media (max-width: 1075px) {
+/* @media (max-width: 1075px) {
     .styleBall-bottom-right {
         position: fixed;
         width: 11%;
@@ -686,4 +700,4 @@ section {
         transition: all 0.25s;
         padding: 0 0px 0px 7px;
     }
-}
+} */
