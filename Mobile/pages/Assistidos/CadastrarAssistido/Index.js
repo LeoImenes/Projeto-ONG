@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Image, TextInput, Text} from 'react-native';
 
 import global from "../../Global/Style"
@@ -11,8 +11,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const fruits = ['Apples', 'Oranges', 'Pears']
 
 export default function CadastrarAssistido({navigation}){
-    const[selectedFruits, setSelectedFruits] = useState([]);
-    const[dorgas, setDorgas] = useState(["Lança", "Cocaina", "Oregano"])
+    const[selected, setSelected] = useState([]);
+    const[comorbidade, setComorbidade] = useState({
+        doencas:[],
+        dorgas:[],
+    });
     const[idFunc, setIdFunc] = useState();
     const[nome, setNome] = useState("");
     const[nomeSocial, setNomeSocial] = useState("");
@@ -29,7 +32,7 @@ export default function CadastrarAssistido({navigation}){
     const[foto, setFoto] = useState("");
 
     onSelectionsChange = (selected) => {
-        setSelectedFruits(selected);
+        setSelected(selected);
     }
 
     const getFunc =  async() => {
@@ -68,10 +71,56 @@ export default function CadastrarAssistido({navigation}){
         .catch(err => { console.log(err) });
       }
 
+      const renderLabel = (label, style) => {
+        return (
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{marginLeft: 5}}>
+              <Text style={{fontSize: 15, fontWeight: 'bold'}}>{label}</Text>
+            </View>
+          </View>
+        )
+      }
+
+      useEffect(() => {          
+        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        .then(resp => {return resp.json()})
+        .then(async data => {
+            let temp = JSON.stringify(data);
+            temp = temp.replace(/id_comorbidade/g, "value");
+            temp = temp.replace(/comorbidade/g, "label");
+            temp = JSON.parse(temp);
+
+            let tempC = [], tempD = [];
+
+            temp.forEach(item => {
+                console.log(item);
+                if(item.tipo == 1) {
+                    setComorbidade(prevState => ({ doencas: [...prevState.doencas, item] }))
+                    //tempC.push(item);
+                }else {
+                    setComorbidade(prevState => ({ dorgas: [...prevState.dorgas, item] }))
+                    //tempD.push(item);
+                }
+            })
+            
+            //setComorbidade(tempC);
+            //setDorgas(tempD);
+        })
+        .catch(err => { console.log(err) });
+
+        console.log(comorbidade);
+
+      }, [])
+
     return(
-        <View style={global.body} onLoad={getFunc()}>
-            <Ionicons name="return-down-back-sharp" size={24} color="black" />
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
+        <View style={css.body} onLoad={getFunc()}>
+            <View style={css.alignHeader}>
+                <Ionicons name="return-down-back-sharp" size={24} color="black" style={{marginLeft: 10}}/>
+                <View style={css.logo}>
+                    <Text style={css.text}>Casa Acolhedora</Text>
+                    <Text style={css.text}>Irmã Antônia</Text>
+                </View>
+            </View>
             <View style={css.scrollView}>
                 <ScrollView>
                     <Text style={css.title}>Dados Pessoais</Text>
@@ -87,10 +136,15 @@ export default function CadastrarAssistido({navigation}){
                     <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                     <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
                     <TextInput value={cartSus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
-                     {/* <SelectMultiple
-                        items={dorgas}
-                        selectedItems={selectedFruits}
-                        onSelectionsChange={onSelectionsChange} /> */}
+                    <Text>Psicoativos</Text>
+                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                            <SelectMultiple
+                                items={comorbidade.doencas}
+                                renderLabel={renderLabel}
+                                selectedItems={selected}
+                                onSelectionsChange={onSelectionsChange}
+                                />
+                    </View>
                     <View style={css.align}>
                         <Image source={require("../../assets/user.png")} style={global.imageUser}/>
                         <View style={css.alignIcon}>
@@ -120,6 +174,10 @@ export default function CadastrarAssistido({navigation}){
 }
 
 const css = StyleSheet.create({
+    body:{
+        flex: 1,
+        backgroundColor: "white",
+    },
     title:{
         alignSelf: "center",
         fontSize: 20,
@@ -141,5 +199,24 @@ const css = StyleSheet.create({
     },
     alignIcon: {
         alignItems: "center"
+    },
+    alignHeader:{
+        width: "100%",
+        height: "20%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    logo:{
+        width: '60%',
+        height: '100%',
+        backgroundColor: "#166B8A",
+        borderBottomLeftRadius: 112.5,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    text: {
+        fontSize: 20,
+        color: "white"
     }
 })
