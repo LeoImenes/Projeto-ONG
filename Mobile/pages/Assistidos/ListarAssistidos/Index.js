@@ -27,7 +27,6 @@ export default function ListarAssistidos({navigation}){
         if (searchText === ''){
             setLista(dados);
         } else {
-            console.log("teste")
             setLista(
                 dados.filter(item => (item.nome_completo.toLowerCase().indexOf(searchText.toLowerCase()) > -1))
             )
@@ -37,7 +36,7 @@ export default function ListarAssistidos({navigation}){
     return(
         <View style={css.body}>
             <View style={css.filtro}>
-                <Ionicons name="return-down-back-sharp" size={24} color="white" onPress={() => { navigation.navigate("Assistido")}}/>
+                <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Assistido")}} />
                 <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={css.pesquisa} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
                 <TouchableOpacity onPress={() => {ordenar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
@@ -71,7 +70,7 @@ const css = StyleSheet.create({
     },
     scrollView: {
         width: "100%",
-        height: 650
+        height: 500
     },
     cardTxt: {
         width: "70%",
@@ -79,18 +78,18 @@ const css = StyleSheet.create({
     },
     filtro:{
         width: "100%",
-        height: "10%",
+        height: 70,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
         alignSelf: "flex-end",
-        marginTop: "5%"
+        marginTop: "5%",
     },
     pesquisa:{
         backgroundColor: "white",
         width: "70%",
-        height: "70%",
+        height: 40,
         borderRadius: 10,
         padding: 10,
         fontSize: 18

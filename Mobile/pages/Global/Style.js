@@ -39,7 +39,8 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignSelf: "center",
         margin: "10%",
-        borderRadius: 5,
+        borderTopLeftRadius: 30,
+        borderBottomRightRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
           width: 0,
@@ -61,10 +62,33 @@ export default StyleSheet.create({
         marginTop: "5%",
         padding: 15
       },
-      buttonText:{
-        color:"blue",
-        fontSize: 20,
+      cardButton1: {
+        backgroundColor: "rgb(22,107,138)",
+        width: "35%",
+        height: 45,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 5
+      },
+      cardButton2: {
+        backgroundColor: "white",
+        width: "35%",
+        height: 45,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 5,
+        marginTop: "30%"
+      },
+      buttonText1:{
+        color: "white",
+        fontSize: 18,
         fontWeight: "bold",
         alignSelf: "center"
+      },
+      buttonText2:{
+        color: "rgb(22,107,138)",
+        fontSize: 18,
+        fontWeight: "bold",
+        alignSelf: "center",
       }
 })

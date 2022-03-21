@@ -4,11 +4,10 @@ import { StyleSheet, View, ScrollView, Image, TextInput, Text} from 'react-nativ
 import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
+import CheckBox from '@react-native-community/checkbox';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const fruits = ['Apples', 'Oranges', 'Pears']
 
 export default function CadastrarAssistido({navigation}){
     const[selected, setSelected] = useState([]);
@@ -30,6 +29,8 @@ export default function CadastrarAssistido({navigation}){
     const[cartCid, setCartCid] = useState("");
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState("");
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
 
     onSelectionsChange = (selected) => {
         setSelected(selected);
@@ -115,7 +116,7 @@ export default function CadastrarAssistido({navigation}){
     return(
         <View style={css.body} onLoad={getFunc()}>
             <View style={css.alignHeader}>
-                <Ionicons name="return-down-back-sharp" size={24} color="black" style={{marginLeft: 10}}/>
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
                 <View style={css.logo}>
                     <Text style={css.text}>Casa Acolhedora</Text>
                     <Text style={css.text}>Irmã Antônia</Text>
@@ -128,7 +129,11 @@ export default function CadastrarAssistido({navigation}){
                     <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                     <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                     <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
-                    <TextInput value={sexo} onChangeText={setSexo} placeholder="Sexo..." style={global.info}></TextInput>
+                    {/* <CheckBox
+                        disabled={false}
+                        value={toggleCheckBox}
+                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                    /> */}
                     <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
                     {/* <TextInput value={mae} onChangeText={setMae} placeholder="Nome da mãe" place style={global.info}></TextInput>
                     <TextInput value={pai} onChangeText={setPai} placeholder="Nome do pai..." place style={global.info}></TextInput> */}
@@ -136,10 +141,19 @@ export default function CadastrarAssistido({navigation}){
                     <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                     <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
                     <TextInput value={cartSus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
-                    <Text>Psicoativos</Text>
+                    <Text style={css.title}>Psicoativos</Text>
                     <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
                             <SelectMultiple
                                 items={comorbidade.doencas}
+                                renderLabel={renderLabel}
+                                selectedItems={selected}
+                                onSelectionsChange={onSelectionsChange}
+                                />
+                    </View>
+                    <Text style={css.title}>Doenças</Text>
+                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                            <SelectMultiple
+                                items={comorbidade.dorgas}
                                 renderLabel={renderLabel}
                                 selectedItems={selected}
                                 onSelectionsChange={onSelectionsChange}
@@ -152,20 +166,21 @@ export default function CadastrarAssistido({navigation}){
                             <Text style={{color: "blue"}}>Adicionar foto</Text>
                         </View>
                     </View>
-                {/* <Collapse>
+                <Collapse>
                     <CollapseHeader>
                     <View style={{display: 'flex', flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: "5%"}}>
-                        <Text style={css.title}>Contato ou emergência</Text>
+                        <Text style={css.title}>Familiar</Text>
                         <AntDesign name="down" size={18} color="black" style={{marginLeft: 10}}/>
                     </View>
                     </CollapseHeader>
                     <CollapseBody>
+                        <TextInput placeholder="Nome..." style={global.info}></TextInput>
                         <TextInput placeholder="Parentesco..." style={global.info}></TextInput>
                         <TextInput placeholder="Telefone..." style={global.info}></TextInput>
-                        <TextInput placeholder="Parentesco..." style={global.info}></TextInput>
-                        <TextInput placeholder="Telefone..." style={global.info}></TextInput>
+                        <TextInput placeholder="E-mail..." style={global.info}></TextInput>
+                        <TextInput placeholder="Endereço..." style={global.info}></TextInput>
                     </CollapseBody>
-                </Collapse> */}
+                </Collapse>
                     <Text style={global.buttonText} onPress={() => {cadastrar()}}>Salvar</Text>
                 </ScrollView>
             </View>
@@ -187,7 +202,7 @@ const css = StyleSheet.create({
     },
     scrollView: {
         width: "100%",
-        height: 583
+        height: 470
     },
     align: {
         width: 150,
