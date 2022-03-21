@@ -7,7 +7,7 @@ function cadastrarAssistido() {
     let est = document.querySelector(".estado");
     let nat = document.querySelector(".naturalidade");
     let nasc = document.querySelector(".nasc")
-    let cartCid = document.querySelector(".cartcid");
+    let cartCid = document.querySelector(".cartcid").value;
     let cartSus = document.querySelector(".cartSus");
 
 
@@ -50,6 +50,7 @@ function cadastrarAssistido() {
         "estado_civil": est.value,
         "naturalidade": nat.value,
         "sexo": sex,
+        "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
     })
 
@@ -71,7 +72,7 @@ function showMenu() {
     let menuimgPsco = document.querySelector(".pscArrow")
     menuPsco.classList.toggle("psDown")
     menuimgPsco.style.transform = "rotate(0deg)"
-    
+
     if (menuPsco.classList.contains("psDown")) {
         menuPsco.style.display = "flex";
         menuimgPsco.style.transform = "rotate(180deg)"
@@ -81,12 +82,12 @@ function showMenu() {
     }
 }
 
-function showMenuDoenca(){
+function showMenuDoenca() {
     let menuDoenca = document.querySelector(".listadoencas")
     let menuimgDoen = document.querySelector(".doArrow")
     menuDoenca.classList.toggle("doDown")
     menuimgDoen.style.transform = "rotate(0deg)"
-    
+
     if (menuDoenca.classList.contains("doDown")) {
         menuDoenca.style.display = "flex";
         menuimgDoen.style.transform = "rotate(180deg)"
@@ -95,3 +96,58 @@ function showMenuDoenca(){
         menuimgDoen.style.transform = "rotate(0deg)"
     }
 }
+
+function getComorbidades() {
+    let listaDrogas = document.querySelector(".listadrogas")
+    let listaDoencas = document.querySelector(".listadoencas")
+    let ulDoenca = document.createElement("ul")
+    let ulDroga = document.createElement("ul")
+    let liDoenca = document.createElement("p")
+    let liDroga = document.createElement("p")
+    let inpDoenca = document.createElement("input")
+    let inpDroga = document.createElement("input")
+
+    inpDroga.type = "checkbox"
+    inpDoenca.type = "checkbox"
+
+    fetch("http://10.87.207.27:3000/assistido/comorbidade")
+        .then(response => { return response.json() })
+        .then(data => {
+            data.forEach((item) => {
+                if (item.tipo === 1) {
+                    liDoenca.innerHTML = item.comorbidade
+                    liDoenca.appendChild(inpDoenca.cloneNode(true))
+                    ulDoenca.appendChild(liDoenca.cloneNode(true));
+                    // ul.appendChild(liinp.cloneNode(true));
+                    listaDoencas.appendChild(ulDoenca)
+                } else if (item.tipo === 0) {
+                    liDroga.innerHTML = item.comorbidade
+                    liDroga.appendChild(inpDroga.cloneNode(true))
+                    ulDroga.appendChild(liDroga.cloneNode(true));
+                    // ul.appendChild(liinp.cloneNode(true));
+                    listaDrogas.appendChild(ulDroga)
+                }
+            })
+        })
+
+}
+
+
+let adcFoto = document.querySelector('.adcFoto')
+let fileInp = document.querySelector("#inpFoto")
+
+function ImgtoBase(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(error);
+    });
+}
+
+
+
+
+adcFoto.addEventListener('click', () => {
+    fileInp.click();
+})

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getfunc()">
+<body onload="getfunc(),getComorbidades()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -69,7 +69,8 @@
                                 <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
                                 <li>
                                     <p>Adicionar Foto </p>
-                                    <p>📸</p>
+                                    <p class="adcFoto">📸</p>
+                                   <input type="file" name="" id="inpFoto" hidden>
                                 </li>
                             </ul>
                         </div>
@@ -91,7 +92,7 @@
                                 <div class="Nascimento">
                                     <input type="text" placeholder="Nascimento..." class="nasc">
                                 </div>
-                                <div class="estado">
+                                <div class="Estado">
                                     <input type="text" placeholder="Estado civil..." class="estado">
                                 </div>
                                 <div class="Naturalidade">
@@ -108,100 +109,47 @@
                                 <p><b>Sexo:</b></p>
                                 <ul class="sexstyle">
                                     <li>
-                                        <input type="checkbox" name="" id="Masculino">
-
-                                    </li>
-                                    <li>
                                         <p> Masculino</p>
                                     </li>
                                     <li>
-                                        <input type="checkbox" name="" id="Feminino">
+                                        <input type="checkbox" name="" id="Masculino">
+
                                     </li>
+                                 
                                     <li>
                                         <p>Feminino</p>
                                     </li>
                                     <li>
-                                        <input type="checkbox" name="" id="Outro">
-
+                                        <input type="checkbox" name="" id="Feminino">
                                     </li>
+                                
                                     <li>
                                         <p>Outro</p>
                                     </li>
-
+                                    <li>
+                                        <input type="checkbox" name="" id="Outro">
+                                    </li>
                                 </ul>
-
                             </div>
-
-
                         </div>
                     </div>
-
                 </div>
                 <div class="Famcard">
                     <div class="outros">
                         <div class="pscoativos">
-                            <p><b>Piscoativos</b><img src="../../Assets/icones/down-chevron.png" class="pscArrow" onclick="showMenu()"></p>
+                            <p><b>Piscoativos</b><img src="../../Assets/icones/down-chevron.png" class="pscArrow" onclick="showMenu() "style="cursor: pointer;"></p>
                             <div class="listadrogas">
-                                <ul>
-                                    <li>Álcool</li>
-                                    <li><input type="checkbox" name="" id="Álcool"></li>
-                                </ul>
-                                <ul>
-                                    <li>Nicotina</li>
-                                    <li><input type="checkbox" name="" id="Nicotina"></li>
-                                </ul>
-                                <ul>
-                                    <li>Cocaína</li>
-                                    <li><input type="checkbox" name="" id="Cocaína"></li>
-                                </ul>
-                                <ul>
-                                    <li>Crack</li>
-                                    <li><input type="checkbox" name="" id="Crack"></li>
-                                </ul>
-                                <ul>
-                                    <li>Maconha</li>
-                                    <li><input type="checkbox" name="" id="Maconha"></li>
-                                </ul>
-                                <ul>
-                                    <li>Ox</li>
-                                    <li><input type="checkbox" name="" id="Ox"></li>
-                                </ul>
-                            </div>
+                              </div>
                         </div>
                         <div class="saude">
-                            <p><b>Saude</b><img src="../../Assets/icones/down-chevron.png" class="doArrow" onClick="showMenuDoenca()"></p>
+                            <p><b>Saude</b><img src="../../Assets/icones/down-chevron.png" class="doArrow" onClick="showMenuDoenca()" style="cursor: pointer;"></p>
                             <div class="listadoencas doDown">
-                                <ul>
-                                    <li style="margin-right: 5px">Sind. do Pânico</li>
-                                    <li><input type="checkbox" name="" id="Sind. do Pânico"></li>
-                                </ul>
-                                <ul>
-                                    <li>Hipertensão</li>
-                                    <li><input type="checkbox" name="" id="Hipertensão"></li>
-                                </ul>
-                                <ul>
-                                    <li>Depressão</li>
-                                    <li><input type="checkbox" name="" id="Depressão"></li>
-                                </ul>
-                                <ul>
-                                    <li>Diabetes</li>
-                                    <li><input type="checkbox" name="" id="Diabetes"></li>
-                                </ul>
-                                <ul>
-                                    <li>Outro:</li>
-                                    <li style="width: 100%;"><input type="text" name="" id=""></li>
-                                </ul>
-
                             </div>
-
-
                         </div>
                     </div>
-
                     <div class="familia">
                         <h1>Familiar</h1>
-
-                        <div class="famform">
+                    <div class="famform">
                             <ul>
                                 <input type="text" placeholder="Nome Completo...">
                                 <input type="text" placeholder="Parentesco...">
