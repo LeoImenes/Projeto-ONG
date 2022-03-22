@@ -92,7 +92,7 @@ section {
 
 .inputDados input {
     width: 100%;
-    margin-right: 5rem;
+    margin-right: 0.2rem;
 }
 
 .Assiscard h1 {
@@ -652,7 +652,7 @@ input[type="checkbox"] {
         align-items: center;
         justify-content: flex-start;
         width: 50%;
-        margin-bottom: 2rem
+        margin-top: 2rem
     }
     .Sex ul {
         height: 100%;

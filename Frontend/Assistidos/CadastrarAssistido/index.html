@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getfunc(),getComorbidades()">
+<body onload="getfunc(),load()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -93,7 +93,7 @@
                                     <input type="text" placeholder="CPF..." class="cpf">
                                 </div>
                                 <div class="Nascimento">
-                                    <input type="date" placeholder="Nascimento..." class="nasc">
+                                    <input type="text" placeholder="Nascimento DD/MM/AAAA..." class="nasc">
                                 </div>
                                 <div class="Estado">
                                     <input type="text" placeholder="Estado civil..." class="estado">
@@ -172,7 +172,7 @@
                             </li>
                         </ul>
                     </div>
-                    <input type="button" value="Salvar" class="btn" onclick="cadastrarAssistido()">
+                    <input type="button" value="Salvar" class="btn" onclick="cadastrarComorbidade()">
 
                 </div>
             </div>
