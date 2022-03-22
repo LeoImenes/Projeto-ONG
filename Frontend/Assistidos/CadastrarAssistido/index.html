@@ -42,8 +42,11 @@
                     <li class="Assistencia">
                         <p>Assistencia</p>
                     </li>
+                    <li class="Assistidos">
+                        <p>Assitidos</p>
+                    </li>
                     <li class="Funcionario">
-                        <p>Funcionario</p>
+                        <p>Funcionarios</p>
                     </li>
                     <li class="Lancamentos">
                         <p>Financeiro</p>
@@ -70,7 +73,7 @@
                                 <li>
                                     <p>Adicionar Foto </p>
                                     <p class="adcFoto">📸</p>
-                                   <input type="file" name="" id="inpFoto" hidden>
+                                    <input type="file" name="" id="inpFoto" hidden>
                                 </li>
                             </ul>
                         </div>
@@ -90,7 +93,7 @@
                                     <input type="text" placeholder="CPF..." class="cpf">
                                 </div>
                                 <div class="Nascimento">
-                                    <input type="text" placeholder="Nascimento..." class="nasc">
+                                    <input type="date" placeholder="Nascimento..." class="nasc">
                                 </div>
                                 <div class="Estado">
                                     <input type="text" placeholder="Estado civil..." class="estado">
@@ -115,14 +118,14 @@
                                         <input type="checkbox" name="" id="Masculino">
 
                                     </li>
-                                 
+
                                     <li>
                                         <p>Feminino</p>
                                     </li>
                                     <li>
                                         <input type="checkbox" name="" id="Feminino">
                                     </li>
-                                
+
                                     <li>
                                         <p>Outro</p>
                                     </li>
@@ -137,9 +140,9 @@
                 <div class="Famcard">
                     <div class="outros">
                         <div class="pscoativos">
-                            <p><b>Piscoativos</b><img src="../../Assets/icones/down-chevron.png" class="pscArrow" onclick="showMenu() "style="cursor: pointer;"></p>
+                            <p><b>Piscoativos</b><img src="../../Assets/icones/down-chevron.png" class="pscArrow" onclick="showMenu() " style="cursor: pointer;"></p>
                             <div class="listadrogas">
-                              </div>
+                            </div>
                         </div>
                         <div class="saude">
                             <p><b>Saude</b><img src="../../Assets/icones/down-chevron.png" class="doArrow" onClick="showMenuDoenca()" style="cursor: pointer;"></p>
@@ -149,7 +152,7 @@
                     </div>
                     <div class="familia">
                         <h1>Familiar</h1>
-                    <div class="famform">
+                        <div class="famform">
                             <ul>
                                 <input type="text" placeholder="Nome Completo...">
                                 <input type="text" placeholder="Parentesco...">
@@ -164,7 +167,9 @@
                             <li>
                                 <p>Anexar arquivo do Assistido</p>
                             </li>
-                            <li><input type="file" name="" id=""></li>
+                            <li>
+                                <input type="file" name="" id="">
+                            </li>
                         </ul>
                     </div>
                     <input type="button" value="Salvar" class="btn" onclick="cadastrarAssistido()">

@@ -6,8 +6,8 @@ function cadastrarAssistido() {
     let cpf = document.querySelector(".cpf");
     let est = document.querySelector(".estado");
     let nat = document.querySelector(".naturalidade");
-    let nasc = document.querySelector(".nasc")
-    let cartCid = document.querySelector(".cartcid").value;
+    let nasc = document.querySelector(".nasc").valueAsDate
+    let cartCid = document.querySelector(".cartCid");
     let cartSus = document.querySelector(".cartSus");
 
 
@@ -17,8 +17,14 @@ function cadastrarAssistido() {
         nomeerr.style.display = "flex"
         nomeerr.style.color = "red"
         nomeerr.style.width = "90%"
+        nomeerr.style.fontSize = "14px"
         inpNomeCom.appendChild(nomeerr)
     }
+
+
+
+    dataNasc = new Date(nasc);
+    dataFormatada = dataNasc.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 
 
     let sexMasc = document.querySelector("#Masculino");
@@ -37,8 +43,9 @@ function cadastrarAssistido() {
         sexOutr.value = "Outro";
         sex.push(sexOutr.value);
     } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
-        alert("Selecione pelo menos um campo")
+        alert("Selecione pelo menos uma opção (Sexo)")
     }
+
 
     let data = JSON.stringify({
         "id_funcionario": 3,
@@ -46,7 +53,7 @@ function cadastrarAssistido() {
         "nome_social": nomesoc.value,
         "rg": rg.value,
         "cpf": cpf.value,
-        "data_nascimento": nasc.value,
+        "data_nascimento": dataFormatada,
         "estado_civil": est.value,
         "naturalidade": nat.value,
         "sexo": sex,
@@ -54,13 +61,14 @@ function cadastrarAssistido() {
         "cartao_sus": cartSus.value,
     })
 
+    console.log(data)
     fetch("http://10.87.207.27:3000/assistidos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data,
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
         .then(response => { return response.json() })
         .then(data => {
             console.log(data)

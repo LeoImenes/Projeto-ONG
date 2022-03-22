@@ -1,7 +1,3 @@
-let dados = localStorage.getItem('userdata')
-let funcionario = JSON.parse(dados)
-console.log(funcionario)
-
 function getfunc() {
     let user = document.querySelector(".Username");
     let foto = document.querySelector(".userimg");
