@@ -47,7 +47,7 @@ export default function ListarAssistidos({navigation}){
                     {
                         lista.map((item, index) =>{
                             return (
-                                <TouchableOpacity style={global.cardInfo} key={index} onPress={() => {navigation.navigate("VerFuncionario")}}>
+                                <TouchableOpacity style={global.cardInfo} key={index} onPress={() => {navigation.navigate("VerAssistido", {item})}}>
                                     <Image source={(item.foto_antes !== null) ? {uri: item.foto_antes} : require("../../assets/user.png")} style={global.imageUser}/>
                                     <View style={css.cardTxt}>
                                         <Text style={global.textInfo}>{item.nome_completo}</Text>

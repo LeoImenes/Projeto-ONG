@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
-import CheckBox from '@react-native-community/checkbox';
-import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Picker} from '@react-native-picker/picker';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function CadastrarAssistido({navigation}){
     const[selected, setSelected] = useState([]);
-    const[comorbidade, setComorbidade] = useState({
-        doencas:[],
-        dorgas:[],
-    });
+    const[comorbidade, setComorbidade] = useState([]);
+    const[dorgas, setDorgas] = useState([]);
     const[idFunc, setIdFunc] = useState();
     const[nome, setNome] = useState("");
     const[nomeSocial, setNomeSocial] = useState("");
@@ -22,14 +20,11 @@ export default function CadastrarAssistido({navigation}){
     const[cpf, setCpf] = useState("");
     const[sexo,setSexo] = useState("");
     const[nascimento, setNascimento] = useState("");
-    const[mae, setMae] = useState("");
-    const[pai, setPai] = useState("");
     const[estdCivil, setEstdCivil] = useState("");
     const[naturalidade, setNaturalidade] = useState("");
     const[cartCid, setCartCid] = useState("");
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState("");
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
 
     onSelectionsChange = (selected) => {
@@ -94,24 +89,41 @@ export default function CadastrarAssistido({navigation}){
             let tempC = [], tempD = [];
 
             temp.forEach(item => {
-                console.log(item);
                 if(item.tipo == 1) {
-                    setComorbidade(prevState => ({ doencas: [...prevState.doencas, item] }))
-                    //tempC.push(item);
+                    // setComorbidade(prevState => ({ doencas: [...prevState.doencas, item] }))
+                    tempC.push(item);
                 }else {
-                    setComorbidade(prevState => ({ dorgas: [...prevState.dorgas, item] }))
-                    //tempD.push(item);
+                    // setComorbidade(prevState => ({ dorgas: [...prevState.dorgas, item] }))
+                    tempD.push(item);
                 }
             })
             
-            //setComorbidade(tempC);
-            //setDorgas(tempD);
+            setComorbidade(tempC);
+            setDorgas(tempD);
         })
         .catch(err => { console.log(err) });
 
-        console.log(comorbidade);
-
       }, [])
+
+      const selecionarImagem = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+            base64: true
+        });
+
+        let item = result.uri.split(".")
+        if (!result.cancelled && result.base64.length < 59500) {
+            setFoto({
+                // uri: 'data:image/jpeg;base64,' + result.base64,
+                uri: `data:image/${item[item.length-1]};base64,`+result.base64,
+            })
+        } else if(!result.cancelled) {
+            ToastAndroid.show('Selecione uma imagem menor', ToastAndroid.SHORT);
+        }
+    }
 
     return(
         <View style={css.body} onLoad={getFunc()}>
@@ -124,64 +136,54 @@ export default function CadastrarAssistido({navigation}){
             </View>
             <View style={css.scrollView}>
                 <ScrollView>
-                    <Text style={css.title}>Dados Pessoais</Text>
+                    <Text style={css.title1}>Dados Pessoais</Text>
                     <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
                     <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                     <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                     <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
-                    {/* <CheckBox
-                        disabled={false}
-                        value={toggleCheckBox}
-                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    /> */}
+                    <View style={{width: "80%", alignSelf: "center", borderBottomWidth: 2}}>
+                        <Picker
+                            selectedValue={sexo}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setSexo(itemValue)
+                        }>
+                            <Picker.Item label="Sexo..." value="" style={{color: "gray"}}/>
+                            <Picker.Item label="Feminino" value="Feminino" />
+                            <Picker.Item label="Masculino" value="Masculino" />
+                            <Picker.Item label="Outro" value="Outro" />
+                        </Picker>
+                    </View>
                     <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
-                    {/* <TextInput value={mae} onChangeText={setMae} placeholder="Nome da mãe" place style={global.info}></TextInput>
-                    <TextInput value={pai} onChangeText={setPai} placeholder="Nome do pai..." place style={global.info}></TextInput> */}
                     <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={global.info}></TextInput>
                     <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                     <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
                     <TextInput value={cartSus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
-                    <Text style={css.title}>Psicoativos</Text>
-                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                    <Text style={css.title1}>Doenças</Text>
+                    <View style={{flex: 1, width: '90%', height: 100, alignItems: "center", alignSelf: "center"}}>
                             <SelectMultiple
-                                items={comorbidade.doencas}
+                                items={comorbidade}
                                 renderLabel={renderLabel}
                                 selectedItems={selected}
                                 onSelectionsChange={onSelectionsChange}
                                 />
                     </View>
-                    <Text style={css.title}>Doenças</Text>
-                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                    <Text style={css.title2}>Psicoativos</Text>
+                    <View style={{flex: 1,width: '85%', height: 50, alignItems: "center", alignSelf: "center"}}>
                             <SelectMultiple
-                                items={comorbidade.dorgas}
+                                items={dorgas}
                                 renderLabel={renderLabel}
                                 selectedItems={selected}
                                 onSelectionsChange={onSelectionsChange}
                                 />
                     </View>
                     <View style={css.align}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View style={css.alignIcon}>
+                        <Image source={( foto )? foto : require("../../assets/user.png")} style={global.imageUser}/>
+                        <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
                             <Feather name="camera" size={24} color="blue" />
                             <Text style={{color: "blue"}}>Adicionar foto</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
-                <Collapse>
-                    <CollapseHeader>
-                    <View style={{display: 'flex', flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: "5%"}}>
-                        <Text style={css.title}>Familiar</Text>
-                        <AntDesign name="down" size={18} color="black" style={{marginLeft: 10}}/>
-                    </View>
-                    </CollapseHeader>
-                    <CollapseBody>
-                        <TextInput placeholder="Nome..." style={global.info}></TextInput>
-                        <TextInput placeholder="Parentesco..." style={global.info}></TextInput>
-                        <TextInput placeholder="Telefone..." style={global.info}></TextInput>
-                        <TextInput placeholder="E-mail..." style={global.info}></TextInput>
-                        <TextInput placeholder="Endereço..." style={global.info}></TextInput>
-                    </CollapseBody>
-                </Collapse>
-                    <Text style={global.buttonText} onPress={() => {cadastrar()}}>Salvar</Text>
+                    <Text style={css.buttonText} onPress={() => {cadastrar()}}>Salvar</Text>
                 </ScrollView>
             </View>
         </View>
@@ -193,16 +195,23 @@ const css = StyleSheet.create({
         flex: 1,
         backgroundColor: "white",
     },
-    title:{
+    title1:{
         alignSelf: "center",
         fontSize: 20,
         fontWeight: "bold",
         color: "black",
         marginTop: "5%"
     },
+    title2:{
+        alignSelf: "center",
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "black",
+        marginBottom: "5%"
+    },
     scrollView: {
         width: "100%",
-        height: 470
+        height: "80%"
     },
     align: {
         width: 150,
@@ -233,5 +242,12 @@ const css = StyleSheet.create({
     text: {
         fontSize: 20,
         color: "white"
+    },
+    buttonText: {
+        fontSize: 20,
+        color: "#166B8A",
+        alignSelf: "center",
+        fontWeight: "bold",
+        marginTop: "5%"
     }
 })

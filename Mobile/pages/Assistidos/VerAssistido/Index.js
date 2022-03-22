@@ -72,6 +72,9 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>Cartão do SUS:</Text>
                         <Text style={global.textInfo}>{item.cartao_sus}</Text>
                     </View>
+                    <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
+                        <Text>Adicionar novo familiar</Text>
+                    </TouchableOpacity>
                     {/* <Text style={css.title}>Dados do Familiar</Text>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
