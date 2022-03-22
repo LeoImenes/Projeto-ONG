@@ -463,6 +463,95 @@ const getComorbidades= (req,res) => {
 
 
 
+// CRUD FAMILIAR 
+
+// POST 
+
+const postFamiliar = (req,res) => {
+
+   
+
+    let nome_completo = req.body.nome_completo
+    let rg = req.body.rg
+    let telefone = req.body.telefone
+    let email = req.body.email
+    let endereco = req.body.endereco
+    let id_assistido = req.body.id_assistido
+    let parentesco = req.body.parentesco
+
+    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}',
+        '${email}','${endereco}')`
+
+       if(nome_completo !== undefined){
+
+
+        con.query(stringFamiliares,(err,result) => {
+
+            if(err === null){
+
+                let id_familiar = result.insertId
+
+                let queries = [
+                    `insert into familiarassistido (id_assistido,id_familiar, data_cadastro) values (${id_assistido}, ${id_familiar}, curdate())`,
+                    `insert into familiarassistido (id_assistido,id_familiar,parentesco,data_cadastro) values (${id_assistido}, ${id_familiar}, '${parentesco}', curdate())`
+                ]
+
+
+                function retString(paren){
+
+                    if(paren === undefined){
+                        return queries[0]
+                    }
+
+                    return queries[1]
+                }
+
+
+                let stringAssisFam = retString(parentesco)
+
+                con.query(stringAssisFam, (err02,result02) => {
+                    if(err02 === null){
+
+                        console.log(result02.insertId)
+                       
+                        let id_assisFam = result02.insertId
+                        let stringResult = `select * from vw_familiar02 where id_familiar = ${id_familiar}`
+
+                        con.query(stringResult, (err03,result03) => {
+
+                            if(err03 === null){
+                                res.status(200).json(result03)
+                            }
+                            else{
+                                res.status(400).json({err03: err03.message}).end()
+                            }
+                        })
+
+
+                    }else{
+                        res.status(400).json({err02: err02.message}).end()
+                    }
+                })
+
+
+            }else{
+                res.status(400).json({err: err.message}).end()
+            }
+        })
+
+       }
+       else{
+
+        res.status(400).json({"err": "informe pelo menos o campo 'nome_completo'"}).end()
+
+       }
+
+
+
+}
+
+
+
 
 
 
@@ -488,4 +577,5 @@ module.exports = {
     postSaude,
     updateSaude,
     getComorbidades,
+    postFamiliar
 }

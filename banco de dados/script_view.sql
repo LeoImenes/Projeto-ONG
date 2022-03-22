@@ -42,7 +42,7 @@ from assistidos a inner join familiarassistido fa on a.id_assistido = fa.id_assi
 inner join familiares f on fa.id_familiar = f.id_familiar;
 
 CREATE VIEW vw_familiar02 AS
-select a.nome_completo, a.nome_social, a.rg, a.cpf, a.antecedente_criminal, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois,f.nome_completo AS nome_familiar,f.rg AS rg_familiar, fa.parentesco, f.telefone, f.email, f.endereco
+select f.id_familiar, a.nome_completo AS nome_assistido, a.nome_social AS nome_social_assistido, a.rg, a.cpf, a.antecedente_criminal, a.cartao_cidadao, a.cartao_sus, a.foto_antes, a.foto_depois,f.nome_completo AS nome_familiar,f.rg AS rg_familiar, fa.parentesco, f.telefone, f.email, f.endereco
 from assistidos a inner join familiarassistido fa on a.id_assistido = fa.id_assistido
 inner join familiares f on fa.id_familiar = f.id_familiar;
 
@@ -51,3 +51,24 @@ inner join familiares f on fa.id_familiar = f.id_familiar;
 -- filtrar view
 SELECT * FROM vw_saude WHERE id_assistido = 1;
 
+
+ -- Criando Triggers
+ 
+ DELIMITER // 
+ 
+ CREATE TRIGGER tr_familiar BEFORE INSERT ON familiarassistido
+ FOR EACH ROW 
+ BEGIN
+ 
+	IF(	NEW.id_assistido = OLD.id_assistido AND NEW.id_familiar = OLD.id_familiar) THEN
+ 
+		SET NEW.id_assistido = null;
+		
+		SET NEW.id_familiar = null;
+        
+	END IF;
+
+
+END;
+
+//

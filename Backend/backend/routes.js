@@ -28,4 +28,6 @@ route.post("/assistido/saude", assistidoControll.postSaude)
 route.put("/assistido/saude", assistidoControll.updateSaude)
 route.get("/assistido/comorbidade", assistidoControll.getComorbidades)
 
+route.post("/assistido/familiar", assistidoControll.postFamiliar)
+
 module.exports = route
