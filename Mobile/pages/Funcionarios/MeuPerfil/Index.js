@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, ScrollView} from 'react-native';
 
 import global from "../../Global/Style"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function MeuPerfil({navigation}){
     const [funcionario, setFuncionario] = useState({});
@@ -35,23 +36,26 @@ export default function MeuPerfil({navigation}){
 
     return(
         <View style={global.body}>
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <View style={{
-                                width: "100%",
-                                height: "20%",
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-evenly"
-                                }}>
-                                <Image source={{uri: funcionario.foto}} style={global.imageUser}/>
-                                <Text style={global.textInfo}>Matrícula: {funcionario.matricula}</Text>
+            <View style={css.header}>
+                <View style={css.alignItems}>
+                    <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('Funcionario')}} />
+                    {/* <Image source={{uri: funcionario.foto}} style={global.imageUser}/> */}
+                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+                </View>
+                <View style={css.cardTitle}>
+                    <Text style={css.textTitle}>CASA ACOLHEDORA</Text>
+                    <Text style={css.textTitle}>IRMÃ ANTÔNIA</Text>
+                </View>
             </View>
             <View style={css.scrollView}>
                 <ScrollView>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
                         <Text style={global.textInfo}>{funcionario.nome_completo}</Text>
+                    </View>
+                    <View style={global.info}>
+                        <Text style={global.textInfo}>Matrícula:</Text>
+                        <Text style={global.textInfo}>{funcionario.matricula}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>RG:</Text>
@@ -87,5 +91,32 @@ const css = StyleSheet.create({
     scrollView: {
         width: "100%",
         height: 430
+    },
+    cardTitle: {
+        backgroundColor: "#166B8A",
+        width: "60%",
+        height: "100%",
+        borderBottomLeftRadius: 66,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    textTitle: {
+        color: "white",
+        fontSize: 18
+    },
+    header: {
+        width: "95%",
+        height: "30%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        alignSelf: "flex-end",
+    },
+    alignItems: {
+        width: "35%",
+        height: "90%",
+        padding: 5,
+        justifyContent: "space-evenly"
     }
 })

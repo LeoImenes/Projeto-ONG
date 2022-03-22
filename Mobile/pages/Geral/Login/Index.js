@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet,Text, View, Image, TextInput, ToastAndroid} from 'react-native';
+import { StyleSheet, Text, View, TextInput, ToastAndroid, TouchableOpacity, StatusBar} from 'react-native';
 
 import global from "../../Global/Style"
-import md5 from 'md5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Login({navigation}) {
   const [recupSenha, setRecupSenha] = useState("");
@@ -47,22 +47,38 @@ export default function Login({navigation}) {
 
   return (
     <View style={global.body}>
-      <Image style={global.image} source={require("../../assets/logo.png")}/>
+      <StatusBar
+            barStyle = "dark-content"
+            hidden = {true}
+            backgroundColor="transparent"
+            translucent={true}
+        />
       {
         (recupSenha) ?
-          <View style={css.cardLogin}>
-            <Text style={css.title}>Recuperar senha</Text>
-            <TextInput placeholder={"Matrícula..."} style={css.input}></TextInput>
-            <TextInput placeholder={"Nova senha..."} style={css.input}></TextInput>
-            <Text style={global.buttonText} onPress={() => { setRecupSenha(false)}}>Salvar</Text>
+          <View style={css.screen2}>
+            <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="white" onPress={() => setRecupSenha(false)} />
+            <Text style={css.title2}>Recuperar senha</Text>
+            <View style={css.inputs}>
+              <TextInput placeholder={"Matrícula..."} placeholderTextColor={"white"} style={css.input2}></TextInput>
+              <TextInput placeholder={"Nova senha..."} placeholderTextColor={"white"} style={css.input2}></TextInput>
+            </View>
+            <TouchableOpacity style={global.cardButton2} onPress={() => { setRecupSenha(false)}}>
+              <Text style={global.buttonText2}>SALVAR</Text>
+            </TouchableOpacity>
           </View>
           :
-          <View style={css.cardLogin}>
-            <Text style={css.title}>LOGIN</Text>
-            <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={css.input}/>
-            <TextInput secureTextEntry={true} placeholder="Senha" value={senha} onChangeText={setSenha} style={css.input}/>
+          <View style={css.screen1}>
+            <View style={css.cardTitle}>
+                    <Text style={css.textTitle}>CASA ACOLHEDORA</Text>
+                    <Text style={css.textTitle}>IRMÃ ANTÔNIA</Text>
+            </View>
+            <Text style={css.title1}>LOGIN</Text>
+            <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={css.input1}/>
+            <TextInput secureTextEntry={true} placeholder="Senha" value={senha} onChangeText={setSenha} style={css.input1}/>
             <Text style={css.button} onPress={() => {recuperarSenha()}}>Esqueci a senha</Text>
-            <Text style={global.buttonText} onPress={() => autenticar()}>Entrar</Text>
+            <TouchableOpacity style={global.cardButton1} onPress={() => autenticar()}>
+              <Text style={global.buttonText1}>ENTRAR</Text>
+            </TouchableOpacity>
           </View>
       }
     </View>
@@ -70,38 +86,72 @@ export default function Login({navigation}) {
 }
 
 const css = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20
+  cardTitle: {
+      backgroundColor: "#166B8A",
+      width: "90%",
+      height: "20%",
+      alignSelf: "flex-end",
+      borderBottomLeftRadius: 66,
+      alignItems: "center",
+      justifyContent: "center",
   },
-  cardLogin: {
-    width: "70%",
-    height: "55%",
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
-    justifyContent: "space-evenly",
-    alignSelf: "center",
-    margin: "10%",
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.00,
-    elevation: 24
+  textTitle: {
+      color: "white",
+      fontSize: 18
   },
-  input:{
-    width: "80%",
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
-    padding: "2%",
+  title1: {
+      color: "black",
+      fontWeight: 'bold',
+      fontSize: 24,
+      marginTop: "10%",
+      marginBottom: "10%"
+  },
+  title2: {
+      color: "white",
+      fontWeight: 'bold',
+      fontSize: 24,
+  },
+  screen1:{
+      width: "100%",
+      height:"100%",
+      alignItems: 'center'
+  },
+  screen2:{
+      width: "100%",
+      height:"100%",
+      alignItems: 'center',
+      backgroundColor: "rgb(22,107,138)"
+  },
+  input1:{
+      width: "80%",
+      borderBottomWidth: 1,
+      borderBottomColor: 'black',
+      padding: "2%",
+      marginBottom: "10%"
+  },
+  input2:{
+      width: "80%",
+      borderBottomWidth: 1,
+      borderBottomColor: 'white',
+      padding: "2%",
+      marginTop: "15%"
   },
   button:{
-    color:"blue",
-    fontSize: 13,
-    marginRight: -60,
-    marginTop: -20
+      color:"rgb(22,107,138)",
+      fontWeight: "bold",
+      fontSize: 14,
+      marginRight: -190,
+      marginTop: -10,
+      marginBottom: "30%"
+  },
+  icon:{
+      alignSelf: "flex-start",
+      marginTop: "10%",
+      marginLeft: 15
+  },
+  inputs:{
+      width: "100%",
+      alignItems: 'center',
+      marginTop: "15%"
   }
 })

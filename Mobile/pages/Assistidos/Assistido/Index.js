@@ -7,13 +7,18 @@ import { Ionicons } from '@expo/vector-icons';
 export default function Assistido({navigation}){
     return(
         <View style={global.body}>
-            <Ionicons name="return-down-back-sharp" size={24} color="black" />
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
+            <View style={css.header}>
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
+                <View style={css.cardTitle}>
+                        <Text style={css.textTitle}>CASA ACOLHEDORA</Text>
+                        <Text style={css.textTitle}>IRMÃ ANTÔNIA</Text>
+                </View>
+            </View>
             <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("ListarAssistidos")}}>
-                <Text style={css.title}>Mostrar</Text>
+                <Text style={css.title}>Ver Assistidos</Text>
             </TouchableOpacity>
             <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("CadastrarAssistido")}}>
-                <Text style={css.title}>Cadastrar</Text>
+                <Text style={css.title}>Cadastrar Novo</Text>
             </TouchableOpacity>
         </View>
     )
@@ -22,5 +27,25 @@ export default function Assistido({navigation}){
 const css = StyleSheet.create({
     title:{
         fontSize: 18
-      }
+      },
+      header:{
+        width: "100%",
+        height: "20%",
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      },
+      cardTitle: {
+          backgroundColor: "#166B8A",
+          width: "60%",
+          height: "100%",
+          borderBottomLeftRadius: 66,
+          alignItems: "center",
+          justifyContent: "center"
+      },
+      textTitle: {
+          color: "white",
+          fontSize: 18
+      },
 })
