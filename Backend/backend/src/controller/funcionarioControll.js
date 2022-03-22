@@ -129,24 +129,11 @@ const updateFuncionario = (req, res) => {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const getAll = (req, res) => {
     let string = 'select * from funcionarios'
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
-            delete item.senha
+           delete item.senha
         });
 
         res.json(result)

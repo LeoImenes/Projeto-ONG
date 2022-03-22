@@ -229,11 +229,16 @@ const postAssistido = (req,res) => {
 
 const updateAssistido = (req,res) => {
 
+    let id_assistido = req.body.id_assistido
+    let id_funcionario = req.body.id_funcionario
+    let nome_completo = req.body.nome_completo
+    let nome_social = req.body.nome_social
+    let rg = req.body.rg
+    let cpf = req.body.cpf
+    let antecedente_criminal = req.body.antecedente_criminal
 
 
 
-
-    
 }
 
 
@@ -439,6 +444,21 @@ const updateSaude = (req,res) => {
 
 }
 
+const getComorbidades= (req,res) => {
+
+    let string = `select * from comorbidades;`
+
+
+    con.query(string, (err,result) => {
+        if(err == null){
+            res.status(200).json(result).end()
+        }
+        else{
+            res.status(400).json({err: err.message})
+        }
+    })
+
+}
 
 
 
@@ -466,5 +486,6 @@ module.exports = {
     getAssistSaude,
     getSaudeID,
     postSaude,
-    updateSaude
+    updateSaude,
+    getComorbidades,
 }

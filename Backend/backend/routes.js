@@ -26,5 +26,6 @@ route.get("/assistido/saude", assistidoControll.getAssistSaude)
 route.get("/assistido/saudeID/:id_assistido", assistidoControll.getSaudeID)
 route.post("/assistido/saude", assistidoControll.postSaude)
 route.put("/assistido/saude", assistidoControll.updateSaude)
+route.get("/assistido/comorbidade", assistidoControll.getComorbidades)
 
 module.exports = route
