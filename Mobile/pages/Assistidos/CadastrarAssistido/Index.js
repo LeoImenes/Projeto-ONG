@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid} from 'react-native';
 
 import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
@@ -115,6 +115,7 @@ export default function CadastrarAssistido({navigation}){
         });
 
         let item = result.uri.split(".")
+        
         if (!result.cancelled && result.base64.length < 59500) {
             setFoto({
                 // uri: 'data:image/jpeg;base64,' + result.base64,
@@ -177,7 +178,7 @@ export default function CadastrarAssistido({navigation}){
                                 />
                     </View>
                     <View style={css.align}>
-                        <Image source={( foto )? foto : require("../../assets/user.png")} style={global.imageUser}/>
+                        <Image source={( foto !== null )? foto : require("../../assets/user.png")} style={global.imageUser}/>
                         <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
                             <Feather name="camera" size={24} color="blue" />
                             <Text style={{color: "blue"}}>Adicionar foto</Text>
