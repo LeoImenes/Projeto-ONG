@@ -1,29 +1,29 @@
-function cadastrarAssistido() {
-    showMenu()
-    showMenuDoenca()
-    getComorbidades()
-}
-
+var func = localStorage.getItem('userdata');
 var fotinho;
-
+var newImg = document.querySelector(".foto")
 var adcFoto = document.querySelector('.adcFoto')
 var fileInp = document.querySelector("#inpFoto")
 fileInp.addEventListener('change', (e) => {
     var fr = new FileReader();
-    fr.onloadend = (data) => {
-        console.log(data.target.result);
-        fotinho = data.target.result;
-     }
+    fr.onloadend = (foto) => {
+        fotinho = foto.target.result;
+        newImg.src = foto.target.result;
+        newImg.style.width = "70px";
+        newImg.style.height = "70px";
+        newImg.style.borderRadius = "50%"
+    }
     fr.readAsDataURL(e.target.files[0]);
-    
+
 })
+
+
 adcFoto.style.cursor = "pointer"
 
 adcFoto.addEventListener('click', () => {
     fileInp.click();
 })
-function cadastrarAssistido() {
 
+function cadastrarAssistido() {
     var inpNomeCom = document.querySelector(".nome-Completo")
     var nome = document.querySelector(".nome")
     var nomesoc = document.querySelector(".nome-soc");
@@ -34,9 +34,8 @@ function cadastrarAssistido() {
     var nasc = document.querySelector(".nasc").value;
     var cartCid = document.querySelector(".cartCid");
     var cartSus = document.querySelector(".cartSus");
+    var ante = document.querySelector(".ant")
 
-
-    console.log(nasc.split("/")[0], nasc.split("/")[1], nasc.split("/")[2])
     var dia = nasc.split("/")[0]
     var mes = nasc.split("/")[1]
     var ano = nasc.split("/")[2]
@@ -72,7 +71,7 @@ function cadastrarAssistido() {
     }
 
     var data = JSON.stringify({
-        "id_funcionario": 3,
+        "id_funcionario": JSON.parse(func).id_funcionario,
         "nome_completo": nome.value,
         "nome_social": nomesoc.value,
         "rg": rg.value,
@@ -83,11 +82,12 @@ function cadastrarAssistido() {
         "sexo": sex,
         "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
-        "foto": fotinho,
+        "foto_antes": fotinho,
+        "antecedente_criminal": ante.value,
+        "foto_depois": fotinho
     })
 
-    console.log(data)
-    fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -102,9 +102,9 @@ function cadastrarAssistido() {
 
 function cadastrarComorbidade() {
     var listaComorbidade = document.querySelectorAll(".Comorbidade");
-    listaComorbidade.forEach((item,index) =>{
-        
-        if(item.checked === true){
+    listaComorbidade.forEach((item, index) => {
+
+        if (item.checked === true) {
             console.log(item.value)
         }
     });
@@ -155,12 +155,12 @@ function getComorbidades() {
             data.forEach((item) => {
                 let inpDoenca = document.createElement("input")
                 let inpDroga = document.createElement("input")
-                
+
                 inpDroga.type = "checkbox"
                 inpDoenca.type = "checkbox"
                 inpDroga.className = "Comorbidade"
                 inpDoenca.className = "Comorbidade"
-            
+
                 if (item.tipo === 1) {
                     liDoenca.innerHTML = item.comorbidade
                     inpDoenca.value = item.id_comorbidade
@@ -180,7 +180,3 @@ function getComorbidades() {
         })
 
 }
-
-
-
-

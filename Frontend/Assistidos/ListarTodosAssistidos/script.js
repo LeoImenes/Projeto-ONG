@@ -3,7 +3,7 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-    fetch("http://10.87.207.27:3000/Assistidos")
+    fetch("http://localhost:3000/Assistidos")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach(fun => {
@@ -23,10 +23,10 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto == null) {
+                if (fun.foto_depois === null) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
-                    img.src = fun.foto
+                    img.src = fun.foto_depois
                 }
 
                 if (!fun.status == 0) {
