@@ -1,4 +1,5 @@
 var func = localStorage.getItem('userdata');
+
 var fotinho;
 var newImg = document.querySelector(".foto")
 var adcFoto = document.querySelector('.adcFoto')
@@ -82,12 +83,12 @@ function cadastrarAssistido() {
         "sexo": sex,
         "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
-        "foto_antes": fotinho,
+        "foto": fotinho,
         "antecedente_criminal": ante.value,
-        "foto_depois": fotinho
+        // "foto_depois": fotinho
     })
 
-    fetch("http://localhost:3000/assistidos", {
+    fetch("http:///10.87.207.27:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
