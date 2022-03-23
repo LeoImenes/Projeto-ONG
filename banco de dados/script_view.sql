@@ -60,7 +60,7 @@ SELECT * FROM vw_saude WHERE id_assistido = 1;
  FOR EACH ROW 
  BEGIN
  
-	IF(	NEW.id_assistido = OLD.id_assistido AND NEW.id_familiar = OLD.id_familiar) THEN
+	IF(	NEW.id_assistido = familiarassistido.id_assistido AND NEW.id_familiar = familiarassistido.id_familiar) THEN
  
 		SET NEW.id_assistido = null;
 		
@@ -72,3 +72,18 @@ SELECT * FROM vw_saude WHERE id_assistido = 1;
 END;
 
 //
+
+
+-- query para deixar uma linha da tabela unique
+
+alter table familiarassistido add unique index (id_assistido,id_familiar);
+
+-- comando para alterar tabela deixando a coluna única
+
+ALTER TABLE familiares
+ADD UNIQUE (email); 
+
+-- comando para resetar o contador auto increment do banco
+
+ALTER TABLE tablename AUTO_INCREMENT = 1;
+

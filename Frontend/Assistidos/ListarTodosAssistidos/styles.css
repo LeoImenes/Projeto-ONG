@@ -2,6 +2,11 @@ body {
     overflow: hidden;
 }
 
+@keyframes mymove {
+    from {top: 0px;}
+    to {top: 200px;}
+  }
+
 .container {
     height: 90vh;
     display: flex;
@@ -39,7 +44,18 @@ body {
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid #050404;
+    background-size: 100px 200px;
     text-align: center;
+    background-position: left;
+    
+}
+
+.cardAssistido:hover{
+    background-color: #166B8A;
+    color: #fff;
+    background-position: right;
+    transition: all .35s ;
+    
 }
 
 .img {

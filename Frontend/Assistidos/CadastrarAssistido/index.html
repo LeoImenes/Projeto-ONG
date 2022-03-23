@@ -73,7 +73,7 @@
                                 <li>
                                     <p>Adicionar Foto </p>
                                     <p class="adcFoto">📸</p>
-                                    <input type="file" name="" id="inpFoto" hidden>
+                                    <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
                                 </li>
                             </ul>
                         </div>
@@ -82,6 +82,9 @@
                             <div class="inputDados">
                                 <div class="nome-Completo">
                                     <input type="text" placeholder="Nome Completo..." class="nome">
+                                </div>
+                                <div class="antecedente">
+                                    <input type="text" placeholder="Antecedente Criminal" class="ant">
                                 </div>
                                 <div class="nome-social">
                                     <input type="text" placeholder="Nome Social..." class="nome-soc">
@@ -150,18 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="familia">
-                        <h1>Familiar</h1>
-                        <div class="famform">
-                            <ul>
-                                <input type="text" placeholder="Nome Completo...">
-                                <input type="text" placeholder="Parentesco...">
-                                <input type="text" placeholder="Telefone...">
-                                <input type="text" placeholder="E-mail...">
-                                <input type="text" placeholder="Endereço...">
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="anexo">
                         <ul>
                             <li>
@@ -172,7 +164,7 @@
                             </li>
                         </ul>
                     </div>
-                    <input type="button" value="Salvar" class="btn" onclick="cadastrarComorbidade()">
+                    <input type="button" value="Salvar" class="btn" onclick="cadastrarAssistido()">
 
                 </div>
             </div>

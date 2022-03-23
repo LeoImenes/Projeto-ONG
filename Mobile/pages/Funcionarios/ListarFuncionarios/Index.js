@@ -76,7 +76,7 @@ const css = StyleSheet.create({
     },
     scrollView: {
         width: "100%",
-        height: 500
+        height: "88%"
     },
     cardTxt: {
         width: "70%",

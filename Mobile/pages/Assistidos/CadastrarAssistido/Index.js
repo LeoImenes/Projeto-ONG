@@ -18,6 +18,7 @@ export default function CadastrarAssistido({navigation}){
     const[nomeSocial, setNomeSocial] = useState("");
     const[rg, setRg] = useState("");
     const[cpf, setCpf] = useState("");
+    const[antCriminal, setAntCriminal] = useState("");
     const[sexo,setSexo] = useState("");
     const[nascimento, setNascimento] = useState("");
     const[estdCivil, setEstdCivil] = useState("");
@@ -38,12 +39,15 @@ export default function CadastrarAssistido({navigation}){
     }
 
     const cadastrar = () => {
+        // console.log(selected)
+
         let assistido = {
             id_funcionario: idFunc,
             nome_completo: nome,
             nome_social: nomeSocial,
             rg: rg,
             cpf: cpf,
+            antecedente_criminal: antCriminal,
             data_nascimento: nascimento,
             estado_civil: estdCivil,
             naturalidade: naturalidade,
@@ -62,9 +66,38 @@ export default function CadastrarAssistido({navigation}){
         })
         .then(resp => {return resp.json()})
         .then(async data => {
-          console.log(data)
+            if(data.err !== undefined) {
+                if(data.err.includes("Duplicate entry"))
+                    ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
+            } else {
+                let saude = {
+                    id_assistido: data.id_assistido,
+                    comorbidades: selected
+                }
+
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": JSON.stringify(saude),
+                })
+                .then(resp => {return resp.json()})
+                .then(async data => {
+                    if(data.err !== undefined) {
+                        console.log(data)
+                    } else{
+                        ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                    }
+                })
+            }
+
+
         })
-        .catch(err => { console.log(err) });
+        .catch(err => {
+            console.log(err) 
+        });
+
       }
 
       const renderLabel = (label, style) => {
@@ -142,6 +175,7 @@ export default function CadastrarAssistido({navigation}){
                     <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                     <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                     <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
+                    <TextInput value={antCriminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={global.info}></TextInput>
                     <View style={{width: "80%", alignSelf: "center", borderBottomWidth: 2}}>
                         <Picker
                             selectedValue={sexo}
@@ -178,13 +212,19 @@ export default function CadastrarAssistido({navigation}){
                                 />
                     </View>
                     <View style={css.align}>
+<<<<<<< HEAD
                         <Image source={( foto !== null )? foto : require("../../assets/user.png")} style={global.imageUser}/>
+=======
+                        <Image source={( foto )? foto : require("../../assets/user1.png")} style={global.imageUser}/>
+>>>>>>> a4bf6b4bf7b628040b80b2381021f9ec2e88d129
                         <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
                             <Feather name="camera" size={24} color="blue" />
                             <Text style={{color: "blue"}}>Adicionar foto</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={css.buttonText} onPress={() => {cadastrar()}}>Salvar</Text>
+                    <TouchableOpacity style={css.cardButton1} onPress={() => {cadastrar()}}>
+                        <Text style={global.buttonText1}>SALVAR</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         </View>
@@ -215,9 +255,9 @@ const css = StyleSheet.create({
         height: "80%"
     },
     align: {
-        width: 150,
-        height: 200,
-        flexDirection: "column",
+        width: "80%",
+        height: 150,
+        flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
         alignSelf: "center"
@@ -244,11 +284,15 @@ const css = StyleSheet.create({
         fontSize: 20,
         color: "white"
     },
-    buttonText: {
-        fontSize: 20,
-        color: "#166B8A",
-        alignSelf: "center",
-        fontWeight: "bold",
-        marginTop: "5%"
+    cardButton1: {
+      backgroundColor: "rgb(22,107,138)",
+      width: "35%",
+      height: 45,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 5,
+      alignSelf: "center",
+      marginTop: "5%",
+      marginBottom: "5%"
     }
 })
