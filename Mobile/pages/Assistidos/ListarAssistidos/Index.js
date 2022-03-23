@@ -10,9 +10,11 @@ export default function ListarAssistidos({navigation}){
     const [dados, setDados] = useState([]);
 
     const Listar = () => {
-        fetch(`http://10.87.207.27:3000/assistidos`)
+        // fetch(`http://10.87.207.27:3000/assistidos`)
+        fetch(`http://192.168.0.103:3000/assistidos`)
         .then(resp => {return resp.json()})
         .then(data => {
+            console.log(data);
             setLista(data);
             setDados(data);
         })
@@ -34,22 +36,22 @@ export default function ListarAssistidos({navigation}){
     }, [searchText]);
 
     return(
-        <View style={css.body}>
-            <View style={css.filtro}>
+        <View style={global.bodyAlternative}>
+            <View style={global.filter}>
                 <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Assistido")}} />
-                <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={css.pesquisa} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
+                <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={global.search} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
                 <TouchableOpacity onPress={() => {ordenar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scrollAlternative}>
                 <ScrollView>
                     {
                         lista.map((item, index) =>{
                             return (
                                 <TouchableOpacity style={global.cardInfo} key={index} onPress={() => {navigation.navigate("VerAssistido", {item})}}>
                                     <Image source={(item.foto_antes !== null) ? {uri: item.foto_antes} : require("../../assets/user.png")} style={global.imageUser}/>
-                                    <View style={css.cardTxt}>
+                                    <View style={global.cardTxt}>
                                         <Text style={global.textInfo}>{item.nome_completo}</Text>
                                     </View>
                                 </TouchableOpacity> 
@@ -63,38 +65,5 @@ export default function ListarAssistidos({navigation}){
 }
 
 const css = StyleSheet.create({
-    body:{
-        flex: 1,
-        backgroundColor: "#166B8A",
-        alignItems: "center",
-    },
-    scrollView: {
-        width: "100%",
-        height: "88%"
-    },
-    cardTxt: {
-        width: "70%",
-        height: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: 5
-    },
-    filtro:{
-        width: "100%",
-        height: 70,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        alignSelf: "flex-end",
-        marginTop: "5%",
-    },
-    pesquisa:{
-        backgroundColor: "white",
-        width: "70%",
-        height: 40,
-        borderRadius: 10,
-        padding: 10,
-        fontSize: 18
-    }
+    
 })

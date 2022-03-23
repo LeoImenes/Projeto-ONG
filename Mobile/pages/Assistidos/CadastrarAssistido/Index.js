@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, SafeAreaView} from 'react-native';
 
 import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
@@ -8,6 +8,7 @@ import { Ionicons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
+import { Camera } from 'expo-camera';
 
 export default function CadastrarAssistido({navigation}){
     const[selected, setSelected] = useState([]);
@@ -26,7 +27,8 @@ export default function CadastrarAssistido({navigation}){
     const[cartCid, setCartCid] = useState("");
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState("");
-
+    const[type, setType] = useState(Camera.Constants.Type.back);
+    const[permissao, setPermissao] = useState(null);
 
     onSelectionsChange = (selected) => {
         setSelected(selected);
@@ -57,7 +59,8 @@ export default function CadastrarAssistido({navigation}){
             foto: foto
         }
     
-        fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://10.87.207.27:3000/assistidos`, {
+        fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -75,7 +78,8 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -86,12 +90,12 @@ export default function CadastrarAssistido({navigation}){
                 .then(async data => {
                     if(data.err !== undefined) {
                         console.log(data)
-                    } else{
+                    }else{
                         ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                        this.textInput.clear()
                     }
                 })
             }
-
 
         })
         .catch(err => {
@@ -110,8 +114,9 @@ export default function CadastrarAssistido({navigation}){
         )
       }
 
-      useEffect(() => {          
-        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+      useEffect(() => {     
+        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -123,10 +128,8 @@ export default function CadastrarAssistido({navigation}){
 
             temp.forEach(item => {
                 if(item.tipo == 1) {
-                    // setComorbidade(prevState => ({ doencas: [...prevState.doencas, item] }))
                     tempC.push(item);
                 }else {
-                    // setComorbidade(prevState => ({ dorgas: [...prevState.dorgas, item] }))
                     tempD.push(item);
                 }
             })
@@ -135,7 +138,6 @@ export default function CadastrarAssistido({navigation}){
             setDorgas(tempD);
         })
         .catch(err => { console.log(err) });
-
       }, [])
 
       const selecionarImagem = async () => {
@@ -146,10 +148,10 @@ export default function CadastrarAssistido({navigation}){
             quality: 1,
             base64: true
         });
-
+        
         let item = result.uri.split(".")
         
-        if (!result.cancelled && result.base64.length < 59500) {
+        if (!result.cancelled && result.base64) {
             setFoto({
                 // uri: 'data:image/jpeg;base64,' + result.base64,
                 uri: `data:image/${item[item.length-1]};base64,`+result.base64,
@@ -160,15 +162,15 @@ export default function CadastrarAssistido({navigation}){
     }
 
     return(
-        <View style={css.body} onLoad={getFunc()}>
-            <View style={css.alignHeader}>
+        <View style={global.body} onLoad={getFunc()}>
+            <View style={global.header}>
                 <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
-                <View style={css.logo}>
-                    <Text style={css.text}>Casa Acolhedora</Text>
-                    <Text style={css.text}>Irmã Antônia</Text>
+                <View style={global.cardTitle}>
+                    <Text style={global.textTitle}>Casa Acolhedora</Text>
+                    <Text style={global.textTitle}>Irmã Antônia</Text>
                 </View>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scroll}>
                 <ScrollView>
                     <Text style={css.title1}>Dados Pessoais</Text>
                     <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
@@ -203,7 +205,7 @@ export default function CadastrarAssistido({navigation}){
                                 />
                     </View>
                     <Text style={css.title2}>Psicoativos</Text>
-                    <View style={{flex: 1,width: '85%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                    <View style={css.select}>
                             <SelectMultiple
                                 items={dorgas}
                                 renderLabel={renderLabel}
@@ -212,17 +214,19 @@ export default function CadastrarAssistido({navigation}){
                                 />
                     </View>
                     <View style={css.align}>
-<<<<<<< HEAD
-                        <Image source={( foto !== null )? foto : require("../../assets/user.png")} style={global.imageUser}/>
-=======
-                        <Image source={( foto )? foto : require("../../assets/user1.png")} style={global.imageUser}/>
->>>>>>> a4bf6b4bf7b628040b80b2381021f9ec2e88d129
-                        <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
-                            <Feather name="camera" size={24} color="blue" />
-                            <Text style={{color: "blue"}}>Adicionar foto</Text>
-                        </TouchableOpacity>
+                        <Image source={( foto !== null )? foto : require("../../assets/user1.png")} style={global.imageUser}/>
+                        <View>
+                            <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
+                                <Feather name="upload" size={24} color="blue" style={{marginRight: 10}}/>
+                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Fazer Upload</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={css.alignIcon} onPress={() => {capturarImagem()}}>
+                                <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
+                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Nova foto</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <TouchableOpacity style={css.cardButton1} onPress={() => {cadastrar()}}>
+                    <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
                         <Text style={global.buttonText1}>SALVAR</Text>
                     </TouchableOpacity>
                 </ScrollView>
@@ -232,10 +236,6 @@ export default function CadastrarAssistido({navigation}){
 }
 
 const css = StyleSheet.create({
-    body:{
-        flex: 1,
-        backgroundColor: "white",
-    },
     title1:{
         alignSelf: "center",
         fontSize: 20,
@@ -250,10 +250,6 @@ const css = StyleSheet.create({
         color: "black",
         marginBottom: "5%"
     },
-    scrollView: {
-        width: "100%",
-        height: "80%"
-    },
     align: {
         width: "80%",
         height: 150,
@@ -263,36 +259,15 @@ const css = StyleSheet.create({
         alignSelf: "center"
     },
     alignIcon: {
-        alignItems: "center"
-    },
-    alignHeader:{
-        width: "100%",
-        height: "20%",
+        alignItems: "center",
         flexDirection: "row",
+        marginBottom: "10%"
+    },
+    select: {
+        flex: 1,
+        width: '85%',
+        height: 50,
         alignItems: "center",
-        justifyContent: "space-between",
-    },
-    logo:{
-        width: '60%',
-        height: '100%',
-        backgroundColor: "#166B8A",
-        borderBottomLeftRadius: 112.5,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    text: {
-        fontSize: 20,
-        color: "white"
-    },
-    cardButton1: {
-      backgroundColor: "rgb(22,107,138)",
-      width: "35%",
-      height: 45,
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 5,
-      alignSelf: "center",
-      marginTop: "5%",
-      marginBottom: "5%"
+        alignSelf: "center"
     }
 })
