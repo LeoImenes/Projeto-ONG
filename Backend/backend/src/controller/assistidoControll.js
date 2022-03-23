@@ -438,10 +438,6 @@ const updateSaude = (req,res) => {
         res.status(400).json({"err": "informe a comorbidade e o id_saude"})
     }
 
-
-
-
-
 }
 
 const getComorbidades= (req,res) => {
@@ -468,8 +464,6 @@ const getComorbidades= (req,res) => {
 // POST 
 
 const postFamiliar = (req,res) => {
-
-   
 
     let nome_completo = req.body.nome_completo
     let rg = req.body.rg
@@ -512,8 +506,6 @@ const postFamiliar = (req,res) => {
                 con.query(stringAssisFam, (err02,result02) => {
                     if(err02 === null){
 
-                        console.log(result02.insertId)
-                       
                         let id_assisFam = result02.insertId
                         let stringResult = `select * from vw_familiar02 where id_familiar = ${id_familiar}`
 
@@ -545,12 +537,41 @@ const postFamiliar = (req,res) => {
         res.status(400).json({"err": "informe pelo menos o campo 'nome_completo'"}).end()
 
        }
+}
+
+const postRelacionamentoFamiliar = (req,res) => {
+
+    let id_assistido = req.body.id_assistido
+    let rg_familiar = req.body.rg
+    let parentesco
+
+    let par = !(parentesco === undefined)?parentesco = null:parentesco = req.body.parentesco
+
+    let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco)values (curdate(),${id_assistido}, 
+    (select id_familiar from familiares where rg = '${rg_familiar}'),'${par}')`
+
+    if(id_assistido !== undefined && rg_familiar !== undefined){
+
+        con.query(string,(err,result) => {
+
+            if(err === null){
+
+                res.status(200).json(result).end()
+
+            }
+            else{
+                res.status(400).json({err: err.message}).end()
+            }
+        })
+
+    }else{
+        res.status(400).json({"err": "Informe os campos de id_assistido e rg"}).end()
+    }
+
 
 
 
 }
-
-
 
 
 
@@ -577,5 +598,6 @@ module.exports = {
     postSaude,
     updateSaude,
     getComorbidades,
-    postFamiliar
+    postFamiliar,
+    postRelacionamentoFamiliar
 }
