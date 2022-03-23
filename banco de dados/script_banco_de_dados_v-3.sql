@@ -49,7 +49,7 @@ CREATE TABLE familiares(
 	nome_completo VARCHAR(40),
 	rg VARCHAR(15),
 	telefone VARCHAR(15),
-	email VARCHAR(20),
+	email VARCHAR(30),
 	endereco VARCHAR(100)
 );
 
@@ -66,6 +66,7 @@ CREATE TABLE familiarAssistido(
 	CONSTRAINT fk_familiar FOREIGN KEY (id_familiar) REFERENCES familiares(id_familiar) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+ALTER TABLE familiarassistido ADD UNIQUE INDEX (id_assistido,id_familiar);
 
 CREATE TABLE DocsAssistidos(
 	id_doc INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -177,7 +178,8 @@ CREATE TABLE estoque(
 );
 
 
-
+ALTER TABLE familiares ADD UNIQUE (email); 
+ALTER TABLE familiares ADD UNIQUE (telefone); 
 
 
 
