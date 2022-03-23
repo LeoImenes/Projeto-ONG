@@ -3,7 +3,7 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-    fetch("http:///10.87.207.27:3000/Assistidos")
+    fetch("http://localhost:3000/Assistidos")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach(fun => {
@@ -20,7 +20,7 @@ function list() {
 
                 cardAssistido.className = "cardAssistido"
                 cardAssistido.style.cursor = "pointer"
-                
+
                 img.className = "fotoUsuario"
                 divimg.className = "img"
                 divnome.className = "nome"
@@ -49,8 +49,8 @@ function list() {
                 cardAssistido.appendChild(divnome)
                 cont.appendChild(cardAssistido)
 
-                cardAssistido.addEventListener("click", (e)=>{
-                    
+                cardAssistido.addEventListener("click", (e) => {
+
                     let id = fun;
                     let store = localStorage.setItem("assistido", fun.id_assistido);
                     window.location.href = "../VerAssistido/index.html"
@@ -69,7 +69,7 @@ function buscar() {
     let card = document.querySelectorAll(".cardAssistido")
 
     filtro.forEach((item, index) => {
-        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex" : card[index].style.display = "none";
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
     })
 }
 
@@ -82,7 +82,7 @@ function Ordem() {
 
         ativo.value = "a"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex" : card[index].style.display = "flex";
+            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "flex";
         })
     } else {
         filtro.forEach((item, index) => {
@@ -91,5 +91,3 @@ function Ordem() {
     }
 
 }
-
- 

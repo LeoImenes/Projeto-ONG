@@ -70,7 +70,7 @@ function list() {
     var local = localStorage.getItem("assistido")
 
     var body = document.querySelector(body)
-    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+    fetch(`http://localhost:3000/assistidos/${local}`)
         .then(response => { return response.json() })
         .then(data => {
             var antes = document.querySelector("#assistidoAntes")
@@ -79,15 +79,15 @@ function list() {
 
             var dataNascimento;
             var newData = data.data_nascimento.split("T")
-            newData.forEach((item,index) => {
-                if(index === 0) {
+            newData.forEach((item, index) => {
+                if (index === 0) {
                     var ano = item.split("-")[0]
-                    var mes =item.split("-")[1]
-                    var dia =item.split("-")[2]
+                    var mes = item.split("-")[1]
+                    var dia = item.split("-")[2]
                     dataNascimento = `${dia}/${mes}/${ano}`
                 }
             })
-            
+
             let nome = document.querySelector(".nomeCom");
             let nomeSoc = document.querySelector(".nomeSoc");
             let rg = document.querySelector(".rg-con");
@@ -96,17 +96,17 @@ function list() {
             let cartCid = document.querySelector(".cartcid");
             let cartSUs = document.querySelector(".cartSus");
             let sex = document.querySelector(".sex");
-            
-            
-            
+
+
+
             nome.innerHTML = data.nome_completo
-            nomeSoc.innerHTML=data.nome_social
-            rg.innerHTML=data.rg
-            cpf.innerHTML=data.cpf
-            datanasc.innerHTML=dataNascimento
-            cartCid.innerHTML=data.cartao_cidadao
-            cartSUs.innerHTML=data.cartao_sus
-            sex.innerHTML=data.sexo
+            nomeSoc.innerHTML = data.nome_social
+            rg.innerHTML = data.rg
+            cpf.innerHTML = data.cpf
+            datanasc.innerHTML = dataNascimento
+            cartCid.innerHTML = data.cartao_cidadao
+            cartSUs.innerHTML = data.cartao_sus
+            sex.innerHTML = data.sexo
 
         })
 }
