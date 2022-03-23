@@ -13,7 +13,8 @@ export default StyleSheet.create({
         marginTop: "10%"
       },
       textInfo:{
-        fontSize: 18
+        fontSize: 18,
+        color: "white"
       },
       info: {
         width: "80%",
@@ -53,7 +54,7 @@ export default StyleSheet.create({
       cardInfo: {
         width: "80%",
         height: 110,
-        borderBottomColor: 'black',
+        borderBottomColor: 'white',
         borderBottomWidth: 2,
         alignItems: 'center',
         justifyContent: "space-between",
