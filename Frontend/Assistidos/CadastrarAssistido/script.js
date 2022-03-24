@@ -88,39 +88,40 @@ function cadastrarAssistido() {
         // "foto_depois": fotinho
     })
 
-    fetch("http://10.87.207.27:3000/assistidos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data,
-    })
+    // fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
         .then(response => { return response.json() })
         .then(data => {
             if (data.id_assistido !== null) {
+                alert("Assistido Cadastrado com sucesso!");
                 var listaComorbidade = document.querySelectorAll(".Comorbidade");
                 listaComorbidade.forEach((item, index) => {
 
                     if (item.checked === true) {
                         var comor = {
                             "id_assistido": data.id_assistido,
-                            "comorbidades": [
-                                {
-                                   "value":`${item.value}`
-                                }
-                            ]
+                            "comorbidades": [{
+                                "value": `${item.value}`
+                            }]
                         }
                         console.log(item.value)
-                        fetch("http://10.87.207.27:3000/assistido/saude", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(comor)
-                        })
+                        fetch("http://localhost:3000/assistido/saude", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(comor)
+                            })
                             .then(response => { return response.json() })
                             .then(data => {
                                 console.log(data)
+
                             })
                     }
                 });
@@ -160,8 +161,6 @@ function showMenuDoenca() {
     }
 }
 
-
-
 function getComorbidades() {
     let listaDrogas = document.querySelector(".listadrogas")
     let listaDoencas = document.querySelector(".listadoencas")
@@ -170,7 +169,8 @@ function getComorbidades() {
     let liDoenca = document.createElement("p")
     let liDroga = document.createElement("p")
 
-    fetch("http://10.87.207.27:3000/assistido/comorbidade")
+    // fetch("http://10.87.207.27:3000/assistido/comorbidade")
+    fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {
