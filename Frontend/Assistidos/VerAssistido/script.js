@@ -70,7 +70,7 @@ function list() {
     var local = localStorage.getItem("assistido")
 
     var body = document.querySelector(body)
-    fetch(`http://localhost:3000/assistidos/${local}`)
+    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
         .then(response => { return response.json() })
         .then(data => {
             var antes = document.querySelector("#assistidoAntes")
