@@ -1,5 +1,4 @@
-
-
+const res = require('express/lib/response')
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
@@ -308,51 +307,77 @@ const updateFotoDepoisAssistido = (req, res) => {
 
 // CRUD SAÚDE
 
+const asynqQuery = (query) =>{
+    return new Promise((resolve, reject) =>{
+        con.query(query, (err, result) => {
+            if(err) reject(err);
+
+            resolve(result);
+        });
+    })
+}
+
 
 // POST SAÚDE  
 
-const postSaude = (req,res) => {
+const postSaude = async (req,res) => {
 
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
 
     if(id_assistido !== undefined && comorbidades.length !== 0){
 
-        let string
-        let values = []
-
-        console.log("values ",  values)
+        let string;
+        let values = [];
+        let comerro = false;
+        let index = 0;
 
        comorbidades.forEach((item,index) => {
-
           values.push(comorbidades[index].value)
-
        })
 
+        try{
+            con.beginTransaction();
+            do {
+                string = `insert into saude (id_assistido,id_comorbidade,data_de_registro) values (${id_assistido}, ${values[index]}, curdate())`
+                const response = await asynqQuery(string)
+                .then(() => {
+                    if(index+1 === values.length) {
+                        con.commit();
+                        res.status(200).json({ok:"ok"});
+                        comerro = true;
+                    }
+                })
+                .catch((err) => {
+                    con.rollback();
+                    res.status(400).json({err});
+                    comerro = true;
+                });
+                index++;
+            }while(!comerro)
 
-       values.forEach((item,index) => {
+            //con.rollback();
+            //res.status(200).json({ok:"ok"});
+        }catch(err){           
+            res.status(400).json({"err": "informe os campos de id_assistido e comorbidades"})
+        }
+        // con.commit(function(err) {
+        //     if (err) { 
+        //         connection.rollback(function() {
+        //             res.status(400).json({nok:'nok'});
+        //         });
+        //     }else {
+        //         res.status(200).json({ok:'ok'});
+        //     }
+        // });
 
-        string = `insert into saude (id_assistido,id_comorbidade,data_de_registro) values (${id_assistido}, ${values[index]}, curdate())`
-        console.log(string)
-
-        con.query(string, (err,result) => {
-
-           /* if(err === null){
-
-                //res.status(200).json({result}).end()
-
-            }else{
-                res.status(400).json({err: err.message}).end()
-            }*/
-        })
-
-       })
-
-       res.status(200).end()
+        // if(comerro) {
+        //     con.rollback();
+        //     res.status(400).json({nok:'nok'});
+        // }
         
-
-    }
-    else{
+        // con.commit();
+    }  else{
         res.status(400).json({"err": "informe os campos de id_assistido e comorbidades"})
     }
 

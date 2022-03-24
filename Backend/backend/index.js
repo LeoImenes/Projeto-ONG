@@ -20,7 +20,6 @@ app.use(Express.json())
     next()
 })*/
 
-
 app.use(cors())
 app.use(route)
 
