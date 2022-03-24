@@ -1,14 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
-import { Feather } from '@expo/vector-icons';
+import { Ionicons, Feather} from '@expo/vector-icons';
 
 export default function CadastrarFuncionario({navigation}){
     return(
         <View style={global.body}>
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <View style={css.scrollView}>
+            <View style={global.header}>
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
+                <View style={global.cardTitle}>
+                    <Text style={global.textTitle}>Casa Acolhedora</Text>
+                    <Text style={global.textTitle}>Irmã Antônia</Text>
+                </View>
+            </View>
+            <View style={global.scroll}>
                 <ScrollView>
                     <TextInput placeholder="Nome..." place style={global.info}></TextInput>
                     <TextInput placeholder="RG..." style={global.info}></TextInput>
@@ -24,7 +30,9 @@ export default function CadastrarFuncionario({navigation}){
                             <Text style={{color: "blue"}}>Adicionar foto</Text>
                         </View>
                     </View>
-                    <Text style={global.buttonText}>Salvar</Text>
+                    <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
+                        <Text style={global.buttonText1}>SALVAR</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         </View>
@@ -38,9 +46,5 @@ const css = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center"
-    },
-    scrollView: {
-        width: "100%",
-        height: 580
     }
 })

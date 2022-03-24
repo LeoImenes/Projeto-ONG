@@ -55,7 +55,7 @@ function cadastrarAssistido() {
         "cartao_sus": cartSus.value,
     })
 
-    fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/funcionarios", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

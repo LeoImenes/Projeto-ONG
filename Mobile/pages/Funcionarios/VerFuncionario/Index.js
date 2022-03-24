@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
+import { Ionicons } from '@expo/vector-icons';
 
 export default function VerFuncionario({navigation, route}){
     const {item} = route.params;
@@ -17,12 +18,17 @@ export default function VerFuncionario({navigation, route}){
 
     return(
         <View style={global.body}>
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <View style={css.imageAlign}>
-                <Image source={(item.foto !== null) ? {uri: item.foto} : require("../../assets/user.png")} style={global.imageUser}/>
-                <Text style={global.textInfo}>Matrícula: {item.matricula}</Text>
+            <View style={global.headerFunc}>
+                <View style={global.alignHeader}>
+                    <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarFuncionario')}} />
+                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
+                </View>
+                <View style={global.cardTitle}>
+                    <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
+                    <Text style={global.textTitle}>IRMÃ ANTÔNIA</Text>
+                </View>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scroll}>
                 <ScrollView>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
@@ -67,16 +73,4 @@ export default function VerFuncionario({navigation, route}){
 }
 
 const css = StyleSheet.create({
-    imageAlign:{
-        width: "100%",
-        height: "20%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-evenly"
-    },
-    scrollView: {
-        width: "100%",
-        height: 430
-    }
 })

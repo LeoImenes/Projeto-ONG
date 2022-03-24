@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, SafeAreaView} from 'react-native';
 
 import global from "../../Global/Style"
 import { Feather } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
-import CheckBox from '@react-native-community/checkbox';
-import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Picker} from '@react-native-picker/picker';
+import * as ImagePicker from 'expo-image-picker';
+import { Camera } from 'expo-camera';
 
 export default function CadastrarAssistido({navigation}){
     const[selected, setSelected] = useState([]);
-    const[comorbidade, setComorbidade] = useState({
-        doencas:[],
-        dorgas:[],
-    });
+    const[comorbidade, setComorbidade] = useState([]);
+    const[dorgas, setDorgas] = useState([]);
     const[idFunc, setIdFunc] = useState();
     const[nome, setNome] = useState("");
     const[nomeSocial, setNomeSocial] = useState("");
     const[rg, setRg] = useState("");
     const[cpf, setCpf] = useState("");
+    const[antCriminal, setAntCriminal] = useState("");
     const[sexo,setSexo] = useState("");
     const[nascimento, setNascimento] = useState("");
-    const[mae, setMae] = useState("");
-    const[pai, setPai] = useState("");
     const[estdCivil, setEstdCivil] = useState("");
     const[naturalidade, setNaturalidade] = useState("");
     const[cartCid, setCartCid] = useState("");
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState("");
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
-
+    const[type, setType] = useState(Camera.Constants.Type.back);
+    const[permissao, setPermissao] = useState(null);
 
     onSelectionsChange = (selected) => {
         setSelected(selected);
@@ -43,13 +41,18 @@ export default function CadastrarAssistido({navigation}){
     }
 
     const cadastrar = () => {
+        let ano = nascimento.split('/')[2]
+        let mes = nascimento.split('/')[1]
+        let dia = nascimento.split('/')[0]
+        
         let assistido = {
             id_funcionario: idFunc,
             nome_completo: nome,
             nome_social: nomeSocial,
             rg: rg,
             cpf: cpf,
-            data_nascimento: nascimento,
+            antecedente_criminal: antCriminal,
+            data_nascimento: `${ano}-${mes}-${dia}`,
             estado_civil: estdCivil,
             naturalidade: naturalidade,
             sexo: sexo,
@@ -59,6 +62,7 @@ export default function CadastrarAssistido({navigation}){
         }
     
         fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -67,9 +71,37 @@ export default function CadastrarAssistido({navigation}){
         })
         .then(resp => {return resp.json()})
         .then(async data => {
-          console.log(data)
+            if(data.err !== undefined) {
+                if(data.err.includes("Duplicate entry"))
+                    ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
+            } else {
+                let saude = {
+                    id_assistido: data.id_assistido,
+                    comorbidades: selected
+                }
+
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": JSON.stringify(saude),
+                })
+                .then(resp => {return resp.json()})
+                .then(async data => {
+                    if(data.err !== undefined) {
+                        console.log(data)
+                    }else{
+                        ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                        this.textInput.clear()
+                    }
+                })
+            }
         })
-        .catch(err => { console.log(err) });
+        .catch(err => {
+            console.log(err) 
+        });
       }
 
       const renderLabel = (label, style) => {
@@ -82,8 +114,9 @@ export default function CadastrarAssistido({navigation}){
         )
       }
 
-      useEffect(() => {          
+      useEffect(() => {     
         fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -94,94 +127,108 @@ export default function CadastrarAssistido({navigation}){
             let tempC = [], tempD = [];
 
             temp.forEach(item => {
-                console.log(item);
                 if(item.tipo == 1) {
-                    setComorbidade(prevState => ({ doencas: [...prevState.doencas, item] }))
-                    //tempC.push(item);
+                    tempC.push(item);
                 }else {
-                    setComorbidade(prevState => ({ dorgas: [...prevState.dorgas, item] }))
-                    //tempD.push(item);
+                    tempD.push(item);
                 }
             })
             
-            //setComorbidade(tempC);
-            //setDorgas(tempD);
+            setComorbidade(tempC);
+            setDorgas(tempD);
         })
         .catch(err => { console.log(err) });
-
-        console.log(comorbidade);
-
       }, [])
 
+      const selecionarImagem = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+            base64: true
+        });
+        
+        let item = result.uri.split(".")
+        
+        if (!result.cancelled && result.base64) {
+            setFoto({
+                // uri: 'data:image/jpeg;base64,' + result.base64,
+                uri: `data:image/${item[item.length-1]};base64,`+result.base64,
+            })
+        } else if(!result.cancelled) {
+            ToastAndroid.show('Selecione uma imagem menor', ToastAndroid.SHORT);
+        }
+    }
+
     return(
-        <View style={css.body} onLoad={getFunc()}>
-            <View style={css.alignHeader}>
+        <View style={global.body} onLoad={getFunc()}>
+            <View style={global.header}>
                 <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
-                <View style={css.logo}>
-                    <Text style={css.text}>Casa Acolhedora</Text>
-                    <Text style={css.text}>Irmã Antônia</Text>
+                <View style={global.cardTitle}>
+                    <Text style={global.textTitle}>Casa Acolhedora</Text>
+                    <Text style={global.textTitle}>Irmã Antônia</Text>
                 </View>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scroll}>
                 <ScrollView>
-                    <Text style={css.title}>Dados Pessoais</Text>
+                    <Text style={css.title1}>Dados Pessoais</Text>
                     <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
                     <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                     <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                     <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
-                    {/* <CheckBox
-                        disabled={false}
-                        value={toggleCheckBox}
-                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    /> */}
+                    <TextInput value={antCriminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={global.info}></TextInput>
+                    <View style={{width: "80%", alignSelf: "center", borderBottomWidth: 2}}>
+                        <Picker
+                            selectedValue={sexo}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setSexo(itemValue)
+                        }>
+                            <Picker.Item label="Sexo..." value="" style={{color: "gray"}}/>
+                            <Picker.Item label="Feminino" value="Feminino" />
+                            <Picker.Item label="Masculino" value="Masculino" />
+                            <Picker.Item label="Outro" value="Outro" />
+                        </Picker>
+                    </View>
                     <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
-                    {/* <TextInput value={mae} onChangeText={setMae} placeholder="Nome da mãe" place style={global.info}></TextInput>
-                    <TextInput value={pai} onChangeText={setPai} placeholder="Nome do pai..." place style={global.info}></TextInput> */}
                     <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={global.info}></TextInput>
                     <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                     <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
                     <TextInput value={cartSus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
-                    <Text style={css.title}>Psicoativos</Text>
-                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                    <Text style={css.title1}>Doenças</Text>
+                    <View style={{flex: 1, width: '90%', height: 100, alignItems: "center", alignSelf: "center"}}>
                             <SelectMultiple
-                                items={comorbidade.doencas}
+                                items={comorbidade}
                                 renderLabel={renderLabel}
                                 selectedItems={selected}
                                 onSelectionsChange={onSelectionsChange}
                                 />
                     </View>
-                    <Text style={css.title}>Doenças</Text>
-                    <View style={{flex: 1,width: '80%', height: 50, alignItems: "center", alignSelf: "center"}}>
+                    <Text style={css.title2}>Psicoativos</Text>
+                    <View style={css.select}>
                             <SelectMultiple
-                                items={comorbidade.dorgas}
+                                items={dorgas}
                                 renderLabel={renderLabel}
                                 selectedItems={selected}
                                 onSelectionsChange={onSelectionsChange}
                                 />
                     </View>
                     <View style={css.align}>
-                        <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                        <View style={css.alignIcon}>
-                            <Feather name="camera" size={24} color="blue" />
-                            <Text style={{color: "blue"}}>Adicionar foto</Text>
+                        <Image source={( foto !== null )? foto : require("../../assets/user1.png")} style={global.imageUser}/>
+                        <View>
+                            <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
+                                <Feather name="upload" size={24} color="blue" style={{marginRight: 10}}/>
+                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Fazer Upload</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={css.alignIcon} onPress={() => {capturarImagem()}}>
+                                <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
+                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Nova foto</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
-                <Collapse>
-                    <CollapseHeader>
-                    <View style={{display: 'flex', flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: "5%"}}>
-                        <Text style={css.title}>Familiar</Text>
-                        <AntDesign name="down" size={18} color="black" style={{marginLeft: 10}}/>
-                    </View>
-                    </CollapseHeader>
-                    <CollapseBody>
-                        <TextInput placeholder="Nome..." style={global.info}></TextInput>
-                        <TextInput placeholder="Parentesco..." style={global.info}></TextInput>
-                        <TextInput placeholder="Telefone..." style={global.info}></TextInput>
-                        <TextInput placeholder="E-mail..." style={global.info}></TextInput>
-                        <TextInput placeholder="Endereço..." style={global.info}></TextInput>
-                    </CollapseBody>
-                </Collapse>
-                    <Text style={global.buttonText} onPress={() => {cadastrar()}}>Salvar</Text>
+                    <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
+                        <Text style={global.buttonText1}>SALVAR</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         </View>
@@ -189,49 +236,38 @@ export default function CadastrarAssistido({navigation}){
 }
 
 const css = StyleSheet.create({
-    body:{
-        flex: 1,
-        backgroundColor: "white",
-    },
-    title:{
+    title1:{
         alignSelf: "center",
         fontSize: 20,
         fontWeight: "bold",
         color: "black",
         marginTop: "5%"
     },
-    scrollView: {
-        width: "100%",
-        height: 470
+    title2:{
+        alignSelf: "center",
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "black",
+        marginBottom: "5%"
     },
     align: {
-        width: 150,
-        height: 200,
-        flexDirection: "column",
+        width: "80%",
+        height: 150,
+        flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
         alignSelf: "center"
     },
     alignIcon: {
-        alignItems: "center"
-    },
-    alignHeader:{
-        width: "100%",
-        height: "20%",
+        alignItems: "center",
         flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
+        marginBottom: "10%"
     },
-    logo:{
-        width: '60%',
-        height: '100%',
-        backgroundColor: "#166B8A",
-        borderBottomLeftRadius: 112.5,
+    select: {
+        flex: 1,
+        width: '85%',
+        height: 50,
         alignItems: "center",
-        justifyContent: "center"
-    },
-    text: {
-        fontSize: 20,
-        color: "white"
+        alignSelf: "center"
     }
 })

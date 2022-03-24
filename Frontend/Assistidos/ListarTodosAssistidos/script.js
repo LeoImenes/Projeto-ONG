@@ -3,7 +3,7 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-    fetch("http://10.87.207.27:3000/Assistidos")
+    fetch("http://localhost:3000/Assistidos")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach(fun => {
@@ -16,17 +16,19 @@ function list() {
                 var matricula = document.createElement("h3");
 
                 names.push(fun.nome_completo)
-                console.log(names)
+
 
                 cardAssistido.className = "cardAssistido"
+                cardAssistido.style.cursor = "pointer"
+
                 img.className = "fotoUsuario"
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto == null) {
+                if (fun.foto_antes === null) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
-                    img.src = fun.foto
+                    img.src = fun.foto_antes
                 }
 
                 if (!fun.status == 0) {
@@ -47,6 +49,13 @@ function list() {
                 cardAssistido.appendChild(divnome)
                 cont.appendChild(cardAssistido)
 
+                cardAssistido.addEventListener("click", (e) => {
+
+                    let id = fun;
+                    let store = localStorage.setItem("assistido", fun.id_assistido);
+                    window.location.href = "../VerAssistido/index.html"
+                })
+
 
             })
 
@@ -64,26 +73,8 @@ function buscar() {
     })
 }
 
-function buscarInativos() {
-    let filtro = document.querySelectorAll("h3");
-    let card = document.querySelectorAll(".cardAssistido")
-    let inativo = document.getElementById("ina")
-
-    if (inativo.checked == 1) {
-        inativo.value = "i"
-        filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
-        })
-    } else {
-        filtro.forEach((item, index) => {
-            card[index].style.display = "flex";
-        })
-    }
-}
-
-
-function buscarAtivos() {
-    let filtro = document.querySelectorAll("h3");
+function Ordem() {
+    let filtro = document.querySelectorAll("h1");
     let card = document.querySelectorAll(".cardAssistido")
     let ativo = document.getElementById("ati")
 
@@ -91,7 +82,7 @@ function buscarAtivos() {
 
         ativo.value = "a"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
+            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "flex";
         })
     } else {
         filtro.forEach((item, index) => {

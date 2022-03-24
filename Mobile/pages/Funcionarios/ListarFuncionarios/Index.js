@@ -12,6 +12,7 @@ export default function ListarFuncionario({navigation}){
 
     const Listar = () => {
         fetch(`http://10.87.207.27:3000/funcionarios`)
+        // fetch(`http://192.168.0.103:3000/funcionarios`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);
@@ -35,29 +36,29 @@ export default function ListarFuncionario({navigation}){
     }, [searchText]);
 
     return(
-        <View style={css.body}>
+        <View style={global.bodyAlternative}>
             <StatusBar
-                animated={true}
-                backgroundColor="#166B8A"
-                // barStyle={}
-                hidden={false} />
-            <View style={css.filtro}>
+                barStyle = "dark-content"
+                hidden = {false}
+                backgroundColor="transparent"
+                translucent={true}/>
+            <View style={global.filter}>
             <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Funcionario")}} />
-                <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={css.pesquisa} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
+                <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={global.search} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
                 <TouchableOpacity onPress={() => {ordenar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scrollAlternative}>
                 <ScrollView>
                     {
                         lista.map((item,index) => {
                             return(
                                 <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
-                                    <Image source={(item.foto !== null) ? {uri: item.foto} : require("../../assets/user.png")} style={global.imageUser}/>
-                                    <View style={css.cardTxt}>
-                                        <Text style={global.textInfo}>{item.nome_completo}</Text>
-                                        <Text style={(item.status === 0) ? {color: "red", fontSize: 18} : {color: "green", fontSize: 18}}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
+                                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
+                                    <View style={global.cardTxt}>
+                                        <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
+                                        <Text style={css.activity}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
                                     </View>
                                 </TouchableOpacity> 
                             )
@@ -69,35 +70,8 @@ export default function ListarFuncionario({navigation}){
     )
 }
 const css = StyleSheet.create({
-    body:{
-        flex: 1,
-        backgroundColor: "#166B8A",
-        alignItems: "center",
-    },
-    scrollView: {
-        width: "100%",
-        height: 500
-    },
-    cardTxt: {
-        width: "70%",
-        alignItems: "center",
-    },
-    filtro:{
-        width: "100%",
-        height: 70,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        alignSelf: "flex-end",
-        marginTop: "5%",
-    },
-    pesquisa:{
-        backgroundColor: "white",
-        width: "70%",
-        height: 40,
-        borderRadius: 10,
-        padding: 10,
-        fontSize: 18
+    activity: {
+        fontSize: 18,
+        fontWeight: "bold"
     }
 })

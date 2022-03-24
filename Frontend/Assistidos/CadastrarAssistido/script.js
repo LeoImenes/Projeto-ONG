@@ -1,15 +1,45 @@
-function cadastrarAssistido() {
-    let inpNomeCom = document.querySelector(".nome-Completo")
-    let nome = document.querySelector(".nome")
-    let nomesoc = document.querySelector(".nome-soc");
-    let rg = document.querySelector(".rg");
-    let cpf = document.querySelector(".cpf");
-    let est = document.querySelector(".estado");
-    let nat = document.querySelector(".naturalidade");
-    let nasc = document.querySelector(".nasc").valueAsDate
-    let cartCid = document.querySelector(".cartCid");
-    let cartSus = document.querySelector(".cartSus");
+var func = localStorage.getItem('userdata');
 
+var fotinho;
+var newImg = document.querySelector(".foto")
+var adcFoto = document.querySelector('.adcFoto')
+var fileInp = document.querySelector("#inpFoto")
+fileInp.addEventListener('change', (e) => {
+    var fr = new FileReader();
+    fr.onloadend = (foto) => {
+        fotinho = foto.target.result;
+        newImg.src = foto.target.result;
+        newImg.style.width = "70px";
+        newImg.style.height = "70px";
+        newImg.style.borderRadius = "50%"
+    }
+    fr.readAsDataURL(e.target.files[0]);
+
+})
+
+
+adcFoto.style.cursor = "pointer"
+
+adcFoto.addEventListener('click', () => {
+    fileInp.click();
+})
+
+function cadastrarAssistido() {
+    var inpNomeCom = document.querySelector(".nome-Completo")
+    var nome = document.querySelector(".nome")
+    var nomesoc = document.querySelector(".nome-soc");
+    var rg = document.querySelector(".rg");
+    var cpf = document.querySelector(".cpf");
+    var est = document.querySelector(".estado");
+    var nat = document.querySelector(".naturalidade");
+    var nasc = document.querySelector(".nasc").value;
+    var cartCid = document.querySelector(".cartCid");
+    var cartSus = document.querySelector(".cartSus");
+    var ante = document.querySelector(".ant")
+
+    var dia = nasc.split("/")[0]
+    var mes = nasc.split("/")[1]
+    var ano = nasc.split("/")[2]
 
     if ((nome.value == "")) {
         var nomeerr = document.createElement("p")
@@ -22,14 +52,9 @@ function cadastrarAssistido() {
     }
 
 
-
-    dataNasc = new Date(nasc);
-    dataFormatada = dataNasc.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-
-
-    let sexMasc = document.querySelector("#Masculino");
-    let sexFem = document.querySelector("#Feminino");
-    let sexOutr = document.querySelector("#Outro");
+    var sexMasc = document.querySelector("#Masculino");
+    var sexFem = document.querySelector("#Feminino");
+    var sexOutr = document.querySelector("#Outro");
 
     var sex = [];
 
@@ -46,23 +71,24 @@ function cadastrarAssistido() {
         alert("Selecione pelo menos uma opção (Sexo)")
     }
 
-
-    let data = JSON.stringify({
-        "id_funcionario": 3,
+    var data = JSON.stringify({
+        "id_funcionario": JSON.parse(func).id_funcionario,
         "nome_completo": nome.value,
         "nome_social": nomesoc.value,
         "rg": rg.value,
         "cpf": cpf.value,
-        "data_nascimento": dataFormatada,
+        "data_nascimento": `${ano}-${mes}-${dia}`,
         "estado_civil": est.value,
         "naturalidade": nat.value,
         "sexo": sex,
         "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
+        "foto": fotinho,
+        "antecedente_criminal": ante.value,
+        // "foto_depois": fotinho
     })
 
-    console.log(data)
-    fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -73,6 +99,34 @@ function cadastrarAssistido() {
         .then(data => {
             console.log(data)
         })
+}
+
+function cadastrarComorbidade() {
+    var listaComorbidade = document.querySelectorAll(".Comorbidade");
+    listaComorbidade.forEach((item, index) => {
+
+        if (item.checked === true) {
+            var comor = {
+                "id_assistido": 13,
+                "comorbidade": [{
+                    "value": `${item.id}`
+                }]
+            }
+
+            fetch("http://localhost:3000/assistido/saude", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: comor
+                })
+                .then(response => { return response.json() })
+                .then(data => {
+                    console.log(data)
+                })
+        }
+    });
+
 }
 
 function showMenu() {
@@ -112,25 +166,30 @@ function getComorbidades() {
     let ulDroga = document.createElement("ul")
     let liDoenca = document.createElement("p")
     let liDroga = document.createElement("p")
-    let inpDoenca = document.createElement("input")
-    let inpDroga = document.createElement("input")
 
-    inpDroga.type = "checkbox"
-    inpDoenca.type = "checkbox"
-
-    fetch("http://10.87.207.27:3000/assistido/comorbidade")
+    fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {
+                let inpDoenca = document.createElement("input")
+                let inpDroga = document.createElement("input")
+
+                inpDroga.type = "checkbox"
+                inpDoenca.type = "checkbox"
+                inpDroga.className = "Comorbidade"
+                inpDoenca.className = "Comorbidade"
+
                 if (item.tipo === 1) {
                     liDoenca.innerHTML = item.comorbidade
-                    liDoenca.appendChild(inpDoenca.cloneNode(true))
+                    inpDoenca.value = item.id_comorbidade
+                    liDoenca.appendChild(inpDoenca)
                     ulDoenca.appendChild(liDoenca.cloneNode(true));
                     // ul.appendChild(liinp.cloneNode(true));
                     listaDoencas.appendChild(ulDoenca)
                 } else if (item.tipo === 0) {
+                    inpDroga.value = item.id_comorbidade
                     liDroga.innerHTML = item.comorbidade
-                    liDroga.appendChild(inpDroga.cloneNode(true))
+                    liDroga.appendChild(inpDroga)
                     ulDroga.appendChild(liDroga.cloneNode(true));
                     // ul.appendChild(liinp.cloneNode(true));
                     listaDrogas.appendChild(ulDroga)
@@ -139,23 +198,3 @@ function getComorbidades() {
         })
 
 }
-
-
-let adcFoto = document.querySelector('.adcFoto')
-let fileInp = document.querySelector("#inpFoto")
-
-function ImgtoBase(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(error);
-    });
-}
-
-
-
-
-adcFoto.addEventListener('click', () => {
-    fileInp.click();
-})

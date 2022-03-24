@@ -1,0 +1,10 @@
+			id_comorbidades 
+            // 01 - HIV
+            // 02 - Hipertensão
+            // 03 - Diabetes
+            // 04 - Depressão
+            // 05 - Maconha
+            // 06 - Cocaína 
+            // 07 - Crack
+            // 08 - OX
+            // 09 - Álcool

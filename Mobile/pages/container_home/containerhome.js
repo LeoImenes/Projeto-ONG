@@ -15,6 +15,7 @@ import ListarFuncionario from '../Funcionarios/ListarFuncionarios/Index';
 import MeuPerfil from '../Funcionarios/MeuPerfil/Index';
 import VerFuncionario from '../Funcionarios/VerFuncionario/Index';
 import Home from '../Geral/Home/Index';
+import CadastrarFamiliar from '../Assistidos/Familiar/Index';
 
 const Drawer = createDrawerNavigator();
 
@@ -104,6 +105,10 @@ export default function ContainerHome() {
                 drawerItemStyle: {display: "none" }
             }} />
             <Drawer.Screen name="VerFuncionario" component={VerFuncionario} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} />
+            <Drawer.Screen name="CadastrarFamiliar" component={CadastrarFamiliar} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} />

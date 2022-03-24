@@ -67,40 +67,46 @@ function menuDownDoenca() {
 }
 
 function list() {
+    var local = localStorage.getItem("assistido")
+
     var body = document.querySelector(body)
-    fetch("http://10.87.207.27:3000/funcionarios")
+    fetch(`http://localhost:3000/assistidos/${local}`)
         .then(response => { return response.json() })
         .then(data => {
-            data.forEach(fun => {
-                var divimg = document.createElement("div")
-                var divnome = document.createElement("div")
-                var cont = document.querySelector(".content")
-                var img = document.createElement("img");
-                var cardfuncionario = document.createElement("div");
-                var nome = document.createElement("h1");
-                var matricula = document.createElement("h3");
+            var antes = document.querySelector("#assistidoAntes")
+            antes.src = data.foto_antes
+            antes.style.borderRadius = "50%"
 
-                cardfuncionario.className = "cardFuncionario"
-                img.className = "fotoUsuario"
-                divimg.className = "img"
-
-                if (fun.foto == null) {
-                    img.src = "../../Assets/icones/user.png"
-                } else {
-                    img.src = fun.btoa(fun.foto)
+            var dataNascimento;
+            var newData = data.data_nascimento.split("T")
+            newData.forEach((item, index) => {
+                if (index === 0) {
+                    var ano = item.split("-")[0]
+                    var mes = item.split("-")[1]
+                    var dia = item.split("-")[2]
+                    dataNascimento = `${dia}/${mes}/${ano}`
                 }
-
-                nome.innerHTML = `${fun.nome_completo}`
-                matricula.innerHTML = `${fun.matricula}`
-
-                divimg.appendChild(img)
-                divnome.appendChild(nome)
-                divnome.appendChild(matricula)
-                cardfuncionario.appendChild(divimg)
-                cardfuncionario.appendChild(divnome)
-                cont.appendChild(cardfuncionario)
-
-
             })
+
+            let nome = document.querySelector(".nomeCom");
+            let nomeSoc = document.querySelector(".nomeSoc");
+            let rg = document.querySelector(".rg-con");
+            let cpf = document.querySelector(".cpf-con");
+            let datanasc = document.querySelector(".data");
+            let cartCid = document.querySelector(".cartcid");
+            let cartSUs = document.querySelector(".cartSus");
+            let sex = document.querySelector(".sex");
+
+
+
+            nome.innerHTML = data.nome_completo
+            nomeSoc.innerHTML = data.nome_social
+            rg.innerHTML = data.rg
+            cpf.innerHTML = data.cpf
+            datanasc.innerHTML = dataNascimento
+            cartCid.innerHTML = data.cartao_cidadao
+            cartSUs.innerHTML = data.cartao_sus
+            sex.innerHTML = data.sexo
+
         })
 }

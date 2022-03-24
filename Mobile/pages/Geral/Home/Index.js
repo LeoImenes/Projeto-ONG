@@ -27,15 +27,15 @@ export default function Home({navigation}) {
           <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("Assistido")}}>
             <Text style={css.title}>Assistido</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={global.card}>
+          {/* <TouchableOpacity style={global.card}>
             <Text style={css.title}>Assistência</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={global.card} onPress={() => {navigation.navigate("Funcionario")}}>
             <Text style={css.title}>Funcionário</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={global.card}>
+          {/* <TouchableOpacity style={global.card}>
             <Text style={css.title}>Financeiro</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
       </ScrollView>
     </View>
   );
