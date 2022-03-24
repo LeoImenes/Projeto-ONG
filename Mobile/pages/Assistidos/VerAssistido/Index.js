@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function VerAssistido({navigation, route}){
     const {item} = route.params;
+    console.log(item  )
 
     const formatDate = (nasc) => {
         let dia = nasc.getDate();
@@ -16,22 +17,33 @@ export default function VerAssistido({navigation, route}){
         return `${dia}/${mes}/${ano}`;
      }
 
+     const alt = () => {
+        return (
+            <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
+        );
+     }
+
     return(
         <View style={global.body}>
-            <Ionicons name="return-down-back-sharp" size={24} color="black" />
-            <Image style={global.image} source={require("../../assets/logo.png")}/>
-            <View style={css.images}>
-                <View>
-                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                    <Text style={css.title}>Antes</Text>
-                </View>
-                <View>
-                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
-                    <Text style={css.title}>Depois</Text>
+            <View style={global.header}>
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarAssistidos')}} />
+                <View style={global.cardTitle}>
+                        <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
+                        <Text style={global.textTitle}>IRMÃ ANTÔNIA</Text>
                 </View>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scroll}>
                 <ScrollView>
+                    <View style={css.images}>
+                        <View>
+                            <Image accessible accessibilityLabel={alt} source={(item.foto_antes !== null) ? {uri:item.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Text style={css.title}>Antes</Text>
+                        </View>
+                        <View>
+                            <Image accessible accessibilityLabel={alt} source={(item.foto_depois !== null) ? {uri:item.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Text style={css.title}>Depois</Text>
+                        </View>
+                    </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
                         <Text style={global.textInfo}>{item.nome_completo}</Text>
@@ -71,6 +83,10 @@ export default function VerAssistido({navigation, route}){
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cartão do SUS:</Text>
                         <Text style={global.textInfo}>{item.cartao_sus}</Text>
+                    </View>
+                    <View style={global.info}>
+                        <Text style={global.textInfo}>Antecedente:</Text>
+                        <Text style={global.textInfo}>{item.antecedente_criminal}</Text>
                     </View>
                     <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
                         <Text>Adicionar novo familiar</Text>

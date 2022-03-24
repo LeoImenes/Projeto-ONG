@@ -36,18 +36,17 @@ export default function MeuPerfil({navigation}){
 
     return(
         <View style={global.body}>
-            <View style={css.header}>
-                <View style={css.alignItems}>
-                    <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('Funcionario')}} />
-                    {/* <Image source={{uri: funcionario.foto}} style={global.imageUser}/> */}
-                    <Image source={require("../../assets/user.png")} style={global.imageUser}/>
+            <View style={global.headerFunc}>
+                <View style={global.alignHeader}>
+                    <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
+                    <Image source={(funcionario.foto === null || funcionario.foto === "") ? require("../../assets/user.png") : {uri: funcionario.foto}} style={global.imageUser}/>
                 </View>
-                <View style={css.cardTitle}>
-                    <Text style={css.textTitle}>CASA ACOLHEDORA</Text>
-                    <Text style={css.textTitle}>IRMÃ ANTÔNIA</Text>
+                <View style={global.cardTitle}>
+                    <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
+                    <Text style={global.textTitle}>IRMÃ ANTÔNIA</Text>
                 </View>
             </View>
-            <View style={css.scrollView}>
+            <View style={global.scroll}>
                 <ScrollView>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
@@ -88,35 +87,4 @@ export default function MeuPerfil({navigation}){
 }
 
 const css = StyleSheet.create({
-    scrollView: {
-        width: "100%",
-        height: 430
-    },
-    cardTitle: {
-        backgroundColor: "#166B8A",
-        width: "60%",
-        height: "100%",
-        borderBottomLeftRadius: 66,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    textTitle: {
-        color: "white",
-        fontSize: 18
-    },
-    header: {
-        width: "95%",
-        height: "30%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        alignSelf: "flex-end",
-    },
-    alignItems: {
-        width: "35%",
-        height: "90%",
-        padding: 5,
-        justifyContent: "space-evenly"
-    }
 })

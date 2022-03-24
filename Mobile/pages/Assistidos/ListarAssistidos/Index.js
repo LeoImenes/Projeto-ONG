@@ -10,8 +10,8 @@ export default function ListarAssistidos({navigation}){
     const [dados, setDados] = useState([]);
 
     const Listar = () => {
-        // fetch(`http://10.87.207.27:3000/assistidos`)
-        fetch(`http://192.168.0.103:3000/assistidos`)
+        fetch(`http://10.87.207.27:3000/assistidos`)
+        // fetch(`http://192.168.0.103:3000/assistidos`)
         .then(resp => {return resp.json()})
         .then(data => {
             console.log(data);
@@ -50,9 +50,9 @@ export default function ListarAssistidos({navigation}){
                         lista.map((item, index) =>{
                             return (
                                 <TouchableOpacity style={global.cardInfo} key={index} onPress={() => {navigation.navigate("VerAssistido", {item})}}>
-                                    <Image source={(item.foto_antes !== null) ? {uri: item.foto_antes} : require("../../assets/user.png")} style={global.imageUser}/>
+                                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
                                     <View style={global.cardTxt}>
-                                        <Text style={global.textInfo}>{item.nome_completo}</Text>
+                                        <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
                                     </View>
                                 </TouchableOpacity> 
                             )

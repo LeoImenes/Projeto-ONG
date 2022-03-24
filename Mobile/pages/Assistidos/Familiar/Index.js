@@ -46,11 +46,11 @@ export default function CadastrarFamiliar({navigation}){
 
     return(
         <View style={css.body} onLoad={getFunc()}>
-            <View style={css.alignHeader}>
-                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
-                <View style={css.logo}>
-                    <Text style={css.text}>Casa Acolhedora</Text>
-                    <Text style={css.text}>Irmã Antônia</Text>
+            <View style={global.header}>
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('VerAssistido')}} />
+                <View style={global.cardTitle}>
+                        <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
+                        <Text style={global.textTitle}>IRMÃ ANTÔNIA</Text>
                 </View>
             </View>
             <View style={css.scrollView}>

@@ -11,8 +11,8 @@ export default function ListarFuncionario({navigation}){
     const [dados, setDados] = useState([]);
 
     const Listar = () => {
-        // fetch(`http://10.87.207.27:3000/funcionarios`)
-        fetch(`http://192.168.0.103:3000/funcionarios`)
+        fetch(`http://10.87.207.27:3000/funcionarios`)
+        // fetch(`http://192.168.0.103:3000/funcionarios`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);
@@ -55,10 +55,10 @@ export default function ListarFuncionario({navigation}){
                         lista.map((item,index) => {
                             return(
                                 <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
-                                    <Image source={(item.foto !== null) ? {uri: item.foto} : require("../../assets/user.png")} style={global.imageUser}/>
+                                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
                                     <View style={global.cardTxt}>
-                                        <Text style={global.textInfo}>{item.nome_completo}</Text>
-                                        <Text style={{fontSize: 18, fontWeight: "bold"}}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
+                                        <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
+                                        <Text style={css.activity}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
                                     </View>
                                 </TouchableOpacity> 
                             )
@@ -70,5 +70,8 @@ export default function ListarFuncionario({navigation}){
     )
 }
 const css = StyleSheet.create({
-    
+    activity: {
+        fontSize: 18,
+        fontWeight: "bold"
+    }
 })

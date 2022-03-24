@@ -20,6 +20,21 @@ export default StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center'
     },
+    headerFunc: {
+      width: "95%",
+      height: "30%",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      alignSelf: "flex-end",
+    },
+    alignHeader: {
+        width: "35%",
+        height: "90%",
+        padding: 5,
+        justifyContent: "space-evenly"
+    },
     cardTitle: {
       backgroundColor: "#166B8A",
       width: "60%",
@@ -53,6 +68,10 @@ export default StyleSheet.create({
       marginTop: "10%"
     },
     textInfo:{
+      fontSize: 18,
+      color: "black"
+    },
+    textInfoAlternative:{
       fontSize: 18,
       color: "white"
     },

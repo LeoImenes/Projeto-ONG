@@ -41,8 +41,10 @@ export default function CadastrarAssistido({navigation}){
     }
 
     const cadastrar = () => {
-        // console.log(selected)
-
+        let ano = nascimento.split('/')[2]
+        let mes = nascimento.split('/')[1]
+        let dia = nascimento.split('/')[0]
+        
         let assistido = {
             id_funcionario: idFunc,
             nome_completo: nome,
@@ -50,7 +52,7 @@ export default function CadastrarAssistido({navigation}){
             rg: rg,
             cpf: cpf,
             antecedente_criminal: antCriminal,
-            data_nascimento: nascimento,
+            data_nascimento: `${ano}-${mes}-${dia}`,
             estado_civil: estdCivil,
             naturalidade: naturalidade,
             sexo: sexo,
@@ -59,8 +61,8 @@ export default function CadastrarAssistido({navigation}){
             foto: foto
         }
     
-        // fetch(`http://10.87.207.27:3000/assistidos`, {
-        fetch(`http://192.168.0.103:3000/assistidos`, {
+        fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -78,8 +80,8 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -96,12 +98,10 @@ export default function CadastrarAssistido({navigation}){
                     }
                 })
             }
-
         })
         .catch(err => {
             console.log(err) 
         });
-
       }
 
       const renderLabel = (label, style) => {
@@ -115,8 +115,8 @@ export default function CadastrarAssistido({navigation}){
       }
 
       useEffect(() => {     
-        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
