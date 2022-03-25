@@ -332,9 +332,17 @@ const postSaude = async (req,res) => {
         let comerro = false;
         let index = 0;
 
-       comorbidades.forEach((item,index) => {
-          values.push(comorbidades[index].value)
-       })
+
+        try{
+
+            comorbidades.forEach((item,index) => {
+                values.push(comorbidades[index].value)
+             })
+
+        }catch(err){
+            console.log(err)
+        }
+       
 
         try{
             con.beginTransaction();
@@ -356,27 +364,11 @@ const postSaude = async (req,res) => {
                 index++;
             }while(!comerro)
 
-            //con.rollback();
-            //res.status(200).json({ok:"ok"});
+          
         }catch(err){           
-            res.status(400).json({"err": "informe os campos de id_assistido e comorbidades"})
+            res.status(400).json({err: err.message})
         }
-        // con.commit(function(err) {
-        //     if (err) { 
-        //         connection.rollback(function() {
-        //             res.status(400).json({nok:'nok'});
-        //         });
-        //     }else {
-        //         res.status(200).json({ok:'ok'});
-        //     }
-        // });
-
-        // if(comerro) {
-        //     con.rollback();
-        //     res.status(400).json({nok:'nok'});
-        // }
-        
-        // con.commit();
+       
     }  else{
         res.status(400).json({"err": "informe os campos de id_assistido e comorbidades"})
     }
