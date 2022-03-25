@@ -29,8 +29,9 @@ export default function CadastrarFamiliar({navigation}){
             email: email,
             parentesco: parentesco,
         }
-    
-        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+
+        fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"

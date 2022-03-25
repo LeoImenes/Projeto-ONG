@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
 import { Ionicons } from '@expo/vector-icons';
 
-export default function VerAssistido({navigation, route}){
-    const {item} = route.params;
-    console.log(item  )
+export default function VerAssistido({navigation}){
+    
+    useEffect(() => {
+        fetch(`http://192.168.0.103:3000/assistidos`)
+            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            .then(resp => {return resp.json()})
+            .then(data => {
+                // setFuncionario(data[0])
+                console.log(data.id_assistido)
+            })
+            .catch( err => { console.log(err) })
+    })
 
     const formatDate = (nasc) => {
         let dia = nasc.getDate();
@@ -17,15 +26,9 @@ export default function VerAssistido({navigation, route}){
         return `${dia}/${mes}/${ano}`;
      }
 
-     const alt = () => {
-        return (
-            <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
-        );
-     }
-
     return(
         <View style={global.body}>
-            <View style={global.header}>
+            {/* <View style={global.header}>
                 <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarAssistidos')}} />
                 <View style={global.cardTitle}>
                         <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
@@ -36,11 +39,11 @@ export default function VerAssistido({navigation, route}){
                 <ScrollView>
                     <View style={css.images}>
                         <View>
-                            <Image accessible accessibilityLabel={alt} source={(item.foto_antes !== null) ? {uri:item.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image alt= "Foto antes" source={(item.foto_antes !== null) ? {uri:item.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Antes</Text>
                         </View>
                         <View>
-                            <Image accessible accessibilityLabel={alt} source={(item.foto_depois !== null) ? {uri:item.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image alt= "Foto antes" source={(item.foto_depois !== null) ? {uri:item.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Depois</Text>
                         </View>
                     </View>
@@ -89,7 +92,7 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>{item.antecedente_criminal}</Text>
                     </View>
                     <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
-                        <Text>Adicionar novo familiar</Text>
+                        <Text style={css.button}>Adicionar novo familiar</Text>
                     </TouchableOpacity>
                     {/* <Text style={css.title}>Dados do Familiar</Text>
                     <View style={global.info}>
@@ -112,10 +115,10 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>Endereço:</Text>
                         <Text style={global.textInfo}>{item.}</Text>
                     </View> */}
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <Text style={css.button}>Adicionar observações</Text>
                     </TouchableOpacity>
-                    <Text style={css.title}>Observações</Text>
+                    <Text style={css.title}>Observações</Text> */}
                     {/* <Text style={css.title}>Observações</Text>
                     <TextInput multiline
                                 numberOfLines={5}
@@ -123,8 +126,8 @@ export default function VerAssistido({navigation, route}){
                                 onChangeText={text => onChangeText(text)}
                                 value={value}
                                 style={css.textArea}></TextInput> */}
-                </ScrollView>
-            </View>
+                {/* </ScrollView> */}
+            {/* </View> */}
         </View>
     )
 }

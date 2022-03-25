@@ -16,7 +16,8 @@ export default function MeuPerfil({navigation}){
         let value = await AsyncStorage.getItem('userdata');
         if(value !== null) {
             value = JSON.parse(value);
-            fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            fetch(`http://192.168.0.103:3000/funcionarios/${value.matricula}`)
+            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setFuncionario(data[0])

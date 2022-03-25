@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, SafeAreaView} from 'react-native';
 
 import global from "../../Global/Style"
-import { Feather } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
-import { Ionicons} from '@expo/vector-icons';
+import { Ionicons, Feather} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
-export default function CadastrarAssistido({navigation}){
+export default function CadastrarAssistido({navigation, route}){
+    const newFoto = route.params;
+
     const[selected, setSelected] = useState([]);
     const[comorbidade, setComorbidade] = useState([]);
     const[dorgas, setDorgas] = useState([]);
@@ -61,8 +62,8 @@ export default function CadastrarAssistido({navigation}){
             foto: foto
         }
     
-        fetch(`http://10.87.207.27:3000/assistidos`, {
-        // fetch(`http://192.168.0.103:3000/assistidos`, {
+        // fetch(`http://10.87.207.27:3000/assistidos`, {
+        fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -80,8 +81,8 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -115,8 +116,8 @@ export default function CadastrarAssistido({navigation}){
       }
 
       useEffect(() => {     
-        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -141,20 +142,22 @@ export default function CadastrarAssistido({navigation}){
       }, [])
 
       const selecionarImagem = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-            base64: true
-        });
+        // let result = await ImagePicker.launchImageLibraryAsync({
+        //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+        //     allowsEditing: true,
+        //     aspect: [4, 3],
+        //     quality: 1,
+        //     base64: true
+        // // });
         
-        let item = result.uri.split(".")
+        let item = newFoto.split(".")
+
+        // console.log(item)
         
-        if (!result.cancelled && result.base64) {
+        if (newFoto.length > 0) {
             setFoto({
                 // uri: 'data:image/jpeg;base64,' + result.base64,
-                uri: `data:image/${item[item.length-1]};base64,`+result.base64,
+                uri: `data:image/${item[item.length-1]};base64,`+newFoto
             })
         } else if(!result.cancelled) {
             ToastAndroid.show('Selecione uma imagem menor', ToastAndroid.SHORT);
@@ -214,19 +217,15 @@ export default function CadastrarAssistido({navigation}){
                                 />
                     </View>
                     <View style={css.align}>
-                        <Image source={( foto !== null )? foto : require("../../assets/user1.png")} style={global.imageUser}/>
-                        <View>
-                            <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}>
-                                <Feather name="upload" size={24} color="blue" style={{marginRight: 10}}/>
-                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Fazer Upload</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={css.alignIcon} onPress={() => {capturarImagem()}}>
-                                <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
-                                <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Nova foto</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <Image source={( foto !== null ) ? foto : require("../../assets/user1.png")} style={global.imageUser}/>
+                        {console.log(foto)}
+                        {/* <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}> */}
+                        <TouchableOpacity style={css.alignIcon} onPress={() => {navigation.navigate("TelaCamera")}}>
+                            <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
+                            <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Nova foto</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
+                    <TouchableOpacity style={global.cardButton1} onPress={() => {selecionarImagem()}}>
                         <Text style={global.buttonText1}>SALVAR</Text>
                     </TouchableOpacity>
                 </ScrollView>

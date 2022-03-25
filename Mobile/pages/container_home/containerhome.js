@@ -16,6 +16,7 @@ import MeuPerfil from '../Funcionarios/MeuPerfil/Index';
 import VerFuncionario from '../Funcionarios/VerFuncionario/Index';
 import Home from '../Geral/Home/Index';
 import CadastrarFamiliar from '../Assistidos/Familiar/Index';
+import TelaCamera from '../Assistidos/Camera/Index';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,7 +30,8 @@ export default function ContainerHome() {
         if(value !== null) {
             value = JSON.parse(value);
 
-            fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            fetch(`http://192.168.0.103:3000/funcionarios/${value.matricula}`)
+            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setFoto(data[0].foto);
@@ -53,7 +55,7 @@ export default function ContainerHome() {
               <DrawerContentScrollView {...props}>
                 <View style={{alignItems: "center", width: "100%", height: 180}}>
                     <Image source={(foto !== null) ? {uri: foto} : require("../assets/user.png")} style={global.imageUser}/>
-                    <Text style={{ width: "70%", color: 'white', fontWeight: 'bold', fontSize: 16, marginTop: 10}}>{nome}</Text>
+                    <Text style={{ width: "70%", color: 'white', fontWeight: 'bold', fontSize: 16, marginTop: 10}}>Olá, {nome}</Text>
                 </View>
                 <DrawerItemList {...props} />
                 <DrawerItem labelStyle={{color: 'white', fontWeight: 'bold', fontSize: 16}} style={{borderBottomWidth: 1, borderBottomColor: "white"}} label="Sair" onPress={async () => {     
@@ -109,6 +111,10 @@ export default function ContainerHome() {
                 drawerItemStyle: {display: "none" }
             }} />
             <Drawer.Screen name="CadastrarFamiliar" component={CadastrarFamiliar} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} />
+            <Drawer.Screen name="TelaCamera" component={TelaCamera} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} />
