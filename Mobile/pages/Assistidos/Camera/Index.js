@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, PermissionsAndroid} from 'react-native';
 
+import * as FileSystem from 'expo-file-system';
+const { StorageAccessFramework } = FileSystem;
+
 import global from "../../Global/Style"
 
 import { Camera } from 'expo-camera';
@@ -17,6 +20,7 @@ export default function TelaCamera({navigation}) {
 
   useEffect(() => {
     (async () => {
+      const permissions = await StorageAccessFramework.requestDirectoryPermissionsAsync();
       const {status} = await Camera.requestCameraPermissionsAsync();
       setPermission(status === 'granted');
       console.log(status);
@@ -34,12 +38,20 @@ export default function TelaCamera({navigation}) {
   async function takePicture(){
     if(camRef){
       const data = await camRef.current.takePictureAsync();
-      setFoto(data.uri)
+      
+      let base = await FileSystem.readAsStringAsync(data.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      
+      setFoto({
+        uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
+      })
     }
   }
 
   const submitPicture = async () => {
-    try {
+    navigation.navigate("CadastrarAssistido", foto);
+    /*try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
         {
@@ -56,7 +68,7 @@ export default function TelaCamera({navigation}) {
       console.warn(err);
     }
 
-    setFoto(null);
+    setFoto(null);*/
   }
 
   return (
@@ -84,7 +96,7 @@ export default function TelaCamera({navigation}) {
       {foto &&
         <View style={{width: "100%", height: '100%', alignItems: 'center', marginTop: "10%", justifyContent: "space-evenly"}}>
             <Text style={{fontSize: 25, left: "40%"}} onPress={() => setFoto(false)}>X</Text>
-            <Image source={{uri: foto}} style={{width: "70%", height: "70%", borderRadius: 10}}/>
+            <Image source={foto} style={{width: "70%", height: "70%", borderRadius: 10}}/>
             <TouchableOpacity style={global.cardButton1} onPress={() => submitPicture()}>
               <Text style={global.buttonText1}>SALVAR</Text>
             </TouchableOpacity>

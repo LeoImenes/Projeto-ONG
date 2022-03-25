@@ -1,18 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
+import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 
-export default function VerAssistido({navigation}){
-    
+export default function VerAssistido({navigation, route}){
+    const id = route.params;
+
+    const[assistido, setAssistido] = useState([]) 
+
     useEffect(() => {
-        fetch(`http://192.168.0.103:3000/assistidos`)
-            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+        // fetch(`http://192.168.0.103:3000/assistidos`)
+            fetch(`http://10.87.207.27:3000/assistidos/${id.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                // setFuncionario(data[0])
-                console.log(data.id_assistido)
+                setAssistido(data)
             })
             .catch( err => { console.log(err) })
     })
@@ -28,7 +31,7 @@ export default function VerAssistido({navigation}){
 
     return(
         <View style={global.body}>
-            {/* <View style={global.header}>
+            <View style={global.header}>
                 <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarAssistidos')}} />
                 <View style={global.cardTitle}>
                         <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
@@ -39,86 +42,116 @@ export default function VerAssistido({navigation}){
                 <ScrollView>
                     <View style={css.images}>
                         <View>
-                            <Image alt= "Foto antes" source={(item.foto_antes !== null) ? {uri:item.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image alt= "Foto antes" source={(assistido.foto_antes !== null) ? {uri:assistido.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Antes</Text>
                         </View>
                         <View>
-                            <Image alt= "Foto antes" source={(item.foto_depois !== null) ? {uri:item.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image alt= "Foto antes" source={(assistido.foto_depois !== null) ? {uri:assistido.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Depois</Text>
                         </View>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>{item.nome_completo}</Text>
+                        <Text style={global.textInfo}>{assistido.nome_completo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome social:</Text>
-                        <Text style={global.textInfo}>{item.nome_social}</Text>
+                        <Text style={global.textInfo}>{assistido.nome_social}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>RG:</Text>
-                        <Text style={global.textInfo}>{item.rg}</Text>
+                        <Text style={global.textInfo}>{assistido.rg}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>CPF:</Text>
-                        <Text style={global.textInfo}>{item.cpf}</Text>
+                        <Text style={global.textInfo}>{assistido.cpf}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nascimento:</Text>
-                        <Text style={global.textInfo}>{formatDate(new Date(item.data_nascimento))}</Text>
+                        <Text style={global.textInfo}>{formatDate(new Date(assistido.data_nascimento))}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Naturalidade:</Text>
-                        <Text style={global.textInfo}>{item.naturalidade}</Text>
+                        <Text style={global.textInfo}>{assistido.naturalidade}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Sexo:</Text>
-                        <Text style={global.textInfo}>{item.sexo}</Text>
+                        <Text style={global.textInfo}>{assistido.sexo}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Estado civíl:</Text>
-                        <Text style={global.textInfo}>{item.estado_civil}</Text>
+                        <Text style={global.textInfo}>{assistido.estado_civil}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cartão cidadão:</Text>
-                        <Text style={global.textInfo}>{item.cartao_cidadao}</Text>
+                        <Text style={global.textInfo}>{assistido.cartao_cidadao}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Cartão do SUS:</Text>
-                        <Text style={global.textInfo}>{item.cartao_sus}</Text>
+                        <Text style={global.textInfo}>{assistido.cartao_sus}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Antecedente:</Text>
-                        <Text style={global.textInfo}>{item.antecedente_criminal}</Text>
+                        <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                     </View>
-                    <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
+                    {/* <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
                         <Text style={css.button}>Adicionar novo familiar</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    <Collapse>
+                        <CollapseHeader style={{width: "100%", height: 90, backgroundColor: "red",}}>
+                            <View style={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent: "center "}}>
+                                <Text style={css.title}>Dados do Familiar</Text>
+                                <AntDesign name="caretdown" size={20} color="black" />
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Nome:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Parentesco:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Telefone:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>E-mail:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Endereço:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                        </CollapseBody>
+                    </Collapse>
                     {/* <Text style={css.title}>Dados do Familiar</Text>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>{item.}</Text>
+                        <Text style={global.textInfo}>{}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Parentesco:</Text>
-                        <Text style={global.textInfo}>{item.}</Text>
+                        <Text style={global.textInfo}>{}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Telefone:</Text>
-                        <Text style={global.textInfo}>{item.}</Text>
+                        <Text style={global.textInfo}>{}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>E-mail:</Text>
-                        <Text style={global.textInfo}>{item.}</Text>
+                        <Text style={global.textInfo}>{}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Endereço:</Text>
-                        <Text style={global.textInfo}>{item.}</Text>
+                        <Text style={global.textInfo}>{}</Text>
                     </View> */}
                     {/* <TouchableOpacity>
                         <Text style={css.button}>Adicionar observações</Text>
                     </TouchableOpacity>
-                    <Text style={css.title}>Observações</Text> */}
+                    <Text style={css.title}>Observações</Text>
                     {/* <Text style={css.title}>Observações</Text>
                     <TextInput multiline
                                 numberOfLines={5}
@@ -126,8 +159,8 @@ export default function VerAssistido({navigation}){
                                 onChangeText={text => onChangeText(text)}
                                 value={value}
                                 style={css.textArea}></TextInput> */}
-                {/* </ScrollView> */}
-            {/* </View> */}
+                </ScrollView>
+            </View>
         </View>
     )
 }
@@ -155,7 +188,7 @@ const css = StyleSheet.create({
     },
     scrollView: {
         width: "100%",
-        height: 425
+        height: "80%"
     },
     button:{
         color:"blue",
