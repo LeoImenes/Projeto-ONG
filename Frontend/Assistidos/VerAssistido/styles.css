@@ -124,7 +124,8 @@ section {
     width: 100%;
     margin-right: 1rem;
 }
-.dadosFamiliares{
+
+.dadosFamiliares {
     background-color: #acd0dd;
 }
 
@@ -148,7 +149,7 @@ section {
 
 .pscoativo,
 .doencas {
-    display: none;
+    display: flex;
     flex-direction: column;
     width: 30%;
     height: 150px;
@@ -160,8 +161,6 @@ section {
     border-bottom-left-radius: 10px;
 }
 
-
-
 .pscoativo ul,
 .doencas ul {
     width: 100%;
@@ -170,6 +169,7 @@ section {
     flex-direction: column;
     padding: 2rem;
     overflow-y: scroll;
+    overflow-x: hidden;
     font-size: 20px;
     display: none;
     border-top: none;
@@ -274,6 +274,17 @@ section {
     opacity: 0.4;
 }
 
+.doclist li,
+.psclist li {
+    position: relative;
+    top: -30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em
+}
+
 @media (max-width: 1768px) {
     p,
     h2,
@@ -312,7 +323,7 @@ section {
     }
     .dadosPessoais ul {
         display: flex;
-        width: 70%;
+        width: 85%;
         height: 100%;
         justify-content: space-between;
         text-align: center;
@@ -328,21 +339,6 @@ section {
     .dadosExtras {
         font-size: 12px;
     }
-
-    .pscoativo,
-    .doencas {
-        display: flex;
-        flex-direction: column;
-        width: 35%;
-        height: 50px;
-        justify-content: space-around;
-        align-items: center;
-        text-align: center;
-        border: 1px solid black;
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: 10px;
-    }
-    
     .pscoativo ul,
     .doencas ul {
         font-size: 20px;
@@ -399,7 +395,7 @@ section {
     .doencas {
         display: flex;
         flex-direction: column;
-        width: 25%;
+        width: 45%;
         height: 100px;
         justify-content: space-around;
         align-items: center;
@@ -409,13 +405,10 @@ section {
         border-bottom-left-radius: 10px;
     }
     .psclist,
-    .docDown {
+    .doclist {
         background-color: whitesmoke;
-        width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         overflow-y: scroll;
         font-size: 12px;
         font-weight: bold;
@@ -423,14 +416,15 @@ section {
         border-bottom-left-radius: 10px;
         box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     }
-
-    .psclist li,
-    .doclist li {
+    .doclist li,
+    .psclist li {
+        position: relative;
+        top: -30px;
+        width: 100%;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-bottom:1em
-
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1em
     }
     .acompanhamento img,
     .pscoativo img,
@@ -443,7 +437,7 @@ section {
         background-color: whitesmoke;
     }
      ::-webkit-scrollbar {
-        width: 15px;
+        width: 10px;
     }
     /* Track */
      ::-webkit-scrollbar-track {
@@ -460,8 +454,12 @@ section {
 @media (max-width:940px) {
     #assistidoAntes,
     #assistidoDepois {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
+    }
+    .container {
+        width: 90%;
+        height: 90%;
     }
     .dadosPessoais h1 {
         font-weight: bold;
@@ -474,6 +472,7 @@ section {
         height: 100%;
         width: 90%;
         font-size: 14px;
+        align-items: center;
     }
     .dadosPessoais p {
         font-size: 12px;
@@ -496,7 +495,7 @@ section {
         display: flex;
         flex-direction: column;
         width: 40%;
-        height: 80px;
+        height: 100px;
         justify-content: space-around;
         align-items: center;
         text-align: center;
@@ -504,4 +503,43 @@ section {
         border-top-right-radius: 20px;
         border-bottom-left-radius: 10px;
     }
-} 
+    .psclist li,
+    .doclist li {
+        font-size: 12px;
+    }
+    .styleBall-bottom-right {
+        position: fixed;
+        width: 11%;
+        background-color: #166B8A;
+        height: 150px;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        left: 86%;
+        bottom: 1.5%;
+        opacity: 0.8;
+    }
+    .styleBall-bottom-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        right: 86%;
+        bottom: 1.5%;
+        opacity: 0.8;
+    }
+    .styleBall-top-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-bottom-right-radius: 50%;
+        z-index: -1;
+        right: 86.5%;
+        top: 10.5%;
+        opacity: 0.8;
+    }
+}

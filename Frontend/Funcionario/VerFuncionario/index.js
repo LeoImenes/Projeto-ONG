@@ -3,7 +3,8 @@ let funcionarioid = JSON.parse(funcls).id_funcionario
 
 function dadosFunc() {
 
-    fetch(`http://10.87.207.27:3000/funcionarios/${funcionarioid}`)
+    // fetch(`http://10.87.207.27:3000/funcionarios/${funcionarioid}`)
+    fetch(`http://localhost:3000/funcionarios/${funcionarioid}`)
         .then(response => { return response.json() })
         .then(data => {
             let img = document.querySelector(".funcimg");
