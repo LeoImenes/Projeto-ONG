@@ -12,6 +12,46 @@ function menuDown() {
     }
 }
 
+function getFamiliares() {
+    let dadosFamilia = document.querySelector(".dadosFamilia")
+    var local = localStorage.getItem("assistido");
+    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+        .then(response => { return response.json() })
+        .then((data) => {
+            data.forEach((item, index) => {
+                var divDadosFamiliares = document.createElement('div');
+                var pNomeFamiliares = document.createElement('p');
+                var pRgFamiliares = document.createElement('p');
+                var pParenteFamiliares = document.createElement('p');
+                var pTelFamiliares = document.createElement('p');
+                var pEmailFamiliares = document.createElement('p');
+                var pEnderecoFamiliares = document.createElement('p');
+                var ul = document.createElement('ul');
+                
+
+                pNomeFamiliares.innerHTML = `Nome: ${item.nome_familiar}`;
+                pRgFamiliares.innerHTML = `RG: ${item.rg_familiar}`;
+                pParenteFamiliares.innerHTML = `Parentesco: ${item.parentesco}`;
+                pTelFamiliares.innerHTML = `Telefone: ${item.telefone_familiar}`;
+                pEmailFamiliares.innerHTML = `Email: ${item.email_familiar}`;
+                pEnderecoFamiliares.innerHTML = `Endereco: ${item.endereco_familiar}`;
+
+                divDadosFamiliares.appendChild(pNomeFamiliares)       
+                divDadosFamiliares.appendChild(pRgFamiliares)       
+                divDadosFamiliares.appendChild(pParenteFamiliares)       
+                divDadosFamiliares.appendChild(pTelFamiliares)   
+                divDadosFamiliares.appendChild(pEmailFamiliares)   
+                divDadosFamiliares.appendChild(pEnderecoFamiliares) 
+                
+                divDadosFamiliares.className = "dadosFamiliares"
+
+                dadosFamilia.appendChild(divDadosFamiliares)
+
+
+            })
+        })
+}
+
 
 
 function menuDownPsco() {
@@ -49,8 +89,8 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    fetch(`http://localhost:3000/assistidos/${local}`)
+    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+        // fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -94,25 +134,27 @@ function getComorbidadeAssistido() {
     var ulDroga = document.querySelector(".psclist");
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
-    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
+    fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+            console.log(data)
             data.forEach((item, index) => {
                 console.log(item, index);
-                var liDroga = document.createElement("li");
-                var liDoenca = document.createElement("li");
+
+
 
                 if (item.tipo === 0) {
+                    var liDroga = document.createElement("li");
                     liDroga.innerHTML = item.comorbidade;
+                    ulDroga.appendChild(liDroga)
                 } else {
+                    var liDoenca = document.createElement("li");
                     liDoenca.innerHTML = item.comorbidade;
+                    ulDoenca.appendChild(liDoenca)
                 }
-                ulDroga.appendChild(liDroga)
 
-
-                ulDoenca.appendChild(liDoenca)
                 console.log(liDroga, liDoenca);
             });
         });
