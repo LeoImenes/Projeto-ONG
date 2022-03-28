@@ -2,22 +2,18 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
-import { Ionicons, AntDesign } from '@expo/vector-icons';
-import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
+import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
 
 export default function VerAssistido({navigation, route}){
     const id = route.params;
 
+    const DadosFamiliar = (null)
+    // const DadosFamiliar = [{"nome": "maria"},{"nome": "maria"}]
+
     const[assistido, setAssistido] = useState([]) 
 
     useEffect(() => {
-        // fetch(`http://192.168.0.103:3000/assistidos`)
-            fetch(`http://10.87.207.27:3000/assistidos/${id.id_assistido}`)
-            .then(resp => {return resp.json()})
-            .then(data => {
-                setAssistido(data)
-            })
-            .catch( err => { console.log(err) })
+        setAssistido(id);
     })
 
     const formatDate = (nasc) => {
@@ -42,11 +38,11 @@ export default function VerAssistido({navigation, route}){
                 <ScrollView>
                     <View style={css.images}>
                         <View>
-                            <Image alt= "Foto antes" source={(assistido.foto_antes !== null) ? {uri:assistido.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image source={(assistido.foto_antes !== null && assistido.foto_antes !== undefined) ? {uri:assistido.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Antes</Text>
                         </View>
                         <View>
-                            <Image alt= "Foto antes" source={(assistido.foto_depois !== null) ? {uri:assistido.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
+                            <Image source={(assistido.foto_depois !== null && assistido.foto_depois !== undefined) ? {uri:assistido.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
                             <Text style={css.title}>Depois</Text>
                         </View>
                     </View>
@@ -94,64 +90,53 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>Antecedente:</Text>
                         <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                     </View>
-                    {/* <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
-                        <Text style={css.button}>Adicionar novo familiar</Text>
-                    </TouchableOpacity> */}
-                    <Collapse>
-                        <CollapseHeader style={{width: "100%", height: 90, backgroundColor: "red",}}>
-                            <View style={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent: "center "}}>
-                                <Text style={css.title}>Dados do Familiar</Text>
-                                <AntDesign name="caretdown" size={20} color="black" />
+                    <Text style={css.title}>Dados do Familiar</Text>
+                    <View style={{width: "100%"}}>
+                        <ScrollView horizontal>
+                        {
+                            (DadosFamiliar !== null && DadosFamiliar !== undefined)
+                            ?
+                            DadosFamiliar.map((item, index) => {
+                                return(
+                                    <View key={index} style={{width: 370, height: 350}}>
+                                        <View style={global.info}>
+                                            <Text style={global.textInfo}>Nome:</Text>
+                                            <Text style={global.textInfo}>{item.nome}</Text>
+                                        </View>
+                                        <View style={global.info}>
+                                            <Text style={global.textInfo}>Parentesco:</Text>
+                                            <Text style={global.textInfo}>{item.parentesco}</Text>
+                                        </View>
+                                        <View style={global.info}>
+                                            <Text style={global.textInfo}>Telefone:</Text>
+                                            <Text style={global.textInfo}>{item.telefone}</Text>
+                                        </View>
+                                        <View style={global.info}>
+                                            <Text style={global.textInfo}>E-mail:</Text>
+                                            <Text style={global.textInfo}>{item.email}</Text>
+                                        </View>
+                                        <View style={global.info}>
+                                            <Text style={global.textInfo}>Endereço:</Text>
+                                            <Text style={global.textInfo}>{item.endereco}</Text>
+                                        </View> 
+                                        <FontAwesome name="circle" size={20} color="#166B8A" style={{alignSelf: "center", marginTop: 5}} />
+                                    </View>
+                                )
+                            })
+                            :
+                            <View style={{display: "flex", flexDirection: "row", width: 370, height: 40, justifyContent: "center", alignItems: "center"}}>
+                                <Text style={{color: "gray", fontSize: 18, marginRight: 10}}>Nenhum familiar cadastrado</Text>
+                                <Entypo name="emoji-sad" size={20} color="gray" />
                             </View>
-                        </CollapseHeader>
-                        <CollapseBody>
-                            <View style={global.info}>
-                                <Text style={global.textInfo}>Nome:</Text>
-                                <Text style={global.textInfo}>{}</Text>
-                            </View>
-                            <View style={global.info}>
-                                <Text style={global.textInfo}>Parentesco:</Text>
-                                <Text style={global.textInfo}>{}</Text>
-                            </View>
-                            <View style={global.info}>
-                                <Text style={global.textInfo}>Telefone:</Text>
-                                <Text style={global.textInfo}>{}</Text>
-                            </View>
-                            <View style={global.info}>
-                                <Text style={global.textInfo}>E-mail:</Text>
-                                <Text style={global.textInfo}>{}</Text>
-                            </View>
-                            <View style={global.info}>
-                                <Text style={global.textInfo}>Endereço:</Text>
-                                <Text style={global.textInfo}>{}</Text>
-                            </View>
-                        </CollapseBody>
-                    </Collapse>
-                    {/* <Text style={css.title}>Dados do Familiar</Text>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>Nome:</Text>
-                        <Text style={global.textInfo}>{}</Text>
+                        }
+                        </ScrollView>
                     </View>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>Parentesco:</Text>
-                        <Text style={global.textInfo}>{}</Text>
-                    </View>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>Telefone:</Text>
-                        <Text style={global.textInfo}>{}</Text>
-                    </View>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>E-mail:</Text>
-                        <Text style={global.textInfo}>{}</Text>
-                    </View>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>Endereço:</Text>
-                        <Text style={global.textInfo}>{}</Text>
-                    </View> */}
+                    <TouchableOpacity style={css.button} onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
+                        <Text style={global.buttonText1}>Novo familiar</Text>
+                    </TouchableOpacity>
                     {/* <TouchableOpacity>
                         <Text style={css.button}>Adicionar observações</Text>
                     </TouchableOpacity>
-                    <Text style={css.title}>Observações</Text>
                     {/* <Text style={css.title}>Observações</Text>
                     <TextInput multiline
                                 numberOfLines={5}
@@ -168,17 +153,19 @@ export default function VerAssistido({navigation, route}){
 const css = StyleSheet.create({
     images: {
         width: "100%",
-        height: "20%",
+        height: "13%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
+        marginTop: 15
     },
     title: {
         fontWeight: 'bold',
         fontSize:18,
         alignSelf: 'center',
-        marginTop: 15
+        marginTop: 15,
+        color: "#166B8A"
     },
     textArea: {
         padding: 10,
@@ -186,14 +173,14 @@ const css = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 15
     },
-    scrollView: {
-        width: "100%",
-        height: "80%"
-    },
     button:{
-        color:"blue",
-        fontSize: 18,
-        alignSelf: 'center',
-        marginTop: 10
+    backgroundColor: "rgb(22,107,138)",
+      width: "35%",
+      height: 45,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 5,
+      alignSelf: "center",
+      marginTop: 20
     }
 })
