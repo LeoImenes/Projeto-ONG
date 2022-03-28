@@ -97,7 +97,7 @@ export default function VerAssistido({navigation, route}){
                     {/* <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
                         <Text style={css.button}>Adicionar novo familiar</Text>
                     </TouchableOpacity> */}
-                    <Collapse>
+                    {/* <Collapse>
                         <CollapseHeader style={{width: "100%", height: 90, backgroundColor: "red",}}>
                             <View style={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent: "center "}}>
                                 <Text style={css.title}>Dados do Familiar</Text>
@@ -126,7 +126,7 @@ export default function VerAssistido({navigation, route}){
                                 <Text style={global.textInfo}>{}</Text>
                             </View>
                         </CollapseBody>
-                    </Collapse>
+                    </Collapse> */}
                     {/* <Text style={css.title}>Dados do Familiar</Text>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>

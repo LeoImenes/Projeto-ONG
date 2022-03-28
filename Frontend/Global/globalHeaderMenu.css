@@ -86,7 +86,7 @@ li h2:hover {
     height: 50%;
     justify-content: space-around;
     align-items: center;
-    background-color: rgba(240, 248, 255, 0.794);
+    background-color: rgba(255, 255, 255, 0.794);
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }

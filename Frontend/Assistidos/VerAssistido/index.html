@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getfunc(),list()">
+<body onload="getfunc(),list(),getFamiliares()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -68,16 +68,18 @@
                 <div class="cardAssistido">
                     <div class="fotos">
                         <ul>
-                            <li><img src="../../Assets/icones/user.png" alt="" id="assistidoAntes"></li>
                             <li>
-                                <p>Foto de Antes</p>
+                                <img src="../../Assets/icones/user.png" alt="" id="assistidoAntes">
+                                <p>Foto de Cadastro</p>
                             </li>
                         </ul>
                         <ul>
-                            <li><img src="../../Assets/icones/user.png" alt="" id="assistidoDepois"></li>
+                            <li><img src="../../Assets/icones/user.png" alt="User" id="assistidoDepois"></li>
                             <li>
-                                <p>Foto de Depois</p>
+                                <p class="adcFoto" style="font-size:16px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto📸</p>
+                                <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
                             </li>
+                            <li><button class="btn-ft" onclick="cadastrarFotoDepois()">Atualizar Foto</button></li>
                         </ul>
 
                     </div>
@@ -167,29 +169,10 @@
                             <div class="familia faDown">
                                 <h1>Familiar <img src="../../Assets/icones/down-chevron.png" alt="" onclick="menuDown()" class="faArrow"></h1>
                                 <div class="dadosFamilia">
-                                    <ul>
-                                        <li>Nome Completo:</li>
-                                        <li>Maria</li>
-                                    </ul>
-                                    <ul>
-                                        <li>Parentesco:</li>
-                                        <li>Bisavó</li>
-                                    </ul>
-                                    <ul>
-                                        <li>Endereco:</li>
-                                        <li>Rua que desce</li>
-                                    </ul>
-                                    <ul>
-                                        <li>Telefone:</li>
-                                        <li>(19)997256706</li>
-                                    </ul>
-                                    <ul>
-                                        <li>E-mail:</li>
-                                        <li>"Não possui"</li>
-                                    </ul>
+
                                 </div>
                             </div>
-                            <button class="btn">Editar Informações</button>
+                            <button class="btn">Cadastrar Familiar</button>
                         </div>
 
                     </div>

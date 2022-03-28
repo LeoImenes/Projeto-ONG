@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getfunc()">
+<body onload="list(),getfunc()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -61,70 +61,99 @@
             </div>
             </ul>
         </div>
-        <div class="container">
+        <div class="cards">
             <div class="card">
-                <div class="container">
-                    <div class="card">
-                        <div class="cardFuncionario">
-                            <div class="FotoFunc">
-                                <img src="../../Assets/icones/user.png" alt="" srcset="" class="funcimg">
-                            </div>
-                            <div class="dadosFunc">
-                                <ul>
-                                    <ul class="nome">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="matricla">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="rg">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="cpf">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="data_nascimento">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="cargo">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="sexo">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="data_admissao">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="data_demissao">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="email">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                    <ul class="status">
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                </ul>
-                            </div>
+                <div class="styleBall-bottom-right"></div>
+                <div class="styleBall-bottom-left"></div>
+                <div class="styleBall-top-right"></div>
+                <div class="styleBall-top-left"></div>
+                <ul>
+
+                    <li><img src="../../Assets/icones/user.png" alt="User" id="Funcfoto"></li>
+                    <li>
+                        <p class="adcFoto" style="font-size:16px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
+                        <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
+                    </li>
+                    <li><button class="btn-ft" onclick="cadastrarFotoDepois()">Atualizar Foto</button></li>
+                </ul>
+            </div>
+            <div class="cardForm">
+                <div class="familia">
+                    <div class="famform">
+                        <div class="EditarDados">
+                            <ul>
+                                <input type="text" placeholder="Email..." id="Email">
+                            </ul>
+                            <ul>
+                                <input type="text" placeholder="Senha..." id="Senha">
+                            </ul>
+                            <ul>
+                                <input type="text" placeholder="Cargo..." id="cargo">
+                            </ul>
+                        </div>
+                        <div class="DadosFuncionario">
+                            <ul>
+                                <li>Nome: </li>
+                                <li class="getNome"></li>
+                            </ul>
+                            <ul>
+                                <li>Email: </li>
+                                <li class="getEmail"></li>
+                            </ul>
+                            <ul>
+                                <li>Matricula: </li>
+                                <li class="getMatricula"></li>
+                            </ul>
+                            <ul>
+                                <li>RG: </li>
+                                <li class="getRG"></li>
+                            </ul>
+                            <ul>
+                                <li>CPF: </li>
+                                <li class="getCPF"></li>
+                            </ul>
+                            <ul>
+                                <li>Nascimento</li>
+                                <li class="getDataNasc"></li>
+                            </ul>
+                            <ul>
+                                <li style="width: 100%;">Estado Civil:</li>
+                                <li class="getEstado"></li>
+                            </ul>
+                            <ul>
+                                <li>Cargo: </li>
+                                <li class="getCargo"></li>
+                            </ul>
+                            <ul>
+                                <li>Sexo: </li>
+                                <li class="getSexo"></li>
+                            </ul>
+                            <ul>
+                                <li>Admissão:</li>
+                                <li class="getDataAdmissao"></li>
+                            </ul>
+                            <ul>
+                                <li>Demissão:</li>
+                                <li class="getDemissao"></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+                <div class="btn-div">
+                    <button class="btn" onclick=" editarDados() ">Editar Dados</button>
+                    <button class="btn-Updt" onclick=" Atualizar() ">Editar Dados</button>
+                </div>
+            </div>
 
+
+        </div>
+
+        </div>
     </section>
+
 </body>
+<script src="script.js"></script>
 <script src="../../Global/menu.js"></script>
 <script src="../../Global/menuData.js"></script>
-<script src="index.js"></script>
 
 </html>

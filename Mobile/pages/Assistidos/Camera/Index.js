@@ -23,7 +23,6 @@ export default function TelaCamera({navigation}) {
       const permissions = await StorageAccessFramework.requestDirectoryPermissionsAsync();
       const {status} = await Camera.requestCameraPermissionsAsync();
       setPermission(status === 'granted');
-      console.log(status);
     })();
   }, []);
 
@@ -73,7 +72,7 @@ export default function TelaCamera({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Camera style={{flex: 1}} type={type} zoom={0.1} ref={camRef}>
+      <Camera style={{flex: 1}} type={type} ref={camRef}>
       <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: 20}} size={35} color="#166B8A" onPress={() => {navigation.navigate('CadastrarAssistido')}} />
         <View style={{flex: 1, backgroundColor: 'transparent', flexDirection: "row"}}>
           <View style={{width: '100%', height: '10%', position: 'absolute', bottom: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',marginBottom: "2%"}}>

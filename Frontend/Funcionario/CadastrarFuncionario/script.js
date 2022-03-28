@@ -1,62 +1,82 @@
-function cadastrarAssistido() {
-    let inpNomeCom = document.querySelector(".nome-Completo")
-    let nome = document.querySelector(".nome")
-    let nomesoc = document.querySelector(".nome-soc");
-    let rg = document.querySelector(".rg");
-    let cpf = document.querySelector(".cpf");
-    let est = document.querySelector(".estado");
-    let nat = document.querySelector(".naturalidade");
-    let nasc = document.querySelector(".nasc")
-    let cartCid = document.querySelector(".cartcid");
-    let cartSus = document.querySelector(".cartSus");
+var func = localStorage.getItem("userdata");
+var fotinho;
+var newImg = document.querySelector("#Funcfoto");
+var adcFoto = document.querySelector(".adcFoto");
+var fileInp = document.querySelector("#inpFoto");
 
+fileInp.addEventListener("change", (e) => {
+    var fr = new FileReader();
+    fr.onloadend = (foto) => {
+        fotinho = foto.target.result;
+        newImg.src = foto.target.result;
+        newImg.style.width = "120px";
+        newImg.style.height = "120px";
+        newImg.style.borderRadius = "50%";
+    };
+    fr.readAsDataURL(e.target.files[0]);
+});
+adcFoto.style.cursor = "pointer";
+adcFoto.addEventListener("click", () => {
+    fileInp.click();
+});
 
-    if ((nome.value == "")) {
-        var nomeerr = document.createElement("p")
-        nomeerr.innerHTML = "* Preencha este campo"
-        nomeerr.style.display = "flex"
-        nomeerr.style.color = "red"
-        nomeerr.style.width = "90%"
-        inpNomeCom.appendChild(nomeerr)
-    }
+function cadastrarFunc() {
+    var status;
+    var DemissaoNull;
+    var getNome = document.querySelector(".getNome").value
+    var getEmail = document.querySelector(".getEmail").value
+    var getMatricula = document.querySelector(".getMatricula").value
+    var getRG = document.querySelector(".getRG").value
+    var getCPF = document.querySelector(".getCPF").value
+    var getDataNasc = document.querySelector(".getDataNasc").value
+    var getEstado = document.querySelector(".getEstado").value
+    var getCargo = document.querySelector(".getCargo").value
+    var getSexo = document.querySelector(".getSexo").value
+    var getDataAdmissao = document.querySelector(".getDataAdmissao").value
+    var getDemissao = document.querySelector(".getDemissao").value
+    var getSenha = document.querySelector(".getSenha").value
 
+    var diaNasc = getDataNasc.split("/")[0]
+    var mesNasc = getDataNasc.split("/")[1]
+    var anoNasc = getDataNasc.split("/")[2]
 
-    let sexMasc = document.querySelector("#Masculino");
-    let sexFem = document.querySelector("#Feminino");
-    let sexOutr = document.querySelector("#Outro");
+    var diaDem = getDemissao.split("/")[0]
+    var mesDem = getDemissao.split("/")[1]
+    var anoDem = getDemissao.split("/")[2]
 
-    var sex = [];
+    var diaAdm = getDataAdmissao.split("/")[0]
+    var mesAdm = getDataAdmissao.split("/")[1]
+    var anoAdm = getDataAdmissao.split("/")[2]
 
-    if (sexMasc.checked == 1) {
-        sexMasc.value = "Masculino";
-        sex.push(sexMasc.value)
-    } else if (sexFem.checked == 1) {
-        sexFem.value = "Feminino";
-        sex.push(sexFem.value)
-    } else if (sexOutr.checked == 1) {
-        sexOutr.value = "Outro";
-        sex.push(sexOutr.value);
-    } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
-        alert("Selecione pelo menos um campo")
-    }
+    // if (getDemissao == `${diaDem}/${mesDem}/${anoDem}`) {
+    //     status = 0
+    //     DemissaoNull = `${anoDem}-${mesDem}-${diaDem}`
+    //     console.log(``)
+    // } else {
+    //     status = 1
+    //     DemissaoNull = null
+    //     console.log(DemissaoNull)
+    // }
 
-
-
-    let data = JSON.stringify({
-        "id_funcionario": 3,
-        "nome_completo": nome.value,
-        "nome_social": nomesoc.value,
-        "rg": rg.value,
-        "cpf": cpf.value,
-        "data_nascimento": nasc.value,
-        "estado_civil": est.value,
-        "naturalidade": nat.value,
-        "sexo": sex,
-        "cartao_sus": cartSus.value,
+    var data = JSON.stringify({
+        "foto": fotinho,
+        "matricula": getMatricula,
+        "nome_completo": getNome,
+        "rg": getRG,
+        "cpf": getCPF,
+        "data_nascimento": `${anoNasc}-${mesNasc}-${diaNasc}`,
+        "estado_civil": getEstado,
+        "cargo": getCargo,
+        "sexo": getSexo,
+        "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
+        "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
+        "email": getEmail,
+        "senha": getSenha,
     })
 
-    // fetch("http://10.87.207.27:3000/funcionarios", {
-    fetch("http://localhost:3000/funcionarios", {
+    console.log(data)
+                fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -65,9 +85,7 @@ function cadastrarAssistido() {
         })
         .then(response => { return response.json() })
         .then(data => {
-            console.log(data)
+            console.log(data.err)
+
         })
-
-
-
 }
