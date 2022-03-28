@@ -22,7 +22,6 @@ adcFoto.addEventListener("click", () => {
 
 function cadastrarFunc() {
     var status;
-    var dataDemissao;
     var DemissaoNull;
     var getNome = document.querySelector(".getNome").value
     var getEmail = document.querySelector(".getEmail").value
@@ -49,15 +48,15 @@ function cadastrarFunc() {
     var mesAdm = getDataAdmissao.split("/")[1]
     var anoAdm = getDataAdmissao.split("/")[2]
 
-    if (getDemissao == `${diaDem}/${mesDem}/${anoDem}`) {
-        status = 0
-        DemissaoNull = `${anoDem}-${mesDem}-${diaDem}`
-        console.log(`${anoDem}-${mesDem}-${diaDem}`)
-    } else {
-        status = 1
-        DemissaoNull = null
-        console.log(DemissaoNull)
-    }
+    // if (getDemissao == `${diaDem}/${mesDem}/${anoDem}`) {
+    //     status = 0
+    //     DemissaoNull = `${anoDem}-${mesDem}-${diaDem}`
+    //     console.log(``)
+    // } else {
+    //     status = 1
+    //     DemissaoNull = null
+    //     console.log(DemissaoNull)
+    // }
 
     var data = JSON.stringify({
         "foto": fotinho,
@@ -70,10 +69,9 @@ function cadastrarFunc() {
         "cargo": getCargo,
         "sexo": getSexo,
         "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
-        "data_demissao": DemissaoNull,
+        "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
         "email": getEmail,
         "senha": getSenha,
-        "status": (DemissaoNull == null) ? 1 : 0
     })
 
     console.log(data)

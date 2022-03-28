@@ -2,10 +2,10 @@ var cpf;
 var matricula;
 
 function list() {
-    let local = localStorage.getItem("assistido");
+    let local = localStorage.getItem("funcionario");
 
-    fetch("http://10.87.207.27:3000/assistido/familiar",)
-    // fetch(`http://localhost:3000/funcionarios/1`)
+    fetch(`http://10.87.207.27:3000/funcionarios/${local}`,)
+    // fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -33,9 +33,7 @@ function list() {
                     liDatademissao.innerHTML = "NDA";
                 } else {
                     var SplitdataDem = item.data_demissao.split("T")[0];
-                    liDatademissao.innerHTML = `${SplitdataAdm.split("-")[2]}/${
-            SplitdataAdm.split("-")[1]
-          }/${SplitdataAdm.split("-")[0]}`;
+                    liDatademissao.innerHTML = `${SplitdataAdm.split("-")[2]}/${SplitdataAdm.split("-")[1]}/${SplitdataAdm.split("-")[0]}`;
                 }
 
                 Fotofuncionario.src = item.foto;
@@ -46,9 +44,7 @@ function list() {
                 liRg.innerHTML = item.rg;
                 liCpf.innerHTML = item.cpf;
                 cpf = item.cpf;
-                liNasc.innerHTML = `${SplitdataNasc.split("-")[2]}/${
-          SplitdataNasc.split("-")[1]
-        }/${SplitdataNasc.split("-")[0]}`;
+                liNasc.innerHTML = `${SplitdataNasc.split("-")[2]}/${SplitdataNasc.split("-")[1]}/${SplitdataNasc.split("-")[0]}`;
                 liCargo.innerHTML = item.cargo;
                 liSex.innerHTML = item.sexo;
                 liEmail.innerHTML = item.email;

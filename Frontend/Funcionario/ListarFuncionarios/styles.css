@@ -42,6 +42,12 @@ body {
     text-align: center;
 }
 
+.cardFuncionario:hover{
+    cursor: pointer;
+    background-color: #166B8A;
+    transition: all 0.5s
+}
+
 .img {
     display: flex;
     flex-direction: column;
@@ -115,8 +121,11 @@ input {
     border-radius: 10px;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 500px) {
     body {
         overflow: hidden;
+    }
+    .fotoUsuario img{
+        width: 20px;
     }
 }
