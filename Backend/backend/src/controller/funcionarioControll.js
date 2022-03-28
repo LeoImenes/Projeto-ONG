@@ -24,13 +24,14 @@ const postFuncionario = (req, res) => {
             req.body.data_admissao,
             req.body.email,
             req.body.senha,
-            status]
+            status
+        ]
 
     ]
     con.query(string, [values], (err, result) => {
 
         if (err == null) {
-            res.status(200).json({ ...req.body, id: result.insertId });
+            res.status(200).json({...req.body, id: result.insertId });
         } else {
             res.status(400).json({ err: err.message });
         }
@@ -40,15 +41,15 @@ const postFuncionario = (req, res) => {
 // Método de login atualizado
 
 const login = (req, res) => {
-    if(req.body.email !== undefined && req.body.senha !== undefined){
+    if (req.body.email !== undefined && req.body.senha !== undefined) {
         let string = `select * from funcionarios where email = '${req.body.email}' and senha = '${req.body.senha}'`
         con.query(string, (err, result) => {
 
-            if(err === null){
+            if (err === null) {
 
-                if(result.length == 0){
+                if (result.length == 0) {
                     res.status(400).end()
-                }else{
+                } else {
                     result.forEach((item, index) => {
                         delete item.senha
                         delete item.status
@@ -66,15 +67,13 @@ const login = (req, res) => {
                     res.json(result[0]).end()
                 }
 
+            } else {
+                res.status(400).json({ err: err.message })
             }
 
-            else{
-                res.status(400).json({err: err.message})
-            }
-            
         })
-    }else{
-        res.status(400).json({err:`'envie os campos 'email' e 'senha'`})
+    } else {
+        res.status(400).json({ err: `'envie os campos 'email' e 'senha'` })
     }
 }
 
@@ -100,17 +99,13 @@ const updateFuncionario = (req, res) => {
 
         if (cargo && email && senha !== undefined) {
             return string[0]
-        }
-        else if (cargo !== undefined && email === undefined && senha === undefined) {
+        } else if (cargo !== undefined && email === undefined && senha === undefined) {
             return string[1]
-        }
-        else if (cargo == undefined && email !== undefined && senha == undefined) {
+        } else if (cargo == undefined && email !== undefined && senha == undefined) {
             return string[2]
-        }
-        else if (cargo == undefined && email == undefined && senha !== undefined) {
+        } else if (cargo == undefined && email == undefined && senha !== undefined) {
             return string[3]
-        }
-        else {
+        } else {
             return string[4]
         }
     }
@@ -121,7 +116,7 @@ const updateFuncionario = (req, res) => {
 
     con.query(resultado, (err, result) => {
         if (err == null) {
-            res.status(200).json({ ...req.body });
+            res.status(200).json({...req.body });
         } else {
             res.status(400).json({ err: err.message });
         }
@@ -133,7 +128,7 @@ const getAll = (req, res) => {
     let string = 'select * from funcionarios'
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
-           delete item.senha
+            delete item.senha
         });
 
         res.json(result)
@@ -147,33 +142,33 @@ const getMatricula = (req, res) => {
     let string = 'select * from funcionarios where matricula =' + req.params.matricula_funcionario
     con.query(string, (err, result) => {
 
-        if(err === null){
-            if(result.length == 0){
+        if (err === null) {
+            if (result.length == 0) {
                 res.status(404).end()
-            }else{
+            } else {
                 result.forEach((item, index) => {
                     delete item.senha
                     delete item.status
                 });
                 res.json(result)
             }
-        }else{
-            res.status(404).json({err: err.message})
+        } else {
+            res.status(404).json({ err: err.message })
         }
     })
 }
 
 
 
-const updateFotoFuncionario = (req,res) => {
+const updateFotoFuncionario = (req, res) => {
 
     let cpf = req.body.cpf
     let foto = req.body.foto
     let string = `update funcionarios set foto = '${foto}' where cpf = '${cpf}'`
 
-    con.query(string,(err, result) => {
+    con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({ ...req.body });
+            res.status(200).json({...req.body });
         } else {
             res.status(400).json({ err: err.message });
         }
@@ -190,7 +185,7 @@ const deletarFuncionario = (req, res) => {
 
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({ ...req.body });
+            res.status(200).json({...req.body });
         } else {
             res.status(400).json({ err: err.message });
         }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getfunc()">
+<body onload="list(),getfunc()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -61,104 +61,89 @@
             </div>
             </ul>
         </div>
-        <div class="container">
+        <div class="cards">
             <div class="card">
-                <div class="Assiscard">
-                    <h1>Cadastrar Funcionario</h1>
-                    <div class="formAssis">
-                        <div class="userform">
-                            <ul>
-                                <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
-                                <li>
-                                    <p>Adicionar Foto </p>
-                                    <p class="adcFoto">📸</p>
-                                    <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="inputs">
-                            <div class="inputDados">
-                                <div class="nome-Completo">
-                                    <input type="text" placeholder="Nome Completo..." class="nome">
-                                </div>
-                                <div class="matricula">
-                                    <input type="text" placeholder="Nome Social..." class="nome-soc">
-                                </div>
-                                <div class="Rg">
-                                    <input type="text" placeholder="RG..." class="rg">
-                                </div>
-                                <div class="cpf">
-                                    <input type="text" placeholder="CPF..." class="cpf">
-                                </div>
-                                <div class="Nascimento">
-                                    <input type="text" placeholder="Nascimento..." class="nasc">
-                                </div>
-                                <div class="cargo">
-                                    <input type="text" placeholder="Estado civil..." class="cargo">
-                                </div>
-                                <div class="data_admissao">
-                                    <input type="text" placeholder="Naturalidade..." class="admissao">
-                                </div>
-                                <div class="data_demissao">
-                                    <input type="text" placeholder="Cartão cidadão..." class="cartCid">
-                                </div>
-                                <div class="email">
-                                    <input type="text" placeholder="Cartão do SUS..." class="Email">
-                                </div>
-                                <div class="Senha">
-                                    <input type="password" name="" id="" placeholder="Senha..." class="senha">
-                                </div>
-                            </div>
-                            <div class="Sex">
-                                <p><b>Sexo:</b></p>
-                                <ul class="sexstyle">
-                                    <li>
-                                        <input type="checkbox" name="" id="Masculino">
-
-                                    </li>
-                                    <li>
-                                        <p> Masculino</p>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="" id="Feminino">
-                                    </li>
-                                    <li>
-                                        <p>Feminino</p>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="" id="Outro">
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="Famcard">
-            <div class="userform">
+                <div class="styleBall-bottom-right"></div>
+                <div class="styleBall-bottom-left"></div>
+                <div class="styleBall-top-right"></div>
+                <div class="styleBall-top-left"></div>
                 <ul>
-                    <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
+
+                    <li><img src="../../Assets/icones/user.png" alt="User" id="Funcfoto"></li>
                     <li>
-                        <p>Adicionar Foto </p>
-                        <p>📸</p>
+                        <p class="adcFoto" style="font-size:16px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
+                        <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
                     </li>
+                    <li><button class="btn-ft" onclick="cadastrarFotoDepois()">Atualizar Foto</button></li>
                 </ul>
             </div>
+            <div class="cardForm">
+                <div class="familia">
+                    <div class="famform">
+                        <div class="DadosFuncionario">
+                            <ul>
+                                <input type="text" class="getNome" placeholder="Nome...">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getEmail" placeholder="Email...">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getMatricula" placeholder="Matricula...">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getRG" placeholder="RG...">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getCPF" placeholder="CPF...">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getDataNasc" placeholder="Data de Nascimento... ">
+                            </ul>
+                            <ul>
+                                <input type="text" class="getEstado" placeholder="Estado Civil">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getCargo" placeholder="Cargo">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getSexo" placeholder="Sexo">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getDataAdmissao" placeholder="Data de Admissão">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getDemissao" placeholder="Data de Demissão">
+                            </ul>
+                            <ul>
+
+                                <input type="text" class="getSenha" placeholder="Senha">
+                            </ul>
+                        </div>
+                        <div class="btn-div">
+                            <button class="btn" onclick=" cadastrarFunc() ">Cadastrar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
         </div>
-        </div>
-        </div>
-        <div class="styleBall-bottom-right"></div>
-        <div class="styleBall-bottom-left"></div>
-        <div class="styleBall-top-right"></div>
-        <div class="styleBall-top-left"></div>
     </section>
 
 </body>
+<script src="script.js"></script>
 <script src="../../Global/menu.js"></script>
 <script src="../../Global/menuData.js"></script>
-<script src="script.js"></script>
 
 </html>
