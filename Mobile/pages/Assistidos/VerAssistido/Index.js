@@ -90,6 +90,7 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>Antecedente:</Text>
                         <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                     </View>
+<<<<<<< HEAD
                     <Text style={css.title}>Dados do Familiar</Text>
                     <View style={{width: "100%"}}>
                         <ScrollView horizontal>
@@ -130,6 +131,45 @@ export default function VerAssistido({navigation, route}){
                             </View>
                         }
                         </ScrollView>
+=======
+                    {/* <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
+                        <Text style={css.button}>Adicionar novo familiar</Text>
+                    </TouchableOpacity> */}
+                    {/* <Collapse>
+                        <CollapseHeader style={{width: "100%", height: 90, backgroundColor: "red",}}>
+                            <View style={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent: "center "}}>
+                                <Text style={css.title}>Dados do Familiar</Text>
+                                <AntDesign name="caretdown" size={20} color="black" />
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Nome:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Parentesco:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Telefone:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>E-mail:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Endereço:</Text>
+                                <Text style={global.textInfo}>{}</Text>
+                            </View>
+                        </CollapseBody>
+                    </Collapse> */}
+                    {/* <Text style={css.title}>Dados do Familiar</Text>
+                    <View style={global.info}>
+                        <Text style={global.textInfo}>Nome:</Text>
+                        <Text style={global.textInfo}>{}</Text>
+>>>>>>> 34d1f1409a001140ffd3bb81f41536d8a4920b31
                     </View>
                     <TouchableOpacity style={css.button} onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
                         <Text style={global.buttonText1}>Novo familiar</Text>

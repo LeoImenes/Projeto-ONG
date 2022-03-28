@@ -311,7 +311,7 @@ const asynqQuery = (query) =>{
     return new Promise((resolve, reject) =>{
         con.query(query, (err, result) => {
             if(err) reject(err);
-
+            console.log(result)
             resolve(result);
         });
     })
@@ -342,7 +342,6 @@ const postSaude = async (req,res) => {
         }catch(err){
             console.log(err)
         }
-       
 
         try{
             con.beginTransaction();
@@ -387,7 +386,11 @@ const getSaudeID = (req,res) => {
 
     if(id_assistido !== undefined){
 
+       
+
         con.query(string, (err,result) => {
+
+            console.log(result)
 
             if(err === null){
                 res.status(200).json(result).end()
@@ -422,49 +425,33 @@ const getAssistSaude = (req,res) => {
 }
 
 
-const updateSaude = (req,res) => {
-
-    let string = `update saude set id_comorbidade = ${req.body.id_comorbidade}, data_de_registro = CURDATE() where id_saude = ${req.body.id_saude}`
-
-    if(req.body.id_saude !== undefined && req.body.id_comorbidade !== undefined){
 
 
-        con.query(string, (err,result) => {
+const updateSaude = async (req,res) => {
 
-            if(err === null){
-
-                // res.status(200).json(result)
-
-                let id_saude = req.body.id_saude
-
-                let stringBusca = `select * from vw_saude02 where id_saude = ${id_saude}`
-
-                con.query(stringBusca, (err02, result02) => {
-
-                    if(err02 === null){
-
-                        res.status(200).json(result02)
-
-                    }
-                    else{
-                        res.status(400).json({err: err.message})
-                    }
-                })
+    let id_assistido = req.body.id_assistido
+    let comorbidades = req.body.comorbidades
 
 
-            }
-            else{
-                res.status(400).json({err: err.message})
-            }
+    if(req.body.id_assistido !== undefined && req.body.comorbidades !== undefined){
 
-        })
+        let string
+        let values = []
+        let ids_saude
+        let comerro = false
+        let index = 0
+        let stringIDSsaude
 
+        stringIDSsaude = `select id_saude from saude where id_assistido = ${id_assistido}`
+
+        
+
+       
     }
 
     else{
         res.status(400).json({"err": "informe a comorbidade e o id_saude"})
     }
-
 }
 
 const getComorbidades= (req,res) => {
@@ -601,7 +588,38 @@ const postRelacionamentoFamiliar = (req,res) => {
 }
 
 
+const getVWFamiliar = (req,res) => {
 
+    let id_assistido = req.params.id_assistido
+
+    if(id_assistido !== undefined){
+
+
+        let string = `select * from vw_familiar02 where id_assistido = ${id_assistido}`
+
+        con.query(string,(err,result) => {
+
+            if(err === null){
+
+                res.status(200).json(result).end()
+
+            }else{
+                res.status(400).json({err: err.message}).end()
+            }
+
+        })
+
+
+
+    }else{
+
+        res.status(400).json({"err": "informe o id_assistido"}).end()
+    }
+
+
+
+
+}
 
 
 
@@ -626,5 +644,6 @@ module.exports = {
     updateSaude,
     getComorbidades,
     postFamiliar,
-    postRelacionamentoFamiliar
+    postRelacionamentoFamiliar,
+    getVWFamiliar
 }

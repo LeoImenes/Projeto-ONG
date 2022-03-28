@@ -13,22 +13,23 @@ function menuDown() {
 }
 
 function getFamiliares() {
-    let dadosFamilia = document.querySelector(".dadosFamilia")
+    let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
-        .then(response => { return response.json() })
+    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+    // fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+        .then((response) => {
+            return response.json();
+        })
         .then((data) => {
             data.forEach((item, index) => {
-                var divDadosFamiliares = document.createElement('div');
-                var pNomeFamiliares = document.createElement('p');
-                var pRgFamiliares = document.createElement('p');
-                var pParenteFamiliares = document.createElement('p');
-                var pTelFamiliares = document.createElement('p');
-                var pEmailFamiliares = document.createElement('p');
-                var pEnderecoFamiliares = document.createElement('p');
-                var ul = document.createElement('ul');
-
+                var divDadosFamiliares = document.createElement("div");
+                var pNomeFamiliares = document.createElement("p");
+                var pRgFamiliares = document.createElement("p");
+                var pParenteFamiliares = document.createElement("p");
+                var pTelFamiliares = document.createElement("p");
+                var pEmailFamiliares = document.createElement("p");
+                var pEnderecoFamiliares = document.createElement("p");
+                var ul = document.createElement("ul");
 
                 pNomeFamiliares.innerHTML = `Nome: ${item.nome_familiar}`;
                 pRgFamiliares.innerHTML = `RG: ${item.rg_familiar}`;
@@ -37,23 +38,19 @@ function getFamiliares() {
                 pEmailFamiliares.innerHTML = `Email: ${item.email_familiar}`;
                 pEnderecoFamiliares.innerHTML = `Endereco: ${item.endereco_familiar}`;
 
-                divDadosFamiliares.appendChild(pNomeFamiliares)
-                divDadosFamiliares.appendChild(pRgFamiliares)
-                divDadosFamiliares.appendChild(pParenteFamiliares)
-                divDadosFamiliares.appendChild(pTelFamiliares)
-                divDadosFamiliares.appendChild(pEmailFamiliares)
-                divDadosFamiliares.appendChild(pEnderecoFamiliares)
+                divDadosFamiliares.appendChild(pNomeFamiliares);
+                divDadosFamiliares.appendChild(pRgFamiliares);
+                divDadosFamiliares.appendChild(pParenteFamiliares);
+                divDadosFamiliares.appendChild(pTelFamiliares);
+                divDadosFamiliares.appendChild(pEmailFamiliares);
+                divDadosFamiliares.appendChild(pEnderecoFamiliares);
 
-                divDadosFamiliares.className = "dadosFamiliares"
+                divDadosFamiliares.className = "dadosFamiliares";
 
-                dadosFamilia.appendChild(divDadosFamiliares)
-
-
-            })
-        })
+                dadosFamilia.appendChild(divDadosFamiliares);
+            });
+        });
 }
-
-
 
 function menuDownPsco() {
     let menuAco = document.querySelector(".psclist");
@@ -62,8 +59,8 @@ function menuDownPsco() {
 
     if (menuAco.classList.contains(".psDown")) {
         menuAco.style.display = "flex";
-        menuAco.style.width = "100%"
-        menuAco.style.height = "100%"
+        menuAco.style.width = "100%";
+        menuAco.style.height = "100%";
         littlearrow.style.transform = "rotate(180deg)";
     } else {
         menuAco.style.display = "none";
@@ -90,8 +87,8 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    fetch(`http://localhost:3000/assistidos/${local}`)
+    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+    // fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -99,6 +96,9 @@ function list() {
             var antes = document.querySelector("#assistidoAntes");
             antes.src = data.foto_antes;
             antes.style.borderRadius = "50%";
+            var depois = document.querySelector("#assistidoDepois");
+            depois.src = data.foto_depois;
+            depois.style.borderRadius = "50%";
 
             var dataNascimento;
             var newData = data.data_nascimento.split("T");
@@ -135,26 +135,25 @@ function getComorbidadeAssistido() {
     var ulDroga = document.querySelector(".psclist");
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
-    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
-        // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+
+    // fetch(`http://localhost:3000/assistido/saudeID/${local}`);
+        fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-            console.log(data)
+            console.log(data);
             data.forEach((item, index) => {
                 console.log(item, index);
-
-
 
                 if (item.tipo === 0) {
                     var liDroga = document.createElement("li");
                     liDroga.innerHTML = item.comorbidade;
-                    ulDroga.appendChild(liDroga)
+                    ulDroga.appendChild(liDroga);
                 } else {
                     var liDoenca = document.createElement("li");
                     liDoenca.innerHTML = item.comorbidade;
-                    ulDoenca.appendChild(liDoenca)
+                    ulDoenca.appendChild(liDoenca);
                 }
 
                 console.log(liDroga, liDoenca);
@@ -162,5 +161,55 @@ function getComorbidadeAssistido() {
         });
 }
 document.querySelector(".btn").addEventListener("click", () => {
-    window.location.href = "../../Familiar/index.html"
-})
+    window.location.href = "../../Familiar/index.html";
+});
+
+var func = localStorage.getItem("userdata");
+var fotinho;
+var newImg = document.querySelector("#assistidoDepois");
+var adcFoto = document.querySelector(".adcFoto");
+var fileInp = document.querySelector("#inpFoto");
+
+fileInp.addEventListener("change", (e) => {
+    var fr = new FileReader();
+    fr.onloadend = (foto) => {
+        fotinho = foto.target.result;
+        newImg.src = foto.target.result;
+        newImg.style.width = "70px";
+        newImg.style.height = "70px";
+        newImg.style.borderRadius = "50%";
+    };
+    fr.readAsDataURL(e.target.files[0]);
+
+});
+adcFoto.style.cursor = "pointer";
+adcFoto.addEventListener("click", () => {
+    fileInp.click();
+});
+
+function cadastrarFotoDepois() {
+    var local = localStorage.getItem("assistido");
+    let data = JSON.stringify({
+        'id_assistido': local,
+        'foto_depois': fotinho,
+    });
+
+    console.log(data);
+    fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.err !== undefined) {
+                alert("Error: " + data.err)
+            } else {
+                window.location.reload
+            }
+        });
+}

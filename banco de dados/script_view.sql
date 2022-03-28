@@ -119,22 +119,22 @@ from
 
 CREATE VIEW vw_familiar02 AS
 select
-	f.id_familiar,
+	a.id_assistido,
 	a.nome_completo AS nome_assistido,
 	a.nome_social AS nome_social_assistido,
-	a.rg,
-	a.cpf,
-	a.antecedente_criminal,
-	a.cartao_cidadao,
-	a.cartao_sus,
-	a.foto_antes,
-	a.foto_depois,
+	a.rg AS rg_assistido,
+	a.cpf AS cpf_assistido,
+	a.antecedente_criminal AS antecedente_criminal_assistido,
+	a.cartao_cidadao AS cartao_cidadao_assistido,
+	a.cartao_sus AS cartao_sus_assistido,
+	a.foto_depois AS foto_depois_assistido,
+	f.id_familiar,
 	f.nome_completo AS nome_familiar,
 	f.rg AS rg_familiar,
 	fa.parentesco,
-	f.telefone,
-	f.email,
-	f.endereco
+	f.telefone AS telefone_familiar,
+	f.email AS email_familiar,
+	f.endereco AS endereco_familiar
 from
 	assistidos a
 	inner join familiarassistido fa on a.id_assistido = fa.id_assistido

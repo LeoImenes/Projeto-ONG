@@ -2,11 +2,6 @@ body {
     overflow: hidden;
 }
 
-@keyframes mymove {
-    from {top: 0px;}
-    to {top: 200px;}
-  }
-
 .container {
     height: 90vh;
     display: flex;
@@ -131,8 +126,22 @@ input {
     border-radius: 10px;
 }
 
-@media (max-width: 1366px) {
-    body {
-        overflow: hidden;
+@media (max-width:500px) {
+    p{
+        font-size: 12px;
+    }
+    .fotoUsuario {
+        width:60px;
+        height:60px
+    }
+    .cardAssistido{
+        text-align:center;
+        width:100%
+    }
+    .cardAssistido h1{
+        font-size:14px;
+    }
+    .cardAssistido h3{
+        font-size:14px;
     }
 }
