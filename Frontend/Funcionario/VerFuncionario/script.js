@@ -4,8 +4,8 @@ var matricula;
 function list() {
     let local = localStorage.getItem("assistido");
 
-    // fetch("http://10.87.207.27:3000/assistido/familiar", {
-    fetch(`http://localhost:3000/funcionarios/1`)
+    fetch("http://10.87.207.27:3000/assistido/familiar",)
+    // fetch(`http://localhost:3000/funcionarios/1`)
         .then((response) => {
             return response.json();
         })
@@ -88,7 +88,7 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    fetch(`http://localhost:3000/funcionario`, {
+    fetch(`http://10.87.207.27:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function Atualizar() {
         senha: Senha,
         email: Email,
     });
-    fetch(`http://localhost:3000/funcionario`, {
+    fetch(`http://10.87.207.27:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

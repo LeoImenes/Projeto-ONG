@@ -15,8 +15,8 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+    // fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -87,8 +87,8 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    fetch(`http://localhost:3000/assistidos/${local}`)
+    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+    // fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -136,8 +136,8 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
-        // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+    // fetch(`http://localhost:3000/assistido/saudeID/${local}`);
+        fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -195,7 +195,7 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    fetch(`http://localhost:3000/assistido_foto_depois`, {
+    fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

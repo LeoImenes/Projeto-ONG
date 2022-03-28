@@ -9,8 +9,8 @@ fileInp.addEventListener("change", (e) => {
     fr.onloadend = (foto) => {
         fotinho = foto.target.result;
         newImg.src = foto.target.result;
-        newImg.style.width = "70px";
-        newImg.style.height = "70px";
+        newImg.style.width = "120px";
+        newImg.style.height = "120px";
         newImg.style.borderRadius = "50%";
     };
     fr.readAsDataURL(e.target.files[0]);
@@ -77,8 +77,8 @@ function cadastrarFunc() {
     })
 
     console.log(data)
-        //     //     // fetch("http://10.87.207.27:3000/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
+                fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
