@@ -21,7 +21,7 @@ export default function VerFuncionario({navigation, route}){
             <View style={global.headerFunc}>
                 <View style={global.alignHeader}>
                     <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarFuncionario')}} />
-                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
+                    <Image source={(item.foto === null || item.foto === "") ? require("../../assets/user.png") : {uri: item.foto}} style={global.imageUser}/>
                 </View>
                 <View style={global.cardTitle}>
                     <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
@@ -34,6 +34,10 @@ export default function VerFuncionario({navigation, route}){
                         <Text style={global.textInfo}>Nome:</Text>
                         <Text style={global.textInfo}>{item.nome_completo}</Text>
                     </View>
+                    {/* <View style={global.info}>
+                        <Text style={global.textInfo}>Matricula:</Text>
+                        <Text style={global.textInfo}>{item.matricula}</Text>
+                    </View> */}
                     <View style={global.info}>
                         <Text style={global.textInfo}>RG:</Text>
                         <Text style={global.textInfo}>{item.rg}</Text>
@@ -62,10 +66,19 @@ export default function VerFuncionario({navigation, route}){
                         <Text style={global.textInfo}>Data admissão:</Text>
                         <Text style={global.textInfo}>{formatDate(new Date(item.data_admissao))}</Text>
                     </View>
-                    <View style={global.info}>
-                        <Text style={global.textInfo}>Data demissão:</Text>
-                        <Text style={global.textInfo}>{formatDate(new Date(item.data_demissao))}</Text>
-                    </View>
+                    {
+                        (item.data_demissao !== null)
+                        ?
+                            <View style={global.info}>
+                                <Text style={global.textInfo}>Data demissão:</Text>
+                                <Text style={global.textInfo}>{formatDate(new Date(item.data_demissao))}</Text>
+                            </View>
+                        :
+                        <TouchableOpacity style={global.cardButton1}>
+                            <Text style={global.buttonText1}>ATUALIZAR</Text>
+                        </TouchableOpacity>
+                    }
+                    
                 </ScrollView>
             </View>
         </View>

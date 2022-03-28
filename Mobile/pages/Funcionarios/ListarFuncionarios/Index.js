@@ -55,7 +55,7 @@ export default function ListarFuncionario({navigation}){
                         lista.map((item,index) => {
                             return(
                                 <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
-                                    <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
+                                    <Image source={(item.foto === null || item.foto === "") ? require("../../assets/user.png") : {uri: item.foto}} style={global.imageUser}/>
                                     <View style={global.cardTxt}>
                                         <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
                                         <Text style={css.activity}>{(item.status ===0) ? "Inativo" : "Ativo"}</Text>
