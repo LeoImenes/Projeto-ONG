@@ -41,7 +41,7 @@ CREATE TABLE saude(
 	CONSTRAINT fk_comorbidade FOREIGN KEY (id_comorbidade) REFERENCES comorbidades(id_comorbidade) ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
-
+ALTER TABLE saude ADD UNIQUE INDEX (id_assistido,id_comorbidade);
 
 
 CREATE TABLE familiares(
