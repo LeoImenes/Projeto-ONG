@@ -18,6 +18,7 @@ route.post('/assistidos', assistidoControll.postAssistido)
 route.get('/assistido_nome/:nome_completo', assistidoControll.buscarAssistidoNomeCompleto)
 route.get('/assistido_cpf/:cpf', assistidoControll.buscarAssistidoCPF)
 route.get('/assistido_rg/:rg', assistidoControll.buscarAssistidoRG)
+route.put('/assistido/update', assistidoControll.updateAssistido)
 route.put('/assistido_foto', assistidoControll.updateFotoAssistido)
 route.put('/assistido_foto_depois', assistidoControll.updateFotoDepoisAssistido)
 

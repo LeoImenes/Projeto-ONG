@@ -176,3 +176,42 @@ ADD
 
 ALTER TABLE
 	tablename AUTO_INCREMENT = 1;
+	
+	
+DELIMITER //
+	
+CREATE TRIGGER tr_status BEFORE UPDATE ON FUNCIONARIOS
+
+BEGIN
+FOR EACH ROW 
+IF funcionarios.status = 0 THEN 
+
+	SET funcionarios.data_demissao = OLD funcionarios.data_demissao
+	
+END IF
+
+
+
+END;
+
+DELIMITER //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

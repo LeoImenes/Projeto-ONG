@@ -235,11 +235,31 @@ const updateAssistido = (req,res) => {
     let rg = req.body.rg
     let cpf = req.body.cpf
     let antecedente_criminal = req.body.antecedente_criminal
+    let data_nascimento = req.body.data_nascimento
+    let estado_civil = req.body.estado_civil
+    let naturalidade = req.body.naturalidade 
+    let sexo = req.body.sexo
+    let cartao_cidadao = req.body.cartao_cidadao
+    let cartao_sus = req.body.cartao_sus
+    let foto_antes = req.body.foto_antes
+    let foto_depois = req.body.foto_depois
+
+    let string = `update assistidos set nome_completo = "${nome_completo}", nome_social = "${nome_social}", rg = "${rg}", cpf = "${cpf}", 
+    antecedente_criminal = "${antecedente_criminal}", data_nascimento = "${data_nascimento}", estado_civil = "${estado_civil}",
+    naturalidade = "${estado_civil}", naturalidade = "${naturalidade}", sexo = "${sexo}", cartao_cidadao = "${cartao_cidadao}",
+    cartao_sus = "${cartao_sus}", foto_antes = "${foto_antes}", foto_depois = "${foto_depois}", data_cadastro = curdate() where id_assistido = ${id_assistido}`
 
 
+    con.query(string, (err,result) => {
+
+        if(err === null){
+            res.status(200).json(result)
+        }else{
+            res.status(400).json({err: err.message})
+        }
+    })
 
 }
-
 
 const updateFotoAssistido = (req,res) => {
 
@@ -444,7 +464,14 @@ const updateSaude = async (req,res) => {
 
         stringIDSsaude = `select id_saude from saude where id_assistido = ${id_assistido}`
 
-        
+        con.query(stringIDSsaude, (err,result) => {
+            if(err === null){
+                console.log(result[0])
+
+            }else{
+                console.log(err)
+            }
+        })
 
        
     }
@@ -638,6 +665,7 @@ module.exports = {
     postAssistido,
     updateFotoAssistido,
     updateFotoDepoisAssistido,
+    updateAssistido,
     getAssistSaude,
     getSaudeID,
     postSaude,
