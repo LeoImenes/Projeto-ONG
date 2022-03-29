@@ -445,6 +445,23 @@ const getAssistSaude = (req,res) => {
 }
 
 
+// promise do update 
+
+
+
+getEmployeeNames = function(){
+    return new Promise(function(resolve, reject){
+      con.query(
+          "select id_saude from saude where id_assistido = 1", 
+          function(err, rows){                                                
+              if(rows === undefined){
+                  reject(new Error("Error rows is undefined"));
+              }else{
+                  resolve(rows);
+              }
+          }
+      )}
+  )}
 
 
 const updateSaude = async (req,res) => {
@@ -453,7 +470,7 @@ const updateSaude = async (req,res) => {
     let comorbidades = req.body.comorbidades
 
 
-    if(req.body.id_assistido !== undefined && req.body.comorbidades !== undefined){
+    if(req.body.id_assistido !== undefined){
 
         let string
         let values = []
@@ -462,20 +479,39 @@ const updateSaude = async (req,res) => {
         let index = 0
         let stringIDSsaude
 
-        stringIDSsaude = `select id_saude from saude where id_assistido = ${id_assistido}`
+        stringIDSsaude = `select * from saude`
+        console.log(stringIDSsaude)
 
-        con.query(stringIDSsaude, (err,result) => {
-            if(err === null){
-                console.log(result[0])
+        //getEmployeeNames()
+        //.then(function(results){
+        
+        //render(results)
 
-            }else{
-                console.log(err)
-            }
+        //render = function(results){ for (var i in results) console.log(results[i].id_saude) }
+        //})
+        //.catch(function(err){
+        //console.log("Promise rejection error: "+err);
+        //})
+
+
+        con.connect();
+        console.log(id_assistido)
+        con.query(stringIDSsaude, function(err, rows, fields) 
+        {
+        if (err) throw err;
+
+        rows.forEach((item,index) => {
+            //values.push(rows[index].RowDataPacket)
+            console.log(rows[index]);
+           
+        })
+        
         })
 
-       
+        con.end()
+            
+        console.log(values[0])
     }
-
     else{
         res.status(400).json({"err": "informe a comorbidade e o id_saude"})
     }

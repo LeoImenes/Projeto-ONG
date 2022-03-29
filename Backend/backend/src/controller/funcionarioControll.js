@@ -31,15 +31,13 @@ const postFuncionario = (req, res) => {
     con.query(string, [values], (err, result) => {
 
         if (err == null) {
-<<<<<<< HEAD
 
         res.status(200).json({ ...req.body, id: result.insertId, "status":  status});
 
             res.status(200).json({...req.body, id: result.insertId });
 
-=======
         res.status(200).json({ ...req.body, id: result.insertId, "status":  status});
->>>>>>> 5b4c4f9a54db3e7a73ba61a16ecc993f572c39a9
+
         } else {
             res.status(400).json({ err: err.message });
         }
@@ -131,7 +129,6 @@ const updateFuncionario = (req, res) => {
         else if(data_demissao !== undefined && cargo !== undefined){
             return string[2]
         }
-<<<<<<< HEAD
         else if (cargo !== undefined && email === undefined && senha === undefined) {
             return string[1]
         } else if (cargo == undefined && email !== undefined && senha == undefined) {
@@ -141,9 +138,7 @@ const updateFuncionario = (req, res) => {
         } else {
             return string[4]
         }
-=======
         
->>>>>>> 5b4c4f9a54db3e7a73ba61a16ecc993f572c39a9
     }
 
     let resultado = busca()
