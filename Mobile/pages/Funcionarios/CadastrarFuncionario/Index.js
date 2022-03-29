@@ -8,7 +8,7 @@ export default function CadastrarFuncionario({navigation}){
     return(
         <View style={global.body}>
             <View style={global.header}>
-                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Assistido')}} />
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Funcionario')}} />
                 <View style={global.cardTitle}>
                     <Text style={global.textTitle}>Casa Acolhedora</Text>
                     <Text style={global.textTitle}>Irmã Antônia</Text>
