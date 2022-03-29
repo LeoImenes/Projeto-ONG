@@ -63,8 +63,8 @@ export default function CadastrarAssistido({navigation, route}){
             foto: foto
         }
     
-        // fetch(`http://10.87.207.27:3000/assistidos`, {
-        fetch(`http://192.168.0.103:3000/assistidos`, {
+        fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -82,8 +82,8 @@ export default function CadastrarAssistido({navigation, route}){
                     comorbidades: selected
                 }
 
-                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -96,7 +96,6 @@ export default function CadastrarAssistido({navigation, route}){
                         console.log(data)
                     }else{
                         ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
-                        this.textInput.clear()
                     }
                 })
             }
@@ -104,7 +103,7 @@ export default function CadastrarAssistido({navigation, route}){
         .catch(err => {
             console.log(err) 
         });
-      }
+    }
 
       const renderLabel = (label, style) => {
         return (
@@ -117,8 +116,8 @@ export default function CadastrarAssistido({navigation, route}){
       }
 
       useEffect(() => { 
-        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -225,7 +224,6 @@ export default function CadastrarAssistido({navigation, route}){
                     </View>
                     <View style={css.align}>
                         <Image source={( foto === null || foto === undefined) ? require("../../assets/user1.png") : foto} style={global.imageUser}/>
-                        {}
                         {/* <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}> */}
                         <TouchableOpacity style={css.alignIcon} onPress={() => {navigation.navigate("TelaCamera")}}>
                             <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
