@@ -90,7 +90,6 @@ export default function VerAssistido({navigation, route}){
                         <Text style={global.textInfo}>Antecedente:</Text>
                         <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                     </View>
-<<<<<<< HEAD
                     <Text style={css.title}>Dados do Familiar</Text>
                     <View style={{width: "100%"}}>
                         <ScrollView horizontal>
@@ -131,7 +130,7 @@ export default function VerAssistido({navigation, route}){
                             </View>
                         }
                         </ScrollView>
-=======
+                    </View>
                     {/* <TouchableOpacity onPress={() => {navigation.navigate("CadastrarFamiliar")}}>
                         <Text style={css.button}>Adicionar novo familiar</Text>
                     </TouchableOpacity> */}
