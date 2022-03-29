@@ -22,14 +22,14 @@ function list() {
                 cardfuncionario.className = "cardFuncionario"
                 cardfuncionario.addEventListener("click", () => {
                     let id = fun;
-                    let store = localStorage.setItem("funcionario", fun.id_funcionario);
+                    let store = localStorage.setItem("funcionario", fun.matricula);
                     window.location.href = "../VerFuncionario/index.html"
                 })
                 img.className = "fotoUsuario"
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto == null) {
+                if (fun.foto == null || fun.foto.length == 0) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto

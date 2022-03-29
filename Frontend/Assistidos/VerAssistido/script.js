@@ -83,7 +83,8 @@ function menuDownDoenca() {
 }
 
 function list() {
-    getComorbidadeAssistido();
+    getComorbidadeAssistido()
+
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);

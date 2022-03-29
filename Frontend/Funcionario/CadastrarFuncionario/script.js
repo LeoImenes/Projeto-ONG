@@ -48,15 +48,6 @@ function cadastrarFunc() {
     var mesAdm = getDataAdmissao.split("/")[1]
     var anoAdm = getDataAdmissao.split("/")[2]
 
-    // if (getDemissao == `${diaDem}/${mesDem}/${anoDem}`) {
-    //     status = 0
-    //     DemissaoNull = `${anoDem}-${mesDem}-${diaDem}`
-    //     console.log(``)
-    // } else {
-    //     status = 1
-    //     DemissaoNull = null
-    //     console.log(DemissaoNull)
-    // }
 
     var data = JSON.stringify({
         "foto": fotinho,
@@ -72,20 +63,22 @@ function cadastrarFunc() {
         "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
         "email": getEmail,
         "senha": getSenha,
+        "status":(getDemissao == "") ? 1 : 0 
     })
+console.log(data)
+    
+    //             fetch("http://10.87.207.27:3000/funcionario", {
+    // // fetch("http://localhost:3000/funcionario", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: data,
+    //     })
+    //     .then(response => { return response.json() })
+    //     .then(data => {
+    //         console.log(data.err)
+    //         console.log(data)
 
-    console.log(data)
-                fetch("http://10.87.207.27:3000/funcionario", {
-    // fetch("http://localhost:3000/funcionario", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then(response => { return response.json() })
-        .then(data => {
-            console.log(data.err)
-
-        })
+    //     })
 }

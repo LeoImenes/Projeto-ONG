@@ -1,5 +1,7 @@
 var cpf;
-var matricula;
+var matricula = localStorage.getItem("funcionario")
+ 
+
 
 function list() {
     let local = localStorage.getItem("funcionario");
@@ -40,7 +42,6 @@ function list() {
                 liNome.innerHTML = item.nome_completo;
                 liEstadoCivil.innerHTML = item.estado_civil;
                 liMatricula.innerHTML = item.matricula;
-                matricula = item.matricula;
                 liRg.innerHTML = item.rg;
                 liCpf.innerHTML = item.cpf;
                 cpf = item.cpf;
@@ -118,21 +119,25 @@ function editarDados() {
 }
 
 function Atualizar() {
-    var Email = document.querySelector("#Email").value;
-    var Senha = document.querySelector("#Senha").value;
+    var Matricula = document.querySelector("#Matricula").value;
+    var dataDemissao = document.querySelector("#Data").value;
     var cargo = document.querySelector("#cargo").value;
     var ulEditarDados = document.querySelector(".EditarDados");
     var ulDadosFunc = document.querySelector(".DadosFuncionario");
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
 
+    var dia= dataDemissao.split("/")[0]
+    var mes = dataDemissao.split("/")[1]
+    var ano= dataDemissao.split("/")[2]
+
+    
+
     const data = JSON.stringify({
-        matricula: matricula,
         cargo: cargo,
-        senha: Senha,
-        email: Email,
+        data: `${ano}-${mes}-${dia}`,
     });
-    fetch(`http://10.87.207.27:3000/funcionario`, {
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -143,6 +148,8 @@ function Atualizar() {
             return resp.json();
         })
         .then((data) => {
+            console.log(data.err)
+            console.log(data)
             if (data.err === undefined) {
                 alert("Falha ao Atualizar");
                 ulDadosFunc.style.display = "flex";
