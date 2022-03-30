@@ -11,6 +11,7 @@ route.post('/funcionario', funcionarioControll.postFuncionario)
 route.put('/funcionarios', funcionarioControll.updateFuncionario)
 route.put('/funcionario', funcionarioControll.updateFotoFuncionario)
 route.delete('/funcionarios/:matricula', funcionarioControll.deletarFuncionario)
+route.put('/funcionario/reset_senha', funcionarioControll.resetSenha)
 
 route.get('/assistidos', assistidoControll.getAll)
 route.get('/assistidos/:id_assistido', assistidoControll.getID)

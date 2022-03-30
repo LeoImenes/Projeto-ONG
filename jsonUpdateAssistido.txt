@@ -19,3 +19,12 @@ Rota: http://localhost:3000/assistido/update
 }
 
 
+Update senha
+
+Rota: http://localhost:3000/funcionario/reset_senha
+
+{	
+	"email": "pedroh@live.com",
+	"senha_antiga": "12345678",
+	"nova_senha": "asd123"
+}

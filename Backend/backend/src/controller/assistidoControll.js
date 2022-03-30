@@ -449,15 +449,16 @@ const getAssistSaude = (req,res) => {
 
 
 
-getEmployeeNames = function(){
+getEmployeeNames = function(id_assistido){
     return new Promise(function(resolve, reject){
       con.query(
-          "select id_saude from saude where id_assistido = 1", 
+          `select id_saude from saude where id_assistido = ${id_assistido}`, 
           function(err, rows){                                                
               if(rows === undefined){
                   reject(new Error("Error rows is undefined"));
               }else{
                   resolve(rows);
+                  
               }
           }
       )}
@@ -473,44 +474,42 @@ const updateSaude = async (req,res) => {
     if(req.body.id_assistido !== undefined){
 
         let string
-        let values = []
+        let vetSaude = []
         let ids_saude
         let comerro = false
         let index = 0
         let stringIDSsaude
 
-        stringIDSsaude = `select * from saude`
-        console.log(stringIDSsaude)
+        getEmployeeNames(id_assistido)
+        .then(function(results){
+          //render(results)
 
-        //getEmployeeNames()
-        //.then(function(results){
-        
-        //render(results)
-
-        //render = function(results){ for (var i in results) console.log(results[i].id_saude) }
-        //})
-        //.catch(function(err){
-        //console.log("Promise rejection error: "+err);
-        //})
-
-
-        con.connect();
-        console.log(id_assistido)
-        con.query(stringIDSsaude, function(err, rows, fields) 
-        {
-        if (err) throw err;
-
-        rows.forEach((item,index) => {
-            //values.push(rows[index].RowDataPacket)
-            console.log(rows[index]);
-           
+            results.forEach((item,index) => {
+                vetSaude.push(item)
+                console.log(item)
+            })
+         
+         
         })
-        
+        .catch(function(err){
+          console.log("Promise rejection error: "+err);
         })
 
-        con.end()
-            
-        console.log(values[0])
+        console.log(vetSaude)
+        console.log("tamanho vetor " + vetSaude.length)
+
+
+        if(vetSaude.length > 0){
+
+            res.status(200).json(vetSaude)
+
+        }else{
+
+            res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
+        }
+
+
+
     }
     else{
         res.status(400).json({"err": "informe a comorbidade e o id_saude"})
