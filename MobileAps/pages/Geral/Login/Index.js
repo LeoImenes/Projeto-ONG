@@ -3,12 +3,14 @@ import { StyleSheet, Text, View, TextInput, ToastAndroid, TouchableOpacity, Stat
 
 import global from "../../Global/Style"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 export default function Login({navigation}) {
   const [recupSenha, setRecupSenha] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const[mostrar1, setMostrar1] = useState(true);
+  const[mostrar2, setMostrar2] = useState(true);
 
   const recuperarSenha = () => {
     setRecupSenha(true);
@@ -61,7 +63,18 @@ export default function Login({navigation}) {
             <Text style={css.title2}>Recuperar senha</Text>
             <View style={css.inputs}>
               <TextInput placeholder={"Matrícula..."} placeholderTextColor={"white"} style={css.input2}></TextInput>
-              <TextInput placeholder={"Nova senha..."} placeholderTextColor={"white"} style={css.input2}></TextInput>
+              <View style={{width: "80%", borderBottomWidth: 1, borderBottomColor: 'white', padding: "2%", marginTop: "15%", flexDirection: "row"}}>
+                <TextInput placeholder={"Nova senha..."} secureTextEntry={mostrar2} placeholderTextColor={"white"} style={{width: "90%", height: "100%", color: "white"}}></TextInput>
+                <TouchableOpacity style={{width: "10%", height: "100%"}} onPress={() => {setMostrar2(!mostrar2)}}>
+                  {
+                    (mostrar2 === true)
+                    ?
+                    <FontAwesome name="eye" size={24} color="white" />
+                    :
+                    <FontAwesome name="eye-slash" size={24} color="white" />
+                  }
+                </TouchableOpacity>
+              </View>
             </View>
             <TouchableOpacity style={global.cardButton2} onPress={() => { setRecupSenha(false)}}>
               <Text style={global.buttonText2}>SALVAR</Text>
@@ -75,7 +88,18 @@ export default function Login({navigation}) {
             </View>
             <Text style={css.title1}>LOGIN</Text>
             <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={css.input1}/>
-            <TextInput secureTextEntry={true} placeholder="Senha" value={senha} onChangeText={setSenha} style={css.input1}/>
+            <View style={{width: "80%", borderBottomWidth: 1, borderBottomColor: 'black', padding: "2%", marginBottom: "10%", flexDirection: "row"}}>
+              <TextInput style={{width: "90%", height: "100%"}} secureTextEntry={mostrar1} placeholder="Senha" value={senha} onChangeText={setSenha}/>
+              <TouchableOpacity style={{width: "10%", height: "100%"}} onPress={() => {setMostrar1(!mostrar1)}}>
+                {
+                  (mostrar1 === true)
+                  ?
+                  <FontAwesome name="eye" size={24} color="black" />
+                  :
+                  <FontAwesome name="eye-slash" size={24} color="black" />
+                }
+              </TouchableOpacity>
+            </View>
             <Text style={css.button} onPress={() => {recuperarSenha()}}>Esqueci a senha</Text>
             <TouchableOpacity style={global.cardButton1} onPress={() => autenticar()}>
               <Text style={global.buttonText1}>ENTRAR</Text>
@@ -135,7 +159,8 @@ const css = StyleSheet.create({
       borderBottomWidth: 1,
       borderBottomColor: 'white',
       padding: "2%",
-      marginTop: "15%"
+      marginTop: "15%",
+      color: "white"
   },
   button:{
       color:"rgb(22,107,138)",

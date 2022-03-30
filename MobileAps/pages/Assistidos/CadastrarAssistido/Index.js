@@ -225,7 +225,7 @@ export default function CadastrarAssistido({navigation, route}){
                     <View style={css.align}>
                         <Image source={( foto === null || foto === undefined) ? require("../../assets/user1.png") : foto} style={global.imageUser}/>
                         {/* <TouchableOpacity style={css.alignIcon} onPress={() => {selecionarImagem()}}> */}
-                        <TouchableOpacity style={css.alignIcon} onPress={() => {navigation.navigate("TelaCamera")}}>
+                        <TouchableOpacity style={css.alignIcon} onPress={() => {}}>
                             <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
                             <Text style={{color: "blue", fontSize: 15, fontWeight: "bold"}}>Nova foto</Text>
                         </TouchableOpacity>

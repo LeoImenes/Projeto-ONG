@@ -10,8 +10,8 @@ export default function ListarAssistidos({navigation}){
     const [dados, setDados] = useState([]);
 
     useEffect(() => {
-        fetch(`http://10.87.207.27:3000/assistidos`)
-        // fetch(`http://192.168.0.103:3000/assistidos`)
+        // fetch(`http://10.87.207.27:3000/assistidos`)
+        fetch(`http://192.168.0.103:3000/assistidos`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);
@@ -30,12 +30,20 @@ export default function ListarAssistidos({navigation}){
         }
     }, [searchText]);
 
+    const listar = () => {
+        let newDados = [...dados];
+
+        newDados.sort((a, b) => (a.nome_completo > b.nome_completo) ? 1 : (b.nome_completo > a.nome_completo ? -1 : 0));
+
+        setLista(newDados)
+    }
+
     return(
         <View style={global.bodyAlternative}>
             <View style={global.filter}>
                 <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Home")}} />
                 <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={global.search} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
-                <TouchableOpacity onPress={() => {ordenar()}}>
+                <TouchableOpacity onPress={() => {listar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
                 </TouchableOpacity>
             </View>
