@@ -15,39 +15,89 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    // fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+        fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
             data.forEach((item, index) => {
-                var divDadosFamiliares = document.createElement("div");
-                var pNomeFamiliares = document.createElement("p");
-                var pRgFamiliares = document.createElement("p");
-                var pParenteFamiliares = document.createElement("p");
-                var pTelFamiliares = document.createElement("p");
-                var pEmailFamiliares = document.createElement("p");
-                var pEnderecoFamiliares = document.createElement("p");
-                var ul = document.createElement("ul");
+                var familia = document.createElement('div')
+                var familias = document.createElement('div')
 
-                pNomeFamiliares.innerHTML = `Nome: ${item.nome_familiar}`;
-                pRgFamiliares.innerHTML = `RG: ${item.rg_familiar}`;
-                pParenteFamiliares.innerHTML = `Parentesco: ${item.parentesco}`;
-                pTelFamiliares.innerHTML = `Telefone: ${item.telefone_familiar}`;
-                pEmailFamiliares.innerHTML = `Email: ${item.email_familiar}`;
-                pEnderecoFamiliares.innerHTML = `Endereco: ${item.endereco_familiar}`;
+                var divnome = document.createElement('div')
+                var ulnome = document.createElement('ul')
+                var lipn = document.createElement('h2')
+                var linome = document.createElement('h2')
 
-                divDadosFamiliares.appendChild(pNomeFamiliares);
-                divDadosFamiliares.appendChild(pRgFamiliares);
-                divDadosFamiliares.appendChild(pParenteFamiliares);
-                divDadosFamiliares.appendChild(pTelFamiliares);
-                divDadosFamiliares.appendChild(pEmailFamiliares);
-                divDadosFamiliares.appendChild(pEnderecoFamiliares);
+                var divrg = document.createElement('div')
+                var ulrg = document.createElement('ul')
+                var lirg = document.createElement('h2')
+                var liprg = document.createElement('h2')
 
-                divDadosFamiliares.className = "dadosFamiliares";
+                var divpar = document.createElement('div')
+                var ulpar = document.createElement('ul')
+                var lipar = document.createElement('h2')
+                var lippar = document.createElement('h2')
 
-                dadosFamilia.appendChild(divDadosFamiliares);
+                var divtl = document.createElement('div')
+                var ultl = document.createElement('ul')
+                var litel = document.createElement('h2')
+                var liptel = document.createElement('h2')
+
+                var divemail = document.createElement('div')
+                var ulemail = document.createElement('ul')
+                var li_email = document.createElement('h2')
+                var lipem = document.createElement('h2')
+
+                var divend = document.createElement('div')
+                var ulend = document.createElement('ul')
+                var liend = document.createElement('h2')
+                var lipend = document.createElement('h2')
+
+                lipn.innerHTML = `Nome`
+                liprg.innerHTML = `RG`
+                lippar.innerHTML = `Parentesco`
+                liptel.innerHTML = `Telefone`
+                lipem.innerHTML = `Email`
+                lipend.innerHTML = `Endereco`
+                linome.innerHTML = ` ${item.nome_familiar}`;
+                lirg.innerHTML = ` ${item.rg_familiar}`;
+                lipar.innerHTML = `${item.parentesco}`;
+                litel.innerHTML = `${item.telefone_familiar}`;
+                li_email.innerHTML = `${item.email_familiar}`;
+                liend.innerHTML = `${item.endereco_familiar}`;
+
+
+                divnome.appendChild(lipn)
+                divnome.appendChild(linome)               
+                divrg.appendChild(liprg)
+                divrg.appendChild(lirg)                
+                divpar.appendChild(lippar)
+                divpar.appendChild(lipar)                
+                divtl.appendChild(liptel)
+                divtl.appendChild(litel)                
+                divemail.appendChild(lipem)
+                divemail.appendChild(li_email)                
+                divend.appendChild(lipend)
+                divend.appendChild(liend)                
+
+
+                familia.appendChild(divnome)
+                familia.appendChild(divrg)
+                familia.appendChild(divpar)
+                familia.appendChild(divpar)
+                familia.appendChild(divtl)
+                familia.appendChild(divemail)
+                familia.appendChild(divend)
+    
+                familia.className = "familiaMembros"
+                familias.appendChild(familia)
+                familias.className = "familias"
+                dadosFamilia.appendChild(familias)
+
+
+
             });
         });
 }
@@ -88,8 +138,8 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    // fetch(`http://localhost:3000/assistidos/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+        fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -137,8 +187,8 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    // fetch(`http://localhost:3000/assistido/saudeID/${local}`);
-        fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -196,13 +246,14 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data
-        })
+    // fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
+    fetch(`http://localhost:3000/assistido_foto_depois`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data
+    })
         .then((response) => {
             return response.json();
         })

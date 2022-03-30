@@ -67,18 +67,18 @@ function cadastrarFunc() {
     })
 console.log(data)
     
-    //             fetch("http://10.87.207.27:3000/funcionario", {
-    // // fetch("http://localhost:3000/funcionario", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: data,
-    //     })
-    //     .then(response => { return response.json() })
-    //     .then(data => {
-    //         console.log(data.err)
-    //         console.log(data)
+                fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
+        .then(response => { return response.json() })
+        .then(data => {
+            console.log(data.err)
+            console.log(data)
 
-    //     })
+        })
 }

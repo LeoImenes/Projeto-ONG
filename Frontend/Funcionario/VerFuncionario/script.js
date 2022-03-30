@@ -137,7 +137,8 @@ function Atualizar() {
         cargo: cargo,
         data: `${ano}-${mes}-${dia}`,
     });
-    fetch(`http://10.87.207.27:3000/funcionarios`, {
+    // fetch(`http://10.87.207.27:3000/funcionarios`, {
+    fetch(`http://localhost:3000/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

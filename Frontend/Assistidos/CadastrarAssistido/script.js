@@ -88,8 +88,8 @@ function cadastrarAssistido() {
         // "foto_depois": fotinho
     })
 
-    fetch("http://10.87.207.27:3000/assistidos", {
-    // fetch("http://localhost:3000/assistidos", {
+    // fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -111,8 +111,8 @@ function cadastrarAssistido() {
                             }]
                         }
                         console.log(item.value)
-                        // fetch("http://localhost:3000/assistido/saude", {
-                                fetch("http://10.87.207.27:3000/assistido/saude", {
+                        fetch("http://localhost:3000/assistido/saude", {
+                                // fetch("http://10.87.207.27:3000/assistido/saude", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -170,8 +170,8 @@ function getComorbidades() {
     let liDoenca = document.createElement("p")
     let liDroga = document.createElement("p")
 
-    fetch("http://10.87.207.27:3000/assistido/comorbidade")
-    // fetch("http://localhost:3000/assistido/comorbidade")
+    // fetch("http://10.87.207.27:3000/assistido/comorbidade")
+    fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {
