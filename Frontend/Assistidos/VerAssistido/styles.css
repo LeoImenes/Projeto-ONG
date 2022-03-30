@@ -85,34 +85,42 @@ section {
     text-align: center;
     align-items: center;
     justify-content: space-between;
-    padding: 0px
+    padding: 0px;
 }
 
 .dadosFamilia {
-    display: flex;
-    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow-x: scroll;
+    padding-left: 90%;
+    padding-right: 30px;
 }
 
-.familias {
-    width: 100%;
+/* .familias {
+    width: 50%;
     height: 100%;
     display: flex;
-}
+    background-color: blue;
+} */
 
 .familiaMembros {
-    width: 100%;
+    width: 200px;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    margin-left: 5em;
+    padding: 10px;
 }
 
 .familiaMembros ul {
     width: 100%;
     height: 100vh;
     background-color: #166B8A
+}
+
+.familiaMembros h2 {
+    font-weight: bold;
 }
 
 .familia img {
