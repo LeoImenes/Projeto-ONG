@@ -41,6 +41,10 @@ export default function VerAssistido({navigation, route}){
         setAssistido(id);
     })
 
+    const limpar = () => {
+        
+    }
+
     const formatDate = (nasc) => {
         let dia = nasc.getDate();
         dia = (dia < 10) ? "0" + dia : dia;
@@ -48,7 +52,7 @@ export default function VerAssistido({navigation, route}){
         mes = (mes < 10) ? "0" + mes : mes;
         let ano = nasc.getFullYear();
         return `${dia}/${mes}/${ano}`;
-     }
+    }
 
     const salvarRelatorio = () => {
         setRelatorio(value)

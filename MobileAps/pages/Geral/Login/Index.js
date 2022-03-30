@@ -9,6 +9,9 @@ export default function Login({navigation}) {
   const [recupSenha, setRecupSenha] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [emailNovo, setEmailNovo] = useState("");
+  const[cpf, setCpf] = useState("")
+  const [senhaNova, setSenhaNova] = useState("");
   const[mostrar1, setMostrar1] = useState(true);
   const[mostrar2, setMostrar2] = useState(true);
 
@@ -28,8 +31,8 @@ export default function Login({navigation}) {
       senha: senha
     }
 
-    // fetch(`http://10.87.207.27:3000/funcionarios`, {
-      fetch(`http://192.168.0.103:3000/funcionarios`, {
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
+      // fetch(`http://192.168.0.103:3000/funcionarios`, {
       "method": "POST",
       "headers": {
           "Content-Type": "application/json"
@@ -43,6 +46,36 @@ export default function Login({navigation}) {
         navigation.navigate('ContainerHome');
       }else {
           ToastAndroid.show('Email ou Senha Invalidos', ToastAndroid.SHORT);
+      }
+    })
+    .catch(err => { console.log(err) });
+  }
+
+  const recSenha = () =>{
+    let funcionario = {
+      email: emailNovo,
+      cpf: cpf,
+      nova_senha: senhaNova
+    }
+
+    fetch(`http://10.87.207.27:3000/funcionario/reset_senha`, {
+      // fetch(`http://192.168.0.103:3000/funcionario/reset_senha`, {
+      "method": "PUT",
+      "headers": {
+          "Content-Type": "application/json"
+      },
+      "body": JSON.stringify(funcionario),
+    })
+    .then(resp => {return resp.json()})
+    .then( async data => {
+      if(data !== undefined) {
+        await AsyncStorage.setItem('userdata', JSON.stringify(data));
+        setEmailNovo('')
+        setSenhaNova('')
+        setCpf('')
+        ToastAndroid.show('Senha alterada com sucesso!', ToastAndroid.SHORT);
+      }else {
+          ToastAndroid.show('Não foi possivel alterar a senha!', ToastAndroid.SHORT);
       }
     })
     .catch(err => { console.log(err) });
@@ -62,9 +95,10 @@ export default function Login({navigation}) {
             <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="white" onPress={() => setRecupSenha(false)} />
             <Text style={css.title2}>Recuperar senha</Text>
             <View style={css.inputs}>
-              <TextInput placeholder={"Matrícula..."} placeholderTextColor={"white"} style={css.input2}></TextInput>
+              <TextInput placeholder={"E-mail..."} value={emailNovo} onChangeText={setEmailNovo} placeholderTextColor={"white"} style={css.input2}></TextInput>
+              <TextInput placeholder={"CPF..."} value={cpf} onChangeText={setCpf} placeholderTextColor={"white"} style={css.input2}></TextInput>
               <View style={{width: "80%", borderBottomWidth: 1, borderBottomColor: 'white', padding: "2%", marginTop: "15%", flexDirection: "row"}}>
-                <TextInput placeholder={"Nova senha..."} secureTextEntry={mostrar2} placeholderTextColor={"white"} style={{width: "90%", height: "100%", color: "white"}}></TextInput>
+                <TextInput placeholder={"Nova senha..."} value={senhaNova} onChangeText={setSenhaNova} secureTextEntry={mostrar2} placeholderTextColor={"white"} style={{width: "90%", height: "100%", color: "white"}}></TextInput>
                 <TouchableOpacity style={{width: "10%", height: "100%"}} onPress={() => {setMostrar2(!mostrar2)}}>
                   {
                     (mostrar2 === true)
@@ -76,7 +110,7 @@ export default function Login({navigation}) {
                 </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity style={global.cardButton2} onPress={() => { setRecupSenha(false)}}>
+            <TouchableOpacity style={global.cardButton2} onPress={() => { recSenha()}}>
               <Text style={global.buttonText2}>SALVAR</Text>
             </TouchableOpacity>
           </View>
