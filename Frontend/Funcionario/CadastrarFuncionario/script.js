@@ -63,12 +63,12 @@ function cadastrarFunc() {
         "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
         "email": getEmail,
         "senha": getSenha,
-        "status":(getDemissao == "") ? 1 : 0 
+        "status": (getDemissao == "") ? 1 : 0
     })
-console.log(data)
-    
-                fetch("http://10.87.207.27:3000/funcionario", {
-    // fetch("http://localhost:3000/funcionario", {
+    console.log(data)
+
+    // fetch("http://10.87.207.27:3000/funcionario", {
+    fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

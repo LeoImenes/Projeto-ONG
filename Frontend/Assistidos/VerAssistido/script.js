@@ -16,71 +16,62 @@ function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
     // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-        fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+    fetch(`http://localhost:3000/assistido/busca_familiar/23`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+
+
             data.forEach((item, index) => {
                 var familia = document.createElement('div')
                 var familias = document.createElement('div')
 
                 var divnome = document.createElement('div')
                 var ulnome = document.createElement('ul')
-                var lipn = document.createElement('h2')
                 var linome = document.createElement('h2')
 
                 var divrg = document.createElement('div')
                 var ulrg = document.createElement('ul')
                 var lirg = document.createElement('h2')
-                var liprg = document.createElement('h2')
+
 
                 var divpar = document.createElement('div')
                 var ulpar = document.createElement('ul')
                 var lipar = document.createElement('h2')
-                var lippar = document.createElement('h2')
+
 
                 var divtl = document.createElement('div')
                 var ultl = document.createElement('ul')
                 var litel = document.createElement('h2')
-                var liptel = document.createElement('h2')
+
 
                 var divemail = document.createElement('div')
                 var ulemail = document.createElement('ul')
                 var li_email = document.createElement('h2')
-                var lipem = document.createElement('h2')
+
 
                 var divend = document.createElement('div')
                 var ulend = document.createElement('ul')
                 var liend = document.createElement('h2')
-                var lipend = document.createElement('h2')
-
-                lipn.innerHTML = `Nome`
-                liprg.innerHTML = `RG`
-                lippar.innerHTML = `Parentesco`
-                liptel.innerHTML = `Telefone`
-                lipem.innerHTML = `Email`
-                lipend.innerHTML = `Endereco`
-                linome.innerHTML = ` ${item.nome_familiar}`;
-                lirg.innerHTML = ` ${item.rg_familiar}`;
-                lipar.innerHTML = `${item.parentesco}`;
-                litel.innerHTML = `${item.telefone_familiar}`;
-                li_email.innerHTML = `${item.email_familiar}`;
-                liend.innerHTML = `${item.endereco_familiar}`;
 
 
-                divnome.appendChild(lipn)
-                divnome.appendChild(linome)               
-                divrg.appendChild(liprg)
-                divrg.appendChild(lirg)                
-                divpar.appendChild(lippar)
-                divpar.appendChild(lipar)                
-                divtl.appendChild(liptel)
-                divtl.appendChild(litel)                
-                divemail.appendChild(lipem)
-                divemail.appendChild(li_email)                
-                divend.appendChild(lipend)
-                divend.appendChild(liend)                
+
+                linome.innerHTML = "Nome: " + `${item.nome_familiar}`;
+                lirg.innerHTML = "RG: " + ` ${item.rg_familiar}`;
+                lipar.innerHTML = "Parentesco: " + `${item.parentesco}`;
+                litel.innerHTML = "Telefone: " + `${item.telefone_familiar}`;
+                li_email.innerHTML = "Email: " + `${item.email_familiar}`;
+                liend.innerHTML = "Endereco: " + `${item.endereco_familiar}`;
+
+
+
+                divnome.appendChild(linome)
+                divrg.appendChild(lirg)
+                divpar.appendChild(lipar)
+                divtl.appendChild(litel)
+                divemail.appendChild(li_email)
+                divend.appendChild(liend)
 
 
                 familia.appendChild(divnome)
@@ -90,14 +81,11 @@ function getFamiliares() {
                 familia.appendChild(divtl)
                 familia.appendChild(divemail)
                 familia.appendChild(divend)
-    
+
                 familia.className = "familiaMembros"
                 familias.appendChild(familia)
                 familias.className = "familias"
                 dadosFamilia.appendChild(familias)
-
-
-
             });
         });
 }
@@ -139,7 +127,7 @@ function list() {
 
     var body = document.querySelector(body);
     // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-        fetch(`http://localhost:3000/assistidos/${local}`)
+    fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -188,7 +176,7 @@ function getComorbidadeAssistido() {
     var local = localStorage.getItem("assistido");
 
     fetch(`http://localhost:3000/assistido/saudeID/${local}`)
-    // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+        // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -248,12 +236,12 @@ function cadastrarFotoDepois() {
     console.log(data);
     // fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
     fetch(`http://localhost:3000/assistido_foto_depois`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data
-    })
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data
+        })
         .then((response) => {
             return response.json();
         })
