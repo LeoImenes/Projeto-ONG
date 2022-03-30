@@ -83,6 +83,58 @@ const login = (req, res) => {
     }
 }
 
+// Reset sennha 
+
+
+
+
+const resetSenha = (req,res) => {
+
+    let email = req.body.email
+    let senha_antiga = req.body.senha_antiga 
+    let nova_senha = req.body.nova_senha
+
+
+    if(email !== undefined && senha_antiga !== undefined && nova_senha !== undefined){
+
+        let string = `update funcionarios set senha = "${nova_senha}" where email = "${email}" and senha = "${senha_antiga}"`
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+
+                if(result.affectedRows === 0){
+                    res.status(200).json({"err": "não foi possível alterar a senha"})
+                }
+                else{
+                    res.status(200).json(result)
+                }
+
+            }else{
+                res.status(400).json({err: err.message})
+            }
+
+
+        })
+
+
+    }else{
+
+        res.status(400).json({"err": "informe os campos email, senha_antiga e nova_senha"})
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
 // Método update atualizado 
 
 
@@ -228,6 +280,7 @@ module.exports = {
     getAll,
     getMatricula,
     login,
+    resetSenha,
     postFuncionario,
     updateFuncionario,
     updateFotoFuncionario,
