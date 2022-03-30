@@ -91,13 +91,13 @@ const login = (req, res) => {
 const resetSenha = (req,res) => {
 
     let email = req.body.email
-    let senha_antiga = req.body.senha_antiga 
+    let cpf = req.body.cpf
     let nova_senha = req.body.nova_senha
 
 
-    if(email !== undefined && senha_antiga !== undefined && nova_senha !== undefined){
+    if(email !== undefined && cpf !== undefined && nova_senha !== undefined){
 
-        let string = `update funcionarios set senha = "${nova_senha}" where email = "${email}" and senha = "${senha_antiga}"`
+        let string = `update funcionarios set senha = "${nova_senha}" where email = "${email}" and cpf = "${cpf}"`
 
         con.query(string, (err,result) => {
 
@@ -120,7 +120,7 @@ const resetSenha = (req,res) => {
 
     }else{
 
-        res.status(400).json({"err": "informe os campos email, senha_antiga e nova_senha"})
+        res.status(400).json({"err": "informe os campos email, cpf e nova_senha"})
     }
 
 
