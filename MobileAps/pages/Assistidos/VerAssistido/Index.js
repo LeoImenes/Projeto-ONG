@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function VerAssistido({navigation, route}){ 
     const id = route.params;
 
+    
     const[assistido, setAssistido] = useState([]) 
     const[relatorio, setRelatorio] = useState("")
     const[value, onChangeText] = useState("");
@@ -39,9 +40,6 @@ export default function VerAssistido({navigation, route}){
     const[telefoneFamiliar, setTelefoneFamiliar] = useState("");
     const[enderecoFamiliar, setEnderecoFamiliar] = useState("");
 
-    // useEffect(() => {        
-    //     console.log("TESTE AQUI")
-    // }, [])
 
     useFocusEffect(
         React.useCallback(() => {
@@ -124,8 +122,8 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
         
-            fetch(`http://10.87.207.27:3000/assistido/update`, {
-            // fetch(`http://192.168.0.103:3000/assistidos`, {
+            // fetch(`http://10.87.207.27:3000/assistido/update`, {
+            fetch(`http://192.168.0.103:3000/assistidos`, {
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -153,8 +151,8 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
-        // fetch(`http://192.168.0.103:3000/assistido/familiar`, {
-        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+        fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -170,11 +168,12 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        // fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${id.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+        fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
+                console.log(data)
             })
             .catch(err => {
                 console.log(err) 
@@ -183,12 +182,11 @@ export default function VerAssistido({navigation, route}){
 
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        // fetch(`http://192.168.0.103:3000/assistido/saudeID/${id.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
+        fetch(`http://192.168.0.103:3000/assistido/saudeID/${idAs.id_assistido}`)
+            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
-                // console.log(data)
             })
             .catch(err => {
                 console.log(err) 
@@ -272,12 +270,36 @@ export default function VerAssistido({navigation, route}){
                                 <Text style={global.textInfo}>Antecedente:</Text>
                                 <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                             </View>
-                            <Text style={{fontSize: 18, color: "black", marginLeft: "10%", fontWeight: "bold"}}>Comorbidade:</Text>
+                            <Text style={css.title}>Psicoativos:</Text>
                             {
                                 comorbidade.map((item, index) => {
                                     return(
-                                        <View style={global.info} key={index}>
-                                            <Text style={global.textInfo}>{item.comorbidade}</Text>
+                                        <View key={index}>
+                                            {
+                                                (item.tipo === 0) ?
+                                                    <View style={global.info}>
+                                                        <Text style={global.textInfo}>{item.comorbidade}</Text>
+                                                    </View>
+                                                :
+                                                    <View style={{display: 'none'}}></View>
+                                            }
+                                        </View>
+                                    )
+                                })
+                            }
+                            <Text style={css.title}>Comorbidades:</Text>
+                            {
+                                comorbidade.map((item, index) => {
+                                    return(
+                                        <View key={index}>
+                                            {
+                                                (item.tipo === 1 && item.tipo !== 0) ?
+                                                    <View style={global.info}>
+                                                        <Text style={global.textInfo}>{item.comorbidade}</Text>
+                                                    </View>
+                                                :
+                                                    <View style={{display: 'none'}}></View>
+                                            }
                                         </View>
                                     )
                                 })
@@ -310,13 +332,18 @@ export default function VerAssistido({navigation, route}){
                             <TextInput value={assistido.naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                             <TextInput value={assistido.cartao_cidadao} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
                             <TextInput value={assistido.cartao_sus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
-                            <TouchableOpacity style={css.button} onPress={() => {salvarEdicao()}}>
-                                <Text style={global.buttonText1}>Salvar</Text>
-                            </TouchableOpacity>
+                            <View style={{alignItems: 'center', justifyContent: 'space-evenly', flexDirection: "row", marginBottom: 15}}>
+                                <TouchableOpacity onPress={() => {setEditar(false)}} style={{alignItems: 'center', justifyContent: 'center', width: "35%", height: 45,  marginTop: 20}}>
+                                    <Text style={{fontSize:18, color: "#166B8A", fontWeight: "bold"}}>Cancelar</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={css.button} onPress={() => {salvarEdicao()}}>
+                                    <Text style={global.buttonText1}>Salvar</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     }
-                    <Text style={css.title}>Dados do Familiar</Text>
-                    <View style={{width: "100%"}}>
+                    <Text style={{fontWeight: 'bold', fontSize:18, alignSelf: 'center', color: "#166B8A"}}>Dados do Familiar</Text>
+                    <View style={{width: "100%", minHeight: 20}}>
                         <ScrollView horizontal>
                         {
                             (DadosFamiliar !== null && DadosFamiliar !== undefined)
@@ -356,10 +383,13 @@ export default function VerAssistido({navigation, route}){
                         }
                         </ScrollView>
                     </View>
+                    <TouchableOpacity style={(familiar === true) ? {display: "none"} : {backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, alignSelf: "center", marginTop: 20, marginBottom: "5%"}} onPress={() => { setFamiliar(true)}}>
+                        <Text style={global.buttonText1}>Novo Familiar</Text>
+                    </TouchableOpacity>
                     {
                         (familiar === true)
                         ?
-                            <View style={{width: "100%", height: 550}}>
+                            <View style={{width: "100%", height: 600}}>
                                 <Text style={css.title}>Novo Familiar</Text>
                                 <TextInput value={nomeFamiliar} onChangeText={setNomeFamiliar} placeholder="Nome..." place style={global.info}></TextInput>
                                 <TextInput value={rgFamiliar} onChangeText={setRgFamiliar} placeholder="RG..." style={global.info}></TextInput>
@@ -367,9 +397,14 @@ export default function VerAssistido({navigation, route}){
                                 <TextInput value={telefoneFamiliar} onChangeText={setTelefoneFamiliar} placeholder="Telefone..." style={global.info}></TextInput>
                                 <TextInput value={emailFamiliar} onChangeText={setEmailFamiliar} placeholder="E-mail..." style={global.info}></TextInput>
                                 <TextInput value={enderecoFamiliar} onChangeText={setEnderecoFamiliar} placeholder="Endereço..." style={global.info}></TextInput>
-                                <TouchableOpacity style={css.button} onPress={() => {cadastrarFamiliar()}}>
-                                    <Text style={global.buttonText1}>Salvar</Text>
-                                </TouchableOpacity>
+                                <View style={{alignItems: 'center', justifyContent: 'space-evenly', flexDirection: "row"}}>
+                                    <TouchableOpacity onPress={() => {setFamiliar(false)}} style={{alignItems: 'center', justifyContent: 'center', width: "35%", height: 45,  marginTop: 20}}>
+                                        <Text style={{fontSize:18, color: "#166B8A", fontWeight: "bold"}}>Cancelar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={css.button} onPress={() => {cadastrarFamiliar()}}>
+                                        <Text style={global.buttonText1}>Salvar</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         :
                             <TouchableOpacity style={css.button} onPress={() => { setFamiliar(true)}}>
@@ -400,7 +435,7 @@ const css = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
-        marginTop: 15,
+        marginTop: 5,
     },
     title: {
         fontWeight: 'bold',
