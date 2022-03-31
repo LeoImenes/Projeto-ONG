@@ -35,9 +35,24 @@ export default function CadastrarAssistido({navigation}){
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState("");
 
-    onSelectionsChange = (selected) => {
+    const onSelectionsChange = (selected) => {
         setSelected(selected);
     }
+
+    const limpar = () => {
+        setNome("");
+        setNomeSocial("");
+        setRg("");
+        setCpf("");
+        setAntCriminal("");
+        setSexo("");
+        setNascimento("");
+        setEstdCivil("");
+        setNaturalidade("");
+        setCartCid("");
+        setCartSus("");
+        setSelected([]);
+        }
 
     const getFunc =  async() => {
         let value = await AsyncStorage.getItem('userdata');
@@ -67,8 +82,8 @@ export default function CadastrarAssistido({navigation}){
         }
         console.log(foto)
 
-        fetch(`http://10.87.207.27:3000/assistidos`, {
-        // fetch(`http://192.168.0.103:3000/assistidos`, {
+        // fetch(`http://10.87.207.27:3000/assistidos`, {
+        fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -86,8 +101,8 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -100,6 +115,7 @@ export default function CadastrarAssistido({navigation}){
                         console.log(data)
                     }else{
                         ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                        limpar()
                     }
                 })
             }
@@ -119,31 +135,37 @@ export default function CadastrarAssistido({navigation}){
         )
       }
 
-      useEffect(() => { 
-        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
-        .then(resp => {return resp.json()})
-        .then(async data => {
-            let temp = JSON.stringify(data);
-            temp = temp.replace(/id_comorbidade/g, "value");
-            temp = temp.replace(/comorbidade/g, "label");
-            temp = JSON.parse(temp);
-
-            let tempC = [], tempD = [];
-
-            temp.forEach(item => {
-                if(item.tipo == 1) {
-                    tempC.push(item);
-                }else {
-                    tempD.push(item);
-                }
+      useFocusEffect(
+        React.useCallback(() => {
+            // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+            fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+            .then(resp => {return resp.json()})
+            .then(async data => {
+                let temp = JSON.stringify(data);
+                temp = temp.replace(/id_comorbidade/g, "value");
+                temp = temp.replace(/comorbidade/g, "label");
+                temp = JSON.parse(temp);
+    
+                let tempC = [], tempD = [];
+    
+                temp.forEach(item => {
+                    if(item.tipo == 1) {
+                        tempC.push(item);
+                    }else {
+                        tempD.push(item);
+                    }
+                })
+                
+                setComorbidade(tempC);
+                setDorgas(tempD);
             })
-            
-            setComorbidade(tempC);
-            setDorgas(tempD);
-        })
-        .catch(err => { console.log(err) });
-      }, [])
+            .catch(err => { console.log(err) });
+        }, [])
+      );
+
+    //   useEffect(() => { 
+        
+    //   }, [])
 
     //   useFocusEffect(
     //     React.useCallback(() => {
