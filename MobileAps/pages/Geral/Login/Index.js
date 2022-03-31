@@ -31,8 +31,8 @@ export default function Login({navigation}) {
       senha: senha
     }
 
-    // fetch(`http://10.87.207.27:3000/funcionarios`, {
-      fetch(`http://192.168.0.103:3000/funcionarios`, {
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
+      // fetch(`http://192.168.0.103:3000/funcionarios`, {
       "method": "POST",
       "headers": {
           "Content-Type": "application/json"
@@ -58,8 +58,8 @@ export default function Login({navigation}) {
       nova_senha: senhaNova
     }
 
-    // fetch(`http://10.87.207.27:3000/funcionario/reset_senha`, {
-      fetch(`http://192.168.0.103:3000/funcionario/reset_senha`, {
+    fetch(`http://10.87.207.27:3000/funcionario/reset_senha`, {
+      // fetch(`http://192.168.0.103:3000/funcionario/reset_senha`, {
       "method": "PUT",
       "headers": {
           "Content-Type": "application/json"

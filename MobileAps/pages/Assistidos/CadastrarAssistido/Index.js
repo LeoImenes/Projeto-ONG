@@ -65,7 +65,8 @@ export default function CadastrarAssistido({navigation}){
             cartao_sus: cartSus,
             foto: foto
         }
-    
+        console.log(foto)
+
         fetch(`http://10.87.207.27:3000/assistidos`, {
         // fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
@@ -119,8 +120,8 @@ export default function CadastrarAssistido({navigation}){
       }
 
       useEffect(() => { 
-        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -175,10 +176,16 @@ export default function CadastrarAssistido({navigation}){
           let base = await FileSystem.readAsStringAsync(data.uri, {
             encoding: FileSystem.EncodingType.Base64,
           });
-          
+          let teste = "data:image/jpeg;base64," + base;
+
+        //   setFoto({
+        //     uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
+        //   })
+
           setFoto({
-            uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
+            uri: teste
           })
+          
           setCam(false)
         }
       }
@@ -264,7 +271,7 @@ export default function CadastrarAssistido({navigation}){
                                 </View>
                                 <View style={css.align}>
                                     {
-                                        ( foto === null || foto === undefined) ?
+                                        ( foto === null || foto === undefined || foto === "") ?
                                             <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
                                         :
                                             <Image source={foto} style={global.imageUser}/>
