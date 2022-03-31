@@ -143,6 +143,10 @@ li h2:hover {
     border-bottom: 0.5px solid black;
 }
 
+.Assistencia,.Lancamentos{
+    display: none;
+}
+
 @media (max-width:1366px) {
     .pages p {
         font-size: 14px

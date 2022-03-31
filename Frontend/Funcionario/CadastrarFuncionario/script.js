@@ -22,7 +22,6 @@ adcFoto.addEventListener("click", () => {
 
 function cadastrarFunc() {
     var status;
-    var DemissaoNull;
     var getNome = document.querySelector(".getNome").value
     var getEmail = document.querySelector(".getEmail").value
     var getMatricula = document.querySelector(".getMatricula").value
@@ -33,27 +32,20 @@ function cadastrarFunc() {
     var getCargo = document.querySelector(".getCargo").value
     var getSexo = document.querySelector(".getSexo").value
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
-    var getDemissao = document.querySelector(".getDemissao").value
     var getSenha = document.querySelector(".getSenha").value
 
     var diaNasc = getDataNasc.split("/")[0]
     var mesNasc = getDataNasc.split("/")[1]
     var anoNasc = getDataNasc.split("/")[2]
 
-    var diaDem = getDemissao.split("/")[0]
-    var mesDem = getDemissao.split("/")[1]
-    var anoDem = getDemissao.split("/")[2]
+
 
     var diaAdm = getDataAdmissao.split("/")[0]
     var mesAdm = getDataAdmissao.split("/")[1]
     var anoAdm = getDataAdmissao.split("/")[2]
 
 
-    if (getDemissao == "") {
-        status = 1
-    } else {
-        status = 0
-    }
+ 
     var data = JSON.stringify({
         "foto": fotinho,
         "matricula": getMatricula,
@@ -65,18 +57,17 @@ function cadastrarFunc() {
         "cargo": getCargo,
         "sexo": getSexo,
         "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
-        "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
         "email": getEmail,
         "senha": getSenha,
-        "status": status
+        "status": 1
     })
     console.log(status)
 
 
 
 
-    // fetch("http://10.87.207.27:3000/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
+    fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -85,8 +76,11 @@ function cadastrarFunc() {
         })
         .then(response => { return response.json() })
         .then(data => {
-            console.log(data.err)
-            console.log(data)
+            if(data.success){
+                window.location.reload();
+            }else{
+                alert("Error" + data.error)
+            }
 
         })
 }

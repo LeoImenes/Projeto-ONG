@@ -1,15 +1,15 @@
 function conectar() {
     let email = document.querySelector(".email");
-    let senha = document.querySelector(".senhaVelha");
+    let cpf = document.querySelector(".cpf");
     let nova_senha = document.querySelector(".senhaNova");
     let data = JSON.stringify({
         email: email.value,
-        senha_antiga: senha.value,
+        cpf: cpf.value,
         nova_senha: nova_senha.value,
     });
 
-    //  fetch("http://10.87.207.27:3000/funcionarios",{
-    fetch("http://localhost:3000/funcionario/reset_senha", {
+     fetch("http://10.87.207.27:3000/funcionario/reset_senha",{
+    // fetch("http://localhost:3000/funcionario/reset_senha", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -23,10 +23,7 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
-            if (data.success) {
-                alert("Alteração Realizada com Sucesso");
-                window.location.href = "../../Login";
-            }
+                window.location.href = "../../Login/"
         });
 }
 

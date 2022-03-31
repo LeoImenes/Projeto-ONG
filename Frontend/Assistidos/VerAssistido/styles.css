@@ -97,8 +97,8 @@ section {
 }
 
 .itens {
-    width: 30vh;
-    height: 100%;
+    width: 100vh;
+    height: 45vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -371,9 +371,7 @@ section {
     }
     .dadosPessoais {
         width: 100%;
-        height: 500px;
-        display: flex;
-        align-self: flex-start;
+        height: 300px;
         border-right: 2px solid #e5e5e5;
     }
     #assistidoAntes,
@@ -419,23 +417,15 @@ section {
         border-bottom-right-radius: 15px;
         overflow-y: hidden;
     }
-    .itens {
-        width: 45vh;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4em;
-    }
+
     .itens ul {
-        width: 46vh;
+        width: 50vh;
         height: 20%;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid black;
-        border-right: 1px solid black;
-        border-top: 1px solid black;
+        border: 1px solid black;
+        
     }
     .itens li {
         width: 30%;
