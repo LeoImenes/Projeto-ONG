@@ -12,8 +12,8 @@ export default function ListarFuncionario({navigation}){
     const[ativo, setAtivo] = useState(false)
 
     useEffect(() => {
-        fetch(`http://10.87.207.27:3000/funcionarios`)
-        // fetch(`http://192.168.0.103:3000/funcionarios`)
+        // fetch(`http://10.87.207.27:3000/funcionarios`)
+        fetch(`http://192.168.0.103:3000/funcionarios`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);
@@ -75,7 +75,7 @@ export default function ListarFuncionario({navigation}){
                                     ? 
                                     <TouchableOpacity style={{display: 'none'}}></TouchableOpacity> 
                                     :
-                                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}} key={index}>
+                                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}}>
                                         <Image source={(item.foto === null || item.foto === "") ? require("../../assets/user.png") : {uri: item.foto}} style={global.imageUser}/>
                                         <View style={global.cardTxt}>
                                             <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>

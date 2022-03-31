@@ -119,8 +119,8 @@ export default function CadastrarAssistido({navigation}){
       }
 
       useEffect(() => { 
-        fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-        // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+        // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+        fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
         .then(resp => {return resp.json()})
         .then(async data => {
             let temp = JSON.stringify(data);
@@ -190,7 +190,7 @@ export default function CadastrarAssistido({navigation}){
                 ?
                     <View style={{width: "100%", height: "100%", justifyContent: 'center'}}>
                         <Camera style={{flex: 1}} type={type} ref={camRef}>
-                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: 20}} size={35} color="#166B8A" onPress={() => {}} />
+                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: 20}} size={35} color="#166B8A" onPress={() => {navigation.navigate("CadastrarAssistido")}} />
                             <View style={{flex: 1, backgroundColor: 'transparent', flexDirection: "row"}}>
                                 <View style={{width: '100%', height: '10%', position: 'absolute', bottom: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',marginBottom: "2%"}}>
                                     <TouchableOpacity style={css.buttons} onPress={() => {
