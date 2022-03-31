@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect , useRef } from 'react';
 import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity} from 'react-native';
 
 import global from "../../Global/Style"
-import { Ionicons, Feather} from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Camera } from 'expo-camera';
 
 export default function CadastrarFuncionario({navigation}){
+    const camRef = useRef(null);
+    const[permission, setPermission] = useState(null);
+    const[type, setType] = useState(Camera.Constants.Type.back);
+    const[cam, setCam] = useState(false);
+
     const[nome, setNome] = useState("");
     const[matricula, setMatricula] = useState("")
     const[rg, setRg] = useState("");
@@ -42,8 +48,8 @@ export default function CadastrarFuncionario({navigation}){
             foto: foto
         }
     
-        fetch(`http://10.87.207.27:3000/funcionario`, {
-        // fetch(`http://192.168.0.103:3000/funcionario`, {
+        // fetch(`http://10.87.207.27:3000/funcionario`, {
+        fetch(`http://192.168.0.103:3000/funcionario`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -100,39 +106,103 @@ export default function CadastrarFuncionario({navigation}){
         });
     }
 
+    useEffect(() => {
+        (async () => {
+          const {status} = await Camera.requestCameraPermissionsAsync();
+          setPermission(status === 'granted');
+        })();
+      }, []);
+    
+      if(permission === null){
+        return <View/>;
+      }
+    
+      if(permission === false){
+        return <Text> Acesso negado!</Text>;
+      }
+    
+      async function takePicture(){
+        if(camRef){
+          const data = await camRef.current.takePictureAsync();
+          
+          let base = await FileSystem.readAsStringAsync(data.uri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+          
+          setFoto({
+            uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
+          })
+          setCam(false)
+        }
+    }
+
     return(
         <View style={global.body}>
-            <View style={global.header}>
-                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
-                <View style={global.cardTitle}>
-                    <Text style={global.textTitle}>Casa Acolhedora</Text>
-                    <Text style={global.textTitle}>Irmã Antônia</Text>
-                </View>
-            </View>
-            <View style={global.scroll}>
-                <ScrollView>
-                    <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
-                    <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
-                    <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
-                    <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
-                    <TextInput value={cargo} onChangeText={setCargo} placeholder="Cargo..." style={global.info}></TextInput>
-                    <TextInput value={sexo} onChangeText={setSexo} placeholder="Sexo..." style={global.info}></TextInput>
-                    <TextInput value={dataAdmissao} onChangeText={setDataAdmissao} placeholder="Data admissão..." style={global.info}></TextInput>
-                    <View style={{flexDirection: "row", alignSelf: "center", marginTop: "5%"}}>
-                        <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
-                        <View style={css.imageAlign}>
-                            <Feather name="camera" size={24} color="blue" />
-                            <Text style={{color: "blue"}}>Adicionar foto</Text>
+            {
+                (cam === true)
+                ?
+                    <View style={{width: "100%", height: "100%", justifyContent: 'center'}}>
+                        <Camera style={{flex: 1}} type={type} ref={camRef}>
+                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: 20}} size={35} color="#166B8A" onPress={() => {navigation.navigate("CadastrarFuncionario")}} />
+                            <View style={{flex: 1, backgroundColor: 'transparent', flexDirection: "row"}}>
+                                <View style={{width: '100%', height: '10%', position: 'absolute', bottom: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',marginBottom: "2%"}}>
+                                    <TouchableOpacity style={css.buttons} onPress={() => {
+                                        setType(
+                                            type === Camera.Constants.Type.back
+                                            ? Camera.Constants.Type.front
+                                            : Camera.Constants.Type.back
+                                            )
+                                            }}
+                                    >
+                                        <Ionicons name="md-camera-reverse-outline" size={30} color="white" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={takePicture} style={css.buttons}>
+                                        <MaterialCommunityIcons name="camera-iris" size={50} color="white" />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </Camera>
+                    </View>
+                :
+                <View style={css.body2}>
+                    <View style={global.header}>
+                        <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
+                        <View style={global.cardTitle}>
+                            <Text style={global.textTitle}>Casa Acolhedora</Text>
+                            <Text style={global.textTitle}>Irmã Antônia</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
-                        <Text style={global.buttonText1}>SALVAR</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={global.cardButton1} onPress={() => {atualizar()}}>
-                        <Text style={global.buttonText1}>ATUALIZAR</Text>
-                    </TouchableOpacity>
-                </ScrollView>
-            </View>
+                    <View style={global.scroll}>
+                        <ScrollView>
+                            <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
+                            <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
+                            <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
+                            <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
+                            <TextInput value={cargo} onChangeText={setCargo} placeholder="Cargo..." style={global.info}></TextInput>
+                            <TextInput value={sexo} onChangeText={setSexo} placeholder="Sexo..." style={global.info}></TextInput>
+                            <TextInput value={dataAdmissao} onChangeText={setDataAdmissao} placeholder="Data admissão..." style={global.info}></TextInput>
+                            <View style={{flexDirection: "row", alignSelf: "center", marginTop: "5%"}}>
+                                {
+                                    ( foto === null || foto === undefined) ?
+                                        <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
+                                    :
+                                        <Image source={foto} style={global.imageUser}/>
+                                }
+                                <TouchableOpacity onPress={() => {setCam(true)}} style={css.imageAlign}>
+                                    <Feather name="camera" size={24} color="blue" />
+                                    <Text style={{color: "blue"}}>Adicionar foto</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity style={global.cardButton1} onPress={() => {cadastrar()}}>
+                                <Text style={global.buttonText1}>SALVAR</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={global.cardButton1} onPress={() => {atualizar()}}>
+                                <Text style={global.buttonText1}>ATUALIZAR</Text>
+                            </TouchableOpacity>
+                        </ScrollView>
+                    </View>
+                </View>
+            }
         </View>
     )
 }
@@ -144,6 +214,12 @@ const css = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center"
+    },
+    body2:{
+        width: "100%",
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flexDirection: "column"
     }
 })
 

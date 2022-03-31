@@ -28,6 +28,10 @@ li h2:hover {
     border-radius: 50%;
 }
 
+.config {
+    display: none;
+}
+
 .ham {
     width: 50px
 }

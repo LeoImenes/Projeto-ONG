@@ -49,6 +49,11 @@ function cadastrarFunc() {
     var anoAdm = getDataAdmissao.split("/")[2]
 
 
+    if (getDemissao == "") {
+        status = 1
+    } else {
+        status = 0
+    }
     var data = JSON.stringify({
         "foto": fotinho,
         "matricula": getMatricula,
@@ -63,9 +68,12 @@ function cadastrarFunc() {
         "data_demissao": `${anoDem}-${mesDem}-${diaDem}`,
         "email": getEmail,
         "senha": getSenha,
-        "status": (getDemissao == "") ? 1 : 0
+        "status": status
     })
-    console.log(data)
+    console.log(status)
+
+
+
 
     // fetch("http://10.87.207.27:3000/funcionario", {
     fetch("http://localhost:3000/funcionario", {

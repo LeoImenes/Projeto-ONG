@@ -1,13 +1,13 @@
 var cpf;
 var matricula = localStorage.getItem("funcionario")
- 
+
 
 
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    fetch(`http://10.87.207.27:3000/funcionarios/${local}`,)
-    // fetch(`http://localhost:3000/funcionarios/${local}`)
+    // fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
+    fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -85,7 +85,8 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    fetch(`http://10.87.207.27:3000/funcionario`, {
+    // fetch(`http://10.87.207.27:3000/funcionario`, {
+    fetch(`http://localhost:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -119,7 +120,6 @@ function editarDados() {
 }
 
 function Atualizar() {
-    var Matricula = document.querySelector("#Matricula").value;
     var dataDemissao = document.querySelector("#Data").value;
     var cargo = document.querySelector("#cargo").value;
     var ulEditarDados = document.querySelector(".EditarDados");
@@ -127,13 +127,14 @@ function Atualizar() {
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
 
-    var dia= dataDemissao.split("/")[0]
+    var dia = dataDemissao.split("/")[0]
     var mes = dataDemissao.split("/")[1]
-    var ano= dataDemissao.split("/")[2]
+    var ano = dataDemissao.split("/")[2]
 
-    
+
 
     const data = JSON.stringify({
+        matricula: matricula,
         cargo: cargo,
         data: `${ano}-${mes}-${dia}`,
     });

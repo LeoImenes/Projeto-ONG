@@ -6,7 +6,7 @@
          senha: senha.value,
      });
 
-    //  fetch("http://10.87.207.27:3000/funcionarios",{
+     //  fetch("http://10.87.207.27:3000/funcionarios",{
      fetch('http://localhost:3000/funcionarios', {
              method: "POST",
              headers: {
@@ -44,3 +44,7 @@
          img.src = "../Assets/icones/view.png"
      }
  }
+
+ var esqueci = document.querySelector('.rec-senha').addEventListener("click", () => {
+     window.location.href = "../../RecSenha/"
+ })

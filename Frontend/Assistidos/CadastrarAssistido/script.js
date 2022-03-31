@@ -121,7 +121,7 @@ function cadastrarAssistido() {
                             })
                             .then(response => { return response.json() })
                             .then(data => {
-                                console.log(data)
+                                window.location.reload();
 
                             })
                     }

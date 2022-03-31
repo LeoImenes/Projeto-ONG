@@ -28,6 +28,7 @@ export default function VerAssistido({navigation, route}){
     const[cartCid, setCartCid] = useState("");
     const[cartSus, setCartSus] = useState("");
     const[foto, setFoto] = useState(assistido.foto_depois);
+    const[comorbidade, setComorbidade] = useState([]);
 
     const[DadosFamiliar, setDadosFamiliar] = useState([])
     const[nomeFamiliar, setNomeFamiliar] = useState("");
@@ -39,10 +40,30 @@ export default function VerAssistido({navigation, route}){
 
     useEffect(() => {
         setAssistido(id);
-    })
+        carregarFam();
+        carregarCom();
+    }, [])
 
     const limpar = () => {
-        
+    setNome("");
+    setNomeSocial("");
+    setRg("");
+    setCpf("");
+    setAntCriminal("");
+    setSexo("");
+    setNascimento("");
+    setEstdCivil("");
+    setNaturalidade("");
+    setCartCid("");
+    setCartSus("");
+
+    setDadosFamiliar([])
+    setNomeFamiliar("");
+    setRgFamiliar("");
+    setParentescoFamiliar("");
+    setEmailFamiliar("");
+    setTelefoneFamiliar("");
+    setEnderecoFamiliar("");
     }
 
     const formatDate = (nasc) => {
@@ -54,9 +75,9 @@ export default function VerAssistido({navigation, route}){
         return `${dia}/${mes}/${ano}`;
     }
 
-    const salvarRelatorio = () => {
-        setRelatorio(value)
-    }
+    // const salvarRelatorio = () => {
+    //     setRelatorio(value)
+    // }
 
     const editarDados = () => {
         setEditar(true)
@@ -65,22 +86,9 @@ export default function VerAssistido({navigation, route}){
     const novoFamiliar = () => {
         setEditar(false)
     }
-
-    useFocusEffect(
-        React.useCallback(() => {
-        fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${id.id_assistido}`)
-        .then(resp => {return resp.json()})
-        .then(data => {
-            setDadosFamiliar(data)
-        })
-        .catch(err => {
-            console.log(err) 
-        });
-    }, [])
-    );
-
+    
     const salvarEdicao = () => {
-        let ano = nascimento.split('/')[2]
+            let ano = nascimento.split('/')[2]
             let mes = nascimento.split('/')[1]
             let dia = nascimento.split('/')[0]
             
@@ -100,8 +108,8 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
         
-            fetch(`http://10.87.207.27:3000/assistido/update`, {
-            // fetch(`http://192.168.0.103:3000/assistidos`, {
+            // fetch(`http://10.87.207.27:3000/assistido/update`, {
+            fetch(`http://192.168.0.103:3000/assistidos`, {
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -110,15 +118,10 @@ export default function VerAssistido({navigation, route}){
             })
             .then(resp => {return resp.json()})
             .then(async data => {
+                limpar()
                 ToastAndroid.show('Atualizado!', ToastAndroid.SHORT)
                 setEditar(false)
-                // if(data.err !== undefined) {
-                //     if(data.err.includes("Duplicate entry"))
-                //         ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
-                // } else {
-                //     ToastAndroid.show('Atualizado!', ToastAndroid.SHORT)
-                //     setEditar(false)
-                // }
+                console.log(data)
             })
             .catch(err => {
                 console.log(err) 
@@ -135,8 +138,8 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
-        // fetch(`http://192.168.0.103:3000/assistido/familiar`, {
-        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+        fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -149,6 +152,31 @@ export default function VerAssistido({navigation, route}){
           setFamiliar(false)
         })
         .catch(err => { console.log(err) });
+    }
+
+    const carregarFam = () => {
+        fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${id.id_assistido}`)
+            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${id.id_assistido}`)
+            .then(resp => {return resp.json()})
+            .then(data => {
+                setDadosFamiliar(data)
+            })
+            .catch(err => {
+                console.log(err) 
+            });
+    }
+
+    const carregarCom = () => {
+        fetch(`http://192.168.0.103:3000/assistido/saudeID/${id.id_assistido}`)
+            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${id.id_assistido}`)
+            .then(resp => {return resp.json()})
+            .then(data => {
+                setComorbidade(data)
+                // console.log(data)
+            })
+            .catch(err => {
+                console.log(err) 
+            });
     }
 
     return(
@@ -220,6 +248,16 @@ export default function VerAssistido({navigation, route}){
                                 <Text style={global.textInfo}>Antecedente:</Text>
                                 <Text style={global.textInfo}>{assistido.antecedente_criminal}</Text>
                             </View>
+                            <Text style={{fontSize: 18, color: "black", marginLeft: "10%", fontWeight: "bold"}}>Comorbidade:</Text>
+                            {
+                                comorbidade.map((item, index) => {
+                                    return(
+                                        <View style={global.info} key={index}>
+                                            <Text style={global.textInfo}>{item.comorbidade}</Text>
+                                        </View>
+                                    )
+                                })
+                            }
                             <TouchableOpacity style={css.button} onPress={() => {editarDados()}}>
                                 <Text style={global.buttonText1}>Editar dados</Text>
                             </TouchableOpacity>
@@ -260,7 +298,6 @@ export default function VerAssistido({navigation, route}){
                             (DadosFamiliar !== null && DadosFamiliar !== undefined)
                             ?
                             DadosFamiliar.map((item, index) => {
-                                {console.log(item)}
                                 return(
                                     <View key={index} style={{width: 370, height: 350}}>
                                         <View style={global.info}>
@@ -298,7 +335,7 @@ export default function VerAssistido({navigation, route}){
                     {
                         (familiar === true)
                         ?
-                            <View>
+                            <View style={{width: "100%", height: 550}}>
                                 <Text style={css.title}>Novo Familiar</Text>
                                 <TextInput value={nomeFamiliar} onChangeText={setNomeFamiliar} placeholder="Nome..." place style={global.info}></TextInput>
                                 <TextInput value={rgFamiliar} onChangeText={setRgFamiliar} placeholder="RG..." style={global.info}></TextInput>
@@ -315,7 +352,7 @@ export default function VerAssistido({navigation, route}){
                                 <Text style={global.buttonText1}>Novo Familiar</Text>
                             </TouchableOpacity>
                     }
-                    <Text style={css.title}>Observações</Text>
+                    {/* <Text style={css.title}>Observações</Text>
                     <TextInput multiline
                                 numberOfLines={5}
                                 maxLength={20000}
@@ -324,7 +361,7 @@ export default function VerAssistido({navigation, route}){
                                 style={css.textArea}></TextInput>
                     <TouchableOpacity style={css.button} onPress={() => {salvarRelatorio()}}>
                         <Text style={global.buttonText1}>Novo</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </ScrollView>
             </View>
         </View>
@@ -364,6 +401,6 @@ const css = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 5,
         alignSelf: "center",
-        marginTop: 20
+        marginTop: 20,
     }
 })

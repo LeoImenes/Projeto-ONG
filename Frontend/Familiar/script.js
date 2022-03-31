@@ -8,14 +8,15 @@ function CadastrarFamiliar() {
     let endereco = document.querySelector(".endereco")
 
     var data = JSON.stringify({
-        "id_assistido":  local,
+        "id_assistido": local,
         "nome_completo": nome.value,
         "rg": rg.value,
         "telefone": telefone.value,
         "email": email.value,
         "endereco": endereco.value
     })
-console.log(data)
+    console.log(data)
+
 
     // fetch("http://10.87.207.27:3000/assistido/familiar", {
     fetch("http://localhost:3000/assistido/familiar", {
@@ -27,11 +28,12 @@ console.log(data)
         })
         .then(response => { return response.json() })
         .then(data => {
-            if (data.err === null) {
-                alert("Familiar cadastrado com sucesso")
+            if ((nome.value == "") && (rg.value == "") && (email.value == "") && (endereco.value == "") && (telefone.value == "")) {
+                data = null
+                alert("Falha ao Cadastrar ")
             } else {
-                alert("Falha ao cadastrar")
-                console.log(data.err)
+                alert("Cadastro Efetuado")
+                window.location.href = "../../Assistidos/VerAssistido/"
             }
 
         })

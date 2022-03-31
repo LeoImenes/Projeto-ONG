@@ -103,8 +103,13 @@ function cadastrarAssistido() {
             return response.json();
         })
         .then((data) => {
-            alert("Dados Atualizados Com Sucesso: ");
-            window.location.href = "../../Assistidos/VerAssistido/index.html"
+            if (sex.length == 0) {
+                alert("Preencha os campos Obrigatórios")
+            } else {
+                alert("Dados Atualizados Com Sucesso: ");
+                window.location.href = "../../Assistidos/VerAssistido/index.html"
+            }
+
         });
 }
 

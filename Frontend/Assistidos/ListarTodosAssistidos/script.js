@@ -14,7 +14,7 @@ function list() {
                 var img = document.createElement("img");
                 var cardAssistido = document.createElement("div");
                 var nomeFun = document.createElement("h1");
-                var matricula = document.createElement("h3");
+
 
                 names.push(fun.nome_completo)
 
@@ -26,26 +26,18 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto_antes === null) {
+                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined")) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto_antes
                 }
 
-                if (!fun.status == 0) {
-                    matricula.innerHTML = `Ativo`
-                    matricula.style.color = `green`
-                } else {
-                    matricula.innerHTML = `Inativo`
-                    matricula.style.color = `red`
-                }
 
                 nomeFun.innerHTML = `${fun.nome_completo}`
 
 
                 divimg.appendChild(img)
                 divnome.appendChild(nomeFun)
-                divnome.appendChild(matricula)
                 cardAssistido.appendChild(divimg)
                 cardAssistido.appendChild(divnome)
                 cont.appendChild(cardAssistido)
