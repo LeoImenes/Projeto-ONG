@@ -45,7 +45,7 @@ function cadastrarFunc() {
     var anoAdm = getDataAdmissao.split("/")[2]
 
 
- 
+
     var data = JSON.stringify({
         "foto": fotinho,
         "matricula": getMatricula,
@@ -66,8 +66,8 @@ function cadastrarFunc() {
 
 
 
-    fetch("http://10.87.207.27:3000/funcionario", {
-    // fetch("http://localhost:3000/funcionario", {
+    // fetch("http://10.87.207.27:3000/funcionario", {
+    fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,9 +76,9 @@ function cadastrarFunc() {
         })
         .then(response => { return response.json() })
         .then(data => {
-            if(data.success){
+            if (data.success) {
                 window.location.reload();
-            }else{
+            } else {
                 alert("Error" + data.error)
             }
 

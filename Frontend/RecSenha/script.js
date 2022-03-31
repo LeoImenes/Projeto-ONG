@@ -8,8 +8,8 @@ function conectar() {
         nova_senha: nova_senha.value,
     });
 
-     fetch("http://10.87.207.27:3000/funcionario/reset_senha",{
-    // fetch("http://localhost:3000/funcionario/reset_senha", {
+    //  fetch("http://10.87.207.27:3000/funcionario/reset_senha",{
+    fetch("http://localhost:3000/funcionario/reset_senha", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -23,7 +23,7 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
-                window.location.href = "../../Login/"
+            window.location.href = "../../Login/"
         });
 }
 

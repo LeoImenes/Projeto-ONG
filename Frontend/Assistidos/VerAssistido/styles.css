@@ -97,8 +97,8 @@ section {
 }
 
 .itens {
-    width: 100vh;
-    height: 45vh;
+    width: 30vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -371,7 +371,9 @@ section {
     }
     .dadosPessoais {
         width: 100%;
-        height: 300px;
+        height: 500px;
+        display: flex;
+        align-self: flex-start;
         border-right: 2px solid #e5e5e5;
     }
     #assistidoAntes,
@@ -417,25 +419,28 @@ section {
         border-bottom-right-radius: 15px;
         overflow-y: hidden;
     }
-
+    .itens {
+        width: 45vh;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4em;
+    }
     .itens ul {
-        width: 50vh;
+        width: 46vh;
         height: 20%;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid black;
-        
+        text-align: center;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        border-top: 1px solid black;
     }
     .itens li {
-        width: 30%;
-        margin-left: 0.01em;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-    .itens li:first-child {
-        font-size: 14px;
+        width: 100%;
+        margin-left: 1em;
     }
     .familia h1 {
         font-size: 18px;
@@ -576,15 +581,6 @@ section {
     .familia {
         width: 100%;
     }
-    .dadosFamilia {
-        width: 250px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        border: 1px solid black;
-        border-top-left-radius: 0px;
-        border-bottom-right-radius: 00px;
-    }
     #telaFamiliar {
         width: 50%;
         display: flex;
@@ -623,7 +619,6 @@ section {
         z-index: -1;
         left: 86%;
         bottom: 1.5%;
-        display: none;
         opacity: 0.8;
     }
     .styleBall-bottom-left {
@@ -636,8 +631,137 @@ section {
         z-index: -1;
         right: 86%;
         bottom: 1.5%;
-        display: none;
         opacity: 0.8;
+    }
+    .styleBall-top-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-bottom-right-radius: 50%;
+        z-index: -1;
+        right: 86.5%;
+        top: 10.5%;
+        opacity: 0.8;
+    }
+    .btn {
+        width: 20vw;
+    }
+    .dadosFamilia {
+        display: flex;
+        align-items: center;
+        width: 240px;
+        height: 100%;
+        overflow-y: scroll;
+    }
+    .itens {
+        width: 46vh;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 2em;
+    }
+    .itens ul {
+        width: 22vh;
+        height: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+    }
+    .itens li {
+        width: 100%;
+        margin-left: 1em
+    }
+    .itens li:nth-child(2) {
+        font-weight: bold
+    }
+    .familia img {
+        width: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    section {
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        width: 100%;
+        height: 100%;
+        font-size: 10px;
+    }
+    .fotos ul {
+        font-size: 10px;
+    }
+    .dadosPessoais p {
+        font-size: 10px;
+    }
+    .dadosPessoais ul {
+        flex-wrap: wrap;
+    }
+    .dadosFamilia {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 200px;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .itens {
+        width: 46vh;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 5em
+    }
+    .itens ul {
+        width: 22vh;
+        height: 100%;
+        display: flex;
+        border: 1px solid black;
+        padding: 1em;
+        font-size: 12px;
+    }
+    .itens li {
+        width: 100%;
+        margin-left: 1em
+    }
+    .itens li:nth-child(2) {
+        font-weight: bold
+    }
+    .familia img {
+        width: 15px;
+    }
+    .styleBall-bottom-right {
+        position: fixed;
+        width: 11%;
+        background-color: #166B8A;
+        height: 150px;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        left: 86%;
+        bottom: 1.5%;
+        opacity: 0.8;
+        display: none;
+    }
+    .styleBall-bottom-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        right: 86%;
+        bottom: 1.5%;
+        opacity: 0.8;
+        display: none;
     }
     .styleBall-top-left {
         position: fixed;
@@ -651,35 +775,30 @@ section {
         opacity: 0.8;
         display: none;
     }
-    .btn {
-        width: 20vw;
-    }
-}
-
-@media (max-width: 600px) {
-    .dadosPessoais p {
-        font-size: 10px;
-    }
-    .dadosPessoais ul {
-        flex-wrap: wrap;
-    }
-    .familia {
-        width: 10%;
-    }
-    .dadosFamilia {
-        width: 200px;
-        height: 550px;
-        flex-direction: column;
-        overflow-y: scroll;
-        overflow-x: auto;
-        justify-content: unset;
-    }
-    .itens {
-        height: 100%;
-        padding: 5em;
-    }
-    .itens ul {
+    .pscoativo,
+    .doencas {
         display: flex;
         flex-direction: column;
+        width: 50%;
+        height: 100px;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        border: 1px solid black;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 10px;
+    }
+    .saude {
+        display: flex;
+        height: 35%;
+    }
+    .psclist li,
+    .doclist li {
+        font-size: 10px;
+    }
+    #assistidoAntes,
+    #assistidoDepois {
+        width: 50px;
+        height: 50px;
     }
 }
