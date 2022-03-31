@@ -12,8 +12,8 @@ export default function ListarFuncionario({navigation}){
     const[ativo, setAtivo] = useState(false)
 
     useEffect(() => {
-        // fetch(`http://10.87.207.27:3000/funcionarios`)
-        fetch(`http://192.168.0.103:3000/funcionarios`)
+        fetch(`http://10.87.207.27:3000/funcionarios`)
+        // fetch(`http://192.168.0.103:3000/funcionarios`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);

@@ -4,9 +4,10 @@ import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity}
 import global from "../../Global/Style"
 import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
 import {Picker} from '@react-native-picker/picker';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, CommonActions  } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function VerAssistido({navigation, route}){
+export default function VerAssistido({navigation, route}){ 
     const id = route.params;
 
     const[assistido, setAssistido] = useState([]) 
@@ -38,11 +39,26 @@ export default function VerAssistido({navigation, route}){
     const[telefoneFamiliar, setTelefoneFamiliar] = useState("");
     const[enderecoFamiliar, setEnderecoFamiliar] = useState("");
 
-    useEffect(() => {
-        setAssistido(id);
-        carregarFam();
-        carregarCom();
-    }, [])
+    // useEffect(() => {        
+    //     console.log("TESTE AQUI")
+    // }, [])
+
+    useFocusEffect(
+        React.useCallback(() => {
+            //console.log("teste");
+            //setAssistido();
+            readStorage();
+            carregarFam();
+            carregarCom();
+        }, [])
+    );
+
+    const readStorage = async () => {
+        let assistido = JSON.parse(await AsyncStorage.getItem("assistido"));
+        setAssistido(assistido);
+
+        setNome(assistido.nome_completo);
+    }
 
     const limpar = () => {
     setNome("");
@@ -108,8 +124,8 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
         
-            // fetch(`http://10.87.207.27:3000/assistido/update`, {
-            fetch(`http://192.168.0.103:3000/assistidos`, {
+            fetch(`http://10.87.207.27:3000/assistido/update`, {
+            // fetch(`http://192.168.0.103:3000/assistidos`, {
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -121,7 +137,6 @@ export default function VerAssistido({navigation, route}){
                 limpar()
                 ToastAndroid.show('Atualizado!', ToastAndroid.SHORT)
                 setEditar(false)
-                console.log(data)
             })
             .catch(err => {
                 console.log(err) 
@@ -138,8 +153,8 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
-        fetch(`http://192.168.0.103:3000/assistido/familiar`, {
-        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+        // fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -148,15 +163,15 @@ export default function VerAssistido({navigation, route}){
         })
         .then(resp => {return resp.json()})
         .then(data => {
-          console.log(data)
           setFamiliar(false)
         })
         .catch(err => { console.log(err) });
     }
 
-    const carregarFam = () => {
-        fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${id.id_assistido}`)
-            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${id.id_assistido}`)
+    const carregarFam = async () => {
+        let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
+        // fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${id.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
@@ -166,9 +181,10 @@ export default function VerAssistido({navigation, route}){
             });
     }
 
-    const carregarCom = () => {
-        fetch(`http://192.168.0.103:3000/assistido/saudeID/${id.id_assistido}`)
-            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${id.id_assistido}`)
+    const carregarCom = async () => {
+        let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
+        // fetch(`http://192.168.0.103:3000/assistido/saudeID/${id.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
@@ -182,7 +198,15 @@ export default function VerAssistido({navigation, route}){
     return(
         <View style={global.body}>
             <View style={global.header}>
-                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarAssistidos')}} />
+                <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {
+                    navigation.dispatch(
+                        CommonActions.navigate({
+                          name: 'ListarAssistidos',
+                          params: {},
+                        })
+                      );
+                    //navigation.navigate('')
+                }} />
                 <View style={global.cardTitle}>
                         <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
                         <Text style={global.textTitle}>IRMÃ ANTÔNIA</Text>
@@ -264,7 +288,7 @@ export default function VerAssistido({navigation, route}){
                         </View>
                         :
                         <View>
-                            <TextInput value={assistido.nome_completo} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
+                            <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
                             <TextInput value={assistido.nome_social} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                             <TextInput value={assistido.rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                             <TextInput value={assistido.cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>

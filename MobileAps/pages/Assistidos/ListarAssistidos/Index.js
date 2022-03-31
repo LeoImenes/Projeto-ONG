@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, TextInput 
 
 import global from "../../Global/Style"
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ListarAssistidos({navigation}){
     const[lista, setLista] = useState([]);
@@ -10,8 +11,8 @@ export default function ListarAssistidos({navigation}){
     const [dados, setDados] = useState([]);
 
     useEffect(() => {
-        // fetch(`http://10.87.207.27:3000/assistidos`)
-        fetch(`http://192.168.0.103:3000/assistidos`)
+        fetch(`http://10.87.207.27:3000/assistidos`)
+        // fetch(`http://192.168.0.103:3000/assistidos`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);
@@ -52,7 +53,10 @@ export default function ListarAssistidos({navigation}){
                     {
                         lista.map((item, index) =>{
                             return (
-                                <TouchableOpacity style={global.cardInfo} key={index} onPress={() => {navigation.navigate("VerAssistido", item)}}>
+                                <TouchableOpacity style={global.cardInfo} key={index} onPress={async () => {
+                                    await AsyncStorage.setItem("assistido", JSON.stringify(item));
+                                    navigation.navigate("VerAssistido")
+                                    }}>
                                     <Image source={(item.foto_antes === null || item.foto_antes === "") ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>
                                     <View style={global.cardTxt}>
                                         <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
