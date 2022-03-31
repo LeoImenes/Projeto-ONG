@@ -1,3 +1,4 @@
+const { render } = require('express/lib/response')
 const res = require('express/lib/response')
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
@@ -449,6 +450,29 @@ const getAssistSaude = (req,res) => {
 
 
 
+function resolveVetor(result) {
+
+    return new Promise((resolve,reject) => {
+
+        let json = JSON.parse(result)
+
+
+        if(json !== null){
+
+            resolve(json)
+        }
+
+        else{
+            reject(err)
+        }
+    }
+
+
+
+    )
+}
+
+
 getEmployeeNames = function(id_assistido){
     return new Promise(function(resolve, reject){
       con.query(
@@ -462,6 +486,8 @@ getEmployeeNames = function(id_assistido){
               }
           }
       )}
+
+    
   )}
 
 
@@ -469,33 +495,40 @@ const updateSaude = async (req,res) => {
 
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
-
+    let vetSaude = []
 
     if(req.body.id_assistido !== undefined){
 
-        let string
-        let vetSaude = []
-        let ids_saude
-        let comerro = false
-        let index = 0
-        let stringIDSsaude
+        
+       let resultado = getEmployeeNames(id_assistido)
+        .then((results) => {
 
-        getEmployeeNames(id_assistido)
-        .then(function(results){
-          //render(results)
+            //console.log(results)
+            return results
 
-            results.forEach((item,index) => {
-                vetSaude.push(item)
-                console.log(item)
-            })
-         
-         
         })
         .catch(function(err){
           console.log("Promise rejection error: "+err);
         })
 
+
+        resultado.then((data) => {
+            //console.log("data")
+            console.log(data)
+
+            vetSaude = data
+
+
+        }).catch((err) => {
+
+            console.log(err)
+        })
+
         console.log(vetSaude)
+
+
+        console.log(resultado)
+
         console.log("tamanho vetor " + vetSaude.length)
 
 
