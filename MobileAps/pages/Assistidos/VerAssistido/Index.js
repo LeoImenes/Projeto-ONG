@@ -376,16 +376,13 @@ export default function VerAssistido({navigation, route}){
                                 )
                             })
                             :
-                            <View style={{display: "flex", flexDirection: "row", width: 370, height: 40, justifyContent: "center", alignItems: "center"}}>
+                            <View style={{display: "flex", flexDirection: "row", width: "100%", height: "5%", justifyContent: "center", alignItems: "center"}}>
                                 <Text style={{color: "gray", fontSize: 18, marginRight: 10}}>Nenhum familiar cadastrado</Text>
                                 <Entypo name="emoji-sad" size={20} color="gray" />
                             </View>
                         }
                         </ScrollView>
                     </View>
-                    <TouchableOpacity style={(familiar === true) ? {display: "none"} : {backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, alignSelf: "center", marginTop: 20, marginBottom: "5%"}} onPress={() => { setFamiliar(true)}}>
-                        <Text style={global.buttonText1}>Novo Familiar</Text>
-                    </TouchableOpacity>
                     {
                         (familiar === true)
                         ?
@@ -407,7 +404,7 @@ export default function VerAssistido({navigation, route}){
                                 </View>
                             </View>
                         :
-                            <TouchableOpacity style={css.button} onPress={() => { setFamiliar(true)}}>
+                            <TouchableOpacity style={{backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, alignSelf: "center", marginTop: "5%", marginBottom: "20%"}} onPress={() => { setFamiliar(true)}}>
                                 <Text style={global.buttonText1}>Novo Familiar</Text>
                             </TouchableOpacity>
                     }

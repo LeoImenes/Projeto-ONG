@@ -52,7 +52,7 @@ export default function CadastrarAssistido({navigation}){
         setCartCid("");
         setCartSus("");
         setSelected([]);
-        }
+    }
 
     const getFunc =  async() => {
         let value = await AsyncStorage.getItem('userdata');
@@ -256,7 +256,7 @@ export default function CadastrarAssistido({navigation}){
                                 <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                                 <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
                                 <TextInput value={antCriminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={global.info}></TextInput>
-                                <View style={{width: "80%", alignSelf: "center", borderBottomWidth: 2}}>
+                                <View style={{width: "90%", alignSelf: "center", borderBottomWidth: 2}}>
                                     <Picker
                                         selectedValue={sexo}
                                         onValueChange={(itemValue, itemIndex) =>

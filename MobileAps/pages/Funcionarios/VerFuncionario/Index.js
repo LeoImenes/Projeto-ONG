@@ -10,17 +10,8 @@ export default function VerFuncionario({navigation, route}){
     const {item} = route.params;
 
     const[atualizar, setAtualizar] = useState(false);
-    const[nome, setNome] = useState("");
     const[matricula, setMatricula] = useState("")
-    const[rg, setRg] = useState("");
-    const[cpf, setCpf] = useState("");
-    const[estdCivil, setEstdCivil] = useState("");
-    const[sexo,setSexo] = useState("");
-    const[email,setEmail] = useState("");
-    const[senha,setSenha] = useState("");
     const[cargo, setCargo] = useState("");
-    const[nascimento, setNascimento] = useState("");
-    const[dataAdmissao, setDataAdmissao]= useState("");
     const[dataDemissao, setDataDemissao]= useState("");
 
     const formatDate = (nasc) => {
@@ -33,16 +24,25 @@ export default function VerFuncionario({navigation, route}){
      }
 
      const Atualizar = () => {
-        let anoDem = dataDemissao.split('/')[2]
-        let mesDem = dataDemissao.split('/')[1]
-        let diaDem = dataDemissao.split('/')[0]
         
-        let funcionario = {
-            matricula_funcionario: matricula,
-            cargo: cargo,
-            data_demissao: `${anoDem}-${mesDem}-${diaDem}`,
+        if(dataDemissao !== null){
+            var anoDem = dataDemissao.split('/')[2]
+            var mesDem = dataDemissao.split('/')[1]
+            var diaDem = dataDemissao.split('/')[0]
+
+            var funcionario = {
+                matricula_funcionario: matricula,
+                cargo: cargo,
+                data_demissao: `${anoDem}-${mesDem}-${diaDem}`,
+            }
+        } else {
+            var funcionario = {
+                matricula_funcionario: matricula,
+                cargo: cargo,
+                data_demissao: dataDemissao,
+            }
         }
-    
+
         // fetch(`http://10.87.207.27:3000/funcionario`, {
         fetch(`http://192.168.0.103:3000/funcionarios`, {
           "method": "PUT",
@@ -144,7 +144,7 @@ export default function VerFuncionario({navigation, route}){
                                         <Text style={global.textInfo}>{formatDate(new Date(item.data_demissao))}</Text>
                                     </View>
                                 :
-                                <TouchableOpacity style={global.cardButton1} onPress={() => {setAtualizar(true)}}>
+                                <TouchableOpacity style={css.cardButton1} onPress={() => {setAtualizar(true)}}>
                                     <Text style={global.buttonText1}>ATUALIZAR</Text>
                                 </TouchableOpacity>
                             }
@@ -196,6 +196,7 @@ const css = StyleSheet.create({
       justifyContent: "center",
       borderRadius: 5,
       alignSelf: "center",
-      marginTop: 20
+      marginTop: 20,
+      marginBottom: 20
     }
 })

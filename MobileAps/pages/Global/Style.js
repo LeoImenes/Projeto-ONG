@@ -76,7 +76,7 @@ export default StyleSheet.create({
       color: "white"
     },
     info: {
-      width: "80%",
+      width: "90%",
       height: 40,
       flexDirection: "row",
       justifyContent: "space-between",

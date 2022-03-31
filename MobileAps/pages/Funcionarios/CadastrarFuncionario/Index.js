@@ -1,15 +1,18 @@
 import React, {useState, useEffect , useRef } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid} from 'react-native';
 
 import global from "../../Global/Style"
-import { Ionicons, Feather, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialCommunityIcons, FontAwesome} from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
+import * as FileSystem from 'expo-file-system';
+import {Picker} from '@react-native-picker/picker';
 
 export default function CadastrarFuncionario({navigation}){
     const camRef = useRef(null);
     const[permission, setPermission] = useState(null);
     const[type, setType] = useState(Camera.Constants.Type.back);
     const[cam, setCam] = useState(false);
+    const[mostrar1, setMostrar1] = useState(true);
 
     const[nome, setNome] = useState("");
     const[matricula, setMatricula] = useState("")
@@ -23,6 +26,22 @@ export default function CadastrarFuncionario({navigation}){
     const[nascimento, setNascimento] = useState("");
     const[dataAdmissao, setDataAdmissao]= useState("");
     const[foto, setFoto] = useState("");
+
+    const limpar = () => {
+        setNome("");
+        setRg("");
+        setCpf("");
+        setSexo("");
+        setNascimento("");
+        setCargo("");
+        setDataAdmissao("");
+        setEmail("");
+        setSenha("");
+        setFoto("");
+        setMatricula("");
+        setEstdCivil("")
+           
+    }
 
     const cadastrar = () => {
         let anoNasc = nascimento.split('/')[2]
@@ -59,47 +78,8 @@ export default function CadastrarFuncionario({navigation}){
         .then(resp => {return resp.json()})
         .then(data => {
             console.log(data)
-        })
-        .catch(err => {
-            console.log(err) 
-        });
-    }
-
-    const atualizar = () => {
-        let anoNasc = nascimento.split('/')[2]
-        let mesNasc = nascimento.split('/')[1]
-        let diaNasc = nascimento.split('/')[0]
-
-        let anoDem = nascimento.split('/')[2]
-        let mesDem = nascimento.split('/')[1]
-        let diaDem = nascimento.split('/')[0]
-        
-        let funcionario = {
-            nome_completo: nome,
-            matricula: matricula,
-            rg: rg,
-            cpf: cpf,
-            data_nascimento: `${anoNasc}-${mesNasc}-${diaNasc}`,
-            estado_civil: estdCivil,
-            sexo: sexo,
-            cargo: cargo,
-            email: email,
-            senha: senha,
-            data_demissao: `${anoDem}-${mesDem}-${diaDem}`,
-            foto: foto
-        }
-    
-        // fetch(`http://10.87.207.27:3000/funcionario`, {
-        fetch(`http://192.168.0.103:3000/funcionario`, {
-          "method": "PUT",
-          "headers": {
-              "Content-Type": "application/json"
-          },
-          "body": JSON.stringify(funcionario),
-        })
-        .then(resp => {return resp.json()})
-        .then(data => {
-            console.log(data)
+            ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+            limpar()
         })
         .catch(err => {
             console.log(err) 
@@ -175,15 +155,40 @@ export default function CadastrarFuncionario({navigation}){
                     <View style={global.scroll}>
                         <ScrollView>
                             <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
+                            <TextInput value={matricula} onChangeText={setMatricula} placeholder="Matricula..." style={global.info}></TextInput>
                             <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                             <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
                             <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
                             <TextInput value={cargo} onChangeText={setCargo} placeholder="Cargo..." style={global.info}></TextInput>
-                            <TextInput value={sexo} onChangeText={setSexo} placeholder="Sexo..." style={global.info}></TextInput>
+                            <View style={{width: "90%", alignSelf: "center", borderBottomWidth: 2}}>
+                                    <Picker
+                                        selectedValue={sexo}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            setSexo(itemValue)
+                                        }>
+                                        <Picker.Item label="Sexo..." value="" style={{color: "gray"}}/>
+                                        <Picker.Item label="Feminino" value="Feminino" />
+                                        <Picker.Item label="Masculino" value="Masculino" />
+                                        <Picker.Item label="Outro" value="Outro" />
+                                    </Picker>
+                            </View>
                             <TextInput value={dataAdmissao} onChangeText={setDataAdmissao} placeholder="Data admissão..." style={global.info}></TextInput>
-                            <View style={{flexDirection: "row", alignSelf: "center", marginTop: "5%"}}>
+                            <TextInput value={email} onChangeText={setEmail} placeholder="E-mail..." style={global.info}></TextInput>
+                            <View style={global.info}>
+                                <TextInput style={{width: "90%", height: "100%"}} secureTextEntry={mostrar1} placeholder="Senha" value={senha} onChangeText={setSenha}/>
+                                <TouchableOpacity style={{width: "10%", height: "100%"}} onPress={() => {setMostrar1(!mostrar1)}}>
+                                    {
+                                    (mostrar1 === true)
+                                    ?
+                                    <FontAwesome name="eye" size={24} color="black" />
+                                    :
+                                    <FontAwesome name="eye-slash" size={24} color="black" />
+                                    }
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{flexDirection: "row", alignSelf: "center", marginTop: "5%", marginBottom: "5%"}}>
                                 {
-                                    ( foto === null || foto === undefined) ?
+                                    ( foto === null || foto === undefined || foto === "") ?
                                         <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
                                     :
                                         <Image source={foto} style={global.imageUser}/>
