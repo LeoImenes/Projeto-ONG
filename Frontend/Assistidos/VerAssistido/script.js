@@ -21,72 +21,66 @@ function getFamiliares() {
             return response.json();
         })
         .then((data) => {
-
-
+            var dadosFamilia = document.querySelector(".dadosFamilia")
             data.forEach((item, index) => {
-                var familia = document.createElement('div')
-                // var familias = document.createElement('div')
+                var div = document.createElement("div")
+                var ul_nome = document.createElement("ul")
+                var litxtNome = document.createElement("li")
+                var litgetNome = document.createElement("li")
 
-                var divnome = document.createElement('div')
-                var ulnome = document.createElement('ul')
-                var linome = document.createElement('h2')
+                var ul_rg = document.createElement("ul")
+                var litxtrg = document.createElement("li")
+                var litgetrg = document.createElement("li")
 
-                var divrg = document.createElement('div')
-                var ulrg = document.createElement('ul')
-                var lirg = document.createElement('h2')
+                var ul_rg = document.createElement("ul")
+                var litxtrg = document.createElement("li")
+                var litgetrg = document.createElement("li")
 
+                
+                var ul_par = document.createElement("ul")
+                var litxtpar = document.createElement("li")
+                var litgetpar = document.createElement("li")
 
-                var divpar = document.createElement('div')
-                var ulpar = document.createElement('ul')
-                var lipar = document.createElement('h2')
+                var ul_tel = document.createElement("ul")
+                var litxttel = document.createElement("li")
+                var litgettel = document.createElement("li")
 
+                var ul_tel = document.createElement("ul")
+                var litxttel = document.createElement("li")
+                var litgettel = document.createElement("li")
 
-                var divtl = document.createElement('div')
-                var ultl = document.createElement('ul')
-                var litel = document.createElement('h2')
-
-
-                var divemail = document.createElement('div')
-                var ulemail = document.createElement('ul')
-                var li_email = document.createElement('h2')
-
-
-                var divend = document.createElement('div')
-                var ulend = document.createElement('ul')
-                var liend = document.createElement('h2')
+                var ul_tel = document.createElement("ul")
+                var litxttel = document.createElement("li")
+                var litgettel = document.createElement("li")
 
                 
 
-                linome.innerHTML = "Nome: " + `${item.nome_familiar}`;
-                lirg.innerHTML = "RG: " + ` ${item.rg_familiar}`;
-                lipar.innerHTML = "Parentesco: " + `${item.parentesco}`;
-                litel.innerHTML = "Telefone: " + `${item.telefone_familiar}`;
-                li_email.innerHTML = "Email: " + `${item.email_familiar}`;
-                liend.innerHTML = "Endereco: " + `${item.endereco_familiar}`;
-
-
-
-                divnome.appendChild(linome)
-                divrg.appendChild(lirg)
-                divpar.appendChild(lipar)
-                divtl.appendChild(litel)
-                divemail.appendChild(li_email)
-                divend.appendChild(liend)
-
-
-                familia.appendChild(divnome)
-                familia.appendChild(divrg)
-                familia.appendChild(divpar)
-                familia.appendChild(divpar)
-                familia.appendChild(divtl)
-                familia.appendChild(divemail)
-                familia.appendChild(divend)
-
-                familia.className = "familiaMembros"
-                // familias.appendChild(familia)
-                // familias.className = "familias"
-                dadosFamilia.appendChild(familia)
+                litxtNome.innerHTML = "Nome: "
+                litgetNome.innerHTML = item.nome_familiar
+                litxtrg.innerHTML = "RG: "
+                litgetrg.innerHTML = item.rg_familiar
+                litxtpar.innerHTML = "Parentesco: "
+                litgetpar.innerHTML = item.parentesco
+                litxttel.innerHTML = "Telefone: "
+                litgettel.innerHTML = item.telefone_familiar
+                
+                ul_tel.appendChild(litxttel)
+                ul_tel.appendChild(litgettel)
+                ul_par.appendChild(litxtpar)
+                ul_par.appendChild(litgetpar)
+                ul_rg.appendChild(litxtrg)
+                ul_rg.appendChild(litgetrg)
+                ul_nome.appendChild(litxtNome)
+                ul_nome.appendChild(litgetNome)
+                div.appendChild(ul_nome)
+                div.appendChild(ul_rg)
+                div.appendChild(ul_par)
+                div.appendChild(ul_tel)
+                dadosFamilia.appendChild(div)
+                div.className = "itens"
             });
+            
+            
         });
 }
 
