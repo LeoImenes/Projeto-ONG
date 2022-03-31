@@ -16,7 +16,7 @@ function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
     // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    fetch(`http://localhost:3000/assistido/busca_familiar/23`)
+    fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
