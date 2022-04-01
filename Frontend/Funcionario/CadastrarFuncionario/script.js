@@ -21,14 +21,13 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFunc() {
-    var status;
+    var status = 1;
     var getNome = document.querySelector(".getNome").value
     var getEmail = document.querySelector(".getEmail").value
     var getMatricula = document.querySelector(".getMatricula").value
     var getRG = document.querySelector(".getRG").value
     var getCPF = document.querySelector(".getCPF").value
     var getDataNasc = document.querySelector(".getDataNasc").value
-    var getEstado = document.querySelector(".getEstado").value
     var getCargo = document.querySelector(".getCargo").value
     var getSexo = document.querySelector(".getSexo").value
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
@@ -53,34 +52,29 @@ function cadastrarFunc() {
         "rg": getRG,
         "cpf": getCPF,
         "data_nascimento": `${anoNasc}-${mesNasc}-${diaNasc}`,
-        "estado_civil": getEstado,
         "cargo": getCargo,
         "sexo": getSexo,
         "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
         "email": getEmail,
         "senha": getSenha,
-        "status": 1
+        "status": status,
+        "estado_civil": ""
     })
-    console.log(status)
 
-
-
-
-    // fetch("http://10.87.207.27:3000/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
+    fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: data,
         })
-        .then(response => { return response.json() })
-        .then(data => {
-            if (data.success) {
-                window.location.reload();
-            } else {
-                alert("Error" + data.error)
-            }
-
+        .then(response => {
+            return response.json()
         })
+
+    .then(data => {
+        console.log(data)
+        alert("Cadastro efetuado!")
+    })
 }

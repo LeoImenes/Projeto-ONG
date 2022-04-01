@@ -123,7 +123,7 @@ export default function VerAssistido({navigation, route}){
             }
         
             // fetch(`http://10.87.207.27:3000/assistido/update`, {
-            fetch(`http://192.168.0.103:3000/assistidos`, {
+            fetch(`http://192.168.137.1:3000/assistidos`, {
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -151,7 +151,7 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
-        fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        fetch(`http://192.168.137.1:3000/assistido/familiar`, {
         // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
@@ -168,7 +168,7 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+        fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs.id_assistido}`)
             // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {
@@ -182,7 +182,7 @@ export default function VerAssistido({navigation, route}){
 
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        fetch(`http://192.168.0.103:3000/assistido/saudeID/${idAs.id_assistido}`)
+        fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs.id_assistido}`)
             // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
             .then(resp => {return resp.json()})
             .then(data => {

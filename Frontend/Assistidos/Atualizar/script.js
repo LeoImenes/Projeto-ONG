@@ -91,8 +91,8 @@ function cadastrarAssistido() {
 
     console.log(data)
 
-    // fetch("http://10.87.207.27:3000/assistido/update", {
-    fetch("http://localhost:3000/assistido/update", {
+    fetch("http://10.87.207.27:3000/assistido/update", {
+    // fetch("http://localhost:3000/assistido/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -109,8 +109,8 @@ function cadastrarAssistido() {
 }
 
 function getAssistido() {
-    fetch(`http://localhost:3000/assistidos/${func}`)
-        // fetch(`http://10.87.207.27:3000/assistidos/${func}`)
+    // fetch(`http://localhost:3000/assistidos/${func}`)
+        fetch(`http://10.87.207.27:3000/assistidos/${func}`)
         .then((response) => {
             return response.json();
         })

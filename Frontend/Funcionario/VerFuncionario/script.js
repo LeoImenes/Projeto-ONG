@@ -6,8 +6,8 @@ var matricula = localStorage.getItem("funcionario")
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    // fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
-    fetch(`http://localhost:3000/funcionarios/${local}`)
+    fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
+    // fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -85,8 +85,8 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    // fetch(`http://10.87.207.27:3000/funcionario`, {
-    fetch(`http://localhost:3000/funcionario`, {
+    fetch(`http://10.87.207.27:3000/funcionario`, {
+    // fetch(`http://localhost:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function cadastrarFotoDepois() {
             if (data.err !== undefined) {
                 alert("Error: " + data.err);
             } else {
-                window.location.reload;
+                window.location.reload();
             }
         });
 }
@@ -138,8 +138,8 @@ function Atualizar() {
         cargo: cargo,
         data: `${ano}-${mes}-${dia}`,
     });
-    // fetch(`http://10.87.207.27:3000/funcionarios`, {
-    fetch(`http://localhost:3000/funcionarios`, {
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
+    // fetch(`http://localhost:3000/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

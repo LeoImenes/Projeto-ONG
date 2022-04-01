@@ -13,7 +13,7 @@ export default function ListarFuncionario({navigation}){
 
     useEffect(() => {
         // fetch(`http://10.87.207.27:3000/funcionarios`)
-        fetch(`http://192.168.0.103:3000/funcionarios`)
+        fetch(`http://192.168.137.1:3000/funcionarios`)
         .then(resp => {return resp.json()})
         .then(data => {
             setLista(data);

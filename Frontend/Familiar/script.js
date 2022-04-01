@@ -6,6 +6,7 @@ function CadastrarFamiliar() {
     let telefone = document.querySelector(".telefone")
     let email = document.querySelector(".email")
     let endereco = document.querySelector(".endereco")
+    let parentesco = document.querySelector(".parentesco")
 
     var data = JSON.stringify({
         "id_assistido": local,
@@ -18,8 +19,8 @@ function CadastrarFamiliar() {
     console.log(data)
 
 
-    // fetch("http://10.87.207.27:3000/assistido/familiar", {
-    fetch("http://localhost:3000/assistido/familiar", {
+    fetch("http://10.87.207.27:3000/assistido/familiar", {
+    // fetch("http://localhost:3000/assistido/familiar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
