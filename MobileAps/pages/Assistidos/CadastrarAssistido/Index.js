@@ -52,6 +52,7 @@ export default function CadastrarAssistido({navigation}){
         setCartCid("");
         setCartSus("");
         setSelected([]);
+        setFoto("");
     }
 
     const getFunc =  async() => {
@@ -80,7 +81,6 @@ export default function CadastrarAssistido({navigation}){
             cartao_sus: cartSus,
             foto: foto
         }
-        console.log(foto)
 
         fetch(`http://10.87.207.27:3000/assistidos`, {
         // fetch(`http://192.168.0.103:3000/assistidos`, {
@@ -92,6 +92,7 @@ export default function CadastrarAssistido({navigation}){
         })
         .then(resp => {return resp.json()})
         .then(async data => {
+            console.log(data)
             if(data.err !== undefined) {
                 if(data.err.includes("Duplicate entry"))
                     ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
@@ -111,11 +112,13 @@ export default function CadastrarAssistido({navigation}){
                 })
                 .then(resp => {return resp.json()})
                 .then(async data => {
+                    console.log("oi", data)
                     if(data.err !== undefined) {
                         console.log(data)
                     }else{
                         ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
                         limpar()
+                        
                     }
                 })
             }
@@ -191,26 +194,20 @@ export default function CadastrarAssistido({navigation}){
         return <Text> Acesso negado!</Text>;
       }
     
-      async function takePicture(){
+    async function takePicture(){
         if(camRef){
-          const data = await camRef.current.takePictureAsync();
-          
-          let base = await FileSystem.readAsStringAsync(data.uri, {
+            const data = await camRef.current.takePictureAsync();
+            let base = await FileSystem.readAsStringAsync(data.uri, {
             encoding: FileSystem.EncodingType.Base64,
-          });
-          let teste = "data:image/jpeg;base64," + base;
+            });
 
-        //   setFoto({
-        //     uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
-        //   })
+            let url = data.uri.split(".");
+            let b64 = `data:image/${url[url.length-1]};base64,${base}` ;
 
-          setFoto({
-            uri: teste
-          })
-          
-          setCam(false)
+            setFoto(b64)
+            setCam(false)
         }
-      }
+    }
 
     return(
         <View style={global.body} onLoad={getFunc()}>
@@ -296,7 +293,7 @@ export default function CadastrarAssistido({navigation}){
                                         ( foto === null || foto === undefined || foto === "") ?
                                             <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
                                         :
-                                            <Image source={foto} style={global.imageUser}/>
+                                            <Image source={{"uri":foto}} style={global.imageUser}/>
                                     }
                                     <TouchableOpacity style={css.alignIcon} onPress={() => {setCam(true)}}>
                                         <Feather name="camera" size={24} color="blue" style={{marginRight: 10}}/>
