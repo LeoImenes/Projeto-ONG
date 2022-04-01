@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, ToastAndroid} from 'react-native';
 
 import global from "../../Global/Style"
 import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
@@ -56,6 +56,16 @@ export default function VerAssistido({navigation, route}){
         setAssistido(assistido);
 
         setNome(assistido.nome_completo);
+        setNomeSocial(assistido.nome_social);
+        setRg(assistido.rg);
+        setCpf(assistido.cpf);
+        setAntCriminal(assistido.antecedente_criminal);
+        setEstdCivil(assistido.estado_civil);
+        setNaturalidade(assistido.naturalidade);
+        setCartCid(assistido.cartao_cidadao);
+        setCartSus(assistido.cartao_sus);
+        setNascimento(assistido.data_nascimento);
+        setSexo(assistido.sexo);
     }
 
     const limpar = () => {
@@ -122,8 +132,13 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
         
+<<<<<<< HEAD
             // fetch(`http://10.87.207.27:3000/assistido/update`, {
             fetch(`http://192.168.137.1:3000/assistidos`, {
+=======
+            fetch(`http://10.87.207.27:3000/assistido/update`, {
+            // fetch(`http://192.168.0.103:3000/assistido/update`, {
+>>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -131,10 +146,11 @@ export default function VerAssistido({navigation, route}){
               "body": JSON.stringify(Assistido),
             })
             .then(resp => {return resp.json()})
-            .then(async data => {
-                limpar()
+            .then(data => {
                 ToastAndroid.show('Atualizado!', ToastAndroid.SHORT)
+                limpar()
                 setEditar(false)
+                readStorage()
             })
             .catch(err => {
                 console.log(err) 
@@ -151,8 +167,13 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
+<<<<<<< HEAD
         fetch(`http://192.168.137.1:3000/assistido/familiar`, {
         // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+=======
+        // fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+>>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -168,12 +189,16 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
+<<<<<<< HEAD
         fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs.id_assistido}`)
             // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+=======
+        // fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+>>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
-                console.log(data)
             })
             .catch(err => {
                 console.log(err) 
@@ -182,8 +207,13 @@ export default function VerAssistido({navigation, route}){
 
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
+<<<<<<< HEAD
         fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs.id_assistido}`)
             // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
+=======
+        // fetch(`http://192.168.0.103:3000/assistido/saudeID/${idAs.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
+>>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
@@ -311,11 +341,11 @@ export default function VerAssistido({navigation, route}){
                         :
                         <View>
                             <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
-                            <TextInput value={assistido.nome_social} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
-                            <TextInput value={assistido.rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
-                            <TextInput value={assistido.cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
-                            <TextInput value={assistido.antecedente_criminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={global.info}></TextInput>
-                            <View style={{width: "80%", alignSelf: "center", borderBottomWidth: 2}}>
+                            <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
+                            <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
+                            <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>
+                            <TextInput value={antCriminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={global.info}></TextInput>
+                            <View style={{width: "90%", alignSelf: "center", borderBottomWidth: 2}}>
                                 <Picker
                                     selectedValue={sexo}
                                     onValueChange={(itemValue, itemIndex) =>
@@ -327,11 +357,11 @@ export default function VerAssistido({navigation, route}){
                                     <Picker.Item label="Outro" value="Outro" />
                                 </Picker>
                             </View>
-                            <TextInput value={formatDate(new Date(assistido.data_nascimento))} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
-                            <TextInput value={assistido.estado_civil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={global.info}></TextInput>
-                            <TextInput value={assistido.naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
-                            <TextInput value={assistido.cartao_cidadao} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
-                            <TextInput value={assistido.cartao_sus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
+                            <TextInput value={formatDate(new Date(nascimento))} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
+                            <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={global.info}></TextInput>
+                            <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
+                            <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>
+                            <TextInput value={cartSus} onChangeText={setCartSus} placeholder="Cartão do SUS..." style={global.info}></TextInput>
                             <View style={{alignItems: 'center', justifyContent: 'space-evenly', flexDirection: "row", marginBottom: 15}}>
                                 <TouchableOpacity onPress={() => {setEditar(false)}} style={{alignItems: 'center', justifyContent: 'center', width: "35%", height: 45,  marginTop: 20}}>
                                     <Text style={{fontSize:18, color: "#166B8A", fontWeight: "bold"}}>Cancelar</Text>
