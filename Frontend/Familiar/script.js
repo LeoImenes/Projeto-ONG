@@ -6,6 +6,7 @@ function CadastrarFamiliar() {
     let telefone = document.querySelector(".telefone")
     let email = document.querySelector(".email")
     let endereco = document.querySelector(".endereco")
+    let parentesco = document.querySelector(".parentesco")
 
     var data = JSON.stringify({
         "id_assistido": local,

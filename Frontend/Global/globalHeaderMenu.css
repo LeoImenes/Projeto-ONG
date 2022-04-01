@@ -1,4 +1,11 @@
 @import url("../../Global/globalHeader.css");
+p,
+h1,
+h2,
+h3 {
+    font-size: 1em
+}
+
 .menuJS {
     position: absolute;
     top: 15%;
@@ -143,7 +150,8 @@ li h2:hover {
     border-bottom: 0.5px solid black;
 }
 
-.Assistencia,.Lancamentos{
+.Assistencia,
+.Lancamentos {
     display: none;
 }
 

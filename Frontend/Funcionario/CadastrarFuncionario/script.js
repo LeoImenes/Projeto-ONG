@@ -21,7 +21,7 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFunc() {
-    var status;
+    var status = 1;
     var getNome = document.querySelector(".getNome").value
     var getEmail = document.querySelector(".getEmail").value
     var getMatricula = document.querySelector(".getMatricula").value
@@ -57,12 +57,9 @@ function cadastrarFunc() {
         "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
         "email": getEmail,
         "senha": getSenha,
-        "status": 1
+        "status": status,
+        "estado_civil": ""
     })
-    console.log(status)
-
-
-
 
     // fetch("http://10.87.207.27:3000/funcionario", {
     fetch("http://localhost:3000/funcionario", {
@@ -72,9 +69,12 @@ function cadastrarFunc() {
             },
             body: data,
         })
-        .then(response => { return response.json() })
-        .then(data => {
-            console.log(data)
-            alert("Cadastro efetuado!")
+        .then(response => {
+            return response.json()
         })
+
+    .then(data => {
+        console.log(data)
+        alert("Cadastro efetuado!")
+    })
 }

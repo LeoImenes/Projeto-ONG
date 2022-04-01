@@ -100,7 +100,7 @@ function cadastrarFotoDepois() {
             if (data.err !== undefined) {
                 alert("Error: " + data.err);
             } else {
-                window.location.reload;
+                window.location.reload();
             }
         });
 }

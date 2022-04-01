@@ -21,8 +21,10 @@ function getFamiliares() {
             return response.json();
         })
         .then((data) => {
+
             var dadosFamilia = document.querySelector(".dadosFamilia")
             data.forEach((item, index) => {
+                console.log(item.email_familiar)
                 var div = document.createElement("div")
                 var ul_nome = document.createElement("ul")
                 var litxtNome = document.createElement("li")
@@ -64,7 +66,7 @@ function getFamiliares() {
                 litxttel.innerHTML = "Telefone: "
                 litgettel.innerHTML = item.telefone_familiar
                 litxtemail.innerHTML = "Email: "
-                litgetemail.innerHTML - item.email_familiar
+                litgetemail.innerHTML = item.email_familiar
                 litxtend.innerHTML = "Endereço: "
                 litgeend.innerHTML = item.endereco_familiar
 
@@ -175,16 +177,49 @@ function list() {
             let datanasc = document.querySelector(".data");
             let cartCid = document.querySelector(".cartcid");
             let cartSUs = document.querySelector(".cartSus");
+            let antecedente = document.querySelector(".ant")
             let sex = document.querySelector(".sex");
 
+
+            if (data.antecedente_criminal == null) {
+                antecedente.innerHTML = "Não possui"
+            } else {
+                antecedente.innerHTML = data.antecedente_criminal;
+            }
+
+            if (data.cpf == null) {
+                cpf.innerHTML = "Não possui"
+            } else {
+                cpf.innerHTML = data.cpf;
+            }
+
+            if (data.nome_social == null) {
+                nomeSoc.innerHTML = "Não possui"
+            } else {
+                nomeSoc.innerHTML = data.nome_social;
+            }
+
+            if (data.cartao_sus == null) {
+                cartSUs.innerHTML = "Não possui"
+            } else {
+                cartSUs.innerHTML = data.cartao_sus;
+            }
+            if (data.cartao_cidadao == null) {
+                cartCid.innerHTML = "Não possui"
+            } else {
+                cartCid.innerHTML = data.cartao_cidadao;
+            }
+
+
             nome.innerHTML = data.nome_completo;
-            nomeSoc.innerHTML = data.nome_social;
+            nomeSoc
             rg.innerHTML = data.rg;
-            cpf.innerHTML = data.cpf;
+            cpf
             datanasc.innerHTML = dataNascimento;
-            cartCid.innerHTML = data.cartao_cidadao;
-            cartSUs.innerHTML = data.cartao_sus;
+            cartCid
+            cartSUs
             sex.innerHTML = data.sexo;
+            antecedente
         });
 }
 

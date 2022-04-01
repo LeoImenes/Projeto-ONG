@@ -35,7 +35,7 @@ function cadastrarAssistido() {
     var nasc = document.querySelector(".nasc").value;
     var cartCid = document.querySelector(".cartCid");
     var cartSus = document.querySelector(".cartSus");
-    var ante = document.querySelector(".ant")
+    var ante = document.querySelector(".ante").value
 
     var dia = nasc.split("/")[0]
     var mes = nasc.split("/")[1]
@@ -84,8 +84,8 @@ function cadastrarAssistido() {
         "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
         "foto": fotinho,
-        "antecedente_criminal": ante.value,
-        // "foto_depois": fotinho
+        "antecedente_criminal": ante
+            // "foto_depois": fotinho
     })
 
     // fetch("http://10.87.207.27:3000/assistidos", {
