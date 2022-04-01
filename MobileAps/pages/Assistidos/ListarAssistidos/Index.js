@@ -13,8 +13,8 @@ export default function ListarAssistidos({navigation}){
 
     useFocusEffect(
         React.useCallback(() => {
-            // fetch(`http://10.87.207.27:3000/assistidos`)
-            fetch(`http://192.168.0.103:3000/assistidos`)
+            fetch(`http://10.87.207.27:3000/assistidos`)
+            // fetch(`http://192.168.0.103:3000/assistidos`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setLista(data);

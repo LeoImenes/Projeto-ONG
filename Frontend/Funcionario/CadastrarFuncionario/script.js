@@ -28,7 +28,6 @@ function cadastrarFunc() {
     var getRG = document.querySelector(".getRG").value
     var getCPF = document.querySelector(".getCPF").value
     var getDataNasc = document.querySelector(".getDataNasc").value
-    var getEstado = document.querySelector(".getEstado").value
     var getCargo = document.querySelector(".getCargo").value
     var getSexo = document.querySelector(".getSexo").value
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
@@ -53,7 +52,6 @@ function cadastrarFunc() {
         "rg": getRG,
         "cpf": getCPF,
         "data_nascimento": `${anoNasc}-${mesNasc}-${diaNasc}`,
-        "estado_civil": getEstado,
         "cargo": getCargo,
         "sexo": getSexo,
         "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
@@ -76,11 +74,7 @@ function cadastrarFunc() {
         })
         .then(response => { return response.json() })
         .then(data => {
-            if (data.success) {
-                window.location.reload();
-            } else {
-                alert("Error" + data.error)
-            }
-
+            console.log(data)
+            alert("Cadastro efetuado!")
         })
 }

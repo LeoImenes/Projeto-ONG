@@ -43,8 +43,8 @@ export default function VerFuncionario({navigation, route}){
             }
         }
 
-        // fetch(`http://10.87.207.27:3000/funcionario`, {
-        fetch(`http://192.168.0.103:3000/funcionarios`, {
+        fetch(`http://10.87.207.27:3000/funcionario`, {
+        // fetch(`http://192.168.0.103:3000/funcionarios`, {
           "method": "PUT",
           "headers": {
               "Content-Type": "application/json"
@@ -72,15 +72,9 @@ export default function VerFuncionario({navigation, route}){
     );
 
     const readStorage = async () => {
-        // setNome(item.nome_completo);
-        // setRg(item.rg);
-        // setCpf(item.cpf);
-        // setNascimento(formatDate(new Date(item.data_nascimento)))
         setCargo(item.cargo);
         setMatricula(item.matricula);
         setDataDemissao(item.data_demissao)
-        // setSexo(item.sexo);
-        // setDataAdmissao(formatDate(new Date(item.data_admissao)))
     }
 
     return(

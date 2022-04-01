@@ -82,8 +82,8 @@ export default function CadastrarAssistido({navigation}){
         }
         console.log(foto)
 
-        // fetch(`http://10.87.207.27:3000/assistidos`, {
-        fetch(`http://192.168.0.103:3000/assistidos`, {
+        fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://192.168.0.103:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -101,8 +101,8 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    fetch(`http://192.168.0.103:3000/assistido/saude`, {
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                    // fetch(`http://192.168.0.103:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -137,8 +137,8 @@ export default function CadastrarAssistido({navigation}){
 
       useFocusEffect(
         React.useCallback(() => {
-            // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
-            fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
+            fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+            // fetch(`http://192.168.0.103:3000/assistido/comorbidade`)
             .then(resp => {return resp.json()})
             .then(async data => {
                 let temp = JSON.stringify(data);

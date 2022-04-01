@@ -67,8 +67,8 @@ export default function CadastrarFuncionario({navigation}){
             foto: foto
         }
     
-        // fetch(`http://10.87.207.27:3000/funcionario`, {
-        fetch(`http://192.168.0.103:3000/funcionario`, {
+        fetch(`http://10.87.207.27:3000/funcionario`, {
+        // fetch(`http://192.168.0.103:3000/funcionario`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
