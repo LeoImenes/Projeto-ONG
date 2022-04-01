@@ -3,6 +3,8 @@ const res = require('express/lib/response')
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
+const fs = require('fs')
+
 
 const getAll = (req,res) => {
 
@@ -104,6 +106,7 @@ const buscarAssistidoCPF = (req,res) => {
 
 const postAssistido = (req,res) => {
 
+    req.connection.setTimeout(120000);
     // Campos referentes a tabela de assistidos do banco de dados 
     let nome_social
     let rg 
@@ -114,7 +117,7 @@ const postAssistido = (req,res) => {
     let foto_antes 
     let foto_depois
 
-   
+  //og(req.body.foto)
    
     if(req.body.nome_social === undefined){
         nome_social = null
@@ -172,25 +175,38 @@ const postAssistido = (req,res) => {
     }
 
 
+    //console.log(foto_antes)
+    //foto_antes = "teste"
+
     let string = `insert into assistidos(id_funcionario, nome_completo, nome_social, rg,
         cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
-        values ?;`
+        values (${req.body.id_funcionario}, "${req.body.nome_completo}", "${nome_social}", "${rg}", "${cpf}", "${req.body.data_nascimento}", "${ req.body.estado_civil}",
+            "${naturalidade}", "${req.body.sexo}", "${cartao_cidadao}", "${cartao_sus}", "${foto_antes}", "${foto_depois}");`
+
+
+        fs.writeFile('./test.txt', string, err => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        //file written successfully
+        })
 
     let values = [
         [
             req.body.id_funcionario,
             req.body.nome_completo,
-            nome_social,
-            rg,
-            cpf,
+            `${nome_social}`,
+            `${rg}`,
+            `${cpf}`,
             req.body.data_nascimento,
             req.body.estado_civil,
-            naturalidade,
+            `${naturalidade}`,
             req.body.sexo,
             cartao_cidadao,
             cartao_sus,
-            foto_antes,
-            foto_depois
+            `${foto_antes}`,
+            `${foto_depois}`
 
         ]
         
@@ -199,10 +215,11 @@ const postAssistido = (req,res) => {
 
 
 
-    con.query(string, [values], (err,result) => {
+    con.query(string, (err,result) => {
 
-        if(err == null){
-            res.status(200).json({...req.body, id_assistido: result.insertId})
+        if(err === null){
+            //console.log(string)
+            res.status(200).json({...req.body, id_assistido: result.insertId}).end()
             let id_gerado = result.insertId
 
             // id_comorbidades 
@@ -219,7 +236,7 @@ const postAssistido = (req,res) => {
             // console.log(id_gerado)
         }
         else{
-            res.status(400).json({err: err.message})
+            res.status(400).json({testeerr: err.message}).end()
         }
     })
 
@@ -450,28 +467,6 @@ const getAssistSaude = (req,res) => {
 
 
 
-function resolveVetor(result) {
-
-    return new Promise((resolve,reject) => {
-
-        let json = JSON.parse(result)
-
-
-        if(json !== null){
-
-            resolve(json)
-        }
-
-        else{
-            reject(err)
-        }
-    }
-
-
-
-    )
-}
-
 
 getEmployeeNames = function(id_assistido){
     return new Promise(function(resolve, reject){
@@ -503,49 +498,34 @@ const updateSaude = async (req,res) => {
        let resultado = getEmployeeNames(id_assistido)
         .then((results) => {
 
-            //console.log(results)
-            return results
+           // console.log(results)
 
+            // results.forEach((item,index) => {
+
+            //     console.log(item)
+            // })
+            
+            if(results.length > 0){
+
+                res.status(200).json(results).end()
+    
+            }else{
+    
+                res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
+            }
+    
+    
         })
         .catch(function(err){
           console.log("Promise rejection error: "+err);
+          res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
         })
 
-
-        resultado.then((data) => {
-            //console.log("data")
-            console.log(data)
-
-            vetSaude = data
-
-
-        }).catch((err) => {
-
-            console.log(err)
-        })
-
-        console.log(vetSaude)
-
-
-        console.log(resultado)
-
-        console.log("tamanho vetor " + vetSaude.length)
-
-
-        if(vetSaude.length > 0){
-
-            res.status(200).json(vetSaude)
-
-        }else{
-
-            res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
-        }
-
-
+        //console.log("tamanho vetor " + vetSaude.length)
 
     }
     else{
-        res.status(400).json({"err": "informe a comorbidade e o id_saude"})
+        res.status(400).json({"err": "informe a comorbidade e o id_saude"}).end()
     }
 }
 
