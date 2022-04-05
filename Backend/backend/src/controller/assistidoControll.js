@@ -117,7 +117,6 @@ const postAssistido = (req,res) => {
     let foto_antes 
     let foto_depois
 
-  //og(req.body.foto)
    
     if(req.body.nome_social === undefined){
         nome_social = null
@@ -175,9 +174,6 @@ const postAssistido = (req,res) => {
     }
 
 
-    //console.log(foto_antes)
-    //foto_antes = "teste"
-
     let string = `insert into assistidos(id_funcionario, nome_completo, nome_social, rg,
         cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
         values (${req.body.id_funcionario}, "${req.body.nome_completo}", "${nome_social}", "${rg}", "${cpf}", "${req.body.data_nascimento}", "${ req.body.estado_civil}",
@@ -189,38 +185,15 @@ const postAssistido = (req,res) => {
             console.error(err)
             return
         }
-        //file written successfully
-        })
-
-    let values = [
-        [
-            req.body.id_funcionario,
-            req.body.nome_completo,
-            `${nome_social}`,
-            `${rg}`,
-            `${cpf}`,
-            req.body.data_nascimento,
-            req.body.estado_civil,
-            `${naturalidade}`,
-            req.body.sexo,
-            cartao_cidadao,
-            cartao_sus,
-            `${foto_antes}`,
-            `${foto_depois}`
-
-        ]
         
-    ]
-
-
-
+        })
 
     con.query(string, (err,result) => {
 
         if(err === null){
-            //console.log(string)
+            
             res.status(200).json({...req.body, id_assistido: result.insertId}).end()
-            let id_gerado = result.insertId
+           
 
             // id_comorbidades 
             // 01 - HIV
@@ -233,7 +206,6 @@ const postAssistido = (req,res) => {
             // 08 - OX
             // 09 - Álcool
 
-            // console.log(id_gerado)
         }
         else{
             res.status(400).json({testeerr: err.message}).end()
@@ -485,34 +457,186 @@ getEmployeeNames = function(id_assistido){
     
   )}
 
+ async function deleteSaude(string) {
+
+    return new Promise((resolve,reject) => {
+
+		con.query(string, (err,result) => {
+			
+			if(err === null){
+				console.log(result)
+				resolve(result)
+			}else{
+				console.log(err)
+				reject(err)
+			}
+			
+		})
+        
+
+    })
+
+}
+
+
+async function inserirComorbidades(string){
+	
+	return new Promise((resolve,reject) => {
+		
+		con.query(string, (err,result) => {
+			
+			
+			if(err === null){
+				
+				resolve(result)
+			}
+			else{
+				
+				reject(err)
+				
+			}
+		})	
+	})
+}
+
+
+
+
+
+
+
 
 const updateSaude = async (req,res) => {
 
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
-    let vetSaude = []
+    let string
+    let comerro = false
+    let index = 0
+
+    let newIndice = 0
+    let newCommerro = false
+    let newString
+
 
     if(req.body.id_assistido !== undefined){
 
+        console.log(comorbidades)
         
        let resultado = getEmployeeNames(id_assistido)
-        .then((results) => {
-
-           // console.log(results)
-
-            // results.forEach((item,index) => {
-
-            //     console.log(item)
-            // })
+        .then(async (results) => {
             
             if(results.length > 0){
 
-                res.status(200).json(results).end()
+                //res.status(200).json(results).end()
+
+                try{
+
+                    con.beginTransaction()
+
+                    do{
+                        
+                        string = `delete from saude where id_saude = ${results[index].id_saude}`
+
+                        console.log("query update: " + string)
+                        
+                        let novaResponse = await deleteSaude(string)
+                        
+                        .then(() => {
+                            
+                            if(index + 1 === results.length){
+                                
+                                con.commit()
+                                
+                                //res.status(200).json({ok:"ok"});
+                                comerro = true;
+                                
+                            }
+                            
+                        })
+                        .catch((err) => {
+                            con.rollback()
+                            res.status(400).json({err})
+                            
+                            comerro = true
+                        })
+                        
+                    index++
+                    }while(!comerro)
+                    
+
+
+                    if(comorbidades.length > 0){
+
+                        try{
+                            con.beginTransaction()
+
+                            do{
+
+                                newString = `insert into saude (id_assistido, id_comorbidade, data_de_registro) values (${id_assistido}, ${comorbidades[newIndice].value}, curdate())`
+
+    
+
+                                let executeQuery = await inserirComorbidades(newString)
+
+                                .then(() => {
+
+                                    if(newIndice + 1 === comorbidades.length){
+
+                                        con.commit()
+                                        res.status(200).json({ok:"ok"})
+                                        newCommerro = true
+
+                                    }
+
+                                }).catch((err) => {
+
+                                        con.rollback()
+                                        res.status(400).json({err})
+                                        newCommerro = true
+
+
+                                })
+
+
+                            newIndice++
+                            }while(!newCommerro)
+
+
+                        }catch{
+
+                            res.status(400).json({err : err.message})
+                        }
+
+
+
+
+                    }else{
+
+                        res.status(400).json({"err": "campos de comorbidades vazios"})
+                    }
+
+
+
+
+                    
+                    
+                    
+                }catch(err){
+                    
+                    res.status(400).json({err: err.message})
+                }
+
     
             }else{
     
                 res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
             }
+
+
+
+
+
     
     
         })
@@ -521,8 +645,7 @@ const updateSaude = async (req,res) => {
           res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
         })
 
-        //console.log("tamanho vetor " + vetSaude.length)
-
+       
     }
     else{
         res.status(400).json({"err": "informe a comorbidade e o id_saude"}).end()
