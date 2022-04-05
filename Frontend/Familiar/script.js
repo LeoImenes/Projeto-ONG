@@ -14,13 +14,14 @@ function CadastrarFamiliar() {
         "rg": rg.value,
         "telefone": telefone.value,
         "email": email.value,
-        "endereco": endereco.value
+        "endereco": endereco.value,
+        "parentesco": parentesco.value
     })
     console.log(data)
 
 
-    fetch("http://10.87.207.27:3000/assistido/familiar", {
-    // fetch("http://localhost:3000/assistido/familiar", {
+    // fetch("http://10.87.207.27:3000/assistido/familiar", {
+    fetch("http://localhost:3000/assistido/familiar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

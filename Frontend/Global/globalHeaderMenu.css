@@ -170,3 +170,13 @@ li h2:hover {
         width: 30%;
     }
 }
+
+@media (max-width:1000px) {
+    .menuJS img {
+        width: 30px;
+        height: 30px
+    }
+    .menucontent {
+        width: 30%;
+    }
+}

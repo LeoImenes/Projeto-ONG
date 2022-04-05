@@ -15,8 +15,8 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    // fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+    fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -66,7 +66,7 @@ function getFamiliares() {
                 litxttel.innerHTML = "Telefone: "
                 litgettel.innerHTML = item.telefone_familiar
                 litxtemail.innerHTML = "Email: "
-                litgetemail.innerHTML = item.email_familiar
+                    // litgetemail.innerHTML = item.email_familiar
                 litxtend.innerHTML = "Endereço: "
                 litgeend.innerHTML = item.endereco_familiar
 
@@ -134,8 +134,8 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    // fetch(`http://localhost:3000/assistidos/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+    fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -228,8 +228,8 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    // fetch(`http://localhost:3000/assistido/saudeID/${local}`)
-        fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
+        // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -281,6 +281,7 @@ fileInp.addEventListener("change", (e) => {
 adcFoto.style.cursor = "pointer";
 adcFoto.addEventListener("click", () => {
     fileInp.click();
+
 });
 
 function cadastrarFotoDepois() {
@@ -291,8 +292,8 @@ function cadastrarFotoDepois() {
     });
 
     console.log(data);
-    fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
-    // fetch(`http://localhost:3000/assistido_foto_depois`, {
+    // fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
+    fetch(`http://localhost:3000/assistido_foto_depois`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

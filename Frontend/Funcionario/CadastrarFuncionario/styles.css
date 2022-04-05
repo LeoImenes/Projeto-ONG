@@ -269,15 +269,14 @@ section {
         height: 100%;
         display: flex;
         margin-top: 1rem;
-        border:0px
+        border: 0px
     }
-
-   .DadosFuncionario ul{
-       display: flex;
-       flex-wrap: wrap;
-   } 
+    .DadosFuncionario ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
     .DadosFuncionario input {
-        width: 100%;
+        width: 80%;
         display: flex;
         text-align: flex-start;
         border-bottom: 1px solid black;
@@ -319,5 +318,30 @@ section {
         transition: all 0.25s;
         padding: 0 0px 0px 7px;
         color: white;
+    }
+}
+
+@media (max-width: 500px) {
+    .DadosFuncionario {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .DadosFuncionario>ul {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    #Funcfoto {
+        width: 50px;
+        height: 50px;
+    }
+    .adcFoto p {
+        font-size: 10px;
+    }
+    .btn {
+        width: 80%;
     }
 }
