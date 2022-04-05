@@ -61,8 +61,8 @@ function cadastrarFunc() {
         "estado_civil": ""
     })
 
-    // fetch("http://10.87.207.27:3000/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
+    fetch("http://10.87.207.27:3000/funcionario", {
+    // fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +74,7 @@ function cadastrarFunc() {
         })
 
     .then(data => {
-        console.log(data)
+        
         alert("Cadastro efetuado!")
     })
 }

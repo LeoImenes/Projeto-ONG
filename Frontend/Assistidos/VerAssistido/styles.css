@@ -1,8 +1,8 @@
 @import url("../../Global/globalHeaderMenu.css");
 #assistidoAntes,
 #assistidoDepois {
-    width: 150px;
-    height: 150px
+    width: 200px;
+    height: 200px
 }
 
 section {
@@ -377,8 +377,8 @@ section {
     }
     #assistidoAntes,
     #assistidoDepois {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
     .fotos img {
         width: 50px;

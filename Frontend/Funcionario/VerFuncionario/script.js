@@ -6,8 +6,8 @@ var matricula = localStorage.getItem("funcionario")
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    // fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
-    fetch(`http://localhost:3000/funcionarios/${local}`)
+    fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
+    // fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -27,9 +27,9 @@ function list() {
                 var liEmail = document.querySelector(".getEmail");
 
                 var SplitdataAdm = item.data_admissao.split("T")[0];
-                console.log(SplitdataAdm.split("-")[2]);
+                
                 var SplitdataNasc = item.data_nascimento.split("T")[0];
-                console.log(SplitdataAdm.split("-")[2]);
+               
 
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
@@ -84,9 +84,9 @@ function cadastrarFotoDepois() {
         foto: fotinho,
     });
 
-    console.log(data);
-    // fetch(`http://10.87.207.27:3000/funcionario`, {
-    fetch(`http://localhost:3000/funcionario`, {
+    
+    fetch(`http://10.87.207.27:3000/funcionario`, {
+    // fetch(`http://localhost:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -138,8 +138,8 @@ function Atualizar() {
         cargo: cargo,
         data: `${ano}-${mes}-${dia}`,
     });
-    // fetch(`http://10.87.207.27:3000/funcionarios`, {
-    fetch(`http://localhost:3000/funcionarios`, {
+    fetch(`http://10.87.207.27:3000/funcionarios`, {
+    // fetch(`http://localhost:3000/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -150,8 +150,7 @@ function Atualizar() {
             return resp.json();
         })
         .then((data) => {
-            console.log(data.err)
-            console.log(data)
+
             if (data.err === undefined) {
                 alert("Falha ao Atualizar");
                 ulDadosFunc.style.display = "flex";

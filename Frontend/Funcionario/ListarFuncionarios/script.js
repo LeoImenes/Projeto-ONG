@@ -3,8 +3,8 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-        // fetch("http://10.87.207.27:3000/funcionarios")
-    fetch("http://localhost:3000/funcionarios")
+        fetch("http://10.87.207.27:3000/funcionarios")
+    // fetch("http://localhost:3000/funcionarios")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach(fun => {
@@ -17,7 +17,7 @@ function list() {
                 var matricula = document.createElement("h3");
 
                 names.push(fun.nome_completo)
-                console.log(names)
+                
 
                 cardfuncionario.className = "cardFuncionario"
                 cardfuncionario.addEventListener("click", () => {

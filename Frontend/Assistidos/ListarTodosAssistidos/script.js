@@ -3,9 +3,15 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-        // fetch("http://10.87.207.27:3000/Assistidos")
-    fetch("http://localhost:3000/Assistidos")
-        .then(response => { return response.json() })
+        fetch("http://10.87.207.27:3000/Assistidos")
+    // fetch("http://localhost:3000/Assistidos")
+        .then(response => { 
+            if(response.ok){
+                console.log("oi")
+            }else{
+                alert("Falha ao carregar dados")
+            }
+            return response.json() })
         .then(data => {
             data.forEach(fun => {
                 var divimg = document.createElement("div")
@@ -26,7 +32,7 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined")) {
+                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined")||(fun.foto_antes === "null")) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto_antes
