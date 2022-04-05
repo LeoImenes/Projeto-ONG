@@ -13,13 +13,8 @@ export default function ListarAssistidos({navigation}){
 
     useFocusEffect(
         React.useCallback(() => {
-<<<<<<< HEAD
-            // fetch(`http://10.87.207.27:3000/assistidos`)
-            fetch(`http://192.168.137.1:3000/assistidos`)
-=======
             fetch(`http://10.87.207.27:3000/assistidos`)
-            // fetch(`http://192.168.0.103:3000/assistidos`)
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
+            // fetch(`http://192.168.137.1:3000/assistidos`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setLista(data);
@@ -62,7 +57,7 @@ export default function ListarAssistidos({navigation}){
                         lista.map((item, index) =>{
                             return (
                                 <TouchableOpacity style={global.cardInfo} key={index} onPress={async () => {
-                                    await AsyncStorage.setItem("assistido", JSON.stringify(item));
+                                    await AsyncStorage.setItem("assistido", JSON.stringify(item.id_assistido));
                                     navigation.navigate("VerAssistido")
                                     }}>
                                     <Image source={(item.foto_antes === null || item.foto_antes === "" || item.foto_antes === undefined) ? require("../../assets/user.png") : {uri: item.foto_antes}} style={global.imageUser}/>

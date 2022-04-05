@@ -26,13 +26,8 @@ export default function ContainerHome() {
         if(value !== null) {
             value = JSON.parse(value);
 
-<<<<<<< HEAD
             fetch(`http://192.168.137.1:3000/funcionarios/${value.matricula}`)
             // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
-=======
-            // fetch(`http://192.168.0.103:3000/funcionarios/${value.matricula}`)
-            fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
             .then(resp => {return resp.json()})
             .then(data => {
                 setFoto(data[0].foto);
