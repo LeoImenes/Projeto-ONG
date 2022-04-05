@@ -43,8 +43,6 @@ export default function VerAssistido({navigation, route}){
 
     useFocusEffect(
         React.useCallback(() => {
-            //console.log("teste");
-            //setAssistido();
             readStorage();
             carregarFam();
             carregarCom();
@@ -53,19 +51,25 @@ export default function VerAssistido({navigation, route}){
 
     const readStorage = async () => {
         let assistido = JSON.parse(await AsyncStorage.getItem("assistido"));
-        setAssistido(assistido);
 
-        setNome(assistido.nome_completo);
-        setNomeSocial(assistido.nome_social);
-        setRg(assistido.rg);
-        setCpf(assistido.cpf);
-        setAntCriminal(assistido.antecedente_criminal);
-        setEstdCivil(assistido.estado_civil);
-        setNaturalidade(assistido.naturalidade);
-        setCartCid(assistido.cartao_cidadao);
-        setCartSus(assistido.cartao_sus);
-        setNascimento(assistido.data_nascimento);
-        setSexo(assistido.sexo);
+        fetch(`http://10.87.207.27:3000/assistidos/${assistido}`)
+            // fetch(`http://192.168.137.1:3000/assistidos`)
+        .then(resp => {return resp.json()})
+        .then(data => {
+            setAssistido(data);
+            setNome(data.nome_completo);
+            setNomeSocial(data.nome_social);
+            setRg(data.rg);
+            setCpf(data.cpf);
+            setAntCriminal(data.antecedente_criminal);
+            setEstdCivil(data.estado_civil);
+            setNaturalidade(data.naturalidade);
+            setCartCid(data.cartao_cidadao);
+            setCartSus(data.cartao_sus);
+            setNascimento(data.data_nascimento);
+            setSexo(data.sexo);
+        })
+        .catch(err => { console.log(err) });
     }
 
     const limpar = () => {
@@ -132,13 +136,8 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
         
-<<<<<<< HEAD
-            // fetch(`http://10.87.207.27:3000/assistido/update`, {
-            fetch(`http://192.168.137.1:3000/assistidos`, {
-=======
             fetch(`http://10.87.207.27:3000/assistido/update`, {
-            // fetch(`http://192.168.0.103:3000/assistido/update`, {
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
+            // fetch(`http://192.168.137.1:3000/assistidos`, {
               "method": "PUT",
               "headers": {
                   "Content-Type": "application/json"
@@ -167,13 +166,8 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
-<<<<<<< HEAD
-        fetch(`http://192.168.137.1:3000/assistido/familiar`, {
-        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
-=======
-        // fetch(`http://192.168.0.103:3000/assistido/familiar`, {
+        // fetch(`http://192.168.137.1:3000/assistido/familiar`, {
         fetch(`http://10.87.207.27:3000/assistido/familiar`, {
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -189,13 +183,8 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-<<<<<<< HEAD
-        fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs.id_assistido}`)
-            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
-=======
-        // fetch(`http://192.168.0.103:3000/assistido/busca_familiar/${idAs.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs.id_assistido}`)
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
+        // fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
@@ -207,13 +196,8 @@ export default function VerAssistido({navigation, route}){
 
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-<<<<<<< HEAD
-        fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs.id_assistido}`)
-            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
-=======
-        // fetch(`http://192.168.0.103:3000/assistido/saudeID/${idAs.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs.id_assistido}`)
->>>>>>> d78b52a0c2292ec7eb8dbf34690c716b2c21f77c
+        // fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs.id_assistido}`)
+            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
