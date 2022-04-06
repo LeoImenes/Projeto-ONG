@@ -6,9 +6,9 @@ import SelectMultiple from 'react-native-select-multiple'
 import { Ionicons, Feather, MaterialCommunityIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
-import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import { useFocusEffect } from '@react-navigation/native';
+import compress from 'compress-base64';
 
 import * as FileSystem from 'expo-file-system';
 
@@ -128,15 +128,15 @@ export default function CadastrarAssistido({navigation}){
         });
     }
 
-      const renderLabel = (label, style) => {
+    const renderLabel = (label, style) => {
         return (
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View style={{marginLeft: 5}}>
-              <Text style={{fontSize: 15, fontWeight: 'bold'}}>{label}</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{marginLeft: 5}}>
+                    <Text style={{fontSize: 15, fontWeight: 'bold'}}>{label}</Text>
+                </View>
             </View>
-          </View>
         )
-      }
+    }
 
       useFocusEffect(
         React.useCallback(() => {
@@ -166,47 +166,51 @@ export default function CadastrarAssistido({navigation}){
         }, [])
       );
 
-    //   useEffect(() => { 
+    useEffect(() => {
+            (async () => {
+            const {status} = await Camera.requestCameraPermissionsAsync();
+            setPermission(status === 'granted');
+            })();
+        }, []);
         
-    //   }, [])
-
-    //   useFocusEffect(
-    //     React.useCallback(() => {
-    //         console.log("teste", route);
-    //         if(newFoto !== null) {
-    //             setFoto(newFoto);  
-    //         }
-    //     }, [])
-    //   );
-
-      useEffect(() => {
-        (async () => {
-          const {status} = await Camera.requestCameraPermissionsAsync();
-          setPermission(status === 'granted');
-        })();
-      }, []);
-    
-      if(permission === null){
-        return <View/>;
-      }
-    
-      if(permission === false){
-        return <Text> Acesso negado!</Text>;
-      }
-    
-    async function takePicture(){
-        if(camRef){
-            const data = await camRef.current.takePictureAsync();
-            let base = await FileSystem.readAsStringAsync(data.uri, {
-            encoding: FileSystem.EncodingType.Base64,
-            });
-
-            let url = data.uri.split(".");
-            let b64 = `data:image/${url[url.length-1]};base64,${base}` ;
-
-            setFoto(b64)
-            setCam(false)
+        if(permission === null){
+            return <View/>;
         }
+        
+        if(permission === false){
+            return <Text> Acesso negado!</Text>;
+        }
+        
+        async function takePicture(){
+            if(camRef){
+                const data = await camRef.current.takePictureAsync();
+                let base = await FileSystem.readAsStringAsync(data.uri, {
+                encoding: FileSystem.EncodingType.Base64,
+                });
+
+                let url = data.uri.split(".");
+                let b64 = `data:image/${url[url.length-1]};base64,${base}` ;
+
+                setFoto(b64)
+                setCam(false)
+            }
+
+            // if (typeof FileReader === 'function') {
+            //     const reader = new FileReader();
+            //     reader.onload = event => {
+            //       compress(event.target.result, {
+            //         width: 400,
+            //         max: 200,
+            //         min: 50,
+            //         quality: 0.8
+            //       }).then(result => {
+            //         console.log(result);
+            //       });
+            //     };
+            //     reader.readAsDataURL(foto);
+            //   } else {
+            //     alert('Your browser does not support FileReader');
+            //   }
     }
 
     return(

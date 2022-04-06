@@ -6,14 +6,16 @@ import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect, CommonActions  } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LottieView from  "lottie-react-native";
 
 export default function VerAssistido({navigation, route}){ 
-    const id = route.params;
+    // const id = route.params;
 
-    
+    const [loading, setLoading] =  useState(true);
+
     const[assistido, setAssistido] = useState([]) 
-    const[relatorio, setRelatorio] = useState("")
-    const[value, onChangeText] = useState("");
+    // const[relatorio, setRelatorio] = useState("")
+    // const[value, onChangeText] = useState("");
 
     const[editar, setEditar] = useState(false)
     const[familiar, setFamiliar] = useState(false)
@@ -73,25 +75,25 @@ export default function VerAssistido({navigation, route}){
     }
 
     const limpar = () => {
-    setNome("");
-    setNomeSocial("");
-    setRg("");
-    setCpf("");
-    setAntCriminal("");
-    setSexo("");
-    setNascimento("");
-    setEstdCivil("");
-    setNaturalidade("");
-    setCartCid("");
-    setCartSus("");
+        setNome("");
+        setNomeSocial("");
+        setRg("");
+        setCpf("");
+        setAntCriminal("");
+        setSexo("");
+        setNascimento("");
+        setEstdCivil("");
+        setNaturalidade("");
+        setCartCid("");
+        setCartSus("");
 
-    setDadosFamiliar([])
-    setNomeFamiliar("");
-    setRgFamiliar("");
-    setParentescoFamiliar("");
-    setEmailFamiliar("");
-    setTelefoneFamiliar("");
-    setEnderecoFamiliar("");
+        setDadosFamiliar([])
+        setNomeFamiliar("");
+        setRgFamiliar("");
+        setParentescoFamiliar("");
+        setEmailFamiliar("");
+        setTelefoneFamiliar("");
+        setEnderecoFamiliar("");
     }
 
     const formatDate = (nasc) => {
