@@ -34,7 +34,7 @@ function CadastrarFamiliar() {
                 alert("Falha ao Cadastrar ")
             } else {
                 alert("Cadastro Efetuado")
-                window.location.href = "../../Assistidos/VerAssistido/"
+                // window.location.href = "../../Assistidos/VerAssistido/"
             }
 
         })

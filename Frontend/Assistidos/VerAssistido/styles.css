@@ -643,22 +643,23 @@ section {
         align-items: center;
         width: 240px;
         height: 100%;
-        overflow-y: scroll;
+        overflow-y: hidden;
     }
     .itens {
         width: 46vh;
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 2em;
+        padding: 0.1em;
     }
     .itens ul {
-        width: 22vh;
+        width: 39.4vh;
         height: 20%;
         display: flex;
         align-items: center;
         justify-content: center;
         border: 1px solid black;
+        border-left: 0px;    
     }
     .itens li {
         width: 100%;
@@ -696,27 +697,27 @@ section {
     }
     .dadosFamilia {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        width: 200px;
+        width: 235px;
         height: 100%;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-y: hidden;
+        border-radius: 0px;
     }
     .itens {
-        width: 46vh;
+        width: 50vw;
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 5em
+        padding: 0.02em;
     }
     .itens ul {
-        width: 22vh;
-        height: 100%;
+        width: 39.2vw;
+        height: 21%;
         display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid black;
-        padding: 1em;
-        font-size: 12px;
+        border-left: 0px;
     }
     .itens li {
         width: 100%;
@@ -776,8 +777,8 @@ section {
         align-items: center;
         text-align: center;
         border: 1px solid black;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 10px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
     .saude {
         display: flex;
@@ -881,7 +882,7 @@ section {
     .itens li {
         flex-wrap: wrap;
         align-items: flex-start;
-        width: 30%;
+        width: 60%;
         margin-left: 0em;
     }
     .itens li:nth-child(2) {
