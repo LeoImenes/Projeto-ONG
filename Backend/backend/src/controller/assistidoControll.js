@@ -1,9 +1,5 @@
-const { render } = require('express/lib/response')
-const res = require('express/lib/response')
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
-
-const fs = require('fs')
 
 
 const getAll = (req,res) => {
@@ -178,15 +174,6 @@ const postAssistido = (req,res) => {
         cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
         values (${req.body.id_funcionario}, "${req.body.nome_completo}", "${nome_social}", "${rg}", "${cpf}", "${req.body.data_nascimento}", "${ req.body.estado_civil}",
             "${naturalidade}", "${req.body.sexo}", "${cartao_cidadao}", "${cartao_sus}", "${foto_antes}", "${foto_depois}");`
-
-
-        fs.writeFile('./test.txt', string, err => {
-        if (err) {
-            console.error(err)
-            return
-        }
-        
-        })
 
     con.query(string, (err,result) => {
 
@@ -521,8 +508,6 @@ const updateSaude = async (req,res) => {
 
     if(req.body.id_assistido !== undefined){
 
-        console.log(comorbidades)
-        
        let resultado = getEmployeeNames(id_assistido)
         .then(async (results) => {
             
@@ -538,17 +523,17 @@ const updateSaude = async (req,res) => {
                         
                         string = `delete from saude where id_saude = ${results[index].id_saude}`
 
-                        console.log("query update: " + string)
-                        
                         let novaResponse = await deleteSaude(string)
                         
                         .then(() => {
                             
                             if(index + 1 === results.length){
-                                
-                                con.commit()
-                                
-                                //res.status(200).json({ok:"ok"});
+                                // término da exclusão das comorbidades antigas
+                                // lógica para saída do laço do while
+                                // se o vetor de resultados (results) tiver tamanha 3, por exemplo,
+                                // quando a variável index + 1 for igual a 3 a variável comerro é setada para true
+                                // pois se index + 1 for igual a 3, quer dizer que index já assumiu o valor 2
+                                // e 2 é o valor do último índice de um array de tamanho 3
                                 comerro = true;
                                 
                             }
@@ -569,14 +554,10 @@ const updateSaude = async (req,res) => {
                     if(comorbidades.length > 0){
 
                         try{
-                            con.beginTransaction()
 
                             do{
 
                                 newString = `insert into saude (id_assistido, id_comorbidade, data_de_registro) values (${id_assistido}, ${comorbidades[newIndice].value}, curdate())`
-
-    
-
                                 let executeQuery = await inserirComorbidades(newString)
 
                                 .then(() => {
@@ -608,20 +589,11 @@ const updateSaude = async (req,res) => {
                             res.status(400).json({err : err.message})
                         }
 
-
-
-
                     }else{
 
                         res.status(400).json({"err": "campos de comorbidades vazios"})
                     }
 
-
-
-
-                    
-                    
-                    
                 }catch(err){
                     
                     res.status(400).json({err: err.message})
@@ -633,19 +605,11 @@ const updateSaude = async (req,res) => {
                 res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
             }
 
-
-
-
-
-    
-    
         })
         .catch(function(err){
-          console.log("Promise rejection error: "+err);
           res.status(400).json({"err": "este assistido não possui comorbidades"}).end()
         })
-
-       
+ 
     }
     else{
         res.status(400).json({"err": "informe a comorbidade e o id_saude"}).end()
@@ -667,9 +631,6 @@ const getComorbidades= (req,res) => {
     })
 
 }
-
-
-
 
 // CRUD FAMILIAR 
 
@@ -780,9 +741,6 @@ const postRelacionamentoFamiliar = (req,res) => {
         res.status(400).json({"err": "Informe os campos de id_assistido e rg"}).end()
     }
 
-
-
-
 }
 
 
@@ -807,15 +765,10 @@ const getVWFamiliar = (req,res) => {
 
         })
 
-
-
     }else{
 
         res.status(400).json({"err": "informe o id_assistido"}).end()
     }
-
-
-
 
 }
 

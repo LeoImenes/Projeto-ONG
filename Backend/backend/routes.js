@@ -13,6 +13,11 @@ route.put('/funcionario', funcionarioControll.updateFotoFuncionario)
 route.delete('/funcionarios/:matricula', funcionarioControll.deletarFuncionario)
 route.put('/funcionario/reset_senha', funcionarioControll.resetSenha)
 
+route.post("/funcionario/financas", funcionarioControll.postFinanca)
+route.get("/funcionario/financas", funcionarioControll.getAllFinancas)
+route.get("/funcionario/financa/:id_financa", funcionarioControll.getIDFinanca)
+route.put("/funcionario/financa", funcionarioControll.updateFinanca)
+
 route.get('/assistidos', assistidoControll.getAll)
 route.get('/assistidos/:id_assistido', assistidoControll.getID)
 route.post('/assistidos', assistidoControll.postAssistido)

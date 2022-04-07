@@ -276,6 +276,124 @@ const deletarFuncionario = (req, res) => {
 }
 
 
+// métodos referentes a tabela financeira 
+
+
+const postFinanca = (req,res) => {
+
+    let id_funcionario = req.body.id_funcionario
+    let tipo = req.body.tipo
+    let descricao = req.body.descricao
+    let valor = req.body.valor
+
+
+
+    if(id_funcionario !== undefined && tipo !== undefined && descricao !== undefined && valor !== undefined){
+
+
+        let string = `insert into financeiro (id_funcionario,tipo,descricao,valor,data_lancamento) values (${id_funcionario}, "${tipo}", "${descricao}", ${valor}, curdate())`
+
+
+        con.query(string,(err,result)=>{
+
+            if(err === null){
+
+                res.status(200).json(result)
+
+            }else{
+                res.status(400).json({err: err.message})
+            }
+        })
+
+
+
+
+    }else{
+
+
+        res.status(400).json({"err": "informe os camppos 'id_funcionario', 'tipo', 'descricao', 'valor'"})
+    }
+
+}
+
+
+const getAllFinancas = (req,res) => {
+
+    let string = `select * from financeiro`
+
+    con.query(string,(err,result) => {
+
+        if(err === null){
+
+            res.status(200).json(result)
+
+        }else{
+            res.status(400).json({err: err.message})
+        }
+    })
+
+}
+
+
+const getIDFinanca = (req,res) => {
+
+    let id_financa = req.params.id_financa
+
+    if(id_financa !== undefined){
+
+        let string = `select * from financeiro where id_lancamento = ${id_financa}`
+
+        con.query(string,(err,result) => {
+
+            if(err === null){
+
+                res.status(200).json(result)
+
+            }else{
+
+                res.status(400).json({err: err.message})
+            }
+        })
+
+    }else{
+
+        res.status(400).json({"err": "informe o id da financa"})
+    }
+
+}
+
+
+const updateFinanca = (req,res) => {
+
+    let id_lancamento = req.body.id_lancamento
+    let tipo = req.body.tipo
+    let descricao = req.body.descricao
+    let valor = req.body.valor
+
+    if(tipo !== undefined && descricao !== undefined && valor !== undefined){
+
+
+        let string = `update financeiro set tipo = "${tipo}", descricao = "${descricao}", valor = ${valor} where id_lancamento = ${id_lancamento}`
+
+        con.query(string,(err,result) => {
+
+            if(err === null){
+
+                res.status(200).json(result)
+
+            }else{
+                res.status(400).json({err: err.message})
+            }
+        })
+
+    }else{
+
+        res.status(400).json({"err": "informe os campos 'tipo', 'descricao', 'valor'"})
+    }
+}
+
+
+
 module.exports = {
     getAll,
     getMatricula,
@@ -284,5 +402,9 @@ module.exports = {
     postFuncionario,
     updateFuncionario,
     updateFotoFuncionario,
-    deletarFuncionario
+    deletarFuncionario,
+    postFinanca,
+    getAllFinancas,
+    getIDFinanca, 
+    updateFinanca
 }

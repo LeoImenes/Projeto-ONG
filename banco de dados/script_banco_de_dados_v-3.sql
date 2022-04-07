@@ -131,7 +131,7 @@ CREATE TABLE assistencias(
 	id_assistencia INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_assistido INTEGER NOT NULL,
 	id_funcionario INTEGER NOT NULL,
-	solicitacao VARCHAR(100) NOT NULL,
+	solicitacao INTEGER,
 	data_registro DATE NOT NULL,
 	
 	CONSTRAINT fk_assistido06 FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,	
