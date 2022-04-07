@@ -5,6 +5,7 @@ import global from "../../Global/Style"
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import Statusbar from '../../Global/Index';
 
 export default function ListarAssistidos({navigation}){
     const[lista, setLista] = useState([]);
@@ -68,6 +69,10 @@ export default function ListarAssistidos({navigation}){
                             )
                         })
                     }
+                    <View style={{width: "100%", height: 50, flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
+                        <Text style={{fontSize: 18, color: "white"}}>Isso é tudo, pessoal!! </Text>
+                        <MaterialCommunityIcons name="rabbit" size={30} color="white" />
+                    </View>
                 </ScrollView>
             </View>
         </View>

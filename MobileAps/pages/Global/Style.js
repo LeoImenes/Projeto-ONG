@@ -120,7 +120,7 @@ export default StyleSheet.create({
       flexDirection: "row",
       alignSelf: "center",
       marginTop: "5%",
-      padding: 15
+      padding: 15,
     },
     cardButton1: {
       backgroundColor: "rgb(22,107,138)",
@@ -160,7 +160,7 @@ export default StyleSheet.create({
       justifyContent: "space-evenly",
       alignItems: "center",
       alignSelf: "flex-end",
-      marginTop: "5%",
+      marginTop: "10%"
     },
     search:{
       backgroundColor: "white",

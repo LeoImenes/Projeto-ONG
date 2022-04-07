@@ -188,8 +188,17 @@ export default function CadastrarAssistido({navigation}){
                 encoding: FileSystem.EncodingType.Base64,
                 });
 
+                // compress(base, {
+                //     width: 400,
+                //     max: 200,
+                //     min: 50,
+                //     quality: 0.8
+                // }).then(result => {
+                //     console.log(result);
+                // });
+
                 let url = data.uri.split(".");
-                let b64 = `data:image/${url[url.length-1]};base64,${base}` ;
+                let b64 = `data:image/${url[url.length-1]};base64,${base}`;
 
                 setFoto(b64)
                 setCam(false)
