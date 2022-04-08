@@ -200,6 +200,23 @@ DELIMITER //
 
 
 
+select 
+	f.nome_completo as nome_completo_funcionario, 
+	f.foto, 
+	f.cpf, 
+	f.email,
+	assis.nome_completo as nome_assistido_completo,
+	ast.id_assistencia,
+	ast.id_assistido,
+	ast.data_registro,
+	sol.id_solicitacao,
+	it.item
+from funcionarios f inner join assistencias ast on f.id_funcionario = ast.id_funcionario
+inner join solicitacao sol on ast.id_assistencia = sol.id_assistencia
+inner join assistidos assis on ast.id_assistido = assis.id_assistido
+inner join itens it on sol.id_item = it.id_item;
+
+
 
 
 
