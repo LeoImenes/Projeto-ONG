@@ -1,4 +1,3 @@
-const res = require('express/lib/response')
 const { con } = require('../database/Connection')
 
 const modeloFuncionario = require('../model/funcionarioModel')
@@ -32,14 +31,10 @@ const postFuncionario = (req, res) => {
 
         if (err == null) {
 
-        res.status(200).json({ ...req.body, id: result.insertId, "status":  status});
-
-            res.status(200).json({...req.body, id: result.insertId });
-
-        res.status(200).json({ ...req.body, id: result.insertId, "status":  status});
+        res.status(200).json({ ...req.body, id: result.insertId, "status":  status}).end();
 
         } else {
-            res.status(400).json({ err: err.message });
+            res.status(400).json({ err: err.message }).end();
         }
     })
 }
@@ -74,12 +69,12 @@ const login = (req, res) => {
                 }
 
             } else {
-                res.status(400).json({ err: err.message })
+                res.status(400).json({ err: err.message }).end()
             }
 
         })
     } else {
-        res.status(400).json({ err: `'envie os campos 'email' e 'senha'` })
+        res.status(400).json({ err: `'envie os campos 'email' e 'senha'` }).end()
     }
 }
 
@@ -104,14 +99,14 @@ const resetSenha = (req,res) => {
             if(err === null){
 
                 if(result.affectedRows === 0){
-                    res.status(200).json({"err": "não foi possível alterar a senha"})
+                    res.status(200).json({"err": "não foi possível alterar a senha"}).end()
                 }
                 else{
-                    res.status(200).json(result)
+                    res.status(200).json(result).end()
                 }
 
             }else{
-                res.status(400).json({err: err.message})
+                res.status(400).json({err: err.message}).end()
             }
 
 
@@ -120,7 +115,7 @@ const resetSenha = (req,res) => {
 
     }else{
 
-        res.status(400).json({"err": "informe os campos email, cpf e nova_senha"})
+        res.status(400).json({"err": "informe os campos email, cpf e nova_senha"}).end()
     }
 
 
@@ -199,9 +194,9 @@ const updateFuncionario = (req, res) => {
 
     con.query(resultado, (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body });
+            res.status(200).json({...req.body }).end();
         } else {
-            res.status(400).json({ err: err.message });
+            res.status(400).json({ err: err.message }).end();
         }
     })
 
@@ -214,7 +209,7 @@ const getAll = (req, res) => {
             delete item.senha
         });
 
-        res.json(result)
+        res.json(result).end()
     })
 }
 
@@ -233,10 +228,10 @@ const getMatricula = (req, res) => {
                     delete item.senha
                     //delete item.status
                 });
-                res.json(result)
+                res.json(result).end()
             }
         } else {
-            res.status(404).json({ err: err.message })
+            res.status(404).json({ err: err.message }).end()
         }
     })
 }
@@ -251,9 +246,9 @@ const updateFotoFuncionario = (req, res) => {
 
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body });
+            res.status(200).json({...req.body }).end();
         } else {
-            res.status(400).json({ err: err.message });
+            res.status(400).json({ err: err.message }).end();
         }
     })
 
@@ -268,9 +263,9 @@ const deletarFuncionario = (req, res) => {
 
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body });
+            res.status(200).json({...req.body }).end();
         } else {
-            res.status(400).json({ err: err.message });
+            res.status(400).json({ err: err.message }).end();
         }
     })
 }
@@ -298,10 +293,10 @@ const postFinanca = (req,res) => {
 
             if(err === null){
 
-                res.status(200).json(result)
+                res.status(200).json(result).end()
 
             }else{
-                res.status(400).json({err: err.message})
+                res.status(400).json({err: err.message}).end()
             }
         })
 
@@ -311,7 +306,7 @@ const postFinanca = (req,res) => {
     }else{
 
 
-        res.status(400).json({"err": "informe os camppos 'id_funcionario', 'tipo', 'descricao', 'valor'"})
+        res.status(400).json({"err": "informe os camppos 'id_funcionario', 'tipo', 'descricao', 'valor'"}).end()
     }
 
 }
@@ -325,10 +320,10 @@ const getAllFinancas = (req,res) => {
 
         if(err === null){
 
-            res.status(200).json(result)
+            res.status(200).json(result).end()
 
         }else{
-            res.status(400).json({err: err.message})
+            res.status(400).json({err: err.message}).end()
         }
     })
 
@@ -347,17 +342,17 @@ const getIDFinanca = (req,res) => {
 
             if(err === null){
 
-                res.status(200).json(result)
+                res.status(200).json(result).end()
 
             }else{
 
-                res.status(400).json({err: err.message})
+                res.status(400).json({err: err.message}).end()
             }
         })
 
     }else{
 
-        res.status(400).json({"err": "informe o id da financa"})
+        res.status(400).json({"err": "informe o id da financa"}).end()
     }
 
 }
@@ -379,18 +374,135 @@ const updateFinanca = (req,res) => {
 
             if(err === null){
 
-                res.status(200).json(result)
+                res.status(200).json(result).end()
 
             }else{
-                res.status(400).json({err: err.message})
+                res.status(400).json({err: err.message}).end()
             }
         })
 
     }else{
 
-        res.status(400).json({"err": "informe os campos 'tipo', 'descricao', 'valor'"})
+        res.status(400).json({"err": "informe os campos 'tipo', 'descricao', 'valor'"}).end()
     }
 }
+
+
+
+
+
+
+// métodos assistências 
+
+
+
+async function executeQuery(string){
+
+    return new Promise((resolve,reject) => {
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+                resolve(result)
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+
+
+}
+
+
+const postAssistencia = (req,res) => {
+
+    let id_funcionario = req.body.id_funcionario
+    let id_assistido = req.body.id_assistido
+    let itens = req.body.itens
+    let index = 0
+    let comerro = false
+    let stringSolicitacao
+
+
+    if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
+
+        let stringAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
+        try{
+
+            con.beginTransaction()
+
+            con.query(stringAssistencia, (err, result) => {
+
+
+                if(err === null){
+
+                    let id_assistencia = result.insertId
+
+                    //console.log(id_assistencia)
+
+                    while(!comerro){
+
+                        console.log("index: " + index)
+                        console.log("tamanho do vetor" + itens.length)
+
+                        stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
+
+                        console.log(stringSolicitacao)
+                        
+                        let a = executeQuery(stringSolicitacao)
+                        .then(() => {
+                            console.log("entrou no then")
+
+                            if(itens.length === 2){
+
+                                console.log("entrou no if")
+                                con.commit()
+                                res.status(200).json({"ok": "ok"}).end()
+                                comerro = true
+                            }
+
+                            
+
+                        }).catch((err) => {
+                            res.status(400).json({err}).end()
+                            con.rollback()
+                            comerro = true
+                        })
+
+
+
+                        index++
+                        }
+
+                }else{
+
+                    res.status(400).json({err: err.message}).end()
+                }
+
+
+            })
+
+
+        }catch{
+
+            con.rollback()
+            console.log("err")
+        }
+
+
+
+
+    }else{
+        res.status(400).json({"err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'"}).end()
+    }
+
+
+
+}
+
+
+
 
 
 
@@ -406,5 +518,6 @@ module.exports = {
     postFinanca,
     getAllFinancas,
     getIDFinanca, 
-    updateFinanca
+    updateFinanca,
+    postAssistencia
 }
