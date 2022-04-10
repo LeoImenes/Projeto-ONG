@@ -82,8 +82,9 @@ export default function CadastrarAssistido({navigation}){
             foto: foto
         }
 
-        fetch(`http://10.87.207.27:3000/assistidos`, {
+        // fetch(`http://10.87.207.27:3000/assistidos`, {
         // fetch(`http://192.168.137.1:3000/assistidos`, {
+        fetch(`http://192.168.0.29:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -102,8 +103,9 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                fetch(`http://10.87.207.27:3000/assistido/saude`, {
-                    // fetch(`http://192.168.137.1:3000/assistido/saude`, {
+                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                // fetch(`http://192.168.137.1:3000/assistido/saude`, {
+                fetch(`http://192.168.0.29:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -140,8 +142,9 @@ export default function CadastrarAssistido({navigation}){
 
       useFocusEffect(
         React.useCallback(() => {
-            fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+            // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
             // fetch(`http://192.168.137.1:3000/assistido/comorbidade`)
+            fetch(`http://192.168.0.29:3000/assistido/comorbidade`)
             .then(resp => {return resp.json()})
             .then(async data => {
                 let temp = JSON.stringify(data);
@@ -184,42 +187,16 @@ export default function CadastrarAssistido({navigation}){
         async function takePicture(){
             if(camRef){
                 const data = await camRef.current.takePictureAsync();
+                
                 let base = await FileSystem.readAsStringAsync(data.uri, {
-                encoding: FileSystem.EncodingType.Base64,
+                  encoding: FileSystem.EncodingType.Base64,
                 });
-
-                // compress(base, {
-                //     width: 400,
-                //     max: 200,
-                //     min: 50,
-                //     quality: 0.8
-                // }).then(result => {
-                //     console.log(result);
-                // });
-
-                let url = data.uri.split(".");
-                let b64 = `data:image/${url[url.length-1]};base64,${base}`;
-
-                setFoto(b64)
+                
+                setFoto({
+                  uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
+                })
                 setCam(false)
-            }
-
-            // if (typeof FileReader === 'function') {
-            //     const reader = new FileReader();
-            //     reader.onload = event => {
-            //       compress(event.target.result, {
-            //         width: 400,
-            //         max: 200,
-            //         min: 50,
-            //         quality: 0.8
-            //       }).then(result => {
-            //         console.log(result);
-            //       });
-            //     };
-            //     reader.readAsDataURL(foto);
-            //   } else {
-            //     alert('Your browser does not support FileReader');
-            //   }
+              }
     }
 
     return(

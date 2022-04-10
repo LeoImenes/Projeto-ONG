@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, TextInput,
 import global from "../../Global/Style"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { useFocusEffect, CommonActions  } from '@react-navigation/native';
 
 export default function ListarFuncionario({navigation}){
     const[lista, setLista] = useState([]);
@@ -11,17 +12,20 @@ export default function ListarFuncionario({navigation}){
     const [dados, setDados] = useState([]);
     const[ativo, setAtivo] = useState(false)
 
-    useEffect(() => {
-        fetch(`http://10.87.207.27:3000/funcionarios`)
-        // fetch(`http://192.168.137.1:3000/funcionarios`)
-        .then(resp => {return resp.json()})
-        .then(data => {
-            setLista(data);
-            setDados(data);
-        })
-        .catch(err => { console.log(err) });
-    },[])
-
+    useFocusEffect(
+        React.useCallback(() => {
+            // fetch(`http://10.87.207.27:3000/funcionarios`)
+            // fetch(`http://192.168.137.1:3000/funcionarios`)
+            fetch(`http://192.168.0.29:3000/funcionarios`)
+            .then(resp => {return resp.json()})
+            .then(data => {
+                setLista(data);
+                setDados(data);
+            })
+            .catch(err => { console.log(err) });
+        }, [])
+    );
+    
     useEffect(() => {
         if (searchText === ''){
             setLista(dados);
@@ -64,7 +68,7 @@ export default function ListarFuncionario({navigation}){
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={global.scrollAlternative}>
+            <View style={css.scrollAlternative}>
                 <ScrollView>
                     {
                         lista.map((item,index) => {
@@ -97,14 +101,19 @@ const css = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold"
     },
-    filter: {
+    filter:{
         width: "100%",
-        height: 80,
+        height: "10%",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
         alignSelf: "flex-end",
-        marginTop: "5%",
-    }
+        marginTop: "8%",
+        marginBottom: "1%"
+      },
+      scrollAlternative:{
+        width: "100%",
+        height: "85%"
+      }
 })

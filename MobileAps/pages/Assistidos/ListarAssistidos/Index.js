@@ -5,7 +5,6 @@ import global from "../../Global/Style"
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import Statusbar from '../../Global/Index';
 
 export default function ListarAssistidos({navigation}){
     const[lista, setLista] = useState([]);
@@ -14,8 +13,9 @@ export default function ListarAssistidos({navigation}){
 
     useFocusEffect(
         React.useCallback(() => {
-            fetch(`http://10.87.207.27:3000/assistidos`)
+            // fetch(`http://10.87.207.27:3000/assistidos`)
             // fetch(`http://192.168.137.1:3000/assistidos`)
+            fetch(`http://192.168.0.29:3000/assistidos`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setLista(data);
@@ -45,14 +45,14 @@ export default function ListarAssistidos({navigation}){
 
     return(
         <View style={global.bodyAlternative}>
-            <View style={global.filter}>
+            <View style={css.filter}>
                 <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Home")}} />
                 <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={global.search} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
                 <TouchableOpacity onPress={() => {listar()}}>
                     <MaterialCommunityIcons name="order-alphabetical-ascending" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-            <View style={global.scrollAlternative}>
+            <View style={css.scrollAlternative}>
                 <ScrollView>
                     {
                         lista.map((item, index) =>{
@@ -69,10 +69,10 @@ export default function ListarAssistidos({navigation}){
                             )
                         })
                     }
-                    <View style={{width: "100%", height: 50, flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
+                    {/* <View style={{width: "100%", height: 50, flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
                         <Text style={{fontSize: 18, color: "white"}}>Isso é tudo, pessoal!! </Text>
                         <MaterialCommunityIcons name="rabbit" size={30} color="white" />
-                    </View>
+                    </View> */}
                 </ScrollView>
             </View>
         </View>
@@ -80,5 +80,18 @@ export default function ListarAssistidos({navigation}){
 }
 
 const css = StyleSheet.create({
-    
+    filter:{
+        width: "100%",
+        height: "10%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        alignSelf: "flex-end",
+        marginTop: "10%",
+      },
+      scrollAlternative:{
+        width: "100%",
+        height: "85%"
+      }
 })

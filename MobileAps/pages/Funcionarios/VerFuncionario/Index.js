@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput, ToastAndroid} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput, ToastAndroid, StatusBar} from 'react-native';
 
 import global from "../../Global/Style"
 import { Ionicons, Feather} from '@expo/vector-icons';
@@ -44,7 +44,8 @@ export default function VerFuncionario({navigation, route}){
         }
 
         // fetch(`http://10.87.207.27:3000/funcionario`, {
-        fetch(`http://192.168.137.1:3000/funcionarios`, {
+        // fetch(`http://192.168.137.1:3000/funcionarios`, {
+        fetch(`http://192.168.0.29:3000/funcionarios`, {
           "method": "PUT",
           "headers": {
               "Content-Type": "application/json"
@@ -82,10 +83,15 @@ export default function VerFuncionario({navigation, route}){
             {
                 (atualizar !== true) ?
                 <View style={css.body2}>
+                    <StatusBar
+                        barStyle = "dark-content"
+                        hidden = {false}
+                        backgroundColor="transparent"
+                        translucent={true}/>
                     <View style={global.headerFunc}>
                         <View style={global.alignHeader}>
                             <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarFuncionario')}} />
-                            <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user.png") : {uri: item.foto}} style={global.imageUser}/>
+                            <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user1.png") : {uri: item.foto}} style={global.imageUser}/>
                         </View>
                         <View style={global.cardTitle}>
                             <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
@@ -95,46 +101,46 @@ export default function VerFuncionario({navigation, route}){
                     <View style={css.scroll}>
                         <ScrollView>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Nome:</Text>
+                                <Text style={global.textInfo1}>Nome:</Text>
                                 <Text style={global.textInfo}>{item.nome_completo}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Matricula:</Text>
+                                <Text style={global.textInfo1}>Matricula:</Text>
                                 <Text style={global.textInfo}>{item.matricula}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>RG:</Text>
+                                <Text style={global.textInfo1}>RG:</Text>
                                 <Text style={global.textInfo}>{item.rg}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>CPF:</Text>
+                                <Text style={global.textInfo1}>CPF:</Text>
                                 <Text style={global.textInfo}>{item.cpf}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Nascimento:</Text>
+                                <Text style={global.textInfo1}>Nascimento:</Text>
                                 <Text style={global.textInfo}>{formatDate(new Date(item.data_nascimento))}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Cargo:</Text>
+                                <Text style={global.textInfo1}>Cargo:</Text>
                                 <Text style={global.textInfo}>{item.cargo}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Sexo:</Text>
+                                <Text style={global.textInfo1}>Sexo:</Text>
                                 <Text style={global.textInfo}>{item.sexo}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>E-mail:</Text>
+                                <Text style={global.textInfo1}>E-mail:</Text>
                                 <Text style={global.textInfo}>{item.email}</Text>
                             </View>
                             <View style={global.info}>
-                                <Text style={global.textInfo}>Data admissão:</Text>
+                                <Text style={global.textInfo1}>Data admissão:</Text>
                                 <Text style={global.textInfo}>{formatDate(new Date(item.data_admissao))}</Text>
                             </View>
                             {
                                 (item.data_demissao !== null)
                                 ?
                                     <View style={global.info}>
-                                        <Text style={global.textInfo}>Data demissão:</Text>
+                                        <Text style={global.textInfo1}>Data demissão:</Text>
                                         <Text style={global.textInfo}>{formatDate(new Date(item.data_demissao))}</Text>
                                     </View>
                                 :

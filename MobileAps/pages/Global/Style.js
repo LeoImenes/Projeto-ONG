@@ -6,7 +6,7 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         flexDirection: "column"
-      },
+    },
     bodyAlternative:{
       flex: 1,
       backgroundColor: "#166B8A",
@@ -38,10 +38,11 @@ export default StyleSheet.create({
     cardTitle: {
       backgroundColor: "#166B8A",
       width: "60%",
-      height: "100%",
+      height: "80%",
       borderBottomLeftRadius: 66,
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      alignSelf: "flex-start"
     },
     textTitle: {
         color: "white",
@@ -53,7 +54,7 @@ export default StyleSheet.create({
     },
     scrollAlternative:{
       width: "100%",
-      height: "88%"
+      height: "85%"
     },
     cardTxt: {
       width: "70%",
@@ -70,6 +71,11 @@ export default StyleSheet.create({
     textInfo:{
       fontSize: 18,
       color: "black"
+    },
+    textInfo1:{
+      fontSize: 18,
+      color: "#166B8A",
+      fontWeight: "bold"
     },
     textInfoAlternative:{
       fontSize: 18,
@@ -114,12 +120,13 @@ export default StyleSheet.create({
       width: "80%",
       height: 110,
       borderBottomColor: 'white',
-      borderBottomWidth: 2,
+      borderTopColor: 'white',
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
       alignItems: 'center',
       justifyContent: "space-between",
       flexDirection: "row",
       alignSelf: "center",
-      marginTop: "5%",
       padding: 15,
     },
     cardButton1: {
@@ -151,16 +158,6 @@ export default StyleSheet.create({
       fontSize: 18,
       fontWeight: "bold",
       alignSelf: "center",
-    },
-    filter:{
-      width: "100%",
-      height: 70,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      alignSelf: "flex-end",
-      marginTop: "10%"
     },
     search:{
       backgroundColor: "white",

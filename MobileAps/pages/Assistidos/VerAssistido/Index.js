@@ -9,7 +9,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LottieView from  "lottie-react-native";
 
 export default function VerAssistido({navigation, route}){ 
-    // const id = route.params;
+    const formatDate = (nasc) => {
+        let dia = nasc.getDate();
+        dia = (dia < 10) ? "0" + dia : dia;
+        let mes = nasc.getMonth() + 1;
+        mes = (mes < 10) ? "0" + mes : mes;
+        let ano = nasc.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
 
     const [loading, setLoading] =  useState(true);
 
@@ -54,8 +61,9 @@ export default function VerAssistido({navigation, route}){
     const readStorage = async () => {
         let assistido = JSON.parse(await AsyncStorage.getItem("assistido"));
 
-        fetch(`http://10.87.207.27:3000/assistidos/${assistido}`)
-            // fetch(`http://192.168.137.1:3000/assistidos`)
+        fetch(`http://192.168.0.29:3000/assistidos/${assistido}`)
+        // fetch(`http://10.87.207.27:3000/assistidos/${assistido}`)
+        // fetch(`http://192.168.137.1:3000/assistidos/${assistido}`)
         .then(resp => {return resp.json()})
         .then(data => {
             setAssistido(data);
@@ -68,7 +76,7 @@ export default function VerAssistido({navigation, route}){
             setNaturalidade(data.naturalidade);
             setCartCid(data.cartao_cidadao);
             setCartSus(data.cartao_sus);
-            setNascimento(data.data_nascimento);
+            setNascimento(formatDate(new Date(data.data_nascimento)));
             setSexo(data.sexo);
         })
         .catch(err => { console.log(err) });
@@ -96,14 +104,7 @@ export default function VerAssistido({navigation, route}){
         setEnderecoFamiliar("");
     }
 
-    const formatDate = (nasc) => {
-        let dia = nasc.getDate();
-        dia = (dia < 10) ? "0" + dia : dia;
-        let mes = nasc.getMonth() + 1;
-        mes = (mes < 10) ? "0" + mes : mes;
-        let ano = nasc.getFullYear();
-        return `${dia}/${mes}/${ano}`;
-    }
+    
 
     // const salvarRelatorio = () => {
     //     setRelatorio(value)
@@ -137,8 +138,9 @@ export default function VerAssistido({navigation, route}){
                 cartao_sus: cartSus,
                 foto_depois: foto
             }
-        
-            fetch(`http://10.87.207.27:3000/assistido/update`, {
+            
+            fetch(`http://192.168.0.29:3000/assistido/update`, {
+            // fetch(`http://10.87.207.27:3000/assistido/update`, {
             // fetch(`http://192.168.137.1:3000/assistidos`, {
               "method": "PUT",
               "headers": {
@@ -168,8 +170,9 @@ export default function VerAssistido({navigation, route}){
             parentesco: parentesco,
         }
 
+        fetch(`http://192.168.0.29:3000/assistido/familiar`, {
         // fetch(`http://192.168.137.1:3000/assistido/familiar`, {
-        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -185,8 +188,9 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        // fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs}`)
+        fetch(`http://192.168.0.29:3000/assistido/busca_familiar/${idAs}`)
+        // fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs}`)
+            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
@@ -198,8 +202,9 @@ export default function VerAssistido({navigation, route}){
 
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        // fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs.id_assistido}`)
-            fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs}`)
+        // fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs}`)
+            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs}`)
+            fetch(`http://192.168.0.29:3000/assistido/saudeID/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
@@ -343,7 +348,7 @@ export default function VerAssistido({navigation, route}){
                                     <Picker.Item label="Outro" value="Outro" />
                                 </Picker>
                             </View>
-                            <TextInput value={formatDate(new Date(nascimento))} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
+                            <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={global.info}></TextInput>
                             <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={global.info}></TextInput>
                             <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={global.info}></TextInput>
                             <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={global.info}></TextInput>

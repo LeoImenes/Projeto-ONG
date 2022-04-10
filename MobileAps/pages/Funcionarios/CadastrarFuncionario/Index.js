@@ -1,5 +1,5 @@
 import React, {useState, useEffect , useRef } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, StatusBar} from 'react-native';
 
 import global from "../../Global/Style"
 import { Ionicons, Feather, MaterialCommunityIcons, FontAwesome} from '@expo/vector-icons';
@@ -68,7 +68,8 @@ export default function CadastrarFuncionario({navigation}){
         }
     
         // fetch(`http://10.87.207.27:3000/funcionario`, {
-        fetch(`http://192.168.137.1:3000/funcionario`, {
+        // fetch(`http://192.168.137.1:3000/funcionario`, {
+        fetch(`http://192.168.0.29:3000/funcionario`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -118,6 +119,11 @@ export default function CadastrarFuncionario({navigation}){
 
     return(
         <View style={global.body}>
+            <StatusBar
+                        barStyle = "dark-content"
+                        hidden = {false}
+                        backgroundColor="transparent"
+                        translucent={true}/>
             {
                 (cam === true)
                 ?
