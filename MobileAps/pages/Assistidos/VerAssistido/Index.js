@@ -6,7 +6,6 @@ import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect, CommonActions  } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LottieView from  "lottie-react-native";
 
 export default function VerAssistido({navigation, route}){ 
     const formatDate = (nasc) => {
@@ -18,11 +17,7 @@ export default function VerAssistido({navigation, route}){
         return `${dia}/${mes}/${ano}`;
     }
 
-    const [loading, setLoading] =  useState(true);
-
     const[assistido, setAssistido] = useState([]) 
-    // const[relatorio, setRelatorio] = useState("")
-    // const[value, onChangeText] = useState("");
 
     const[editar, setEditar] = useState(false)
     const[familiar, setFamiliar] = useState(false)
@@ -61,8 +56,8 @@ export default function VerAssistido({navigation, route}){
     const readStorage = async () => {
         let assistido = JSON.parse(await AsyncStorage.getItem("assistido"));
 
-        fetch(`http://192.168.0.29:3000/assistidos/${assistido}`)
-        // fetch(`http://10.87.207.27:3000/assistidos/${assistido}`)
+        // fetch(`http://192.168.0.29:3000/assistidos/${assistido}`)
+        fetch(`http://10.87.207.27:3000/assistidos/${assistido}`)
         // fetch(`http://192.168.137.1:3000/assistidos/${assistido}`)
         .then(resp => {return resp.json()})
         .then(data => {
@@ -139,8 +134,8 @@ export default function VerAssistido({navigation, route}){
                 foto_depois: foto
             }
             
-            fetch(`http://192.168.0.29:3000/assistido/update`, {
-            // fetch(`http://10.87.207.27:3000/assistido/update`, {
+            // fetch(`http://192.168.0.29:3000/assistido/update`, {
+            fetch(`http://10.87.207.27:3000/assistido/update`, {
             // fetch(`http://192.168.137.1:3000/assistidos`, {
               "method": "PUT",
               "headers": {
@@ -171,9 +166,9 @@ export default function VerAssistido({navigation, route}){
             endereco: enderecoFamiliar
         }
 
-        fetch(`http://192.168.0.29:3000/assistido/familiar`, {
+        // fetch(`http://192.168.0.29:3000/assistido/familiar`, {
         // fetch(`http://192.168.137.1:3000/assistido/familiar`, {
-        // fetch(`http://10.87.207.27:3000/assistido/familiar`, {
+        fetch(`http://10.87.207.27:3000/assistido/familiar`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -191,9 +186,9 @@ export default function VerAssistido({navigation, route}){
 
     const carregarFam = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
-        fetch(`http://192.168.0.29:3000/assistido/busca_familiar/${idAs}`)
+        // fetch(`http://192.168.0.29:3000/assistido/busca_familiar/${idAs}`)
         // fetch(`http://192.168.137.1:3000/assistido/busca_familiar/${idAs}`)
-            // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs}`)
+            fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setDadosFamiliar(data)
@@ -206,8 +201,8 @@ export default function VerAssistido({navigation, route}){
     const carregarCom = async () => {
         let idAs = JSON.parse(await AsyncStorage.getItem("assistido"));
         // fetch(`http://192.168.137.1:3000/assistido/saudeID/${idAs}`)
-            // fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs}`)
-            fetch(`http://192.168.0.29:3000/assistido/saudeID/${idAs}`)
+        fetch(`http://10.87.207.27:3000/assistido/saudeID/${idAs}`)
+        // fetch(`http://192.168.0.29:3000/assistido/saudeID/${idAs}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setComorbidade(data)
@@ -232,7 +227,6 @@ export default function VerAssistido({navigation, route}){
                           params: {},
                         })
                       );
-                    //navigation.navigate('')
                 }} />
                 <View style={global.cardTitle}>
                         <Text style={global.textTitle}>CASA ACOLHEDORA</Text>

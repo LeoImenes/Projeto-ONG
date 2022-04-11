@@ -31,9 +31,10 @@ export default function Login({navigation}) {
       senha: senha
     }
 
+    fetch(`http://10.87.207.20:3000/funcionarios`, {
     // fetch(`http://10.87.207.27:3000/funcionarios`, {
-      // fetch(`http://192.168.137.1:3000/funcionarios`, {
-        fetch(`http://192.168.0.29:3000/funcionarios`, {
+    // fetch(`http://192.168.137.1:3000/funcionarios`, {
+    // fetch(`http://192.168.0.29:3000/funcionarios`, {
       "method": "POST",
       "headers": {
           "Content-Type": "application/json"
@@ -43,8 +44,10 @@ export default function Login({navigation}) {
     .then(resp => {return resp.json()})
     .then(async data => {
       if(data.id_funcionario !== undefined) {
-        await AsyncStorage.setItem('userdata', JSON.stringify(data));
+        await AsyncStorage.setItem('userdata', JSON.stringify(data.id_funcionario));
         navigation.navigate('ContainerHome');
+        setEmail("")
+        setSenha("")
       }else {
           ToastAndroid.show('Email ou Senha Invalidos', ToastAndroid.SHORT);
       }
@@ -59,9 +62,9 @@ export default function Login({navigation}) {
       nova_senha: senhaNova
     }
 
-    // fetch(`http://10.87.207.27:3000/funcionario/reset_senha`, {
-      // fetch(`http://192.168.137.1:3000/funcionario/reset_senha`, {
-        fetch(`http://192.168.0.29:3000/funcionario/reset_senha`, {
+    fetch(`http://10.87.207.20:3000/funcionario/reset_senha`, {
+    // fetch(`http://192.168.137.1:3000/funcionario/reset_senha`, {
+    // fetch(`http://192.168.0.29:3000/funcionario/reset_senha`, {
       "method": "PUT",
       "headers": {
           "Content-Type": "application/json"

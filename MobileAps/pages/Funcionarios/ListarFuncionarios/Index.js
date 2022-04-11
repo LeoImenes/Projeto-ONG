@@ -14,9 +14,9 @@ export default function ListarFuncionario({navigation}){
 
     useFocusEffect(
         React.useCallback(() => {
-            // fetch(`http://10.87.207.27:3000/funcionarios`)
+            fetch(`http://10.87.207.20:3000/funcionarios`)
             // fetch(`http://192.168.137.1:3000/funcionarios`)
-            fetch(`http://192.168.0.29:3000/funcionarios`)
+            // fetch(`http://192.168.0.29:3000/funcionarios`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setLista(data);

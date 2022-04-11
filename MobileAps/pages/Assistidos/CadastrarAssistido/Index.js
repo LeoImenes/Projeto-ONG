@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import { Camera } from 'expo-camera';
 import { useFocusEffect } from '@react-navigation/native';
-import compress from 'compress-base64';
 
 import * as FileSystem from 'expo-file-system';
 
@@ -82,9 +81,9 @@ export default function CadastrarAssistido({navigation}){
             foto: foto
         }
 
-        // fetch(`http://10.87.207.27:3000/assistidos`, {
+        fetch(`http://10.87.207.27:3000/assistidos`, {
         // fetch(`http://192.168.137.1:3000/assistidos`, {
-        fetch(`http://192.168.0.29:3000/assistidos`, {
+        // fetch(`http://192.168.0.29:3000/assistidos`, {
           "method": "POST",
           "headers": {
               "Content-Type": "application/json"
@@ -103,9 +102,9 @@ export default function CadastrarAssistido({navigation}){
                     comorbidades: selected
                 }
 
-                // fetch(`http://10.87.207.27:3000/assistido/saude`, {
+                fetch(`http://10.87.207.27:3000/assistido/saude`, {
                 // fetch(`http://192.168.137.1:3000/assistido/saude`, {
-                fetch(`http://192.168.0.29:3000/assistido/saude`, {
+                // fetch(`http://192.168.0.29:3000/assistido/saude`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -136,9 +135,9 @@ export default function CadastrarAssistido({navigation}){
 
       useFocusEffect(
         React.useCallback(() => {
-            // fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
+            fetch(`http://10.87.207.27:3000/assistido/comorbidade`)
             // fetch(`http://192.168.137.1:3000/assistido/comorbidade`)
-            fetch(`http://192.168.0.29:3000/assistido/comorbidade`)
+            // fetch(`http://192.168.0.29:3000/assistido/comorbidade`)
             .then(resp => {return resp.json()})
             .then(async data => {
                 let temp = JSON.stringify(data);

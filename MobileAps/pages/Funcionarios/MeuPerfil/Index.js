@@ -16,12 +16,13 @@ export default function MeuPerfil({navigation}){
         let value = await AsyncStorage.getItem('userdata');
         if(value !== null) {
             value = JSON.parse(value);
-            fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
+            // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
             // fetch(`http://192.168.137.1:3000/funcionarios/${value.matricula}`)
-            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            fetch(`http://10.87.207.20:3000/funcionarios/${value.matricula}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                setFuncionario(data[0])
+                console.log(data)
+                // setFuncionario(data)
             })
             .catch( err => { console.log(err) })
         }
@@ -41,7 +42,7 @@ export default function MeuPerfil({navigation}){
             <View style={global.headerFunc}>
                 <View style={global.alignHeader}>
                     <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
-                    <Image source={(funcionario.foto === null || funcionario.foto === "") ? require("../../assets/user.png") : {uri: funcionario.foto}} style={global.imageUser}/>
+                    <Image source={(funcionario.foto === null || funcionario.foto === "" || funcionario.foto === undefined) ? require("../../assets/user.png") : {uri: funcionario.foto}} style={global.imageUser}/>
                 </View>
                 <View style={global.cardTitle}>
                     <Text style={global.textTitle}>CASA ACOLHEDORA</Text>

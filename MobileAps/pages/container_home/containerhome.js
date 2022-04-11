@@ -25,12 +25,12 @@ export default function ContainerHome() {
         if(value !== null) {
             value = JSON.parse(value);
 
-            fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
+            // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
             // fetch(`http://192.168.137.1:3000/funcionarios/${value.matricula}`)
-            // fetch(`http://10.87.207.27:3000/funcionarios/${value.matricula}`)
+            fetch(`http://10.87.207.20:3000/funcionarios/${value.matricula}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                setFoto(data[0].foto);
+                setFoto(data.foto);
                 setNome(data[0].nome_completo);
             })
             .catch( err => { console.log(err) })

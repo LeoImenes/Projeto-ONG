@@ -45,9 +45,9 @@ export default function VerFuncionario({navigation, route}){
             }
         }
 
-        // fetch(`http://10.87.207.27:3000/funcionario`, {
-        // fetch(`http://192.168.137.1:3000/funcionario`, {
-        fetch(`http://192.168.0.29:3000/funcionarios`, {
+        fetch(`http://10.87.207.20:3000/funcionarios`, {
+        // fetch(`http://192.168.137.1:3000/funcionarios`, {
+        // fetch(`http://192.168.0.29:3000/funcionarios`, {
           "method": "PUT",
           "headers": {
               "Content-Type": "application/json"
@@ -77,8 +77,8 @@ export default function VerFuncionario({navigation, route}){
     const readStorage = async () => {
         let funcionario = JSON.parse(await AsyncStorage.getItem("funcionario"));
 
-        fetch(`http://192.168.0.29:3000/funcionarios/${funcionario}`)
-        // fetch(`http://10.87.207.27:3000/funcionarios/${funcionario}`)
+        // fetch(`http://192.168.0.29:3000/funcionarios/${funcionario}`)
+        fetch(`http://10.87.207.20:3000/funcionarios/${funcionario}`)
         // fetch(`http://192.168.137.1:3000/funcionarios/${funcionario}`)
         .then(resp => {return resp.json()})
         .then(data => {
