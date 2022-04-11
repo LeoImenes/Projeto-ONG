@@ -84,22 +84,29 @@ function cadastrarAssistido() {
         "cartao_cidadao": cartCid.value,
         "cartao_sus": cartSus.value,
         "foto": fotinho,
-        // "antecedente_criminal": ante
-        // "foto_depois": fotinho
+        "antecedente_criminal": ante
+            // "foto_depois": fotinho
     })
 
-    fetch("http://10.87.207.27:3000/assistidos", {
-    // fetch("http://localhost:3000/assistidos", {
+    // fetch("http://10.87.207.27:3000/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: data,
         })
-        .then(response => { return response.json() })
+        .then(response => {
+            if (response.ok) {
+                alert("Assistido Cadastrado Com Sucesso")
+                return response.json()
+            } else {
+                alert("Falha ao Cadastrar Assisitido")
+            }
+        })
         .then(data => {
             if (data.id_assistido !== null) {
-                alert("Assistido Cadastrado com sucesso!");
+                console.log(data)
                 var listaComorbidade = document.querySelectorAll(".Comorbidade");
                 listaComorbidade.forEach((item, index) => {
 
@@ -110,23 +117,30 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-                        
-                        // fetch("http://localhost:3000/assistido/saude", {
-                                fetch("http://10.87.207.27:3000/assistido/saude", {
+
+                        fetch("http://localhost:3000/assistido/saude", {
+                                // fetch("http://10.87.207.27:3000/assistido/saude", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
                                 },
                                 body: JSON.stringify(comor)
                             })
-                            .then(response => { return response.json() })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json()
+                                } else {
+                                    alert("Falha ao Cadastrar Comorbidades")
+                                }
+                            })
                             .then(data => {
-                                window.location.reload();
 
+                                console.log(data)
                             })
                     }
                 });
             }
+            window.location.reload();
         })
 }
 
@@ -198,7 +212,10 @@ function getComorbidades() {
                     // ul.appendChild(liinp.cloneNode(true));
                     listaDrogas.appendChild(ulDroga)
                 }
+
             })
+
+
         })
 
 }

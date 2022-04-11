@@ -61,8 +61,8 @@ function cadastrarFunc() {
         "estado_civil": ""
     })
 
-    fetch("http://10.87.207.27:3000/funcionario", {
-    // fetch("http://localhost:3000/funcionario", {
+    // fetch("http://10.87.207.27:3000/funcionario", {
+    fetch("http://localhost:3000/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -70,11 +70,18 @@ function cadastrarFunc() {
             body: data,
         })
         .then(response => {
-            return response.json()
+            if (response.ok) {
+                alert("Cadastro efetuado com sucesso")
+                return response.json()
+
+            } else {
+                alert("Falha ao Cadastrar")
+            }
+
         })
 
     .then(data => {
-        
-        alert("Cadastro efetuado!")
+
+        window.location.href = '../ListarFuncionarios/'
     })
 }

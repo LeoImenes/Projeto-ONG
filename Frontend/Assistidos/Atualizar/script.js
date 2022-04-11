@@ -1,4 +1,6 @@
 var func = localStorage.getItem("assistido");
+var fotoAntes;
+var getSexo;
 
 var fotinho;
 var newImg = document.querySelector(".foto");
@@ -22,6 +24,47 @@ adcFoto.addEventListener("click", () => {
     fileInp.click();
 });
 
+function getAssistido() {
+    fetch(`http://localhost:3000/assistidos/${func}`)
+        // fetch(`http://10.87.207.27:3000/assistidos/${func}`)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            fotoAntes = data.foto_antes;
+            getSexo = data.sexo;
+            var inpNomeCom = document.querySelector(".nome-Completo");
+            var nome = document.querySelector(".nome");
+            var nomesoc = document.querySelector(".nome-soc");
+            var rg = document.querySelector(".rg");
+            var cpf = document.querySelector(".cpf");
+            var est = document.querySelector(".estado");
+            var nat = document.querySelector(".naturalidade");
+            var nasc = document.querySelector(".nasc");
+            var cartCid = document.querySelector(".cartCid");
+            var cartSus = document.querySelector(".cartSus");
+            var ante = document.querySelector(".ant");
+
+            nasc.placeholder = data.data_nascimento;
+            var formatnasc = nasc.placeholder.split("T")[0];
+
+            var dia = formatnasc.split("-")[2];
+            var mes = formatnasc.split("-")[1];
+            var ano = formatnasc.split("-")[0];
+
+            nome.value = data.nome_completo;
+            nomesoc.value = data.nome_social;
+            rg.value = data.rg;
+            cpf.value = data.cpf;
+            est.value = data.estado_civil;
+            nat.value = data.naturalidade;
+            nasc.value = `${dia}/${mes}/${ano}`;
+            cartCid.value = data.cartao_cidadao;
+            cartSus.value = data.cartao_sus;
+            ante.value = data.antecedente_criminal;
+        });
+}
+
 function cadastrarAssistido() {
     var inpNomeCom = document.querySelector(".nome-Completo");
     var nome = document.querySelector(".nome");
@@ -34,6 +77,7 @@ function cadastrarAssistido() {
     var cartCid = document.querySelector(".cartCid");
     var cartSus = document.querySelector(".cartSus");
     var ante = document.querySelector(".ant");
+    var inputs = document.querySelectorAll("input");
 
     var dia = nasc.split("/")[0];
     var mes = nasc.split("/")[1];
@@ -64,35 +108,26 @@ function cadastrarAssistido() {
     } else if (sexOutr.checked == 1) {
         sexOutr.value = "Outro";
         sex.push(sexOutr.value);
-    } else if (
-        sexOutr.checked == 0 &&
-        sexMasc.checked == 0 &&
-        sexFem.checked == 0
-    ) {
-        alert("Selecione pelo menos uma opção (Sexo)");
-    }
+    } else if ((sex = getSexo))
+        var data = JSON.stringify({
+            id_assistido: JSON.parse(func),
+            nome_completo: nome.value,
+            nome_social: nomesoc.value,
+            rg: rg.value,
+            cpf: cpf.value,
+            data_nascimento: `${ano}-${mes}-${dia}`,
+            estado_civil: est.value,
+            naturalidade: nat.value,
+            sexo: sex === undefined ? getSexo : sex,
+            cartao_cidadao: cartCid.value,
+            cartao_sus: cartSus.value,
+            foto_depois: fotinho,
+            antecedente_criminal: ante.value,
+            foto_antes: fotoAntes,
+        });
 
-    var data = JSON.stringify({
-        "id_assistido": JSON.parse(func),
-        "nome_completo": nome.value,
-        "nome_social": nomesoc.value,
-        "rg": rg.value,
-        "cpf": cpf.value,
-        "data_nascimento": `${ano}-${mes}-${dia}`,
-        "estado_civil": est.value,
-        "naturalidade": nat.value,
-        "sexo": sex,
-        "cartao_cidadao": cartCid.value,
-        "cartao_sus": cartSus.value,
-        "foto_depois": fotinho,
-        "antecedente_criminal": ante.value,
-        // "foto_depois": fotinho
-    });
-
-  
-
-    fetch("http://10.87.207.27:3000/assistido/update", {
-    // fetch("http://localhost:3000/assistido/update", {
+    // fetch("http://10.87.207.27:3000/assistido/update", {
+    fetch("http://localhost:3000/assistido/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -100,55 +135,13 @@ function cadastrarAssistido() {
             body: data,
         })
         .then((response) => {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.log("Falha ao atualizar");
+            }
         })
         .then((data) => {
-           
-
-        });
-}
-
-function getAssistido() {
-    fetch(`http://localhost:3000/assistidos/${func}`)
-    // fetch(`http://10.87.207.27:3000/assistidos/${func}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            var inpNomeCom = document.querySelector(".nome-Completo");
-            var nome = document.querySelector(".nome");
-            var nomesoc = document.querySelector(".nome-soc");
-            var rg = document.querySelector(".rg");
-            var cpf = document.querySelector(".cpf");
-            var est = document.querySelector(".estado");
-            var nat = document.querySelector(".naturalidade");
-            var nasc = document.querySelector(".nasc");
-            var cartCid = document.querySelector(".cartCid");
-            var cartSus = document.querySelector(".cartSus");
-            var ante = document.querySelector(".ant");
-
-            nasc.placeholder = data.data_nascimento;
-            var formatnasc = nasc.placeholder.split('T')[0];
-
-            var dia = formatnasc.split("-")[2]
-            var mes = formatnasc.split("-")[1]
-            var ano = formatnasc.split("-")[0]
-
-
-
-
-            nome.placeholder = "Nome: " + data.nome_completo;
-            nomesoc.placeholder = "Nome Social: " + data.nome_social;
-            rg.placeholder = "RG:" + data.rg;
-            cpf.placeholder = "Cpf: " + data.cpf;
-            est.placeholder = "Estado Civil:" + data.estado_civil;
-            nat.placeholder = "Natural de: " + data.naturalidade;
-            nasc.placeholder = "Nascimento: " + `${dia}/${mes}/${ano}`
-            cartCid.placeholder = "Cartão Cidadão: " + data.cartao_cidadao;
-            cartSus.placeholder = "Cartão Sus: " + data.cartao_sus;
-            ante.placeholder = "Antecedente Criminal:" + data.antecedente_criminal;
-
-
-
+            window.location.href = "../VerAssistido/index.html";
         });
 }

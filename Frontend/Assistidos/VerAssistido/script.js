@@ -15,8 +15,8 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
-    // fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistido/busca_familiar/${local}`)
+    fetch(`http://localhost:3000/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -24,7 +24,7 @@ function getFamiliares() {
 
             var dadosFamilia = document.querySelector(".dadosFamilia")
             data.forEach((item, index) => {
-                
+
                 var div = document.createElement("div")
                 var ul_nome = document.createElement("ul")
                 var litxtNome = document.createElement("li")
@@ -134,10 +134,14 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    fetch(`http://10.87.207.27:3000/assistidos/${local}`)
-    // fetch(`http://localhost:3000/assistidos/${local}`)
+    // fetch(`http://10.87.207.27:3000/assistidos/${local}`)
+    fetch(`http://localhost:3000/assistidos/${local}`)
         .then((response) => {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                alert("Falha ao Listar Assistido")
+            }
         })
         .then((data) => {
             var antes = document.querySelector("#assistidoAntes");
@@ -147,12 +151,12 @@ function list() {
             depois.src = data.foto_depois;
             depois.style.borderRadius = "50%";
 
-            if ((data.foto_antes == null) || (data.foto_antes == "undefined")) {
+            if ((data.foto_antes == null) || (data.foto_antes == "undefined") || (data.foto_antes == "null") || (data.foto_antes == "")) {
                 antes.src = "../../../Assets/icones/user.png"
             } else { antes.src = data.foto_antes }
 
 
-            if ((data.foto_depois === null) || (data.foto_depois === "undefined")) {
+            if ((data.foto_depois === null) || (data.foto_depois === "undefined") || (data.foto_depois == "null") || (data.foto_depois == "null")) {
                 depois.src = "../../Assets/icones/user.png"
             } else {
                 depois.src = data.foto_depois
@@ -228,15 +232,15 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    // fetch(`http://localhost:3000/assistido/saudeID/${local}`)
-        fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
+    fetch(`http://localhost:3000/assistido/saudeID/${local}`)
+        // fetch(`http://10.87.207.27:3000/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-            
+
             data.forEach((item, index) => {
-                
+
                 if (item.tipo === 0) {
                     var liDroga = document.createElement("li");
                     liDroga.innerHTML = item.comorbidade;
@@ -247,7 +251,7 @@ function getComorbidadeAssistido() {
                     ulDoenca.appendChild(liDoenca);
                 }
 
-                
+
             });
         });
 }
@@ -265,47 +269,47 @@ var newImg = document.querySelector("#assistidoDepois");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
 
-fileInp.addEventListener("change", (e) => {
-    var fr = new FileReader();
-    fr.onloadend = (foto) => {
-        fotinho = foto.target.result;
-        newImg.src = foto.target.result;
-        newImg.style.width = "70px";
-        newImg.style.height = "70px";
-        newImg.style.borderRadius = "50%";
-    };
-    fr.readAsDataURL(e.target.files[0]);
+// fileInp.addEventListener("change", (e) => {
+//     var fr = new FileReader();
+//     fr.onloadend = (foto) => {
+//         fotinho = foto.target.result;
+//         newImg.src = foto.target.result;
+//         newImg.style.width = "70px";
+//         newImg.style.height = "70px";
+//         newImg.style.borderRadius = "50%";
+//     };
+//     fr.readAsDataURL(e.target.files[0]);
 
-});
-adcFoto.style.cursor = "pointer";
-adcFoto.addEventListener("click", () => {
-    fileInp.click();
+// });
+// adcFoto.style.cursor = "pointer";
+// adcFoto.addEventListener("click", () => {
+//     fileInp.click();
 
-});
+// });
 
-function cadastrarFotoDepois() {
-    var local = localStorage.getItem("assistido");
-    let data = JSON.stringify({
-        'id_assistido': local,
-        'foto_depois': fotinho,
-    });
+// function cadastrarFotoDepois() {
+//     var local = localStorage.getItem("assistido");
+//     let data = JSON.stringify({
+//         'id_assistido': local,
+//         'foto_depois': fotinho,
+//     });
 
-    
-    fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
-    // fetch(`http://localhost:3000/assistido_foto_depois`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
 
-            window.location.href = "http://127.0.0.1:5500/Assistidos/VerAssistido/index.html"
+//     // fetch(`http://10.87.207.27:3000/assistido_foto_depois`, {
+//     fetch(`http://localhost:3000/assistido_foto_depois`, {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: data
+//         })
+//         .then((response) => {
+//             return response.json();
+//         })
+//         .then((data) => {
 
-        });
+//             window.location.href = "http://127.0.0.1:5500/Assistidos/VerAssistido/index.html"
 
-}
+//         });
+
+// }

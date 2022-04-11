@@ -19,22 +19,28 @@ function CadastrarFamiliar() {
     })
 
 
-    fetch("http://10.87.207.27:3000/assistido/familiar", {
-    // fetch("http://localhost:3000/assistido/familiar", {
+    // fetch("http://10.87.207.27:3000/assistido/familiar", {
+    fetch("http://localhost:3000/assistido/familiar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: data
         })
-        .then(response => { return response.json() })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                alert("Falha ao Cadastrar")
+            }
+        })
         .then(data => {
             if ((nome.value == "") && (rg.value == "") && (email.value == "") && (endereco.value == "") && (telefone.value == "")) {
                 data = null
                 alert("Falha ao Cadastrar ")
             } else {
                 alert("Cadastro Efetuado")
-                // window.location.href = "../../Assistidos/VerAssistido/"
+                window.location.href = "../../Assistidos/VerAssistido/"
             }
 
         })

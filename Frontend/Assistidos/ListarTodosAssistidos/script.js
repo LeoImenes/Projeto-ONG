@@ -1,19 +1,23 @@
+var listaData = [];
+
 function list() {
     let input = document.querySelector('input');
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-        fetch("http://10.87.207.27:3000/Assistidos")
-    // fetch("http://localhost:3000/Assistidos")
-        .then(response => { 
-            if(response.ok){
-                console.log("oi")
-            }else{
+
+    // fetch("http://10.87.207.27:3000/Assistidos")
+    fetch("http://localhost:3000/Assistidos")
+        .then(response => {
+            if (response.ok) {} else {
                 alert("Falha ao carregar dados")
             }
-            return response.json() })
+            return response.json()
+        })
         .then(data => {
+            listaData.push(data)
             data.forEach(fun => {
+
                 var divimg = document.createElement("div")
                 var divnome = document.createElement("div")
                 var cont = document.querySelector(".content")
@@ -32,7 +36,7 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined")||(fun.foto_antes === "null")) {
+                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined") || (fun.foto_antes === "null")) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto_antes
@@ -40,6 +44,7 @@ function list() {
 
 
                 nomeFun.innerHTML = `${fun.nome_completo}`
+
 
 
                 divimg.appendChild(img)
@@ -71,6 +76,9 @@ function buscar() {
         (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
     })
 }
+
+
+
 
 function Ordem() {
     let filtro = document.querySelectorAll("h1");

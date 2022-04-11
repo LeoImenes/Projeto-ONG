@@ -34,7 +34,7 @@ CREATE TABLE comorbidades(
 CREATE TABLE saude(
 	id_saude INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_assistido INTEGER NOT NULL,
-	id_comorbidade INTEGER NOT NULL,
+	id_comorbidade INTEGER,
 	data_de_registro DATE,
 	
 	CONSTRAINT fk_assistido FOREIGN KEY (id_assistido) REFERENCES assistidos(id_assistido) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -180,6 +180,8 @@ CREATE TABLE estoque(
 
 ALTER TABLE familiares ADD UNIQUE (email); 
 ALTER TABLE familiares ADD UNIQUE (telefone); 
+
+set global max_allowed_packet=33554432
 
 
 

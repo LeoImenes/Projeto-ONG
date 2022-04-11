@@ -1,18 +1,23 @@
 var cpf;
 var matricula = localStorage.getItem("funcionario")
-
-
+var getMatricula;
+var getCargo;
 
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
-    // fetch(`http://localhost:3000/funcionarios/${local}`)
+    // fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
+    fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+
+
             data.forEach((item, index) => {
+                getMatricula = item.matricula
+                getCargo = item.cargo
+                var botaoEditar = document.querySelector(".btn")
                 var Fotofuncionario = document.querySelector("#Funcfoto");
                 var liNome = document.querySelector(".getNome");
                 var liEstadoCivil = document.querySelector(".getDataNasc");
@@ -27,18 +32,24 @@ function list() {
                 var liEmail = document.querySelector(".getEmail");
 
                 var SplitdataAdm = item.data_admissao.split("T")[0];
-                
+
                 var SplitdataNasc = item.data_nascimento.split("T")[0];
-               
+
+                if ((item.foto === null) || (item.foto === "undefined") || (item.foto == "null") || (item.foto == "")) {
+                    Fotofuncionario.src = "../../Assets/icones/user.png"
+                } else {
+                    Fotofuncionario.src = item.foto
+                }
 
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
                 } else {
                     var SplitdataDem = item.data_demissao.split("T")[0];
-                    liDatademissao.innerHTML = `${SplitdataAdm.split("-")[2]}/${SplitdataAdm.split("-")[1]}/${SplitdataAdm.split("-")[0]}`;
+                    liDatademissao.innerHTML = `${SplitdataDem.split("-")[2]}/${SplitdataDem.split("-")[1]}/${SplitdataDem.split("-")[0]}`;
+                    botaoEditar.disabled = true;
                 }
 
-                Fotofuncionario.src = item.foto;
+
                 liNome.innerHTML = item.nome_completo;
                 liEstadoCivil.innerHTML = item.estado_civil;
                 liMatricula.innerHTML = item.matricula;
@@ -84,9 +95,9 @@ function cadastrarFotoDepois() {
         foto: fotinho,
     });
 
-    
-    fetch(`http://10.87.207.27:3000/funcionario`, {
-    // fetch(`http://localhost:3000/funcionario`, {
+
+    // fetch(`http://10.87.207.27:3000/funcionario`, {
+    fetch(`http://localhost:3000/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -94,14 +105,17 @@ function cadastrarFotoDepois() {
             body: data,
         })
         .then((response) => {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                alert("Falha ao Atualizar Foto")
+            }
         })
         .then((data) => {
-            if (data.err !== undefined) {
-                alert("Error: " + data.err);
-            } else {
-                window.location.reload();
-            }
+
+            alert("Foto Atualizada");
+            window.location.reload()
+
         });
 }
 
@@ -110,6 +124,11 @@ function editarDados() {
     var ulDadosFunc = document.querySelector(".DadosFuncionario");
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
+    var cargo = document.querySelector("#cargo");
+    var matricula = document.querySelector("#Matricula")
+    cargo.value = getCargo
+    matricula.value = getMatricula
+
     ulDadosFunc.style.display = "none";
 
     if (ulDadosFunc.style.display === "none") {
@@ -126,20 +145,24 @@ function Atualizar() {
     var ulDadosFunc = document.querySelector(".DadosFuncionario");
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
+    var matricula = document.querySelector("#Matricula").value
 
     var dia = dataDemissao.split("/")[0]
     var mes = dataDemissao.split("/")[1]
     var ano = dataDemissao.split("/")[2]
 
-
+    cargo.placeholder = getCargo
+    matricula.placeholder = getMatricula
 
     const data = JSON.stringify({
-        matricula: matricula,
+        matricula_funcionario: matricula,
         cargo: cargo,
-        data: `${ano}-${mes}-${dia}`,
+        data_demissao: `${ano}-${mes}-${dia}`,
     });
-    fetch(`http://10.87.207.27:3000/funcionarios`, {
-    // fetch(`http://localhost:3000/funcionarios`, {
+
+    console.log(data)
+        // fetch(`http://10.87.207.27:3000/funcionarios`, {
+    fetch(`http://localhost:3000/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -147,22 +170,24 @@ function Atualizar() {
             body: data,
         })
         .then((resp) => {
-            return resp.json();
-        })
-        .then((data) => {
-
-            if (data.err === undefined) {
-                alert("Falha ao Atualizar");
-                ulDadosFunc.style.display = "flex";
-                btnDadosFunc.style.display = "block";
-                ulEditarDados.style.display = "none";
-                btnAtualizarDados.style.display = "none";
+            if (resp.ok) {
+                return resp.json();
             } else {
-                alert("Atualizado com sucesso");
+                alert("Falha ao Atualizar")
                 ulDadosFunc.style.display = "flex";
                 btnDadosFunc.style.display = "block";
                 ulEditarDados.style.display = "none";
                 btnAtualizarDados.style.display = "none";
             }
+        })
+        .then((data) => {
+            alert("Atualizado com sucesso");
+            ulDadosFunc.style.display = "flex";
+            btnDadosFunc.style.display = "block";
+            ulEditarDados.style.display = "none";
+            btnAtualizarDados.style.display = "none";
+
+            window.location.reload()
+
         });
 }
