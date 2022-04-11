@@ -396,7 +396,7 @@ const updateFinanca = (req,res) => {
 
 
 
-async function executeQuery(string){
+async function executarQuery(string){
 
     return new Promise((resolve,reject) => {
 
@@ -425,83 +425,105 @@ const postAssistencia = (req,res) => {
     let stringSolicitacao
 
 
-    if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
 
-        let stringAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
+    if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0){
+
+        let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
+
+
         try{
 
             con.beginTransaction()
 
-            con.query(stringAssistencia, (err, result) => {
-
+            con.query(strinAssistencia, async (err,result) => {
 
                 if(err === null){
 
                     let id_assistencia = result.insertId
 
-                    //console.log(id_assistencia)
 
-                    while(!comerro){
+                    do{
 
-                        console.log("index: " + index)
-                        console.log("tamanho do vetor" + itens.length)
 
                         stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
 
-                        console.log(stringSolicitacao)
-                        
-                        let a = executeQuery(stringSolicitacao)
+                        console.log("string sql:" + stringSolicitacao)
+
+                        console.log("index: " + index)
+
+
+                       let response = await executarQuery(stringSolicitacao)
                         .then(() => {
-                            console.log("entrou no then")
 
-                            if(itens.length === 2){
 
-                                console.log("entrou no if")
+                            if(index + 1 === itens.length){
+
                                 con.commit()
-                                res.status(200).json({"ok": "ok"}).end()
+                                res.status(400).json({"ok":"ok"})
                                 comerro = true
                             }
 
-                            
 
                         }).catch((err) => {
-                            res.status(400).json({err}).end()
                             con.rollback()
+                            res.status(400).json({err: err.message})
                             comerro = true
                         })
 
 
+                        
+                    index++
+                    }while(!comerro)
 
-                        index++
-                        }
+
+
+
+
 
                 }else{
 
-                    res.status(400).json({err: err.message}).end()
+                    res.status(400).json({err: err.message})
                 }
 
 
             })
 
-
-        }catch{
-
+        }catch(err){
             con.rollback()
-            console.log("err")
+            res.status(400).json({err: err.message})
         }
 
 
 
 
-    }else{
+    }
+
+    else{
         res.status(400).json({"err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'"}).end()
     }
 
 
-
 }
 
+const getAllAssistencias = (req,res) => {
 
+    let string = `select * from vw_assistencia`
+
+    con.query(string, (err,result) => {
+
+        if(err === null){
+
+            res.status(200).json(result)
+        }
+        else{
+            res.status(400).json({err: err.message})
+        }
+    })
+
+
+
+
+}
 
 
 
@@ -519,5 +541,6 @@ module.exports = {
     getAllFinancas,
     getIDFinanca, 
     updateFinanca,
-    postAssistencia
+    postAssistencia,
+    getAllAssistencias
 }
