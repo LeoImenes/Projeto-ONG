@@ -30,7 +30,6 @@ export default function ListarFuncionario({navigation}){
         if (searchText === ''){
             setLista(dados);
         } else {
-            console.log("teste")
             setLista(
                 dados.filter(item => (item.nome_completo.toLowerCase().indexOf(searchText.toLowerCase()) > -1))
             )
@@ -50,21 +49,25 @@ export default function ListarFuncionario({navigation}){
     }
 
     return(
-        <View style={global.bodyAlternative}>
+        <View style={global.body}>
             <StatusBar
                 barStyle = "dark-content"
                 hidden = {false}
                 backgroundColor="transparent"
                 translucent={true}/>
-            <View style={css.filter}>
-                <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Home")}} />
-                <TextInput placeholder="Pesquise uma pessoa" placeholderTextColor= "gray" style={global.search} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
-                <View style={{width: "10%", alignItems: "center", height: "90%", justifyContent: "space-evenly", marginTop: 10}}>
-                    <TouchableOpacity style={{width: "100%", height: "50%"}} onPress={() => {listar()}}>
-                        <MaterialCommunityIcons name="order-alphabetical-ascending" size={30} color="white" />
+            <View style={{width: "100%", height: 150, backgroundColor: "#166B8A", borderBottomRightRadius: 40, borderBottomLeftRadius: 40}}>
+                <View style={css.filter}>
+                    <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Home")}} />
+                    <TextInput placeholder="Pesquisar..." placeholderTextColor= "white" style={{width: "80%", borderBottomWidth: 1, borderBottomColor: 'white', padding: "2%", color: 'white'}} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
+                </View>
+                <View style={{width: "90%", alignItems: "center", alignSelf: "center", height: "50%", justifyContent: "space-between",flexDirection: "row"}}>
+                    <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Filtrar por:</Text>
+                    <TouchableOpacity style={{height: "100%", alignItems: "center", justifyContent: "center"}} onPress={() => {listar()}}>
+                        {/* <MaterialCommunityIcons name="order-alphabetical-ascending" size={30} color="white" /> */}
+                        <Text style={{fontSize: 18, color: 'white'}}>A-Z</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{width: "100%", height: "50%", alignItems: "center"}} onPress={() => {ativos()}}>
-                        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>Ativ</Text>
+                    <TouchableOpacity style={{height: "100%", alignItems: "center", justifyContent: "center"}} onPress={() => {ativos()}}>
+                        <Text style={{fontSize: 18, color: 'white'}}>Atividade</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -79,10 +82,13 @@ export default function ListarFuncionario({navigation}){
                                     ? 
                                     <TouchableOpacity style={{display: 'none'}}></TouchableOpacity> 
                                     :
-                                    <TouchableOpacity style={global.cardInfo} onPress={() => {navigation.navigate("VerFuncionario", {item})}}>
-                                        <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user.png") : {uri: item.foto}} style={global.imageUser}/>
+                                    <TouchableOpacity style={global.cardInfo} onPress={async () => {
+                                        await AsyncStorage.setItem("funcionario", JSON.stringify(item.matricula));
+                                        navigation.navigate("VerFuncionario")
+                                        }}>
+                                        <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user1.png") : {uri: item.foto}} style={global.imageUser}/>
                                         <View style={global.cardTxt}>
-                                            <Text style={global.textInfoAlternative}>{item.nome_completo}</Text>
+                                            <Text style={global.textInfo}>{item.nome_completo}</Text>
                                             <Text style={css.activity}>{(item.status === 0) ? "Inativo" : "Ativo"}</Text>
                                         </View>
                                     </TouchableOpacity> 
@@ -103,7 +109,7 @@ const css = StyleSheet.create({
     },
     filter:{
         width: "100%",
-        height: "10%",
+        height: "30%",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-evenly",
@@ -114,6 +120,6 @@ const css = StyleSheet.create({
       },
       scrollAlternative:{
         width: "100%",
-        height: "85%"
+        height: "80%"
       }
 })

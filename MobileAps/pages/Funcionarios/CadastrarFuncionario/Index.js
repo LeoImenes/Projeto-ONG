@@ -79,8 +79,13 @@ export default function CadastrarFuncionario({navigation}){
         .then(resp => {return resp.json()})
         .then(data => {
             console.log(data)
-            ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
-            limpar()
+            if(data.err !== undefined) {
+                if(data.err.includes("Duplicate entry"))
+                    ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
+            } else {
+                ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                limpar()
+            }
         })
         .catch(err => {
             console.log(err) 
@@ -104,16 +109,16 @@ export default function CadastrarFuncionario({navigation}){
     
       async function takePicture(){
         if(camRef){
-          const data = await camRef.current.takePictureAsync();
-          
-          let base = await FileSystem.readAsStringAsync(data.uri, {
+            const data = await camRef.current.takePictureAsync();
+            let base = await FileSystem.readAsStringAsync(data.uri, {
             encoding: FileSystem.EncodingType.Base64,
-          });
-          
-          setFoto({
-            uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
-          })
-          setCam(false)
+            });
+
+            let url = data.uri.split(".");
+            let b64 = `data:image/${url[url.length-1]};base64,${base}`;
+
+            setFoto(b64)
+            setCam(false)
         }
     }
 
@@ -152,7 +157,7 @@ export default function CadastrarFuncionario({navigation}){
                 :
                 <View style={css.body2}>
                     <View style={global.header}>
-                        <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
+                        <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home'), limpar()}} />
                         <View style={global.cardTitle}>
                             <Text style={global.textTitle}>Casa Acolhedora</Text>
                             <Text style={global.textTitle}>Irmã Antônia</Text>
@@ -197,7 +202,7 @@ export default function CadastrarFuncionario({navigation}){
                                     ( foto === null || foto === undefined || foto === "") ?
                                         <Image source={require("../../assets/user1.png")} style={global.imageUser}/>
                                     :
-                                        <Image source={foto} style={global.imageUser}/>
+                                        <Image source={{"uri":foto}} style={global.imageUser}/>
                                 }
                                 <TouchableOpacity onPress={() => {setCam(true)}} style={css.imageAlign}>
                                     <Feather name="camera" size={24} color="blue" />
@@ -230,18 +235,3 @@ const css = StyleSheet.create({
         flexDirection: "column"
     }
 })
-
-        // "foto": null,
-        // "matricula": "001",
-        // "nome_completo": "Jaque Momolada",
-        // "rg": "123.312.123.2",
-        // "cpf": "321.543.123-2",
-        // "data_nascimento": "2003-06-03T03:00:00.000Z",
-        // "estado_civil": "",
-        // "cargo": "Suplente",
-        // "sexo": "Feminino",
-        // "data_admissao": "2022-03-22T03:00:00.000Z",
-        // "data_demissao": null,
-        // "email": "jaque@live.com",
-		// "senha": "12345678",
-        // "status": 0

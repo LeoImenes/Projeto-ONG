@@ -7,14 +7,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         flexDirection: "column"
     },
-    bodyAlternative:{
-      flex: 1,
-      backgroundColor: "#166B8A",
-      alignItems: "center"
-    },
+    // bodyAlternative:{
+    //   flex: 1,
+    //   backgroundColor: "#166B8A",
+    //   alignItems: "center"
+    // },
     header:{
       width: "100%",
-      height: "20%",
+      height: "15%",
       display: "flex",
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     cardTitle: {
       backgroundColor: "#166B8A",
       width: "60%",
-      height: "80%",
+      height: "100%",
       borderBottomLeftRadius: 66,
       alignItems: "center",
       justifyContent: "center",
@@ -50,7 +50,7 @@ export default StyleSheet.create({
     },
     scroll: {
       width: "100%",
-      height: "80%"
+      height: "85%"
     },
     scrollAlternative:{
       width: "100%",
@@ -70,17 +70,18 @@ export default StyleSheet.create({
     },
     textInfo:{
       fontSize: 18,
-      color: "black"
+      color: "black",
+      textAlign: "center",
     },
     textInfo1:{
       fontSize: 18,
       color: "#166B8A",
       fontWeight: "bold"
     },
-    textInfoAlternative:{
-      fontSize: 18,
-      color: "white"
-    },
+    // textInfoAlternative:{
+    //   fontSize: 18,
+    //   color: "white"
+    // },
     info: {
       width: "90%",
       height: 40,
@@ -119,9 +120,7 @@ export default StyleSheet.create({
     cardInfo: {
       width: "80%",
       height: 110,
-      borderBottomColor: 'white',
-      borderTopColor: 'white',
-      borderTopWidth: 1,
+      borderBottomColor: 'black',
       borderBottomWidth: 1,
       alignItems: 'center',
       justifyContent: "space-between",
@@ -136,7 +135,9 @@ export default StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 5,
-      alignSelf: "center"
+      marginTop:"10%",
+      alignSelf: "center",
+      marginBottom: "20%"
     },
     cardButton2: {
       backgroundColor: "white",
@@ -160,7 +161,7 @@ export default StyleSheet.create({
       alignSelf: "center",
     },
     search:{
-      backgroundColor: "white",
+      backgroundColor: "lightgray",
       width: "70%",
       height: 40,
       borderRadius: 10,

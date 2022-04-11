@@ -3,13 +3,15 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput,
 
 import global from "../../Global/Style"
 import { Ionicons, Feather} from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect, CommonActions  } from '@react-navigation/native';
 
 export default function VerFuncionario({navigation, route}){
-    const {item} = route.params;
+    // const {item} = route.params;
 
     const[atualizar, setAtualizar] = useState(false);
+    const[funcionario, setFuncionario] = useState([]);
     const[matricula, setMatricula] = useState("")
     const[cargo, setCargo] = useState("");
     const[dataDemissao, setDataDemissao]= useState("");
@@ -44,7 +46,7 @@ export default function VerFuncionario({navigation, route}){
         }
 
         // fetch(`http://10.87.207.27:3000/funcionario`, {
-        // fetch(`http://192.168.137.1:3000/funcionarios`, {
+        // fetch(`http://192.168.137.1:3000/funcionario`, {
         fetch(`http://192.168.0.29:3000/funcionarios`, {
           "method": "PUT",
           "headers": {
@@ -54,12 +56,12 @@ export default function VerFuncionario({navigation, route}){
         })
         .then(resp => {return resp.json()})
         .then(data => {
-            console.log(data)
-            ToastAndroid.show('Funcionário atualizado!', ToastAndroid.SHORT)
-            setAtualizar(false)
             setMatricula("")
             setCargo("")
             setDataDemissao("")
+            ToastAndroid.show('Funcionário atualizado!', ToastAndroid.SHORT)
+            setAtualizar(false)
+            readStorage()
         })
         .catch(err => {
             console.log(err) 
@@ -73,9 +75,20 @@ export default function VerFuncionario({navigation, route}){
     );
 
     const readStorage = async () => {
-        setCargo(item.cargo);
-        setMatricula(item.matricula);
-        setDataDemissao(item.data_demissao)
+        let funcionario = JSON.parse(await AsyncStorage.getItem("funcionario"));
+
+        fetch(`http://192.168.0.29:3000/funcionarios/${funcionario}`)
+        // fetch(`http://10.87.207.27:3000/funcionarios/${funcionario}`)
+        // fetch(`http://192.168.137.1:3000/funcionarios/${funcionario}`)
+        .then(resp => {return resp.json()})
+        .then(data => {
+            setFuncionario(data[0]);
+            setDataDemissao(formatDate(new Date()));
+            setCargo(data[0].cargo);
+            setMatricula(data[0].matricula);
+            
+        })
+        .catch(err => { console.log(err) });
     }
 
     return(
@@ -91,7 +104,7 @@ export default function VerFuncionario({navigation, route}){
                     <View style={global.headerFunc}>
                         <View style={global.alignHeader}>
                             <Ionicons name="arrow-back-circle-outline" style={css.icon} size={35} color="#166B8A" onPress={() => {navigation.navigate('ListarFuncionario')}} />
-                            <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user1.png") : {uri: item.foto}} style={global.imageUser}/>
+                            <Image source={(funcionario.foto === "null" || funcionario.foto === "" || funcionario.foto === "undefined") ? require("../../assets/user1.png") : {uri: funcionario.foto}} style={global.imageUser}/>
                         </View>
                         <View style={global.cardTitle}>
                             <Text style={global.textTitle}>CASA ACOLHEDORA</Text>
@@ -102,46 +115,46 @@ export default function VerFuncionario({navigation, route}){
                         <ScrollView>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Nome:</Text>
-                                <Text style={global.textInfo}>{item.nome_completo}</Text>
+                                <Text style={global.textInfo}>{funcionario.nome_completo}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Matricula:</Text>
-                                <Text style={global.textInfo}>{item.matricula}</Text>
+                                <Text style={global.textInfo}>{funcionario.matricula}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>RG:</Text>
-                                <Text style={global.textInfo}>{item.rg}</Text>
+                                <Text style={global.textInfo}>{funcionario.rg}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>CPF:</Text>
-                                <Text style={global.textInfo}>{item.cpf}</Text>
+                                <Text style={global.textInfo}>{funcionario.cpf}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Nascimento:</Text>
-                                <Text style={global.textInfo}>{formatDate(new Date(item.data_nascimento))}</Text>
+                                <Text style={global.textInfo}>{formatDate(new Date(funcionario.data_nascimento))}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Cargo:</Text>
-                                <Text style={global.textInfo}>{item.cargo}</Text>
+                                <Text style={global.textInfo}>{funcionario.cargo}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Sexo:</Text>
-                                <Text style={global.textInfo}>{item.sexo}</Text>
+                                <Text style={global.textInfo}>{funcionario.sexo}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>E-mail:</Text>
-                                <Text style={global.textInfo}>{item.email}</Text>
+                                <Text style={global.textInfo}>{funcionario.email}</Text>
                             </View>
                             <View style={global.info}>
                                 <Text style={global.textInfo1}>Data admissão:</Text>
-                                <Text style={global.textInfo}>{formatDate(new Date(item.data_admissao))}</Text>
+                                <Text style={global.textInfo}>{formatDate(new Date(funcionario.data_admissao))}</Text>
                             </View>
                             {
-                                (item.data_demissao !== null)
+                                (funcionario.data_demissao !== null)
                                 ?
                                     <View style={global.info}>
                                         <Text style={global.textInfo1}>Data demissão:</Text>
-                                        <Text style={global.textInfo}>{formatDate(new Date(item.data_demissao))}</Text>
+                                        <Text style={global.textInfo}>{formatDate(new Date(funcionario.data_demissao))}</Text>
                                     </View>
                                 :
                                 <TouchableOpacity style={css.cardButton1} onPress={() => {setAtualizar(true)}}>

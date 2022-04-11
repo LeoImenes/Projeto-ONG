@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, SafeAreaView} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, StatusBar} from 'react-native';
 
 import global from "../../Global/Style"
 import SelectMultiple from 'react-native-select-multiple'
@@ -93,11 +93,11 @@ export default function CadastrarAssistido({navigation}){
         })
         .then(resp => {return resp.json()})
         .then(async data => {
-            console.log(data)
             if(data.err !== undefined) {
                 if(data.err.includes("Duplicate entry"))
                     ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
             } else {
+
                 let saude = {
                     id_assistido: data.id_assistido,
                     comorbidades: selected
@@ -114,14 +114,8 @@ export default function CadastrarAssistido({navigation}){
                 })
                 .then(resp => {return resp.json()})
                 .then(async data => {
-                    console.log("oi", data)
-                    if(data.err !== undefined) {
-                        console.log(data)
-                    }else{
-                        ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
-                        limpar()
-                        
-                    }
+                    ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                    limpar()
                 })
             }
         })
@@ -187,26 +181,31 @@ export default function CadastrarAssistido({navigation}){
         async function takePicture(){
             if(camRef){
                 const data = await camRef.current.takePictureAsync();
-                
                 let base = await FileSystem.readAsStringAsync(data.uri, {
-                  encoding: FileSystem.EncodingType.Base64,
+                encoding: FileSystem.EncodingType.Base64,
                 });
-                
-                setFoto({
-                  uri: `data:image/${data.uri[data.uri.length-1]};base64,`+base
-                })
+
+                let url = data.uri.split(".");
+                let b64 = `data:image/${url[url.length-1]};base64,${base}`;
+
+                setFoto(b64)
                 setCam(false)
               }
     }
 
     return(
         <View style={global.body} onLoad={getFunc()}>
+            <StatusBar
+                barStyle = "dark-content"
+                hidden = {false}
+                backgroundColor="transparent"
+                translucent={true}/>
             {
                 (cam === true)
                 ?
                     <View style={{width: "100%", height: "100%", justifyContent: 'center'}}>
                         <Camera style={{flex: 1}} type={type} ref={camRef}>
-                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: 20}} size={35} color="#166B8A" onPress={() => {navigation.navigate("CadastrarAssistido")}} />
+                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5, marginTop: "10%"}} size={35} color="#166B8A" onPress={() => {navigation.navigate("CadastrarAssistido")}} />
                             <View style={{flex: 1, backgroundColor: 'transparent', flexDirection: "row"}}>
                                 <View style={{width: '100%', height: '10%', position: 'absolute', bottom: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',marginBottom: "2%"}}>
                                     <TouchableOpacity style={css.buttons} onPress={() => {
@@ -229,7 +228,7 @@ export default function CadastrarAssistido({navigation}){
                 :
                     <View style={css.body2}>
                         <View style={global.header}>
-                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home')}} />
+                            <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {navigation.navigate('Home'), limpar()}} />
                             <View style={global.cardTitle}>
                                 <Text style={global.textTitle}>Casa Acolhedora</Text>
                                 <Text style={global.textTitle}>Irmã Antônia</Text>

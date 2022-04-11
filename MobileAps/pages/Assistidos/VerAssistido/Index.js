@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, ToastAndroid} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, ToastAndroid, StatusBar} from 'react-native';
 
 import global from "../../Global/Style"
 import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
@@ -163,11 +163,12 @@ export default function VerAssistido({navigation, route}){
     const cadastrarFamiliar = () => {
         let familiar = {
             id_assistido: assistido.id_assistido,
-            nome_completo: nome,
-            rg: rg,
-            telefone: telefone,
-            email: email,
-            parentesco: parentesco,
+            nome_completo: nomeFamiliar,
+            rg: rgFamiliar,
+            telefone: telefoneFamiliar,
+            email: emailFamiliar,
+            parentesco: parentescoFamiliar,
+            endereco: enderecoFamiliar
         }
 
         fetch(`http://192.168.0.29:3000/assistido/familiar`, {
@@ -181,7 +182,9 @@ export default function VerAssistido({navigation, route}){
         })
         .then(resp => {return resp.json()})
         .then(data => {
-          setFamiliar(false)
+            limpar()
+            setFamiliar(false)
+            carregarFam()
         })
         .catch(err => { console.log(err) });
     }
@@ -216,6 +219,11 @@ export default function VerAssistido({navigation, route}){
 
     return(
         <View style={global.body}>
+            <StatusBar
+                barStyle = "dark-content"
+                hidden = {false}
+                backgroundColor="transparent"
+                translucent={true}/>
             <View style={global.header}>
                 <Ionicons name="arrow-back-circle-outline" style={{marginLeft: 5}} size={35} color="#166B8A" onPress={() => {
                     navigation.dispatch(
@@ -239,11 +247,11 @@ export default function VerAssistido({navigation, route}){
                         <View>
                             <View style={css.images}>
                                 <View>
-                                    <Image source={(assistido.foto_antes !== null && assistido.foto_antes !== undefined && assistido.foto_antes !== "") ? {uri:assistido.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
+                                    <Image source={(assistido.foto_antes !== "null" && assistido.foto_antes !== "undefined" && assistido.foto_antes !== "") ? {uri:assistido.foto_antes} : require("../../assets/user1.png")} style={global.imageUser}/>
                                     <Text style={css.title}>Antes</Text>
                                 </View>
                                 <View>
-                                    <Image source={(assistido.foto_depois !== null && assistido.foto_depois !== undefined && assistido.foto_depois !== "") ? {uri:assistido.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
+                                    <Image source={(assistido.foto_depois !== "null" && assistido.foto_depois !== "undefined" && assistido.foto_depois !== "") ? {uri:assistido.foto_depois} : require("../../assets/user1.png")} style={global.imageUser}/>
                                     <Text style={css.title}>Depois</Text>
                                 </View>
                             </View>
@@ -381,6 +389,10 @@ export default function VerAssistido({navigation, route}){
                                             <Text style={global.textInfo}>{item.parentesco}</Text>
                                         </View>
                                         <View style={global.info}>
+                                            <Text style={global.textInfo}>RG:</Text>
+                                            <Text style={global.textInfo}>{item.rg_familiar}</Text>
+                                        </View>
+                                        <View style={global.info}>
                                             <Text style={global.textInfo}>Telefone:</Text>
                                             <Text style={global.textInfo}>{item.telefone_familiar}</Text>
                                         </View>
@@ -416,7 +428,7 @@ export default function VerAssistido({navigation, route}){
                                 <TextInput value={emailFamiliar} onChangeText={setEmailFamiliar} placeholder="E-mail..." style={global.info}></TextInput>
                                 <TextInput value={enderecoFamiliar} onChangeText={setEnderecoFamiliar} placeholder="Endereço..." style={global.info}></TextInput>
                                 <View style={{alignItems: 'center', justifyContent: 'space-evenly', flexDirection: "row"}}>
-                                    <TouchableOpacity onPress={() => {setFamiliar(false)}} style={{alignItems: 'center', justifyContent: 'center', width: "35%", height: 45,  marginTop: 20}}>
+                                    <TouchableOpacity onPress={() => {limpar(), setFamiliar(false)}} style={{alignItems: 'center', justifyContent: 'center', width: "35%", height: 45,  marginTop: 20}}>
                                         <Text style={{fontSize:18, color: "#166B8A", fontWeight: "bold"}}>Cancelar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={css.button} onPress={() => {cadastrarFamiliar()}}>
@@ -425,20 +437,10 @@ export default function VerAssistido({navigation, route}){
                                 </View>
                             </View>
                         :
-                            <TouchableOpacity style={{backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, alignSelf: "center", marginTop: "5%", marginBottom: "20%"}} onPress={() => { setFamiliar(true)}}>
+                            <TouchableOpacity style={global.cardButton1} onPress={() => { setFamiliar(true)}}>
                                 <Text style={global.buttonText1}>Novo Familiar</Text>
                             </TouchableOpacity>
                     }
-                    {/* <Text style={css.title}>Observações</Text>
-                    <TextInput multiline
-                                numberOfLines={5}
-                                maxLength={20000}
-                                onChangeText={text => onChangeText(text)}
-                                value={value}
-                                style={css.textArea}></TextInput>
-                    <TouchableOpacity style={css.button} onPress={() => {salvarRelatorio()}}>
-                        <Text style={global.buttonText1}>Novo</Text>
-                    </TouchableOpacity> */}
                 </ScrollView>
             </View>
         </View>
@@ -453,7 +455,7 @@ const css = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
-        marginTop: 5,
+        marginTop: 10,
     },
     title: {
         fontWeight: 'bold',
