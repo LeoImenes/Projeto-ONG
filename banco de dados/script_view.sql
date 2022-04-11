@@ -165,9 +165,9 @@ END;
 
 / /
 alter table
-	familiarassistido
+	solicitacao
 add
-	unique index (id_assistido, id_familiar);
+	unique index (id_assistencia, id_item);
 
 ALTER TABLE
 	familiares
@@ -199,7 +199,7 @@ DELIMITER //
 
 
 
-
+create view vw_assistencia as
 select 
 	f.nome_completo as nome_completo_funcionario, 
 	f.foto, 
