@@ -201,6 +201,7 @@ DELIMITER //
 
 create view vw_assistencia as
 select 
+	f.id_funcionario,
 	f.nome_completo as nome_completo_funcionario, 
 	f.foto, 
 	f.cpf, 

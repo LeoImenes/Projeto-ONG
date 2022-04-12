@@ -520,11 +520,38 @@ const getAllAssistencias = (req,res) => {
         }
     })
 
-
-
-
 }
 
+
+const getAssistenciasID = (req,res) => {
+
+    let id_funcionario = req.body.id_funcionario
+    let id_assistido = req.body.id_assistido
+
+    if(id_funcionario !== undefined && id_assistido !== undefined){
+
+        let string = `select * from vw_assistencia where id_funcionario = ${id_funcionario} and id_assistido = ${id_assistido}`
+
+        con.query(string, (err,result) => {
+
+            if(err === null){
+
+                res.status(200).json(result).end()
+
+            }else{
+
+                res.status(400).json({err: err.message}).end()
+            }
+        })
+
+
+
+    }else{
+
+        res.status(400).json({"err": "informe os campos id_funcionario e id_assistido"}).end()
+
+    }
+}
 
 
 
@@ -542,5 +569,6 @@ module.exports = {
     getIDFinanca, 
     updateFinanca,
     postAssistencia,
-    getAllAssistencias
+    getAllAssistencias,
+    getAssistenciasID
 }
