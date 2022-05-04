@@ -26,7 +26,7 @@ adcFoto.addEventListener("click", () => {
 
 function getAssistido() {
     fetch(`http://localhost:3000/assistidos/${func}`)
-        // fetch(`http://10.87.207.27:3000/assistidos/${func}`)
+        // fetch(`http://10.87.207.11:3000/assistidos/${func}`)
         .then((response) => {
             return response.json();
         })
@@ -126,7 +126,7 @@ function cadastrarAssistido() {
             foto_antes: fotoAntes,
         });
 
-    // fetch("http://10.87.207.27:3000/assistido/update", {
+    // fetch("http://10.87.207.11:3000/assistido/update", {
     fetch("http://localhost:3000/assistido/update", {
             method: "PUT",
             headers: {
