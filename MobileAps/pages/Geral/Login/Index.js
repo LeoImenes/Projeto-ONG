@@ -31,9 +31,9 @@ export default function Login({navigation}) {
       senha: senha
     }
 
-    fetch(`http://10.87.207.20:3000/funcionarios`, {
-    // fetch(`http://10.87.207.27:3000/funcionarios`, {
-    // fetch(`http://192.168.137.1:3000/funcionarios`, {
+    // fetch(`http://10.87.207.11:3000/funcionarios`, {
+    // fetch(`http://10.87.207.11:3000/funcionarios`, {
+    fetch(`http://192.168.137.1:3000/funcionarios`, {
     // fetch(`http://192.168.0.29:3000/funcionarios`, {
       "method": "POST",
       "headers": {
@@ -44,7 +44,7 @@ export default function Login({navigation}) {
     .then(resp => {return resp.json()})
     .then(async data => {
       if(data.id_funcionario !== undefined) {
-        await AsyncStorage.setItem('userdata', JSON.stringify(data.id_funcionario));
+        await AsyncStorage.setItem('userdata', JSON.stringify(data.matricula));
         navigation.navigate('ContainerHome');
         setEmail("")
         setSenha("")
@@ -62,7 +62,7 @@ export default function Login({navigation}) {
       nova_senha: senhaNova
     }
 
-    fetch(`http://10.87.207.20:3000/funcionario/reset_senha`, {
+    fetch(`http://10.87.207.11:3000/funcionario/reset_senha`, {
     // fetch(`http://192.168.137.1:3000/funcionario/reset_senha`, {
     // fetch(`http://192.168.0.29:3000/funcionario/reset_senha`, {
       "method": "PUT",
