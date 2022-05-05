@@ -3,10 +3,11 @@ function list() {
     let filterText = input.value
     let names = []
     var body = document.querySelector(body)
-        // fetch("http://10.87.207.27:3000/funcionarios")
-    fetch("http://localhost:3000/funcionarios")
+        fetch("http://10.87.207.11:3000/funcionarios")
+    // fetch("http://localhost:3000/funcionarios")
         .then(response => { return response.json() })
         .then(data => {
+            console.log(data)
             data.forEach(fun => {
                 var divimg = document.createElement("div")
                 var divnome = document.createElement("div")
