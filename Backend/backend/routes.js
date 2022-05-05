@@ -32,7 +32,6 @@ route.put('/assistido/update', assistidoControll.updateAssistido)
 route.put('/assistido_foto', assistidoControll.updateFotoAssistido)
 route.put('/assistido_foto_depois', assistidoControll.updateFotoDepoisAssistido)
 
-
 route.get("/assistido/saude", assistidoControll.getAssistSaude)
 route.get("/assistido/saudeID/:id_assistido", assistidoControll.getSaudeID)
 route.post("/assistido/saude", assistidoControll.postSaude)

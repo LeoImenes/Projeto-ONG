@@ -6,8 +6,8 @@ var getCargo;
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    // fetch(`http://10.87.207.27:3000/funcionarios/${local}`, )
-    fetch(`http://localhost:3000/funcionarios/${local}`)
+    fetch(`http://10.87.207.11:3000/funcionarios/${local}`, )
+    // fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -96,7 +96,7 @@ function cadastrarFotoDepois() {
     });
 
 
-    // fetch(`http://10.87.207.27:3000/funcionario`, {
+    // fetch(`http://10.87.207.11:3000/funcionario`, {
     fetch(`http://localhost:3000/funcionario`, {
             method: "PUT",
             headers: {
@@ -161,7 +161,7 @@ function Atualizar() {
     });
 
     console.log(data)
-        // fetch(`http://10.87.207.27:3000/funcionarios`, {
+        // fetch(`http://10.87.207.11:3000/funcionarios`, {
     fetch(`http://localhost:3000/funcionarios`, {
             method: "PUT",
             headers: {
