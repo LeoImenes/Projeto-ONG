@@ -48,9 +48,9 @@ export default function CadastrarFuncionario({navigation}){
         let mesNasc = nascimento.split('/')[1]
         let diaNasc = nascimento.split('/')[0]
 
-        let anoAdm = nascimento.split('/')[2]
-        let mesAdm = nascimento.split('/')[1]
-        let diaAdm = nascimento.split('/')[0]
+        let anoAdm = dataAdmissao.split('/')[2]
+        let mesAdm = dataAdmissao.split('/')[1]
+        let diaAdm = dataAdmissao.split('/')[0]
         
         let funcionario = {
             nome_completo: nome,
@@ -67,8 +67,8 @@ export default function CadastrarFuncionario({navigation}){
             foto: foto
         }
     
-        fetch(`http://10.87.207.20:3000/funcionario`, {
-        // fetch(`http://192.168.137.1:3000/funcionario`, {
+        // fetch(`http://10.87.207.11:3000/funcionario`, {
+        fetch(`http://192.168.137.1:3000/funcionario`, {
         // fetch(`http://192.168.0.29:3000/funcionario`, {
           "method": "POST",
           "headers": {

@@ -16,13 +16,12 @@ export default function MeuPerfil({navigation}){
         let value = await AsyncStorage.getItem('userdata');
         if(value !== null) {
             value = JSON.parse(value);
-            // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
-            // fetch(`http://192.168.137.1:3000/funcionarios/${value.matricula}`)
-            fetch(`http://10.87.207.20:3000/funcionarios/${value.matricula}`)
+            // fetch(`http://192.168.0.29:3000/funcionarios/${value}`)
+            fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
+            // fetch(`http://10.87.207.11:3000/funcionarios/${value}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                console.log(data)
-                // setFuncionario(data)
+                setFuncionario(data[0])
             })
             .catch( err => { console.log(err) })
         }
@@ -54,6 +53,10 @@ export default function MeuPerfil({navigation}){
                     <View style={global.info}>
                         <Text style={global.textInfo}>Nome:</Text>
                         <Text style={global.textInfo}>{funcionario.nome_completo}</Text>
+                    </View>
+                    <View style={global.info}>
+                        <Text style={global.textInfo}>Nome:</Text>
+                        <Text style={global.textInfo}>{funcionario.email}</Text>
                     </View>
                     <View style={global.info}>
                         <Text style={global.textInfo}>Matrícula:</Text>

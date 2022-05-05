@@ -25,7 +25,11 @@ export default function VerFuncionario({navigation, route}){
         return `${dia}/${mes}/${ano}`;
      }
 
-     const Atualizar = () => {
+     const Atualizar = async() => {
+        let value = await AsyncStorage.getItem('userdata');
+        if(value !== null) {
+            value = JSON.parse(value);
+        }
         
         if(dataDemissao !== null){
             var anoDem = dataDemissao.split('/')[2]
@@ -33,6 +37,7 @@ export default function VerFuncionario({navigation, route}){
             var diaDem = dataDemissao.split('/')[0]
 
             var funcionario = {
+                matricula: value,
                 matricula_funcionario: matricula,
                 cargo: cargo,
                 data_demissao: `${anoDem}-${mesDem}-${diaDem}`,
@@ -45,8 +50,8 @@ export default function VerFuncionario({navigation, route}){
             }
         }
 
-        fetch(`http://10.87.207.20:3000/funcionarios`, {
-        // fetch(`http://192.168.137.1:3000/funcionarios`, {
+        // fetch(`http://10.87.207.11:3000/funcionarios`, {
+        fetch(`http://192.168.137.1:3000/funcionarios`, {
         // fetch(`http://192.168.0.29:3000/funcionarios`, {
           "method": "PUT",
           "headers": {
@@ -78,15 +83,14 @@ export default function VerFuncionario({navigation, route}){
         let funcionario = JSON.parse(await AsyncStorage.getItem("funcionario"));
 
         // fetch(`http://192.168.0.29:3000/funcionarios/${funcionario}`)
-        fetch(`http://10.87.207.20:3000/funcionarios/${funcionario}`)
-        // fetch(`http://192.168.137.1:3000/funcionarios/${funcionario}`)
+        // fetch(`http://10.87.207.11:3000/funcionarios/${funcionario}`)
+        fetch(`http://192.168.137.1:3000/funcionarios/${funcionario}`)
         .then(resp => {return resp.json()})
         .then(data => {
             setFuncionario(data[0]);
             setDataDemissao(formatDate(new Date()));
             setCargo(data[0].cargo);
             setMatricula(data[0].matricula);
-            
         })
         .catch(err => { console.log(err) });
     }
