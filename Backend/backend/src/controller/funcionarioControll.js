@@ -39,7 +39,7 @@ const getAll = (req, res) => {
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
             delete item.senha
-            delete item.foto
+            // delete item.foto
         });
         res.json(result).end()
     })
@@ -66,55 +66,61 @@ const getMatricula = (req, res) => {
 }
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO FUNCIONARIO
-const updateFuncionario = (req, res) => {
-    let id_func = req.body.func_resp;    
+const updateFuncionario = async (req, res) => {
+    let matricula = req.body.matricula;    
     let cargo = req.body.cargo
     let matricula_funcionario = req.body.matricula_funcionario
     let data_demissao = req.body.data_demissao
     let status = (data_demissao == undefined) ? 1 : 0
     let verificacao = false
-    let auth = getAuthorization(id_func);
-    if(auth == "OK") {
-        let string = [
-            `update funcionarios set data_demissao = "${data_demissao}", status = ${status} where matricula = "${matricula_funcionario}";`,
-            `update funcionarios set cargo = "${cargo}" where matricula = "${matricula_funcionario}"`,
-            `update funcionarios set cargo = "${cargo}", data_demissao = "${data_demissao}", status = "${status}" where matricula = "${matricula_funcionario}"`
-        ]
-
-        function busca() {
-            if (data_demissao !== undefined && cargo === undefined) {
-                return string[0]
+    let auth = await getAuthorization(matricula)
+    .then((auth) => {
+        if(auth == "OK") {
+            let string = [
+                `update funcionarios set data_demissao = "${data_demissao}", status = ${status} where matricula = "${matricula_funcionario}";`,
+                `update funcionarios set cargo = "${cargo}" where matricula = "${matricula_funcionario}"`,
+                `update funcionarios set cargo = "${cargo}", data_demissao = "${data_demissao}", status = "${status}" where matricula = "${matricula_funcionario}"`
+            ]
+    
+            function busca() {
+                if (data_demissao !== undefined && cargo === undefined) {
+                    return string[0]
+                }
+                else if (data_demissao === undefined && cargo !== undefined) {
+                    return string[1]
+                }
+                else if(data_demissao !== undefined && cargo !== undefined){
+                    return string[2]
+                }
+                else if (cargo !== undefined && email === undefined && senha === undefined) {
+                    return string[1]
+                } else if (cargo == undefined && email !== undefined && senha == undefined) {
+                    return string[2]
+                } else if (cargo == undefined && email == undefined && senha !== undefined) {
+                    return string[3]
+                } else {
+                    return string[4]
+                }            
             }
-            else if (data_demissao === undefined && cargo !== undefined) {
-                return string[1]
-            }
-            else if(data_demissao !== undefined && cargo !== undefined){
-                return string[2]
-            }
-            else if (cargo !== undefined && email === undefined && senha === undefined) {
-                return string[1]
-            } else if (cargo == undefined && email !== undefined && senha == undefined) {
-                return string[2]
-            } else if (cargo == undefined && email == undefined && senha !== undefined) {
-                return string[3]
-            } else {
-                return string[4]
-            }            
+            let resultado = busca()
+            console.log(resultado)
+            con.query(resultado, (err, result) => {
+                if (err == null) {
+                    res.status(200).json({...req.body }).end();
+                } else {
+                    res.status(400).json({ err: err.message }).end();
+                }
+            })
+        }else if(auth == "NOK") {
+            res.status(401).json({ err: "nao autorizado" }).end()
+        }else {
+            res.status(404).json({ err: auth }).end()
         }
-        let resultado = busca()
-        console.log(resultado)
-        con.query(resultado, (err, result) => {
-            if (err == null) {
-                res.status(200).json({...req.body }).end();
-            } else {
-                res.status(400).json({ err: err.message }).end();
-            }
-        })
-    }else if(auth == "NOK") {
-        res.status(401).json({ err: "nao autorizado" }).end()
-    }else {
-        res.status(404).json({ err: auth }).end()
-    }
+    })
+    .catch(err => {
+        res.status(404).json({ err: err }).end()
+    })
+    
 }
 
 // MÉTOD ATUALIZAR FOTO DO FUNCIONARIO
@@ -214,18 +220,23 @@ const asynqQuery = (query) =>{
 }
 
 // METODO QUE VEREFICA SE O USUARIO TEM PERMISSÃO PARA EXECUTAR DETERMINADA AÇÃO
-const getAuthorization = (id_func) => {
-    let string = 'select cargo from funcionarios where matricula =' + id_func
-    con.query(string, (err, result) => {
-        if (err === null) {
-            if(result[0].cargo == "Diretor" || result[0].cargo == "Assistente Social") {
-                return "OK";
-            } else {
-                return "NOK";
+
+async function getAuthorization(matricula){
+    return new Promise((resolve,reject) => {
+        let string = `select cargo from funcionarios where matricula = "${matricula}"`
+        console.log(string)
+        con.query(string, (err, result) => {
+            if (err === null) {
+                console.log(result[0].cargo)
+                if(result[0].cargo == "Diretor" || result[0].cargo == "Assistente Social") {
+                    resolve("OK");
+                } else {
+                    resolve("NOK");
+                }
+            }else{
+                reject(err.message);
             }
-        }else{
-            return err.message;
-        }
+        });
     });
 }
 

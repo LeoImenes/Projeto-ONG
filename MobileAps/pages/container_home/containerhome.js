@@ -12,6 +12,7 @@ import ListarFuncionario from '../Funcionarios/ListarFuncionarios/Index';
 import MeuPerfil from '../Funcionarios/MeuPerfil/Index';
 import VerFuncionario from '../Funcionarios/VerFuncionario/Index';
 import Home from '../Geral/Home/Index';
+import NovaAssistencia from '../Assistencias/NovaAssistencia/Index';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,11 +27,11 @@ export default function ContainerHome() {
             value = JSON.parse(value);
 
             // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
-            // fetch(`http://192.168.137.1:3000/funcionarios/${value.matricula}`)
-            fetch(`http://10.87.207.20:3000/funcionarios/${value.matricula}`)
+            fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
+            // fetch(`http://10.87.207.11:3000/funcionarios/${value}`)
             .then(resp => {return resp.json()})
             .then(data => {
-                setFoto(data.foto);
+                setFoto(data[0].foto);
                 setNome(data[0].nome_completo);
             })
             .catch( err => { console.log(err) })
@@ -65,6 +66,10 @@ export default function ContainerHome() {
                 drawerContentContainerStyle: { width: 0 }
             }}
           >
+              {/* <Drawer.Screen name="NovaAssistencia" component={NovaAssistencia} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} /> */}
             <Drawer.Screen name="Home" component={Home} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
