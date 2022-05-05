@@ -249,7 +249,7 @@ const postAssistencia = (req,res) => {
     let id_assistido = req.body.id_assistido
     let itens = req.body.itens
     let index = 0
-    let comerro = false // ??????
+    let comerro = false // camerro ??????
     let stringSolicitacao
     if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0){
         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`

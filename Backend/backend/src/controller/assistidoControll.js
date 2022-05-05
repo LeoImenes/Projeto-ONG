@@ -524,6 +524,51 @@ const getVWFamiliar = (req, res) => {
     }
 }
 
+// MÉTODO CONSULTAR O RELARÓRIO DO ASSISTIDO
+const getRelatorio = (req, res) => {
+    let string = `select * from relatorios;`
+    con.query(string, (err, result) => {
+        if (err == null) {
+            res.status(200).json(result).end()
+        } else {
+            res.status(400).json({ err: err.message })
+        }
+    })
+}
+
+// MÉTODO FAZER RELARÓRIO DO ASSISTIDO
+const postRelatorio = (req, res) => {
+    let id_assistido = req.body.id_assistido
+    let id_funcionario = req.body.id_funcionario
+    let relatorio = req.body.lelatorio
+     
+    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values' (${id_assistido}, ${id_funcionario}, ${relatorio}, curdate());
+    con.query(string, (err, result)) => {
+        if (err === null) {
+            res.status(200).json(result).end()
+        } else {
+            res.status(400).json({ err: err.message }).end()
+        }
+    })
+    } else {
+    res.status(400).json({ "err": "Informe os campos de id_assistido e rg" }).end()
+}
+
+//OUTRO METODO
+// const postRelatorio = async (req, resp) => {
+//     const data = req.body;
+//     let ret = [];
+//     try {
+//         console.log(data)
+
+//         ret = await relatorios.postRelatorio(data);
+//     }catch(err) {
+//         console.log(err);
+//         resp.status(400);
+//     }
+//     resp.json(ret);
+// }
+
 module.exports = {
     getAll,
     getID,
@@ -541,5 +586,7 @@ module.exports = {
     getComorbidades,
     postFamiliar,
     postRelacionamentoFamiliar,
-    getVWFamiliar
+    getVWFamiliar,
+    getRelatorio,
+    postRelatorio
 }
