@@ -60,7 +60,6 @@ export default function CadastrarAssistido({ navigation }) {
         fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
             .then(resp => { return resp.json() })
             .then(async data => {
-                console.log(data)
                 const id = JSON.parse(data[0].id_funcionario)
                 setIdFunc(id)
             })
@@ -88,46 +87,46 @@ export default function CadastrarAssistido({ navigation }) {
         }
 
         // fetch(`http://10.87.207.11:3000/assistidos`, {
-        // fetch(`http://192.168.137.1:3000/assistidos`, {
-        //     // fetch(`http://192.168.0.29:3000/assistidos`, {
-        //     "method": "POST",
-        //     "headers": {
-        //         "Content-Type": "application/json"
-        //     },
-        //     "body": JSON.stringify(assistido),
-        // })
-        //     .then(resp => { return resp.json() })
-        //     .then(async data => {
-        //         if (data.err !== undefined) {
-        //             if (data.err.includes("Duplicate entry"))
-        //                 ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
-        //         } else {
+        fetch(`http://192.168.137.1:3000/assistidos`, {
+            // fetch(`http://192.168.0.29:3000/assistidos`, {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": JSON.stringify(assistido),
+        })
+            .then(resp => { return resp.json() })
+            .then(async data => {
+                if (data.err !== undefined) {
+                    if (data.err.includes("Duplicate entry"))
+                        ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
+                } else {
 
-        //             let saude = {
-        //                 id_assistido: data.id_assistido,
-        //                 comorbidades: selected
-        //             }
+                    let saude = {
+                        id_assistido: data.id_assistido,
+                        comorbidades: selected
+                    }
 
-        //             // fetch(`http://10.87.207.11:3000/assistido/saude`, {
-        //             fetch(`http://192.168.137.1:3000/assistido/saude`, {
-        //                 // fetch(`http://192.168.0.29:3000/assistido/saude`, {
-        //                 "method": "POST",
-        //                 "headers": {
-        //                     "Content-Type": "application/json"
-        //                 },
-        //                 "body": JSON.stringify(saude),
-        //             })
-        //                 .then(resp => { return resp.json() })
-        //                 .then(async data => {
-        //                     ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
-        //                     limpar()
-        //                     console.log(data)
-        //                 })
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     });
+                    // fetch(`http://10.87.207.11:3000/assistido/saude`, {
+                    fetch(`http://192.168.137.1:3000/assistido/saude`, {
+                        // fetch(`http://192.168.0.29:3000/assistido/saude`, {
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": JSON.stringify(saude),
+                    })
+                        .then(resp => { return resp.json() })
+                        .then(async data => {
+                            ToastAndroid.show('Cadastro Efetuado!', ToastAndroid.SHORT)
+                            limpar()
+                            console.log(data)
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     const renderLabel = (label, style) => {
@@ -142,6 +141,8 @@ export default function CadastrarAssistido({ navigation }) {
 
     useFocusEffect(
         React.useCallback(() => {
+            getFunc()
+
             // fetch(`http://10.87.207.11:3000/assistido/comorbidade`)
             fetch(`http://192.168.137.1:3000/assistido/comorbidade`)
                 // fetch(`http://192.168.0.29:3000/assistido/comorbidade`)
@@ -200,7 +201,7 @@ export default function CadastrarAssistido({ navigation }) {
     }
 
     return (
-        <View style={global.body} onLoad={getFunc()}>
+        <View style={global.body}>
             <StatusBar
                 barStyle="dark-content"
                 hidden={false}
@@ -243,7 +244,7 @@ export default function CadastrarAssistido({ navigation }) {
                         <View style={global.scroll}>
                             <ScrollView>
                                 <Text style={css.title1}>Dados Pessoais</Text>
-                                <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." place style={global.info}></TextInput>
+                                <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." style={global.info}></TextInput>
                                 <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." place style={global.info}></TextInput>
                                 <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={global.info}></TextInput>
                                 <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={global.info}></TextInput>

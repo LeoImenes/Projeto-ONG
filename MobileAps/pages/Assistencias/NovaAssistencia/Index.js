@@ -1,12 +1,17 @@
-import react from 'react'
-import { View, Text, StatusBar } from "react-native"
+import React, { useState } from 'react'
+import { View, Text, StatusBar, ScrollView, TextInput, TouchableOpacity } from "react-native"
 
 import global from "../../Global/Style"
 
-import {Picker} from '@react-native-picker/picker';
-import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import Checkbox from 'expo-checkbox';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 export default function NovaAssistencia({ navigation }) {
+    const [roupas, setRoupas] = useState(false);
+    const [data, setData] = useState(day);
+    const day = new Date();
+    console.log(day.toString())
+
     return (
         <View style={global.body}>
             <StatusBar
@@ -21,17 +26,20 @@ export default function NovaAssistencia({ navigation }) {
                     <Text style={global.textTitle}>Irmã Antônia</Text>
                 </View>
             </View>
-            <View style={{ width: "90%", alignSelf: "center", borderBottomWidth: 2 }}>
-                {/* <Picker
-                    selectedValue={sexo}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSexo(itemValue)
-                    }>
-                    <Picker.Item label="Sexo..." value="" style={{ color: "gray" }} />
-                    <Picker.Item label="Feminino" value="Feminino" />
-                    <Picker.Item label="Masculino" value="Masculino" />
-                    <Picker.Item label="Outro" value="Outro" />
-                </Picker> */}
+            <View style={global.scroll}>
+                <ScrollView>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", alignSelf: "center", marginTop: "2%" }}>Nova Assistência</Text>
+                    <TextInput style={global.info} placeholder="Data de registro" value={day.toLocaleDateString()} onChangeText={setData}></TextInput>
+                    <View style={{ display: "flex", flexDirection: "row", width: "70%", alignSelf: "center", justifyContent: "space-evenly", height: 40, alignItems: "center" }}>
+                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Vc é idiota?</Text>
+                        <Checkbox
+                            style={{ borderRadius: 30, width: 25, height: 25 }}
+                            value={roupas}
+                            onValueChange={setRoupas}
+                            color={roupas ? '#166B8A' : undefined}
+                        />
+                    </View>
+                </ScrollView>
             </View>
         </View>
     );
