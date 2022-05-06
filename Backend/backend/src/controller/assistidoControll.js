@@ -322,6 +322,7 @@ getEmployeeNames = function(id_assistido) {
     )
 }
 
+// MÉTODO DELETAR SAÚDE
 async function deleteSaude(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
@@ -336,6 +337,7 @@ async function deleteSaude(string) {
     })
 }
 
+// MÉTODO CADASTAR COMORBIDADE
 async function inserirComorbidades(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
@@ -348,6 +350,7 @@ async function inserirComorbidades(string) {
     })
 }
 
+// MÉTODO ATUALIZAR SAÚDE
 const updateSaude = async(req, res) => {
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
@@ -426,6 +429,7 @@ const updateSaude = async(req, res) => {
     }
 }
 
+// MÉTODO CONSULTAR COMORBIDADES
 const getComorbidades = (req, res) => {
     let string = `select * from comorbidades;`
     con.query(string, (err, result) => {
@@ -437,8 +441,8 @@ const getComorbidades = (req, res) => {
     })
 }
 
-// CRUD FAMILIAR 
-// POST 
+// **** CRUD FAMILIAR ****
+// MÉTODO CADASTRAR FAMILIAR 
 const postFamiliar = (req, res) => {
     let nome_completo = req.body.nome_completo
     let rg = req.body.rg
@@ -524,50 +528,73 @@ const getVWFamiliar = (req, res) => {
     }
 }
 
-// MÉTODO CONSULTAR O RELARÓRIO DO ASSISTIDO
-const getRelatorio = (req, res) => {
-    let string = `select * from relatorios;`
+// MÉTODO CONSULTAR TODO OS RELARÓRIO DOS ASSISTIDOS
+const relatorio = (req,res) => {
+    let string = `select * from relatorios`
     con.query(string, (err, result) => {
-        if (err == null) {
-            res.status(200).json(result).end()
-        } else {
-            res.status(400).json({ err: err.message })
-        }
-    })
-}
-
-// MÉTODO FAZER RELARÓRIO DO ASSISTIDO
-const postRelatorio = (req, res) => {
-    let id_assistido = req.body.id_assistido
-    let id_funcionario = req.body.id_funcionario
-    let relatorio = req.body.lelatorio
-     
-    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values' (${id_assistido}, ${id_funcionario}, ${relatorio}, curdate());
-    con.query(string, (err, result)) => {
         if (err === null) {
             res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message }).end()
+            res.status(400).json({"hjhj": "gjghjgjgj"}).end();
         }
     })
-    } else {
-    res.status(400).json({ "err": "Informe os campos de id_assistido e rg" }).end()
 }
 
-//OUTRO METODO
-// const postRelatorio = async (req, resp) => {
-//     const data = req.body;
-//     let ret = [];
-//     try {
-//         console.log(data)
+// MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
+const getRelatorioID = (req, res) => {
+        let string = `select * from relatorios where id_assistido = ${req.params.id_assistido};`
+        if (req.params.id_assistido !== undefined) {
+            con.query(string, (err, result) => {
+                if (err == null) {
+                    res.status(200).json(result).end()
+                } else {
+                    res.status(400).json({ err: err.message }).end();
+                }
+            })
+        } else {
+            res.status(400).json({ "err" : "Informe o Id do Assistido"})
+        }   
+    }
 
-//         ret = await relatorios.postRelatorio(data);
-//     }catch(err) {
-//         console.log(err);
-//         resp.status(400);
-//     }
-//     resp.json(ret);
-// }
+// MÉTODO FAZER RELARÓRIO DO ASSISTIDO
+const relatorioPost = (req, res) => {
+    let id_assistido = req.body.id_assistido
+    let id_funcionario = req.body.id_funcionario
+    let relatorio = req.body.relatorio
+     
+    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values (${id_assistido}, ${id_funcionario}, "${relatorio}", curdate())`;
+    
+    if(id_assistido !== undefined || id_funcionario !== undefined || relatorio !== undefined){
+        con.query(string, (err, result) => {
+            if (err === null) {
+                res.status(200).json({result,...req.body}).end()
+            }else{
+                res.status(400).json({err:err.message}).end()
+            }
+        })
+    } else {
+        res.status(400).json({ "err":"Erro informe os comapos id_assistido, id_funcionario e relatório"})
+    }       
+}
+
+const updateRelatorioID = (req, res) => {
+    let string = `update relatorios set relatorio = "${req.body.relatorio}", id_funcionario = ${req.body.id_funcionario} where id_relatorio = ${req.body.id_relatorio};`
+    if (req.body.id_relatorio !== undefined || req.body.relatorio) {
+        con.query(string, (err, result) => {
+            if (err == null) {            
+                if(result.affectedRows === 0){
+                    res.status(400).json({"err": "id do relatorio não existe"})
+                }else{
+                    res.status(200).json(result).end()
+                }
+            } else {
+                res.status(400).json({ err: err.message }).end();
+            }
+        })
+    } else {
+        res.status(400).json({ "err" : "Informe o Id do Relatorio"})
+    }   
+}
 
 module.exports = {
     getAll,
@@ -587,6 +614,8 @@ module.exports = {
     postFamiliar,
     postRelacionamentoFamiliar,
     getVWFamiliar,
-    getRelatorio,
-    postRelatorio
+    relatorio,
+    relatorioPost,
+    getRelatorioID,
+    updateRelatorioID    
 }

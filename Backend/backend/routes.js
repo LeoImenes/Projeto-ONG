@@ -42,7 +42,25 @@ route.post("/assistido/familiar", assistidoControll.postFamiliar)
 route.post("/assistido_familiar", assistidoControll.postRelacionamentoFamiliar)
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
 
-route.get("/assistido/relatorio", assistidoControll.getRelatorio)
-route.post("/assistido/relatorio", assistidoControll.postRelatorio)
+
+route.get("/relatorio", assistidoControll.relatorio)
+route.post("/relatorio/assistido", assistidoControll.relatorioPost)
+route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
+route.put("/relatorio/put", assistidoControll.updateRelatorioID)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = route
