@@ -1,13 +1,14 @@
 var cpf;
-var matricula = localStorage.getItem("funcionario")
+var func = localStorage.getItem("userdata")
+var matriculaLogado = JSON.parse(func).matricula
 var getMatricula;
 var getCargo;
 
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    fetch(`http://10.87.207.11:3000/funcionarios/${local}`, )
-    // fetch(`http://localhost:3000/funcionarios/${local}`)
+    // fetch(`http://10.87.207.11:3000/funcionarios/${local}`, )
+    fetch(`http://localhost:3000/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -155,6 +156,7 @@ function Atualizar() {
     matricula.placeholder = getMatricula
 
     const data = JSON.stringify({
+        matricula: matriculaLogado,
         matricula_funcionario: matricula,
         cargo: cargo,
         data_demissao: `${ano}-${mes}-${dia}`,
@@ -181,6 +183,7 @@ function Atualizar() {
             }
         })
         .then((data) => {
+            console.log(data)
             alert("Atualizado com sucesso");
             ulDadosFunc.style.display = "flex";
             btnDadosFunc.style.display = "block";
