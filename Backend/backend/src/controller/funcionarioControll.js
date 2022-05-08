@@ -2,6 +2,8 @@ const { con } = require('../database/Connection')
 
 const modeloFuncionario = require('../model/funcionarioModel')
 
+//***** - FUNCIONARIO - *****//
+
 // MÉTODO CADASTRAR FUNCIONARIO 
 const postFuncionario = (req, res) => {
     let foto = (req.body.foto === undefined) ? "" : req.body.foto
@@ -45,7 +47,7 @@ const getAll = (req, res) => {
     })
 }
 
-//MÉTODO CONSULTAR PELA MATRICULA DO FINCIONARIO
+//MÉTODO CONSULTAR FUNCIONARIO PELA MATRICULA
 const getMatricula = (req, res) => {
     let string = 'select * from funcionarios where matricula =' + req.params.matricula_funcionario
     con.query(string, (err, result) => {
@@ -208,7 +210,7 @@ const resetSenha = (req,res) => {
     }
 }
 
-// Método update atualizado ???????????
+// NOVOS MÉTODO DE REQUISIÇÃO ASSINCRONA
 const asynqQuery = (query) =>{
     return new Promise((resolve, reject) =>{
         con.query(query, (err, result) => {
@@ -220,7 +222,6 @@ const asynqQuery = (query) =>{
 }
 
 // METODO QUE VEREFICA SE O USUARIO TEM PERMISSÃO PARA EXECUTAR DETERMINADA AÇÃO
-
 async function getAuthorization(matricula){
     return new Promise((resolve,reject) => {
         let string = `select cargo from funcionarios where matricula = "${matricula}"`
@@ -240,7 +241,9 @@ async function getAuthorization(matricula){
     });
 }
 
-// MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS ????????
+// ***** - ASSISTENCIAS - ****//
+
+// MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS
 async function executarQuery(string){
     return new Promise((resolve,reject) => {
         con.query(string, (err,result) => {
@@ -260,7 +263,7 @@ const postAssistencia = (req,res) => {
     let id_assistido = req.body.id_assistido
     let itens = req.body.itens
     let index = 0
-    let comerro = false // camerro ??????
+    let comerro = false
     let stringSolicitacao
     if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0){
         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
@@ -331,6 +334,8 @@ const getAssistenciasID = (req,res) => {
         res.status(400).json({"err": "informe os campos id_funcionario e id_assistido"}).end()
     }
 }
+
+// ***** - FINANCEIRO - *****//
 
 // MÉTODO LANÇAR FINANCEIRO
 const postFinanca = (req,res) => {

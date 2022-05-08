@@ -43,23 +43,10 @@ route.post("/assistido_familiar", assistidoControll.postRelacionamentoFamiliar)
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
 
 
-route.get("/relatorio", assistidoControll.relatorio)
+route.get("/relatorio", assistidoControll.getRelatorio)
 route.post("/relatorio/assistido", assistidoControll.relatorioPost)
 route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
 route.put("/relatorio/put", assistidoControll.updateRelatorioID)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
