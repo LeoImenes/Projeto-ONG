@@ -5,12 +5,30 @@ import global from "../../Global/Style"
 
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function NovaAssistencia({ navigation }) {
     const [roupas, setRoupas] = useState(false);
-    const [data, setData] = useState(day);
-    const day = new Date();
-    console.log(day.toString())
+    const [dataCriacao, setDataCriacao] = useState("");
+    const [lista, setLista] = useState([]);
+    const [selecionados, setSelecionados] = useState([]);
+    const [itens, setItens] = useState("")
+    console.log(itens)
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const data = new Date();
+            setDataCriacao(data)
+
+            fetch(`http://10.87.207.20:3000/assistidos`)
+                .then(resp => { return resp.json() })
+                .then(data => {
+                    setLista(data);
+                })
+                .catch(err => { console.log(err) });
+
+        }, [])
+    );
 
     return (
         <View style={global.body}>
@@ -26,11 +44,19 @@ export default function NovaAssistencia({ navigation }) {
                     <Text style={global.textTitle}>Irmã Antônia</Text>
                 </View>
             </View>
-            <View style={global.scroll}>
+            <View style={{ width: "100%", height: "84%" }}>
                 <ScrollView>
                     <Text style={{ fontSize: 20, fontWeight: "bold", alignSelf: "center", marginTop: "2%" }}>Nova Assistência</Text>
-                    <TextInput style={global.info} placeholder="Data de registro" value={day.toLocaleDateString()} onChangeText={setData}></TextInput>
-                    <View style={{ display: "flex", flexDirection: "row", width: "70%", alignSelf: "center", justifyContent: "space-evenly", height: 40, alignItems: "center" }}>
+                    {
+                        lista.map((item, index) => {
+                            return (
+                                <TouchableOpacity style={(itens != "") ? {width: "100%", height: 100, marginBottom: 10, justifyContent: "center", alignSelf: "center",backgroundColor: "whitesmoke", display: "flex"} : {backgroundColor: "red"}} key={index} onPress={() => {setItens(item.id_assistido)}}>
+                                    <Text style={{fontSize: 18, fontWeight: "bold", alignSelf: "center", marginTop: "2%"}}>{item.nome_completo}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                    {/* <View style={{ display: "flex", flexDirection: "row", width: "70%", alignSelf: "center", justifyContent: "space-evenly", height: 40, alignItems: "center" }}>
                         <Text style={{ fontSize: 18, fontWeight: "bold" }}>Vc é idiota?</Text>
                         <Checkbox
                             style={{ borderRadius: 30, width: 25, height: 25 }}
@@ -38,7 +64,7 @@ export default function NovaAssistencia({ navigation }) {
                             onValueChange={setRoupas}
                             color={roupas ? '#166B8A' : undefined}
                         />
-                    </View>
+                    </View> */}
                 </ScrollView>
             </View>
         </View>
