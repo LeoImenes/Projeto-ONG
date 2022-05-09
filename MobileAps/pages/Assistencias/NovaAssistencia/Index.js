@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, StatusBar, ScrollView, TextInput, TouchableOpacity } from "react-native"
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, Text, StatusBar, ScrollView, TextInput, TouchableOpacity } from "react-native"
 
 import global from "../../Global/Style"
 
@@ -13,14 +13,16 @@ export default function NovaAssistencia({ navigation }) {
     const [lista, setLista] = useState([]);
     const [selecionados, setSelecionados] = useState([]);
     const [itens, setItens] = useState("")
-    console.log(itens)
+    const [card, setCard] = useState("");
+    const [teste, setTeste] = useState(false)
+    // console.log("oi", teste);
 
     useFocusEffect(
         React.useCallback(() => {
             const data = new Date();
             setDataCriacao(data)
 
-            fetch(`http://10.87.207.20:3000/assistidos`)
+            fetch(`http://192.168.0.104:3000/assistidos`)
                 .then(resp => { return resp.json() })
                 .then(data => {
                     setLista(data);
@@ -29,6 +31,15 @@ export default function NovaAssistencia({ navigation }) {
 
         }, [])
     );
+
+    const add = () => {
+        setSelecionados(itens)
+        console.log(selecionados)
+    };
+
+    useEffect(() => {
+        
+    });
 
     return (
         <View style={global.body}>
@@ -50,7 +61,7 @@ export default function NovaAssistencia({ navigation }) {
                     {
                         lista.map((item, index) => {
                             return (
-                                <TouchableOpacity style={(itens != "") ? {width: "100%", height: 100, marginBottom: 10, justifyContent: "center", alignSelf: "center",backgroundColor: "whitesmoke", display: "flex"} : {backgroundColor: "red"}} key={index} onPress={() => {setItens(item.id_assistido)}}>
+                                <TouchableOpacity style={[css.card, (itens === "" || teste === false || card !== index) ? {} : {backgroundColor: "salmon"}]} key={index} onPress={() => { add(), setItens(item.id_assistido), setCard(index), setTeste(!teste)}}>
                                     <Text style={{fontSize: 18, fontWeight: "bold", alignSelf: "center", marginTop: "2%"}}>{item.nome_completo}</Text>
                                 </TouchableOpacity>
                             )
@@ -70,3 +81,15 @@ export default function NovaAssistencia({ navigation }) {
         </View>
     );
 }
+
+const css = StyleSheet.create({
+    card:{
+        width: "100%",
+        height: 100,
+        marginBottom: 10,
+        justifyContent: "center",
+        alignSelf: "center",
+        backgroundColor: "whitesmoke",
+        display: "flex"
+    }
+});
