@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-require('events').setMaxListeners(0)
+
 
 const route = require('./routes')
 

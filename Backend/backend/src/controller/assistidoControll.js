@@ -85,6 +85,8 @@ const postAssistido = (req, res) => {
     let cartao_sus
     let foto_antes
     let foto_depois
+
+    console.log(req)
     if (req.body.nome_social === undefined) {
         nome_social = null
     } else {

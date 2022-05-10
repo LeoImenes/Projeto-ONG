@@ -6,6 +6,7 @@ var adcFoto = document.querySelector('.adcFoto')
 var fileInp = document.querySelector("#inpFoto")
 fileInp.addEventListener('change', (e) => {
     var fr = new FileReader();
+    
     fr.onloadend = (foto) => {
         fotinho = foto.target.result;
         newImg.src = foto.target.result;
@@ -16,6 +17,8 @@ fileInp.addEventListener('change', (e) => {
     fr.readAsDataURL(e.target.files[0]);
 
 })
+
+
 
 
 adcFoto.style.cursor = "pointer"
@@ -55,10 +58,11 @@ function cadastrarAssistido() {
     var sexMasc = document.querySelector("#Masculino");
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
+    
 
     var sex = [];
 
-    if (sexMasc.checked == 1) {
+    if (sexMasc.check) {
         sexMasc.value = "Masculino";
         sex.push(sexMasc.value)
     } else if (sexFem.checked == 1) {

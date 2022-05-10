@@ -340,6 +340,10 @@ input[type="checkbox"] {
     color: white;
 }
 
+.disable{
+    display: none;
+}
+
 @media (max-width: 1623px) {
     p,
     h1,
@@ -780,4 +784,6 @@ input[type="checkbox"] {
         align-items: flex-start;
         justify-content: flex-start;
     }
+
+
 }

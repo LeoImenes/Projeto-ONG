@@ -25,7 +25,7 @@ section {
 .cards-container {
     width: 70%;
     height: 80%;
-    background-color: var(--primary-color);
+    background-color: var(--casa-azul);
     display: flex;
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;

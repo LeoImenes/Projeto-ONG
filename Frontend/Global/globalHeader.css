@@ -2,7 +2,8 @@
 
 :root{
     --casa-azul:#166b8a;
-    --casa-branco:
+    --casa-branco:#ffff;
+    --sombra: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 * {
@@ -42,7 +43,7 @@ header h2 {
     display: flex;
     text-align: center;
     font-weight: bold;
-    color: #166B8A;
+    color: var(--casa-azul);
 }
 
 .nav-bar :nth-child(2) :nth-child(3) {
