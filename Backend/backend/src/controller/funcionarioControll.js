@@ -2,6 +2,8 @@ const { con } = require('../database/Connection')
 
 const modeloFuncionario = require('../model/funcionarioModel')
 
+//***** - FUNCIONARIO - *****//
+
 // MÉTODO CADASTRAR FUNCIONARIO 
 const postFuncionario = (req, res) => {
     let foto = (req.body.foto === undefined) ? "" : req.body.foto
@@ -26,7 +28,7 @@ const postFuncionario = (req, res) => {
     ]
     con.query(string, [values], (err, result) => {
         if (err == null) {
-        res.status(200).json({ ...req.body, id: result.insertId, "status":  status}).end();
+            res.status(200).json({...req.body, id: result.insertId, "status": status }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -39,13 +41,13 @@ const getAll = (req, res) => {
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
             delete item.senha
-            // delete item.foto
+                // delete item.foto
         });
         res.json(result).end()
     })
 }
 
-//MÉTODO CONSULTAR PELA MATRICULA DO FINCIONARIO
+//MÉTODO CONSULTAR FUNCIONARIO PELA MATRICULA
 const getMatricula = (req, res) => {
     let string = 'select * from funcionarios where matricula =' + req.params.matricula_funcionario
     con.query(string, (err, result) => {
@@ -55,7 +57,7 @@ const getMatricula = (req, res) => {
             } else {
                 result.forEach((item, index) => {
                     delete item.senha
-                    //delete item.status
+                        //delete item.status
                 });
                 res.json(result).end()
             }
@@ -66,61 +68,58 @@ const getMatricula = (req, res) => {
 }
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO FUNCIONARIO
-const updateFuncionario = async (req, res) => {
-    let matricula = req.body.matricula;    
+const updateFuncionario = async(req, res) => {
+    let matricula = req.body.matricula;
     let cargo = req.body.cargo
     let matricula_funcionario = req.body.matricula_funcionario
     let data_demissao = req.body.data_demissao
     let status = (data_demissao == undefined) ? 1 : 0
     let verificacao = false
     let auth = await getAuthorization(matricula)
-    .then((auth) => {
-        if(auth == "OK") {
-            let string = [
-                `update funcionarios set data_demissao = "${data_demissao}", status = ${status} where matricula = "${matricula_funcionario}";`,
-                `update funcionarios set cargo = "${cargo}" where matricula = "${matricula_funcionario}"`,
-                `update funcionarios set cargo = "${cargo}", data_demissao = "${data_demissao}", status = "${status}" where matricula = "${matricula_funcionario}"`
-            ]
-    
-            function busca() {
-                if (data_demissao !== undefined && cargo === undefined) {
-                    return string[0]
+        .then((auth) => {
+            if (auth == "OK") {
+                let string = [
+                    `update funcionarios set data_demissao = "${data_demissao}", status = ${status} where matricula = "${matricula_funcionario}";`,
+                    `update funcionarios set cargo = "${cargo}" where matricula = "${matricula_funcionario}"`,
+                    `update funcionarios set cargo = "${cargo}", data_demissao = "${data_demissao}", status = "${status}" where matricula = "${matricula_funcionario}"`
+                ]
+
+                function busca() {
+                    if (data_demissao !== undefined && cargo === undefined) {
+                        return string[0]
+                    } else if (data_demissao === undefined && cargo !== undefined) {
+                        return string[1]
+                    } else if (data_demissao !== undefined && cargo !== undefined) {
+                        return string[2]
+                    } else if (cargo !== undefined && email === undefined && senha === undefined) {
+                        return string[1]
+                    } else if (cargo == undefined && email !== undefined && senha == undefined) {
+                        return string[2]
+                    } else if (cargo == undefined && email == undefined && senha !== undefined) {
+                        return string[3]
+                    } else {
+                        return string[4]
+                    }
                 }
-                else if (data_demissao === undefined && cargo !== undefined) {
-                    return string[1]
-                }
-                else if(data_demissao !== undefined && cargo !== undefined){
-                    return string[2]
-                }
-                else if (cargo !== undefined && email === undefined && senha === undefined) {
-                    return string[1]
-                } else if (cargo == undefined && email !== undefined && senha == undefined) {
-                    return string[2]
-                } else if (cargo == undefined && email == undefined && senha !== undefined) {
-                    return string[3]
-                } else {
-                    return string[4]
-                }            
+                let resultado = busca()
+                console.log(resultado)
+                con.query(resultado, (err, result) => {
+                    if (err == null) {
+                        res.status(200).json({...req.body }).end();
+                    } else {
+                        res.status(400).json({ err: err.message }).end();
+                    }
+                })
+            } else if (auth == "NOK") {
+                res.status(401).json({ err: "nao autorizado" }).end()
+            } else {
+                res.status(404).json({ err: auth }).end()
             }
-            let resultado = busca()
-            console.log(resultado)
-            con.query(resultado, (err, result) => {
-                if (err == null) {
-                    res.status(200).json({...req.body }).end();
-                } else {
-                    res.status(400).json({ err: err.message }).end();
-                }
-            })
-        }else if(auth == "NOK") {
-            res.status(401).json({ err: "nao autorizado" }).end()
-        }else {
-            res.status(404).json({ err: auth }).end()
-        }
-    })
-    .catch(err => {
-        res.status(404).json({ err: err }).end()
-    })
-    
+        })
+        .catch(err => {
+            res.status(404).json({ err: err }).end()
+        })
+
 }
 
 // MÉTOD ATUALIZAR FOTO DO FUNCIONARIO
@@ -185,34 +184,33 @@ const login = (req, res) => {
 }
 
 // MÉTODO RESET SENHA FUNCIONARIOS PELO CPF
-const resetSenha = (req,res) => {
+const resetSenha = (req, res) => {
     let email = req.body.email
     let cpf = req.body.cpf
     let nova_senha = req.body.nova_senha
-    if(email !== undefined && cpf !== undefined && nova_senha !== undefined){
+    if (email !== undefined && cpf !== undefined && nova_senha !== undefined) {
         let string = `update funcionarios set senha = "${nova_senha}" where email = "${email}" and cpf = "${cpf}"`
-        con.query(string, (err,result) => {
-            if(err === null){
-                if(result.affectedRows === 0){
-                    res.status(200).json({"err": "não foi possível alterar a senha"}).end()
-                }
-                else{
+        con.query(string, (err, result) => {
+            if (err === null) {
+                if (result.affectedRows === 0) {
+                    res.status(200).json({ "err": "não foi possível alterar a senha" }).end()
+                } else {
                     res.status(200).json(result).end()
                 }
-            }else{
-                res.status(400).json({err: err.message}).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
-    }else{
-        res.status(400).json({"err": "informe os campos email, cpf e nova_senha"}).end()
+    } else {
+        res.status(400).json({ "err": "informe os campos email, cpf e nova_senha" }).end()
     }
 }
 
-// Método update atualizado ???????????
-const asynqQuery = (query) =>{
-    return new Promise((resolve, reject) =>{
+// NOVOS MÉTODO DE REQUISIÇÃO ASSINCRONA
+const asynqQuery = (query) => {
+    return new Promise((resolve, reject) => {
         con.query(query, (err, result) => {
-            if(err) reject(err);
+            if (err) reject(err);
             console.log(result)
             resolve(result);
         });
@@ -220,34 +218,34 @@ const asynqQuery = (query) =>{
 }
 
 // METODO QUE VEREFICA SE O USUARIO TEM PERMISSÃO PARA EXECUTAR DETERMINADA AÇÃO
-
-async function getAuthorization(matricula){
-    return new Promise((resolve,reject) => {
+async function getAuthorization(matricula) {
+    return new Promise((resolve, reject) => {
         let string = `select cargo from funcionarios where matricula = "${matricula}"`
         console.log(string)
         con.query(string, (err, result) => {
             if (err === null) {
                 console.log(result[0].cargo)
-                if(result[0].cargo == "Diretor" || result[0].cargo == "Assistente Social") {
+                if (result[0].cargo == "Diretor" || result[0].cargo == "Assistente Social") {
                     resolve("OK");
                 } else {
                     resolve("NOK");
                 }
-            }else{
+            } else {
                 reject(err.message);
             }
         });
     });
 }
 
-// MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS ????????
-async function executarQuery(string){
-    return new Promise((resolve,reject) => {
-        con.query(string, (err,result) => {
-            if(err === null){
+// ***** - ASSISTENCIAS - ****//
+
+// MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS
+async function executarQuery(string) {
+    return new Promise((resolve, reject) => {
+        con.query(string, (err, result) => {
+            if (err === null) {
                 resolve(result)
-            }
-            else{
+            } else {
                 reject(err)
             }
         })
@@ -255,50 +253,106 @@ async function executarQuery(string){
 }
 
 // MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS
-const postAssistencia = (req,res) => {
+const postAssistencia = (req, res) => {
     let id_funcionario = req.body.id_funcionario
     let id_assistido = req.body.id_assistido
     let itens = req.body.itens
     let index = 0
-    let comerro = false // ??????
+    let comerro = false
     let stringSolicitacao
-    if(id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0){
+    if (id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
-        try{
+        try {
             con.beginTransaction()
-            con.query(strinAssistencia, async (err,result) => {
-                if(err === null){
+            con.query(strinAssistencia, async(err, result) => {
+                if (err === null) {
                     let id_assistencia = result.insertId
-                    do{
+                    do {
                         stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
                         console.log("string sql:" + stringSolicitacao)
                         console.log("index: " + index)
-                       let response = await executarQuery(stringSolicitacao)
-                        .then(() => {
-                            if(index + 1 === itens.length){
-                                con.commit()
-                                res.status(400).json({"ok":"ok"})
+                        let response = await executarQuery(stringSolicitacao)
+                            .then(() => {
+                                if (index + 1 === itens.length) {
+                                    con.commit()
+                                    res.status(200).json({ "ok": "ok" })
+                                    comerro = true
+                                }
+                            }).catch((err) => {
+                                con.rollback()
+                                res.status(400).json({ err: err.message })
                                 comerro = true
-                            }
-                        }).catch((err) => {
-                            con.rollback()
-                            res.status(400).json({err: err.message})
-                            comerro = true
-                        })                        
-                    index++
-                    }while(!comerro)
-                }else{
-                    res.status(400).json({err: err.message})
+                            })
+                        index++
+                    } while (!comerro)
+                } else {
+                    res.status(400).json({ err: err.message })
                 }
             })
-        }catch(err){
+        } catch (err) {
             con.rollback()
-            res.status(400).json({err: err.message})
+            res.status(400).json({ err: err.message })
         }
+    } else {
+        res.status(400).json({ "err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'" }).end()
     }
-    else{
-        res.status(400).json({"err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'"}).end()
+}
+
+// MÉTODO fazer assistencia para varios assistidos
+
+const postmultAssis = (req, res) => {
+    let id_funcionario = req.body.id_funcionario
+    let assistidos = req.body.assistidos;
+    let strinAssistencia;
+    let itens = req.body.itens
+    let index = 0
+    let comerro = false
+    let stringSolicitacao
+
+    if (id_funcionario !== undefined && assistidos.length !== undefined && itens.length > 0) {
+        assistidos.forEach(item => {
+            var idtoStr = JSON.stringify(item);
+            var assistidos = idtoStr.substring(idtoStr.indexOf(":") + 1, idtoStr.lastIndexOf("}"));
+            var query = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${assistidos}, ${id_funcionario}, curdate())`
+            strinAssistencia = query;
+            try {
+                console.log(strinAssistencia)
+                con.beginTransaction()
+                con.query(strinAssistencia, async(err, result) => {
+                    if (err === null) {
+                        let id_assistencia = result.insertId
+                        itens.forEach(async(item, index) => {
+                            stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
+                            console.log(stringSolicitacao)
+                            asynqQuery(stringSolicitacao)
+                                .then(() => {
+                                    if (index + 1 === itens.length) {
+                                        con.commit()
+                                        res.end(JSON.stringify(req.body))
+                                        comerro = true
+                                    }
+                                }).catch((err) => {
+                                    con.rollback()
+                                    res.status(400).json({ err: err.message })
+                                    comerro = true
+                                })
+                        })
+                    } else {
+                        res.status(400).json({ err: err.message })
+                    }
+
+                })
+            } catch (err) {
+                con.rollback()
+                res.status(400).json({ err: err.message })
+            }
+        })
+
+    } else {
+        res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
     }
+
+
 }
 
 const postmultAssis = (req, res) => {
@@ -358,102 +412,108 @@ const postmultAssis = (req, res) => {
 
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
-const getAllAssistencias = (req,res) => {
+const getAllAssistencias = (req, res) => {
     let string = `select * from vw_assistencia`
-    con.query(string, (err,result) => {
-        if(err === null){
+    con.query(string, (err, result) => {
+        if (err === null) {
             res.status(200).json(result)
-        }
-        else{
-            res.status(400).json({err: err.message})
+        } else {
+            res.status(400).json({ err: err.message })
         }
     })
 }
 
 // MÉTODO CONSULTAR ASSISTENCIAS PRESTADAS POR ID
-const getAssistenciasID = (req,res) => {
+const getAssistenciasID = (req, res) => {
     let id_funcionario = req.body.id_funcionario
     let id_assistido = req.body.id_assistido
-    if(id_funcionario !== undefined && id_assistido !== undefined){
+    if (id_funcionario !== undefined && id_assistido !== undefined) {
         let string = `select * from vw_assistencia where id_funcionario = ${id_funcionario} and id_assistido = ${id_assistido}`
-        con.query(string, (err,result) => {
-            if(err === null){
+        con.query(string, (err, result) => {
+            if (err === null) {
                 res.status(200).json(result).end()
-            }else{
-                res.status(400).json({err: err.message}).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
-    }else{
-        res.status(400).json({"err": "informe os campos id_funcionario e id_assistido"}).end()
+    } else {
+        res.status(400).json({ "err": "informe os campos id_funcionario e id_assistido" }).end()
     }
 }
 
+// ***** - FINANCEIRO - *****//
+
 // MÉTODO LANÇAR FINANCEIRO
-const postFinanca = (req,res) => {
+const postFinanca = (req, res) => {
     let id_funcionario = req.body.id_funcionario
     let tipo = req.body.tipo
     let descricao = req.body.descricao
     let valor = req.body.valor
-    if(id_funcionario !== undefined && tipo !== undefined && descricao !== undefined && valor !== undefined){
+    if (id_funcionario !== undefined && tipo !== undefined && descricao !== undefined && valor !== undefined) {
         let string = `insert into financeiro (id_funcionario,tipo,descricao,valor,data_lancamento) values (${id_funcionario}, "${tipo}", "${descricao}", ${valor}, curdate())`
-        con.query(string,(err,result)=>{
-            if(err === null){
+        con.query(string, (err, result) => {
+            if (err === null) {
                 res.status(200).json(result).end()
-            }else{
-                res.status(400).json({err: err.message}).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
+<<<<<<< HEAD
     }else{
         res.status(400).json({"err": "informe os campos 'id_funcionario', 'tipo', 'descricao', 'valor'"}).end()
+=======
+    } else {
+        res.status(400).json({ "err": "informe os camppos 'id_funcionario', 'tipo', 'descricao', 'valor'" }).end()
+>>>>>>> 4ac0fa806656ce465bd12135b2caa6ce321f0cab
     }
 }
 
 // MÉTODO CONSULTAR TODOS LANÇAMENTOS FINANCEIRO
-const getAllFinancas = (req,res) => {
+const getAllFinancas = (req, res) => {
     let string = `select * from financeiro`
-    con.query(string,(err,result) => {
-        if(err === null){
+    con.query(string, (err, result) => {
+        if (err === null) {
             res.status(200).json(result).end()
-        }else{
-            res.status(400).json({err: err.message}).end()
+        } else {
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
 
 // MÉTODO CONSULTAR LANÇAMENTOS FINANCEIRO POR ID
-const getIDFinanca = (req,res) => {
+const getIDFinanca = (req, res) => {
     let id_financa = req.params.id_financa
-    if(id_financa !== undefined){
+    if (id_financa !== undefined) {
         let string = `select * from financeiro where id_lancamento = ${id_financa}`
-        con.query(string,(err,result) => {
-            if(err === null){
+        con.query(string, (err, result) => {
+            if (err === null) {
                 res.status(200).json(result).end()
-            }else{
-                res.status(400).json({err: err.message}).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
-    }else{
-        res.status(400).json({"err": "informe o id da financa"}).end()
+    } else {
+        res.status(400).json({ "err": "informe o id da financa" }).end()
     }
 }
 
 // MÉTODO ATUALIZAR LANÇAMENTO FINANCEIRO
-const updateFinanca = (req,res) => {
+const updateFinanca = (req, res) => {
     let id_lancamento = req.body.id_lancamento
     let tipo = req.body.tipo
     let descricao = req.body.descricao
     let valor = req.body.valor
-    if(tipo !== undefined && descricao !== undefined && valor !== undefined){
+    if (tipo !== undefined && descricao !== undefined && valor !== undefined) {
         let string = `update financeiro set tipo = "${tipo}", descricao = "${descricao}", valor = ${valor} where id_lancamento = ${id_lancamento}`
-        con.query(string,(err,result) => {
-            if(err === null){
+        con.query(string, (err, result) => {
+            if (err === null) {
                 res.status(200).json(result).end()
-            }else{
-                res.status(400).json({err: err.message}).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
-    }else{
-        res.status(400).json({"err": "informe os campos 'tipo', 'descricao', 'valor'"}).end()
+    } else {
+        res.status(400).json({ "err": "informe os campos 'tipo', 'descricao', 'valor'" }).end()
     }
 }
 
@@ -465,13 +525,14 @@ module.exports = {
     updateFotoFuncionario,
     deletarFuncionario,
     login,
-    resetSenha,    
+    resetSenha,
     getAuthorization,
     postAssistencia,
     getAllAssistencias,
     getAssistenciasID,
     postFinanca,
     getAllFinancas,
-    getIDFinanca, 
-    updateFinanca,    
+    getIDFinanca,
+    updateFinanca,
+    postmultAssis
 }

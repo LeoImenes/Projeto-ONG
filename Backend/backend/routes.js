@@ -19,6 +19,7 @@ route.get("/funcionario/financa/:id_financa", funcionarioControll.getIDFinanca)
 route.put("/funcionario/financa", funcionarioControll.updateFinanca)
 
 route.post("/funcionario/assistencia", funcionarioControll.postAssistencia)
+route.post("/funcionario/assistencias/", funcionarioControll.postmultAssis)
 route.get("/funcionario/all_assistencias", funcionarioControll.getAllAssistencias)
 route.get("/funcionario/assistencias_id", funcionarioControll.getAssistenciasID)
 
@@ -41,5 +42,13 @@ route.get("/assistido/comorbidade", assistidoControll.getComorbidades)
 route.post("/assistido/familiar", assistidoControll.postFamiliar)
 route.post("/assistido_familiar", assistidoControll.postRelacionamentoFamiliar)
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
+
+
+route.get("/relatorio", assistidoControll.getRelatorio)
+route.post("/relatorio/assistido", assistidoControll.relatorioPost)
+route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
+route.put("/relatorio/put", assistidoControll.updateRelatorioID)
+
+
 
 module.exports = route

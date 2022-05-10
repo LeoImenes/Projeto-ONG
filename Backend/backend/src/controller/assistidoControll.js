@@ -1,78 +1,6 @@
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
-// MÉTODO CONSULTAR TODOS ASSISTIDOS
-const getAll = (req, res) => {
-    let string = `select * from assistidos`
-    con.query(string, (err, result) => {
-        if (err == null) {
-            res.json(result)
-        } else {
-            res.status(400).json({ err: err.message })
-        }
-    })
-}
-
-// MÉTODO CONSULTAR ASSISTIDO POR ID
-const getID = (req, res) => {
-    let string = `select * from assistidos where id_assistido = ${req.params.id_assistido}`
-    con.query(string, (err, result) => {
-        if (err == null) {
-            res.json(result[0])
-        } else {
-            res.status(400).json({ err: err.message })
-        }
-    })
-}
-
-// MÉTODO CONSULTAR ASSISTIDO PELO NOME
-const buscarAssistidoNomeCompleto = (req, res) => {
-    let nome_completo = req.params.nome_completo
-    let stringNomeCompleto = `select * from assistidos where nome_completo = '${nome_completo}';`
-    con.query(stringNomeCompleto, (err, result) => {
-        if (err === null) {
-            res.json(result)
-        } else {
-            res.status(400).json({ err: err.message })
-        }
-    })
-}
-
-// MÉTODO CONSULTAR ASSISTIDO PELO CPF
-const buscarAssistidoCPF = (req, res) => {
-    let cpf = req.params.cpf
-    let stringCPF = `select * from assistidos where cpf = '${cpf}'`
-    console.log(cpf)
-    if (req.params.cpf !== undefined) {
-        con.query(stringCPF, (err, result) => {
-            if (err === null) {
-                res.json(result)
-            } else {
-                res.status(400).json({ err: err.message })
-            }
-        })
-    } else {
-        res.status(400).end().json({ "err": "informe um cpf" })
-    }
-}
-
-// MÉTODO CONSULTAR ASSISTIDO PELO RG
-const buscarAssistidoRG = (req, res) => {
-    let rg = req.params.rg
-    let stringRG = `select * from assistidos where rg = '${req.params.rg}'`
-    if (rg !== undefined) {
-        con.query(stringRG, (err, result) => {
-            if (err === null) {
-                res.json(result)
-            } else {
-                res.status(404).end().json({ err: err.message })
-            }
-        })
-    } else {
-        res.status(400).end().json({ "err": "informe um rg" })
-    }
-}
-
 // MÉTODO CADASTRAR ASSISTIDO
 const postAssistido = (req, res) => {
     req.connection.setTimeout(120000);
@@ -145,9 +73,80 @@ const postAssistido = (req, res) => {
             // 08 - OX
             // 09 - Álcool
         } else {
-            res.status(400).json({ testeerr: err.message }).end()
+            res.status(400).json({ "Erro:" : err.message }).end()
         }
     })
+}
+
+// MÉTODO CONSULTAR TODOS ASSISTIDOS
+const getAll = (req, res) => {
+    let string = `select * from assistidos`
+    con.query(string, (err, result) => {
+        if (err == null) {
+            res.json(result)
+        } else {
+            res.status(400).json({ err: err.message })
+        }
+    })
+}
+
+// MÉTODO CONSULTAR ASSISTIDO POR ID
+const getID = (req, res) => {
+    let string = `select * from assistidos where id_assistido = ${req.params.id_assistido}`
+    con.query(string, (err, result) => {
+        if (err == null) {
+            res.json(result[0])
+        } else {
+            res.status(400).json({ err: err.message })
+        }
+    })
+}
+
+// MÉTODO CONSULTAR ASSISTIDO PELO NOME
+const buscarAssistidoNomeCompleto = (req, res) => {
+    let nome_completo = req.params.nome_completo
+    let stringNomeCompleto = `select * from assistidos where nome_completo = '${nome_completo}';`
+    con.query(stringNomeCompleto, (err, result) => {
+        if (err === null) {
+            res.json(result)
+        } else {
+            res.status(400).json({ err: err.message })
+        }
+    })
+}
+
+// MÉTODO CONSULTAR ASSISTIDO PELO CPF
+const buscarAssistidoCPF = (req, res) => {
+    let cpf = req.params.cpf
+    let stringCPF = `select * from assistidos where cpf = '${cpf}'`
+    if (req.params.cpf !== undefined) {
+        con.query(stringCPF, (err, result) => {
+            if (err === null) {
+                res.json(result)
+            } else {
+                res.status(400).json({ err: err.message })
+            }
+        })
+    } else {
+        res.status(400).end().json({ "err": "informe um cpf" })
+    }
+}
+
+// MÉTODO CONSULTAR ASSISTIDO PELO RG
+const buscarAssistidoRG = (req, res) => {
+    let rg = req.params.rg
+    let stringRG = `select * from assistidos where rg = '${req.params.rg}'`
+    if (rg !== undefined) {
+        con.query(stringRG, (err, result) => {
+            if (err === null) {
+                res.json(result)
+            } else {
+                res.status(404).end().json({ err: err.message })
+            }
+        })
+    } else {
+        res.status(400).end().json({ "err": "informe um rg" })
+    }
 }
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO ASSISTIDO
@@ -219,9 +218,8 @@ const updateFotoDepoisAssistido = (req, res) => {
     }
 }
 
-// novos métodos de requisição
-
-// CRUD SAÚDE
+//***** -SAÚDE DO ASSISTIDO- *****//
+// NOVOS MÉTODO DE REQUISIÇÃO ASSINCRONA
 const asynqQuery = (query) => {
     return new Promise((resolve, reject) => {
         con.query(query, (err, result) => {
@@ -324,6 +322,7 @@ getEmployeeNames = function(id_assistido) {
     )
 }
 
+// MÉTODO DELETAR SAÚDE
 async function deleteSaude(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
@@ -338,18 +337,7 @@ async function deleteSaude(string) {
     })
 }
 
-async function inserirComorbidades(string) {
-    return new Promise((resolve, reject) => {
-        con.query(string, (err, result) => {
-            if (err === null) {
-                resolve(result)
-            } else {
-                reject(err)
-            }
-        })
-    })
-}
-
+// MÉTODO ATUALIZAR SAÚDE DO ASSISTIDO
 const updateSaude = async(req, res) => {
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
@@ -428,6 +416,21 @@ const updateSaude = async(req, res) => {
     }
 }
 
+//***** - COMORBIDADES - *****//
+// MÉTODO CADASTAR COMORBIDADE
+async function inserirComorbidades(string) {
+    return new Promise((resolve, reject) => {
+        con.query(string, (err, result) => {
+            if (err === null) {
+                resolve(result)
+            } else {
+                reject(err)
+            }
+        })
+    })
+}
+
+// MÉTODO CONSULTAR COMORBIDADES
 const getComorbidades = (req, res) => {
     let string = `select * from comorbidades;`
     con.query(string, (err, result) => {
@@ -439,8 +442,9 @@ const getComorbidades = (req, res) => {
     })
 }
 
-// CRUD FAMILIAR 
-// POST 
+// ***** - FAMILIAR DO ASSISTIDO - *****//
+
+// MÉTODO CADASTRAR FAMILIAR 
 const postFamiliar = (req, res) => {
     let nome_completo = req.body.nome_completo
     let rg = req.body.rg
@@ -490,6 +494,7 @@ const postFamiliar = (req, res) => {
     }
 }
 
+// MÉTODO POST RELACIONAMENTO FAMILIAR / ASSISTIDO
 const postRelacionamentoFamiliar = (req, res) => {
     let id_assistido = req.body.id_assistido
     let rg_familiar = req.body.rg
@@ -510,6 +515,7 @@ const postRelacionamentoFamiliar = (req, res) => {
     }
 }
 
+// MÉTODO GET VW FAMILIAR
 const getVWFamiliar = (req, res) => {
     let id_assistido = req.params.id_assistido
     if (id_assistido !== undefined) {
@@ -524,6 +530,76 @@ const getVWFamiliar = (req, res) => {
     } else {
         res.status(400).json({ "err": "informe o id_assistido" }).end()
     }
+}
+
+//***** - RELATÓRIOS DO ASSISTIDO - *****//
+// MÉTODO FAZER RELARÓRIO DO ASSISTIDO
+const relatorioPost = (req, res) => {
+    let id_assistido = req.body.id_assistido
+    let id_funcionario = req.body.id_funcionario
+    let relatorio = req.body.relatorio
+     
+    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values (${id_assistido}, ${id_funcionario}, "${relatorio}", curdate())`;
+    
+    if(id_assistido !== undefined || id_funcionario !== undefined || relatorio !== undefined){
+        con.query(string, (err, result) => {
+            if (err === null) {
+                res.status(200).json({result,...req.body}).end()
+            }else{
+                res.status(400).json({err:err.message}).end()
+            }
+        })
+    } else {
+        res.status(400).json({ "err":"Erro informe os comapos id_assistido, id_funcionario e relatório"})
+    }       
+}
+
+// MÉTODO CONSULTAR TODO OS RELARÓRIO DOS ASSISTIDOS
+const getRelatorio = (req,res) => {
+    let string = `select * from relatorios`
+    con.query(string, (err, result) => {
+        if (err === null) {
+            res.status(200).json(result).end()
+        } else {
+            res.status(400).json({"hjhj": "gjghjgjgj"}).end();
+        }
+    })
+}
+
+// MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
+const getRelatorioID = (req, res) => {
+        let string = `select * from relatorios where id_assistido = ${req.params.id_assistido};`
+        if (req.params.id_assistido !== undefined) {
+            con.query(string, (err, result) => {
+                if (err == null) {
+                    res.status(200).json(result).end()
+                } else {
+                    res.status(400).json({ err: err.message }).end();
+                }
+            })
+        } else {
+            res.status(400).json({ "err" : "Informe o Id do Assistido"})
+        }   
+    }
+
+// MÉTODO ATUALIZAR RELARÓRIO DO ASSISTIDO
+const updateRelatorioID = (req, res) => {
+    let string = `update relatorios set relatorio = "${req.body.relatorio}", id_funcionario = ${req.body.id_funcionario} where id_relatorio = ${req.body.id_relatorio};`
+    if (req.body.id_relatorio !== undefined || req.body.relatorio) {
+        con.query(string, (err, result) => {
+            if (err == null) {            
+                if(result.affectedRows === 0){
+                    res.status(400).json({"err": "id do relatorio não existe"})
+                }else{
+                    res.status(200).json(result).end()
+                }
+            } else {
+                res.status(400).json({ err: err.message }).end();
+            }
+        })
+    } else {
+        res.status(400).json({ "err" : "Informe o Id do Relatorio"})
+    }   
 }
 
 module.exports = {
@@ -543,5 +619,9 @@ module.exports = {
     getComorbidades,
     postFamiliar,
     postRelacionamentoFamiliar,
-    getVWFamiliar
+    getVWFamiliar,
+    getRelatorio,
+    relatorioPost,
+    getRelatorioID,
+    updateRelatorioID,
 }

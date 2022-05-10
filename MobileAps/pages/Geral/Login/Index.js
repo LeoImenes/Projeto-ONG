@@ -31,9 +31,9 @@ export default function Login({navigation}) {
       senha: senha
     }
 
+    fetch(`http://10.87.207.20:3000/funcionarios`, {
     // fetch(`http://10.87.207.11:3000/funcionarios`, {
-    // fetch(`http://10.87.207.11:3000/funcionarios`, {
-    fetch(`http://192.168.137.1:3000/funcionarios`, {
+    // fetch(`http://192.168.137.1:3000/funcionarios`, {
     // fetch(`http://192.168.0.29:3000/funcionarios`, {
       "method": "POST",
       "headers": {
