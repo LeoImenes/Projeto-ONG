@@ -27,8 +27,8 @@ export default function ContainerHome() {
             value = JSON.parse(value);
 
             // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
-            fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
-            // fetch(`http://10.87.207.11:3000/funcionarios/${value}`)
+            // fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
+            fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setFoto(data[0].foto);
@@ -66,6 +66,10 @@ export default function ContainerHome() {
                 drawerContentContainerStyle: { width: 0 }
             }}
           >
+              <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} />
               <Drawer.Screen name="NovaAssistencia" component={NovaAssistencia} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
@@ -83,10 +87,10 @@ export default function ContainerHome() {
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} />
-            <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
+            {/* <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
-            }} />
+            }} /> */}
             <Drawer.Screen name="VerAssistido" component={VerAssistido} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }

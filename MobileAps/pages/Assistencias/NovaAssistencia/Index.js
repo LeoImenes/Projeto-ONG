@@ -7,20 +7,22 @@ import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 
+import ToggleButton from '../../Components/ToggleButton/Index';
+
 export default function NovaAssistencia({ navigation }) {
     const [roupas, setRoupas] = useState(false);
     const [dataCriacao, setDataCriacao] = useState("");
     const [lista, setLista] = useState([]);
     const [selecionados, setSelecionados] = useState([]);
-    const [card, setCard] = useState([]);
-    const [cor, setCor] = useState(false)
+    const [searchText, setSearchText] = useState("");
 
     useFocusEffect(
         React.useCallback(() => {
             const data = new Date();
             setDataCriacao(data)
 
-            fetch(`http://192.168.0.104:3000/assistidos`)
+            // fetch(`http://192.168.0.104:3000/assistidos`)
+            fetch(`http://10.87.207.20:3000/assistidos`)
                 .then(resp => { return resp.json() })
                 .then(data => {
                     setLista(data);
@@ -31,21 +33,9 @@ export default function NovaAssistencia({ navigation }) {
     );
 
     const add = (idAss, idCard) => {
-        selecionados.push(idAss)
-
-        if(card.includes(idCard)) {
-            card.splice(card.indexOf(idCard), 1);
-            setCor(false)
-        } else {
-            card.push(idCard)
-            setCor(true)
-        }
-
+        if(selecionados.includes(idAss)) selecionados.splice(selecionados.indexOf(idAss), 1)
+        else selecionados.push(idAss)
     };
-
-    useEffect(() => {
-        
-    });
 
     return (
         <View style={global.body}>
@@ -54,11 +44,13 @@ export default function NovaAssistencia({ navigation }) {
                 hidden={false}
                 backgroundColor="transparent"
                 translucent={true} />
-            <View style={global.header}>
-                <Ionicons name="arrow-back-circle-outline" style={{ marginLeft: 5 }} size={35} color="#166B8A" />
-                <View style={global.cardTitle}>
-                    <Text style={global.textTitle}>Casa Acolhedora</Text>
-                    <Text style={global.textTitle}>Irmã Antônia</Text>
+            <View style={{width: "100%", height: 150, backgroundColor: "#166B8A", borderBottomRightRadius: 40, borderBottomLeftRadius: 40}}>
+                <View style={css.filter}>
+                    <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => {navigation.navigate("Home")}} />
+                    <TextInput placeholder="Pesquisar..." placeholderTextColor= "white" style={{width: "80%", borderBottomWidth: 1, borderBottomColor: 'white', padding: "2%", color: 'white'}} value={searchText} onChangeText={(t) => setSearchText(t)}></TextInput>
+                </View>
+                <View style={{width: "90%", alignItems: "center", alignSelf: "center", height: "50%", justifyContent: "space-around",flexDirection: "row"}}>
+                    <Text style={global.textTitle}>Nova Assistência</Text>
                 </View>
             </View>
             <View style={{ width: "100%", height: "84%" }}>
@@ -67,9 +59,7 @@ export default function NovaAssistencia({ navigation }) {
                     {
                         lista.map((item, index) => {
                             return (
-                                <TouchableOpacity style={[css.card, (cor === false) ? {} : {backgroundColor: "salmon"}]} key={index} onPress={() => { add(item.id_assistido, index)}}>
-                                    <Text style={{fontSize: 18, fontWeight: "bold", alignSelf: "center", marginTop: "2%"}}>{item.nome_completo}</Text>
-                                </TouchableOpacity>
+                                <ToggleButton key={index} text={item.nome_completo} style={css.card} onPress={() => {add(item.id_assistido, index) }}/>
                             )
                         })
                     }
