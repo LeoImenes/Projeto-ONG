@@ -355,60 +355,60 @@ const postmultAssis = (req, res) => {
 
 }
 
-const postmultAssis = (req, res) => {
-    let id_funcionario = req.body.id_funcionario
-    let assistidos = req.body.assistidos;
-    let strinAssistencia;
-    let itens = req.body.itens
-    let index = 0
-    let comerro = false
-    let stringSolicitacao
+// const postmultAssis = (req, res) => {
+//     let id_funcionario = req.body.id_funcionario
+//     let assistidos = req.body.assistidos;
+//     let strinAssistencia;
+//     let itens = req.body.itens
+//     let index = 0
+//     let comerro = false
+//     let stringSolicitacao
 
-    if (id_funcionario !== undefined && assistidos.length !== undefined && itens.length > 0) {
-        assistidos.forEach(item => {
-            var idtoStr = JSON.stringify(item);
-            var assistidos = idtoStr.substring(idtoStr.indexOf(":") + 1, idtoStr.lastIndexOf("}"));
-            var query = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${assistidos}, ${id_funcionario}, curdate())`
-            strinAssistencia = query;
-            try {
-                console.log(strinAssistencia)
-                con.beginTransaction()
-                con.query(strinAssistencia, async(err, result) => {
-                    if (err === null) {
-                        let id_assistencia = result.insertId
-                        itens.forEach(async(item, index) => {
-                            stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
-                            console.log(stringSolicitacao)
-                            asynqQuery(stringSolicitacao)
-                                .then(() => {
-                                    if (index + 1 === itens.length) {
-                                        con.commit()
-                                        res.end(JSON.stringify(req.body))
-                                        comerro = true
-                                    }
-                                }).catch((err) => {
-                                    con.rollback()
-                                    res.status(400).json({ err: err.message })
-                                    comerro = true
-                                })
-                        })
-                    } else {
-                        res.status(400).json({ err: err.message })
-                    }
+//     if (id_funcionario !== undefined && assistidos.length !== undefined && itens.length > 0) {
+//         assistidos.forEach(item => {
+//             var idtoStr = JSON.stringify(item);
+//             var assistidos = idtoStr.substring(idtoStr.indexOf(":") + 1, idtoStr.lastIndexOf("}"));
+//             var query = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${assistidos}, ${id_funcionario}, curdate())`
+//             strinAssistencia = query;
+//             try {
+//                 console.log(strinAssistencia)
+//                 con.beginTransaction()
+//                 con.query(strinAssistencia, async(err, result) => {
+//                     if (err === null) {
+//                         let id_assistencia = result.insertId
+//                         itens.forEach(async(item, index) => {
+//                             stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
+//                             console.log(stringSolicitacao)
+//                             asynqQuery(stringSolicitacao)
+//                                 .then(() => {
+//                                     if (index + 1 === itens.length) {
+//                                         con.commit()
+//                                         res.end(JSON.stringify(req.body))
+//                                         comerro = true
+//                                     }
+//                                 }).catch((err) => {
+//                                     con.rollback()
+//                                     res.status(400).json({ err: err.message })
+//                                     comerro = true
+//                                 })
+//                         })
+//                     } else {
+//                         res.status(400).json({ err: err.message })
+//                     }
 
-                })
-            } catch (err) {
-                con.rollback()
-                res.status(400).json({ err: err.message })
-            }
-        })
+//                 })
+//             } catch (err) {
+//                 con.rollback()
+//                 res.status(400).json({ err: err.message })
+//             }
+//         })
 
-    } else {
-        res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
-    }
+//     } else {
+//         res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
+//     }
 
 
-}
+// }
 
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
@@ -458,13 +458,8 @@ const postFinanca = (req, res) => {
                 res.status(400).json({ err: err.message }).end()
             }
         })
-<<<<<<< HEAD
     }else{
         res.status(400).json({"err": "informe os campos 'id_funcionario', 'tipo', 'descricao', 'valor'"}).end()
-=======
-    } else {
-        res.status(400).json({ "err": "informe os camppos 'id_funcionario', 'tipo', 'descricao', 'valor'" }).end()
->>>>>>> 4ac0fa806656ce465bd12135b2caa6ce321f0cab
     }
 }
 
