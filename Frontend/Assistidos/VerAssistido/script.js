@@ -162,18 +162,6 @@ function list() {
                 depois.src = data.foto_depois
             }
 
-
-            var dataNascimento;
-            var newData = data.data_nascimento.split("T");
-            newData.forEach((item, index) => {
-                if (index === 0) {
-                    var ano = item.split("-")[0];
-                    var mes = item.split("-")[1];
-                    var dia = item.split("-")[2];
-                    dataNascimento = `${dia}/${mes}/${ano}`;
-                }
-            });
-
             let nome = document.querySelector(".nomeCom");
             let nomeSoc = document.querySelector(".nomeSoc");
             let rg = document.querySelector(".rg-con");
@@ -219,7 +207,7 @@ function list() {
             nomeSoc
             rg.innerHTML = data.rg;
             cpf
-            datanasc.innerHTML = dataNascimento;
+            datanasc.innerHTML = `${dataCoverter(data.data_nascimento)}`;
             cartCid
             cartSUs
             sex.innerHTML = data.sexo;

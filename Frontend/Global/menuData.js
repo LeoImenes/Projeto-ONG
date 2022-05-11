@@ -15,3 +15,68 @@ function getfunc() {
 
         })
 }
+
+function dataCoverter(data) {
+    var dia = data.split("T")[0].split("-")[2];
+    var mes = data.split("T")[0].split("-")[1];
+    var ano = data.split("T")[0].split("-")[0];
+
+
+    return `${dia}/${mes}/${ano}`
+}
+
+function dataUS(data) {
+    var dia = data.split("/")[0]
+    var mes = data.split("/")[1]
+    var ano = data.split("/")[2]
+
+
+    return `${ano}-${mes}-${dia}`
+}
+
+function mascaraCPF(i) {
+
+    var v = i.value;
+
+    if (isNaN(v[v.length - 1])) {
+        i.value = v.substring(0, v.length - 1);
+        return;
+    }
+
+    i.setAttribute("maxlength", "14");
+    if (v.length == 3 || v.length == 7) i.value += ".";
+    if (v.length == 11) i.value += "-";
+
+}
+
+
+function mascaraData(i) {
+
+    var v = i.value;
+
+    if (isNaN(v[v.length - 1])) {
+        i.value = v.substring(0, v.length - 1);
+        return;
+    }
+
+    i.setAttribute("maxlength", "10");
+    if (v.length == 2 || v.length == 5) i.value += "/";
+
+
+}
+
+function mascaraRG(i) {
+
+    var v = i.value;
+
+    if (isNaN(v[v.length - 1])) {
+        i.value = v.substring(0, v.length - 1);
+        return;
+    }
+
+    i.setAttribute("maxlength", "12");
+    if (v.length == 2 || v.length == 6) i.value += ".";
+    if (v.length == 10) i.value += "-";
+
+
+}

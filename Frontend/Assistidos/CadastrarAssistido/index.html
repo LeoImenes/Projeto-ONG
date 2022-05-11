@@ -91,13 +91,13 @@
                                     <input type="text" placeholder="Nome Social..." class="nome-soc">
                                 </div>
                                 <div class="Rg">
-                                    <input type="text" placeholder="RG..." class="rg">
+                                    <input type="text" placeholder="RG..." class="rg" oninput="mascaraRG(this)">
                                 </div>
                                 <div class="Cpf">
-                                    <input type="text" placeholder="CPF..." class="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" \>
+                                    <input type="text" placeholder="CPF..." class="cpf" oninput="mascaraCPF(this)">
                                 </div>
                                 <div class="Nascimento">
-                                    <input type="text" placeholder="Nascimento DD/MM/AAAA..." class="nasc">
+                                    <input type="text" placeholder="Nascimento DD/MM/AAAA..." class="nasc" oninput="mascaraData(this)">
                                 </div>
                                 <div class="Estado">
                                     <input type="text" placeholder="Estado civil..." class="estado">
@@ -165,7 +165,7 @@
                             </li>
                         </ul>
                     </div> -->
-                    <input type="button" value="Salvar" class="btn" onclick="cadastrarAssistido()">
+                    <input type="button" value="Cadastrar" class="btn" onclick="cadastrarAssistido()">
 
                 </div>
             </div>
