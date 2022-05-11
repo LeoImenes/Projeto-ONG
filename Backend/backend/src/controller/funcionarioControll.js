@@ -279,8 +279,10 @@ const postAssistencia = (req,res) => {
                        let response = await executarQuery(stringSolicitacao)
                         .then(() => {
                             if(index + 1 === itens.length){
+                                
+                                console.log(itens)
                                 con.commit()
-                                res.status(400).json({"ok":"ok"})
+                                res.status(200).json({"ok":"ok"})
                                 comerro = true
                             }
                         }).catch((err) => {

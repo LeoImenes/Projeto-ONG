@@ -8,8 +8,7 @@ function conectar() {
         nova_senha: nova_senha.value,
     });
 
-    //  fetch("http://10.87.207.11:3000/funcionario/reset_senha",{
-    fetch("http://localhost:3000/funcionario/reset_senha", {
+    fetch("https://app-ongdigital-backend.herokuapp.com/reset_senha", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
