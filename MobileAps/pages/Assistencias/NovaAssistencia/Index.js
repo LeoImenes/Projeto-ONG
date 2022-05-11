@@ -12,10 +12,8 @@ export default function NovaAssistencia({ navigation }) {
     const [dataCriacao, setDataCriacao] = useState("");
     const [lista, setLista] = useState([]);
     const [selecionados, setSelecionados] = useState([]);
-    const [itens, setItens] = useState("")
-    const [card, setCard] = useState("");
-    const [teste, setTeste] = useState(false)
-    // console.log("oi", teste);
+    const [card, setCard] = useState([]);
+    const [cor, setCor] = useState(false)
 
     useFocusEffect(
         React.useCallback(() => {
@@ -32,9 +30,17 @@ export default function NovaAssistencia({ navigation }) {
         }, [])
     );
 
-    const add = () => {
-        setSelecionados(itens)
-        console.log(selecionados)
+    const add = (idAss, idCard) => {
+        selecionados.push(idAss)
+
+        if(card.includes(idCard)) {
+            card.splice(card.indexOf(idCard), 1);
+            setCor(false)
+        } else {
+            card.push(idCard)
+            setCor(true)
+        }
+
     };
 
     useEffect(() => {
@@ -49,7 +55,7 @@ export default function NovaAssistencia({ navigation }) {
                 backgroundColor="transparent"
                 translucent={true} />
             <View style={global.header}>
-                <Ionicons name="arrow-back-circle-outline" style={{ marginLeft: 5 }} size={35} color="#166B8A" onPress={() => { navigation.navigate('Home'), limpar() }} />
+                <Ionicons name="arrow-back-circle-outline" style={{ marginLeft: 5 }} size={35} color="#166B8A" />
                 <View style={global.cardTitle}>
                     <Text style={global.textTitle}>Casa Acolhedora</Text>
                     <Text style={global.textTitle}>Irmã Antônia</Text>
@@ -61,7 +67,7 @@ export default function NovaAssistencia({ navigation }) {
                     {
                         lista.map((item, index) => {
                             return (
-                                <TouchableOpacity style={[css.card, (itens === "" || teste === false || card !== index) ? {} : {backgroundColor: "salmon"}]} key={index} onPress={() => { add(), setItens(item.id_assistido), setCard(index), setTeste(!teste)}}>
+                                <TouchableOpacity style={[css.card, (cor === false) ? {} : {backgroundColor: "salmon"}]} key={index} onPress={() => { add(item.id_assistido, index)}}>
                                     <Text style={{fontSize: 18, fontWeight: "bold", alignSelf: "center", marginTop: "2%"}}>{item.nome_completo}</Text>
                                 </TouchableOpacity>
                             )
