@@ -45,13 +45,16 @@ function getfinanceiro() {
                     div.className = `receitas`
                     var h2 = document.createElement("h2")
                     var p = document.createElement("p")
+                    var pData = document.createElement("p")
 
                     h2.innerHTML = item.descricao
                     p.innerHTML = `R$ ${item.valor}`
                     p.style.color = "green"
+                    pData.innerHTML = `${dataCoverter(item.data_lancamento)}`
 
                     div.appendChild(h2)
                     div.appendChild(p)
+                    div.appendChild(pData)
                     despesaCard.appendChild(div)
                 }
 
