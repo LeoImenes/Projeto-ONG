@@ -23,6 +23,8 @@ route.post("/funcionario/assistencias/", funcionarioControll.postmultAssis)
 route.get("/funcionario/all_assistencias", funcionarioControll.getAllAssistencias)
 route.get("/funcionario/assistencias_id", funcionarioControll.getAssistenciasID)
 
+route.get("/itens", funcionarioControll.getItensAssistencia)
+
 route.get('/assistidos', assistidoControll.getAll)
 route.get('/assistidos/:id_assistido', assistidoControll.getID)
 route.post('/assistidos', assistidoControll.postAssistido)
@@ -48,6 +50,8 @@ route.get("/relatorio", assistidoControll.getRelatorio)
 route.post("/relatorio/assistido", assistidoControll.relatorioPost)
 route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
 route.put("/relatorio/put", assistidoControll.updateRelatorioID)
+
+
 
 
 

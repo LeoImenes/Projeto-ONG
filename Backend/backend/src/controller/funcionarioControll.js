@@ -471,6 +471,17 @@ const updateFinanca = (req, res) => {
     }
 }
 
+const getItensAssistencia = (req, res) =>{
+    let string = `select * from itens order by (tipo)`
+    con.query(string, (err, result) => {
+        if (err === null) {
+            res.status(200).json(result).end()
+        } else {
+            res.status(400).json({ err: err.message }).end()
+        }
+    })
+}
+
 module.exports = {
     postFuncionario,
     getAll,
@@ -488,5 +499,6 @@ module.exports = {
     getAllFinancas,
     getIDFinanca,
     updateFinanca,
-    postmultAssis
+    postmultAssis,
+    getItensAssistencia
 }

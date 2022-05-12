@@ -41,7 +41,7 @@ function getfinanceiro() {
 
                 } else if (item.tipo === 1) {
                     console.log("Lancamentos")
-                    totalDespesas += item.valor
+                    totalReceitas += item.valor
                     console.log("total de despesas: ", totalDespesas, item.tipo, item.id_lancamento)
 
                     var despesaCard = document.querySelector(".receitasContent")
@@ -63,16 +63,46 @@ function getfinanceiro() {
                 }
 
             })
+            var pTotalDesp = document.createElement("p")
             var cardTotalDesp = document.querySelector(".totaldespCont")
-            var pTotal = document.createElement("p")
-            var pText = document.createElement("p")
+            var pDespText = document.createElement("p")
 
-            pText.innerHTML = "Total: "
-            pText.style.marginRight = "20px"
-            pTotal.innerHTML = `R$${totalDespesas}`
-            pTotal.style.color = "red"
-            cardTotalDesp.appendChild(pText)
-            cardTotalDesp.appendChild(pTotal)
+            var total = (-totalDespesas) + (totalReceitas)
+
+            var pTotal = document.createElement("p")
+            var cardTotal= document.querySelector(".totalCont")
+            var pTotalText = document.createElement("p")
+
+            var cardTotalRec = document.querySelector(".totalreceitaContent")
+            var pTotalRec = document.createElement("p")
+            var pRectext = document.createElement("p")
+
+            pDespText.innerHTML = "Total das Despesas: "
+            pRectext.innerHTML = "Total das Receitas: "
+            pTotalText.innerHTML = "Diferença: "
+            // pRectext.style.marginRight = "20px"
+            // pDespText.style.marginRight = "20px"
+            pTotalDesp.innerHTML = `R$${totalDespesas.toFixed(2)}`
+            pTotalRec.innerHTML = `R$${totalReceitas.toFixed(2)}`
+
+            if(total < 0){
+                pTotal.style.color = "red"
+            }else{
+                pTotal.style.color = "green"
+            }
+            pTotal.innerHTML = `R$ ${total.toFixed(2)}`
+
+            pTotalRec.style.color = "green"
+            pTotalDesp.style.color = "red"
+
+            cardTotalRec.appendChild(pRectext)
+            cardTotalRec.appendChild(pTotalRec)
+            cardTotalDesp.appendChild(pDespText)
+            cardTotalDesp.appendChild(pTotalDesp)
+            cardTotal.appendChild(pTotalText)
+            cardTotal.appendChild(pTotal)
+
+
 
         })
 }
