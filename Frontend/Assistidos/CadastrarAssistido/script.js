@@ -18,9 +18,6 @@ fileInp.addEventListener('change', (e) => {
 
 })
 
-
-
-
 adcFoto.style.cursor = "pointer"
 
 adcFoto.addEventListener('click', () => {

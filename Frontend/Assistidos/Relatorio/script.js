@@ -22,9 +22,6 @@ function relatorio() {
                 localStorage.setItem("userdata", JSON.stringify(data));
                 window.location.href = "../../Assistidos/VerAssistido";
 
-            });
-
-
-
-
+            }
+        );
 }
