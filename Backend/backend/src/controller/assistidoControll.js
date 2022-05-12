@@ -1,6 +1,8 @@
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
+
+
 // MÉTODO CADASTRAR ASSISTIDO
 const postAssistido = (req, res) => {
     req.connection.setTimeout(120000);

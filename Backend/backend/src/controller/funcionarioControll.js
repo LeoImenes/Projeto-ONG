@@ -28,7 +28,7 @@ const postFuncionario = (req, res) => {
     ]
     con.query(string, [values], (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body, id: result.insertId, "status": status }).end();
+            res.status(200).json({ ...req.body, id: result.insertId, "status": status }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -41,7 +41,7 @@ const getAll = (req, res) => {
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
             delete item.senha
-                // delete item.foto
+            // delete item.foto
         });
         res.json(result).end()
     })
@@ -57,7 +57,7 @@ const getMatricula = (req, res) => {
             } else {
                 result.forEach((item, index) => {
                     delete item.senha
-                        //delete item.status
+                    //delete item.status
                 });
                 res.json(result).end()
             }
@@ -68,7 +68,7 @@ const getMatricula = (req, res) => {
 }
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO FUNCIONARIO
-const updateFuncionario = async(req, res) => {
+const updateFuncionario = async (req, res) => {
     let matricula = req.body.matricula;
     let cargo = req.body.cargo
     let matricula_funcionario = req.body.matricula_funcionario
@@ -105,7 +105,7 @@ const updateFuncionario = async(req, res) => {
                 console.log(resultado)
                 con.query(resultado, (err, result) => {
                     if (err == null) {
-                        res.status(200).json({...req.body }).end();
+                        res.status(200).json({ ...req.body }).end();
                     } else {
                         res.status(400).json({ err: err.message }).end();
                     }
@@ -129,7 +129,7 @@ const updateFotoFuncionario = (req, res) => {
     let string = `update funcionarios set foto = '${foto}' where cpf = '${cpf}'`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body }).end();
+            res.status(200).json({ ...req.body }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -141,7 +141,7 @@ const deletarFuncionario = (req, res) => {
     let string = `delete from funcionarios where id_funcionario = ${req.params.matricula};`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({...req.body }).end();
+            res.status(200).json({ ...req.body }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -264,7 +264,7 @@ const postAssistencia = (req, res) => {
         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
         try {
             con.beginTransaction()
-            con.query(strinAssistencia, async(err, result) => {
+            con.query(strinAssistencia, async (err, result) => {
                 if (err === null) {
                     let id_assistencia = result.insertId
                     do {
@@ -318,10 +318,10 @@ const postmultAssis = (req, res) => {
             try {
                 console.log(strinAssistencia)
                 con.beginTransaction()
-                con.query(strinAssistencia, async(err, result) => {
+                con.query(strinAssistencia, async (err, result) => {
                     if (err === null) {
                         let id_assistencia = result.insertId
-                        itens.forEach(async(item, index) => {
+                        itens.forEach(async (item, index) => {
                             stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
                             console.log(stringSolicitacao)
                             asynqQuery(stringSolicitacao)
@@ -340,75 +340,16 @@ const postmultAssis = (req, res) => {
                     } else {
                         res.status(400).json({ err: err.message })
                     }
-
                 })
             } catch (err) {
                 con.rollback()
                 res.status(400).json({ err: err.message })
             }
         })
-
     } else {
         res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
     }
-
-
 }
-
-// const postmultAssis = (req, res) => {
-//     let id_funcionario = req.body.id_funcionario
-//     let assistidos = req.body.assistidos;
-//     let strinAssistencia;
-//     let itens = req.body.itens
-//     let index = 0
-//     let comerro = false
-//     let stringSolicitacao
-
-//     if (id_funcionario !== undefined && assistidos.length !== undefined && itens.length > 0) {
-//         assistidos.forEach(item => {
-//             var idtoStr = JSON.stringify(item);
-//             var assistidos = idtoStr.substring(idtoStr.indexOf(":") + 1, idtoStr.lastIndexOf("}"));
-//             var query = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${assistidos}, ${id_funcionario}, curdate())`
-//             strinAssistencia = query;
-//             try {
-//                 console.log(strinAssistencia)
-//                 con.beginTransaction()
-//                 con.query(strinAssistencia, async(err, result) => {
-//                     if (err === null) {
-//                         let id_assistencia = result.insertId
-//                         itens.forEach(async(item, index) => {
-//                             stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
-//                             console.log(stringSolicitacao)
-//                             asynqQuery(stringSolicitacao)
-//                                 .then(() => {
-//                                     if (index + 1 === itens.length) {
-//                                         con.commit()
-//                                         res.end(JSON.stringify(req.body))
-//                                         comerro = true
-//                                     }
-//                                 }).catch((err) => {
-//                                     con.rollback()
-//                                     res.status(400).json({ err: err.message })
-//                                     comerro = true
-//                                 })
-//                         })
-//                     } else {
-//                         res.status(400).json({ err: err.message })
-//                     }
-
-//                 })
-//             } catch (err) {
-//                 con.rollback()
-//                 res.status(400).json({ err: err.message })
-//             }
-//         })
-
-//     } else {
-//         res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
-//     }
-
-
-// }
 
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
@@ -436,8 +377,26 @@ const getAssistenciasID = (req, res) => {
                 res.status(400).json({ err: err.message }).end()
             }
         })
+    } else if ((id_funcionario === undefined) && (id_assistido !== undefined)) {
+        let string = `select * from vw_assistencia where id_assistido = ${id_assistido}`
+        con.query(string, (err, result) => {
+            if (err === null) {
+                res.status(200).json(result).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
+            }
+        })
+    } else if ((id_funcionario !== undefined) && (id_assistido === undefined)) {
+        let string = `select * from vw_assistencia where id_funcionario = ${id_funcionario}`
+        con.query(string, (err, result) => {
+            if (err === null) {
+                res.status(200).json(result).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
+            }
+        })
     } else {
-        res.status(400).json({ "err": "informe os campos id_funcionario e id_assistido" }).end()
+        res.status(400).json({ err: err.message })
     }
 }
 
@@ -458,8 +417,8 @@ const postFinanca = (req, res) => {
                 res.status(400).json({ err: err.message }).end()
             }
         })
-    }else{
-        res.status(400).json({"err": "informe os campos 'id_funcionario', 'tipo', 'descricao', 'valor'"}).end()
+    } else {
+        res.status(400).json({ "err": "informe os campos 'id_funcionario', 'tipo', 'descricao', 'valor'" }).end()
     }
 }
 
