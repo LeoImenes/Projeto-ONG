@@ -16,6 +16,17 @@ h3 {
     border-radius: 50%;
 }
 
+.btnLog {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    font: 1.2em sans-serif;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+
 .menuJS img {
     width: 50px;
     height: 50px;

@@ -25,8 +25,7 @@ adcFoto.addEventListener("click", () => {
 });
 
 function getAssistido() {
-    fetch(`http://localhost:3000/assistidos/${func}`)
-        // fetch(`http://10.87.207.11:3000/assistidos/${func}`)
+    fetch(`https://app-ongdigital-backend.herokuapp.com/assistidos/${func}`)
         .then((response) => {
             return response.json();
         })
@@ -45,12 +44,6 @@ function getAssistido() {
             var cartSus = document.querySelector(".cartSus");
             var ante = document.querySelector(".ant");
 
-            nasc.placeholder = data.data_nascimento;
-            var formatnasc = nasc.placeholder.split("T")[0];
-
-            var dia = formatnasc.split("-")[2];
-            var mes = formatnasc.split("-")[1];
-            var ano = formatnasc.split("-")[0];
 
             nome.value = data.nome_completo;
             nomesoc.value = data.nome_social;
@@ -58,7 +51,7 @@ function getAssistido() {
             cpf.value = data.cpf;
             est.value = data.estado_civil;
             nat.value = data.naturalidade;
-            nasc.value = `${dia}/${mes}/${ano}`;
+            nasc.value = `${dataCoverter(data.data_nascimento)}`;
             cartCid.value = data.cartao_cidadao;
             cartSus.value = data.cartao_sus;
             ante.value = data.antecedente_criminal;
@@ -79,9 +72,6 @@ function cadastrarAssistido() {
     var ante = document.querySelector(".ant");
     var inputs = document.querySelectorAll("input");
 
-    var dia = nasc.split("/")[0];
-    var mes = nasc.split("/")[1];
-    var ano = nasc.split("/")[2];
 
     if (nome.value == "") {
         var nomeerr = document.createElement("p");
@@ -115,7 +105,7 @@ function cadastrarAssistido() {
             nome_social: nomesoc.value,
             rg: rg.value,
             cpf: cpf.value,
-            data_nascimento: `${ano}-${mes}-${dia}`,
+            data_nascimento: `${dataUS(nasc)}`,
             estado_civil: est.value,
             naturalidade: nat.value,
             sexo: sex === undefined ? getSexo : sex,
@@ -126,9 +116,8 @@ function cadastrarAssistido() {
             foto_antes: fotoAntes,
         });
 
-    // fetch("http://10.87.207.11:3000/assistido/update", {
-    fetch("http://localhost:3000/assistido/update", {
-            method: "PUT",
+    fetch("https://app-ongdigital-backend.herokuapp.com/assistido/update", {
+             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },

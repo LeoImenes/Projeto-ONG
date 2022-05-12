@@ -33,17 +33,6 @@ function cadastrarFunc() {
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
     var getSenha = document.querySelector(".getSenha").value
 
-    var diaNasc = getDataNasc.split("/")[0]
-    var mesNasc = getDataNasc.split("/")[1]
-    var anoNasc = getDataNasc.split("/")[2]
-
-
-
-    var diaAdm = getDataAdmissao.split("/")[0]
-    var mesAdm = getDataAdmissao.split("/")[1]
-    var anoAdm = getDataAdmissao.split("/")[2]
-
-
 
     var data = JSON.stringify({
         "foto": fotinho,
@@ -51,18 +40,17 @@ function cadastrarFunc() {
         "nome_completo": getNome,
         "rg": getRG,
         "cpf": getCPF,
-        "data_nascimento": `${anoNasc}-${mesNasc}-${diaNasc}`,
+        "data_nascimento": `${dataUS(getDataNasc)}`,
         "cargo": getCargo,
         "sexo": getSexo,
-        "data_admissao": `${anoAdm}-${mesAdm}-${diaAdm}`,
+        "data_admissao": `${dataUS(getDataAdmissao)}`,
         "email": getEmail,
         "senha": getSenha,
         "status": status,
         "estado_civil": ""
     })
 
-    // fetch("http://10.87.207.11:3000/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
+    fetch("https://app-ongdigital-backend.herokuapp.com/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

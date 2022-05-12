@@ -1,14 +1,28 @@
+SELECT 
+a.data,
+assistidos.nome_completo,
+funcionarios.nome_completo,
+itens.item
+from
+assistencia a
+inner join
+assistidos on a.id_assistido = assistidos.id_assistido,
+INNER join funcionarios on a.id_funcionario = funcionarios.id_funcionario,
+INNER JOIN solicitacao on a.id_solicitacao = solicitacao.id_solicitacao,
+INNER JOIN itens on solicitacao.id_item = itens.id_item
+
+
+
 CREATE VIEW vw_saude AS
 SELECT
 	a.id_assistido AS id_assit,
 	a.nome_completo,
-	a.data_nascimento,
 	c.id_comorbidade AS id_comorb,
 	c.comorbidade
 FROM
 	assistidos a
 	INNER JOIN saude s ON a.id_assistido = s.id_assistido
-	INNER JOIN comorbidades c ON s.id_probs = p.id;
+	INNER JOIN comorbidades c ON s.id_comorbidade = c.id_comorbidade;
 
 select
 	*
@@ -216,20 +230,3 @@ from funcionarios f inner join assistencias ast on f.id_funcionario = ast.id_fun
 inner join solicitacao sol on ast.id_assistencia = sol.id_assistencia
 inner join assistidos assis on ast.id_assistido = assis.id_assistido
 inner join itens it on sol.id_item = it.id_item;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
