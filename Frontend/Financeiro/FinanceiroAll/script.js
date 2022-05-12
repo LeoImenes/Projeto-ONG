@@ -25,6 +25,8 @@ function getfinanceiro() {
                     var p = document.createElement("p")
                     var pData = document.createElement("p")
 
+
+
                     h2.innerHTML = item.descricao
                     p.innerHTML = `R$ ${item.valor}`
                     p.style.color = "red"
@@ -34,6 +36,8 @@ function getfinanceiro() {
                     div.appendChild(p)
                     div.appendChild(pData)
                     despesaCard.appendChild(div)
+
+
 
                 } else if (item.tipo === 1) {
                     console.log("Lancamentos")
@@ -59,6 +63,16 @@ function getfinanceiro() {
                 }
 
             })
+            var cardTotalDesp = document.querySelector(".totaldespCont")
+            var pTotal = document.createElement("p")
+            var pText = document.createElement("p")
+
+            pText.innerHTML = "Total: "
+            pText.style.marginRight = "20px"
+            pTotal.innerHTML = `R$${totalDespesas}`
+            pTotal.style.color = "red"
+            cardTotalDesp.appendChild(pText)
+            cardTotalDesp.appendChild(pTotal)
 
         })
 }
