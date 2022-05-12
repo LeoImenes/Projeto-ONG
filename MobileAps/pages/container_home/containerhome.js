@@ -66,10 +66,10 @@ export default function ContainerHome() {
                 drawerContentContainerStyle: { width: 0 }
             }}
           >
-              <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
+              {/* <Drawer.Screen name="ListarAssistidos" component={ListarAssistidos} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
-            }} />
+            }} /> */}
               <Drawer.Screen name="NovaAssistencia" component={NovaAssistencia} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
