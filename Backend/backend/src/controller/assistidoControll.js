@@ -1,6 +1,8 @@
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
+
+
 // MÉTODO CADASTRAR ASSISTIDO
 const postAssistido = (req, res) => {
     req.connection.setTimeout(120000);
@@ -13,6 +15,8 @@ const postAssistido = (req, res) => {
     let cartao_sus
     let foto_antes
     let foto_depois
+
+    console.log(req)
     if (req.body.nome_social === undefined) {
         nome_social = null
     } else {

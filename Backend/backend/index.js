@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-require('events').setMaxListeners(0)
+
 
 const route = require('./routes')
 
@@ -9,6 +9,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const app = Express()
+
+
 
 app.use(bodyParser.json({limit:"150mb"}))
 app.use(Express.json({limit:"150mb"}))

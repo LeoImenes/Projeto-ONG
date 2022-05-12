@@ -31,10 +31,6 @@ function list() {
                 var liDatademissao = document.querySelector(".getDemissao");
                 var liEmail = document.querySelector(".getEmail");
 
-                var SplitdataAdm = item.data_admissao.split("T")[0];
-
-                var SplitdataNasc = item.data_nascimento.split("T")[0];
-
                 if ((item.foto === null) || (item.foto === "undefined") || (item.foto == "null") || (item.foto == "")) {
                     Fotofuncionario.src = "../../Assets/icones/user.png"
                 } else {
@@ -44,8 +40,7 @@ function list() {
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
                 } else {
-                    var SplitdataDem = item.data_demissao.split("T")[0];
-                    liDatademissao.innerHTML = `${SplitdataDem.split("-")[2]}/${SplitdataDem.split("-")[1]}/${SplitdataDem.split("-")[0]}`;
+                    liDatademissao.innerHTML = `${dataCoverter(item.data_demissao)}`;
                     botaoEditar.disabled = true;
                 }
 
@@ -56,13 +51,11 @@ function list() {
                 liRg.innerHTML = item.rg;
                 liCpf.innerHTML = item.cpf;
                 cpf = item.cpf;
-                liNasc.innerHTML = `${SplitdataNasc.split("-")[2]}/${SplitdataNasc.split("-")[1]}/${SplitdataNasc.split("-")[0]}`;
+                liNasc.innerHTML = `${dataCoverter(item.data_nascimento)}`;
                 liCargo.innerHTML = item.cargo;
                 liSex.innerHTML = item.sexo;
                 liEmail.innerHTML = item.email;
-                liDataAdmissao.innerHTML = `${SplitdataAdm.split("-")[2]}/${
-          SplitdataAdm.split("-")[1]
-        }/${SplitdataAdm.split("-")[0]}`;
+                liDataAdmissao.innerHTML = `${dataCoverter(item.data_admissao)}`;
             });
         });
 }
@@ -145,9 +138,6 @@ function Atualizar() {
     var btnAtualizarDados = document.querySelector(".btn-Updt");
     var matricula = document.querySelector("#Matricula").value
 
-    var dia = dataDemissao.split("/")[0]
-    var mes = dataDemissao.split("/")[1]
-    var ano = dataDemissao.split("/")[2]
 
     cargo.placeholder = getCargo
     matricula.placeholder = getMatricula
@@ -156,7 +146,7 @@ function Atualizar() {
         matricula: matriculaLogado,
         matricula_funcionario: matricula,
         cargo: cargo,
-        data_demissao: `${ano}-${mes}-${dia}`,
+        data_demissao: `${dataUS(dataDemissao)}`,
     });
 
     console.log(data)

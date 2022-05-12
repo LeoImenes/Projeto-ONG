@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Financeiro</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <ul class="nav-bar">
+                <li>
+                    <h2>Casa Acolhedora Irmã Antonia</h2>
+                </li>
+
+            </ul>
+        </div>
+
+    </header>
+    <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p class="Username">Usuario</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li class="Assistencia">
+                        <p>Assistencia</p>
+                    </li>
+                    <li class="Assistidos">
+                        <p>Assitidos</p>
+                    </li>
+                    <li class="Funcionario">
+                        <p>Funcionarios</p>
+                    </li>
+                    <li class="Lancamentos">
+                        <p>Financeiro</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+            </ul>
+        </div>
+        <div class="cards-container">
+            <div class="cards">
+                <div class="Receitas">
+                    <div class="cardReceitas">
+                        <div class="titulo">
+                            <h1>Receitas</h1>
+
+                        </div>
+                        <div class="receitasContent">
+
+                        </div>
+                    </div>
+                    <div class="totalReceita">
+                        <div class="totalreceitaContent">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="Despesas">
+                    <div class="cardDespesas">
+                        <div class="titulo">
+                            <h1>Despesas:</h1>
+
+                        </div>
+                        <div class="despesaContent">
+
+                        </div>
+                    </div>
+                    <div class="totalDespesas">
+                        <div class="totaldespCont">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="cardTotais">
+
+
+                    <div class="diferencas">
+                        <p>Teste</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script src="../../Global/menu.js "></script>
+<script src="../../Global/menuData.js "></script>
+<script src="../FinanceiroAll/script.js "></script>
+
+</html>

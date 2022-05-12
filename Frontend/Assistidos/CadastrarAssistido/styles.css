@@ -235,7 +235,7 @@ input[type="checkbox"] {
 
 .listadrogas ul,
 .listadoencas ul {
-    height: 100%;
+    height: 11vh;
     width: 100%;
 }
 
@@ -338,6 +338,10 @@ input[type="checkbox"] {
     transition: all 0.25s;
     padding: 0 0px 0px 7px;
     color: white;
+}
+
+.disable {
+    display: none;
 }
 
 @media (max-width: 1623px) {
@@ -754,7 +758,7 @@ input[type="checkbox"] {
     .listadrogas ul,
     .listadoencas ul {
         width: 100%;
-        height: 10px;
+        height: 24vh;
         display: flex;
         justify-content: none;
         align-items: none;
