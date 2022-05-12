@@ -17,7 +17,7 @@ function conectar() {
         })
         .then((resp) => {
             if (resp.status == 400) {
-                alert("Email Invalido");
+                alert("Email ou Senha Invalido");
             }
             return resp.json();
         })

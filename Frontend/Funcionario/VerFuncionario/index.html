@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionario</title>
+    <link rel="sortcut icon" href="../../Assets/icones/icone_i.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,7 +15,7 @@
         <div class="header">
             <ul class="nav-bar">
                 <li>
-                    <h2>Casa Acolhedora Irmã Antonia</h2>
+                    <h2>Casa Acolhedora Irmã Antônia</h2>
                 </li>
 
             </ul>
@@ -85,7 +86,7 @@
                                 <input type="text" placeholder="Matricula..." id="Matricula">
                             </ul>
                             <ul>
-                                <input type="text" placeholder="Data de Demissao..." id="Data">
+                                <input type="text" placeholder="Data de Demissao..." id="Data" oninput="mascaraData(this)">
                             </ul>
                             <ul>
                                 <input type="text" placeholder="Cargo..." id="cargo">
