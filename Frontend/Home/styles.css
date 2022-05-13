@@ -1,6 +1,4 @@
 @import url("../Global/globalHeaderMenu.css");
-
-
 a {
     text-decoration: none;
     color: black;
@@ -25,7 +23,11 @@ section {
 .cards-container {
     width: 70%;
     height: 80%;
-    background-color: var(--casa-azul);
+    background: var(--casa-azul);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, var(--casa-azul), #002a6e);
     display: flex;
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -73,7 +75,11 @@ section {
 .lower-cards :hover,
 .uppercards :hover {
     box-shadow: none;
-    background-color: gray;
+    background: var(--casa-azul);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, var(--casa-azul), #002a6e);
     padding: auto;
     cursor: pointer;
     transition: all 0.5s;
@@ -92,7 +98,7 @@ section {
     z-index: 1;
     left: 74%;
     bottom: 9%;
-    opacity: 0.4;
+    opacity: 0.9;
 }
 
 .styleBall-bottom-left {
@@ -105,7 +111,7 @@ section {
     z-index: 1;
     right: 74%;
     bottom: 9%;
-    opacity: 0.4;
+    opacity: 0.9;
 }
 
 @media (max-width: 900px) {

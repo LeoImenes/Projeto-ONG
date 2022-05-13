@@ -6,7 +6,7 @@ var adcFoto = document.querySelector('.adcFoto')
 var fileInp = document.querySelector("#inpFoto")
 fileInp.addEventListener('change', (e) => {
     var fr = new FileReader();
-    
+
     fr.onloadend = (foto) => {
         fotinho = foto.target.result;
         newImg.src = foto.target.result;
@@ -55,7 +55,7 @@ function cadastrarAssistido() {
     var sexMasc = document.querySelector("#Masculino");
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
-    
+
 
     var sex = [];
 
@@ -88,14 +88,9 @@ function cadastrarAssistido() {
         "antecedente_criminal": ante
             // "foto_depois": fotinho
     })
-<<<<<<< HEAD
-    // fetch("https://app-ongdigital-backend.herokuapp.com/assistidos", {
-    fetch("http://localhost:3000/assistidos", {
-=======
 
     // fetch("http://10.87.207.11:3000/assistidos", {
     fetch(`${url}/assistidos`, {
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -123,14 +118,9 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-<<<<<<< HEAD
-                        // fetch("https://app-ongdigital-backend.herokuapp.com/assistido/saude", {
-                        fetch("http://localhost:3000/assistido/saude", {
-=======
 
                         // fetch("http://localhost:3000/assistido/saude", {
-                                fetch(`${url}/assistido/saude`, {
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
+                        fetch(`${url}/assistido/saude`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -196,7 +186,7 @@ function getComorbidades() {
     let liDroga = document.createElement("p")
 
     fetch(`${url}/assistido/comorbidade`)
-    // fetch("http://localhost:3000/assistido/comorbidade")
+        // fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {

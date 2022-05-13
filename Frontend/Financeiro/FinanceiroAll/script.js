@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-// const url = `https://app-ongdigital-backend.herokuapp.com/funcionario/financas`
-const url = `http://localhost:3000/funcionario/financas`
-=======
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
-
-
-
-
 function getfinanceiro() {
     var totalDespesas = 0;
     var totalReceitas = 0;
 
-    
+
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -76,7 +67,7 @@ function getfinanceiro() {
             var total = (-totalDespesas) + (totalReceitas)
 
             var pTotal = document.createElement("p")
-            var cardTotal= document.querySelector(".totalCont")
+            var cardTotal = document.querySelector(".totalCont")
             var pTotalText = document.createElement("p")
 
             var cardTotalRec = document.querySelector(".totalreceitaContent")
@@ -86,14 +77,14 @@ function getfinanceiro() {
             pDespText.innerHTML = "Total das Despesas: "
             pRectext.innerHTML = "Total das Receitas: "
             pTotalText.innerHTML = "Diferença: "
-            // pRectext.style.marginRight = "20px"
-            // pDespText.style.marginRight = "20px"
+                // pRectext.style.marginRight = "20px"
+                // pDespText.style.marginRight = "20px"
             pTotalDesp.innerHTML = `R$${totalDespesas.toFixed(2)}`
             pTotalRec.innerHTML = `R$${totalReceitas.toFixed(2)}`
 
-            if(total < 0){
+            if (total < 0) {
                 pTotal.style.color = "red"
-            }else{
+            } else {
                 pTotal.style.color = "green"
             }
             pTotal.innerHTML = `R$ ${total.toFixed(2)}`
