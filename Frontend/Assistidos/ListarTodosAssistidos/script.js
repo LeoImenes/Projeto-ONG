@@ -6,8 +6,13 @@ function list() {
     let names = []
     var body = document.querySelector(body)
 
+<<<<<<< HEAD
     fetch("https://app-ongdigital-backend.herokuapp.com/Assistidos")
     // fetch("http://localhost:3000/Assistidos")
+=======
+    // fetch("http://10.87.207.11:3000/Assistidos")
+    fetch(`${url}/Assistidos`)
+>>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
         .then(response => {
             if (response.ok) {} else {
                 alert("Falha ao carregar dados")

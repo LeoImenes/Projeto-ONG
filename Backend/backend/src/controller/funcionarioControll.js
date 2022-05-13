@@ -486,6 +486,9 @@ const getItensAssistencia = (req, res) => {
     })
 }
 
+
+
+
 module.exports = {
     postFuncionario,
     getAll,

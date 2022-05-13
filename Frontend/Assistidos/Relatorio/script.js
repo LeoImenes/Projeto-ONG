@@ -4,8 +4,13 @@ let btn = document.querySelector(".btnLog");
 relatorio.value;
 
 function relatorio() {
+<<<<<<< HEAD
         // fetch('https://app-ongdigital-backend.herokuapp.com/relatorio/assistido'), {
         fetch('https://localhost:3000/relatorio/assistido'), {
+=======
+    // fetch('localhost/relatorio/assistido'), {
+    fetch(`${url}/relatorio/assistido`), {
+>>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
         method: "POST",
         headers: {
             "Content-Type": "application/json",

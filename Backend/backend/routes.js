@@ -42,6 +42,7 @@ route.put("/assistido/saude", assistidoControll.updateSaude)
 route.get("/assistido/comorbidade", assistidoControll.getComorbidades)
 
 route.post("/assistido/familiar", assistidoControll.postFamiliar)
+
 route.post("/assistido_familiar", assistidoControll.postRelacionamentoFamiliar)
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
 

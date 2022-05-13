@@ -4,7 +4,7 @@ function getfunc() {
     user.innerHTML = funcionario.nome_completo
     foto.src = funcionario.foto
 
-    fetch(`https://app-ongdigital-backend.herokuapp.com/funcionarios/${funcionario.matricula}`)
+    fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {
             user.innerHTML = data[0].nome_completo
