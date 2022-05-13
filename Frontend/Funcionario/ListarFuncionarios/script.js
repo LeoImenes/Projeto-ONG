@@ -3,7 +3,8 @@ function list() {
     let names = []
     var body = document.querySelector(body)
 
-    fetch("https://app-ongdigital-backend.herokuapp.com/funcionarios")
+    // fetch("https://app-ongdigital-backend.herokuapp.com/funcionarios")
+    fetch("http://localhost:3000/funcionarios")
         .then(response => { return response.json() })
         .then(data => {
             console.log(data)

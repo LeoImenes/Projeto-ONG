@@ -1,5 +1,5 @@
-// const url = `http://localhost:3000/funcionario/financas`
-const url = `https://app-ongdigital-backend.herokuapp.com/funcionario/financas`
+// const url = `https://app-ongdigital-backend.herokuapp.com/funcionario/financas`
+const url = `http://localhost:3000/funcionario/financas`
 
 var body = document.querySelector('body').addEventListener('onload', getfinanceiro())
 

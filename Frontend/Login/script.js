@@ -6,7 +6,8 @@
          senha: senha.value,
      });
 
-     fetch('https://app-ongdigital-backend.herokuapp.com/funcionarios', {
+    //  fetch('https://app-ongdigital-backend.herokuapp.com/funcionarios', {
+     fetch('http://localhost:3000/funcionarios', {
              method: "POST",
              headers: {
                  "Content-Type": "application/json",

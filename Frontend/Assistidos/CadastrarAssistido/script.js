@@ -88,9 +88,8 @@ function cadastrarAssistido() {
         "antecedente_criminal": ante
             // "foto_depois": fotinho
     })
-
-    // fetch("http://10.87.207.11:3000/assistidos", {
-    fetch("https://app-ongdigital-backend.herokuapp.com/assistidos", {
+    // fetch("https://app-ongdigital-backend.herokuapp.com/assistidos", {
+    fetch("http://localhost:3000/assistidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -118,9 +117,8 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-
-                        // fetch("http://localhost:3000/assistido/saude", {
-                                fetch("https://app-ongdigital-backend.herokuapp.com/assistido/saude", {
+                        // fetch("https://app-ongdigital-backend.herokuapp.com/assistido/saude", {
+                        fetch("http://localhost:3000/assistido/saude", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",

@@ -18,7 +18,8 @@ function CadastrarFamiliar() {
         "parentesco": parentesco.value
     })
 
-    fetch("https://app-ongdigital-backend.herokuapp.com/assistido/familiar", {
+    // fetch("https://app-ongdigital-backend.herokuapp.com/assistido/familiar", {
+    fetch("http://localhost:3000/assistido/familiar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

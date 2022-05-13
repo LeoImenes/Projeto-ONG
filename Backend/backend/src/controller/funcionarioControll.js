@@ -271,34 +271,28 @@ const postAssistencia = (req, res) => {
                         stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
                         console.log("string sql:" + stringSolicitacao)
                         console.log("index: " + index)
-<<<<<<< HEAD
-                       let response = await executarQuery(stringSolicitacao)
-                        .then(() => {
-                            if(index + 1 === itens.length){
-                                
-                                console.log(itens)
-                                con.commit()
-                                res.status(200).json({"ok":"ok"})
-=======
                         let response = await executarQuery(stringSolicitacao)
                             .then(() => {
                                 if (index + 1 === itens.length) {
+                                    console.log(itens)
                                     con.commit()
                                     res.status(200).json({ "ok": "ok" })
                                     comerro = true
                                 }
+
                             }).catch((err) => {
                                 con.rollback()
                                 res.status(400).json({ err: err.message })
->>>>>>> 2e09b08f8494b527840579fbab2c400348d00275
                                 comerro = true
                             })
+
                         index++
                     } while (!comerro)
                 } else {
                     res.status(400).json({ err: err.message })
                 }
             })
+
         } catch (err) {
             con.rollback()
             res.status(400).json({ err: err.message })
@@ -306,7 +300,7 @@ const postAssistencia = (req, res) => {
     } else {
         res.status(400).json({ "err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'" }).end()
     }
-}
+};
 
 // MÉTODO fazer assistencia para varios assistidos
 
@@ -481,7 +475,7 @@ const updateFinanca = (req, res) => {
     }
 }
 
-const getItensAssistencia = (req, res) =>{
+const getItensAssistencia = (req, res) => {
     let string = `select * from itens order by (tipo)`
     con.query(string, (err, result) => {
         if (err === null) {
