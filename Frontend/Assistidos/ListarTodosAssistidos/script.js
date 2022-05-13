@@ -42,10 +42,7 @@ function list() {
                     img.src = fun.foto_antes
                 }
 
-
                 nomeFun.innerHTML = `${fun.nome_completo}`
-
-
 
                 divimg.appendChild(img)
                 divnome.appendChild(nomeFun)

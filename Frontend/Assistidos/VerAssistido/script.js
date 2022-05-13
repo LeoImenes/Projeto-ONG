@@ -218,7 +218,7 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    fetch(`http://https://app-ongdigital-backend.herokuapp.com/assistido/saudeID/${local}`)
+    fetch(`https://app-ongdigital-backend.herokuapp.com/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -243,6 +243,11 @@ function getComorbidadeAssistido() {
 var telaUPDT = document.querySelector("#telaUPDT").addEventListener("click", () => {
     window.location.href = "../Atualizar/"
 });;
+
+var telaRELATORIO = document.querySelector("#telaRELATORIO").addEventListener("click", () => {
+    window.location.href = "../Relatorio/"
+});;
+
 var telaFamiliar = document.querySelector("#telaFamiliar").addEventListener("click", () => {
     window.location.href = "../../Familiar/"
 });
