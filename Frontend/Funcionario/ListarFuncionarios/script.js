@@ -3,7 +3,7 @@ function list() {
     let names = []
     var body = document.querySelector(body)
 
-    fetch("https://app-ongdigital-backend.herokuapp.com/funcionarios")
+    fetch(`${url}/funcionarios`)
         .then(response => { return response.json() })
         .then(data => {
             console.log(data)

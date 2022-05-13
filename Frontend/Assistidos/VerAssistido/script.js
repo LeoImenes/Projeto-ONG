@@ -15,7 +15,7 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    fetch(`https://app-ongdigital-backend.herokuapp.com/assistido/busca_familiar/${local}`)
+    fetch(`${url}/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -133,7 +133,7 @@ function list() {
     var local = localStorage.getItem("assistido");
 
     var body = document.querySelector(body);
-    fetch(`https://app-ongdigital-backend.herokuapp.com/assistidos/${local}`)
+    fetch(`${url}/assistidos/${local}`)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -218,7 +218,7 @@ function getComorbidadeAssistido() {
     var ulDoenca = document.querySelector(".doclist");
     var local = localStorage.getItem("assistido");
 
-    fetch(`https://app-ongdigital-backend.herokuapp.com/assistido/saudeID/${local}`)
+    fetch(`${url}/assistido/saudeID/${local}`)
         .then((response) => {
             return response.json();
         })

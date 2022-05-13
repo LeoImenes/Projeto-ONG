@@ -7,7 +7,7 @@ var getCargo;
 function list() {
     let local = localStorage.getItem("funcionario");
 
-    fetch(`https://app-ongdigital-backend.herokuapp.com/funcionarios/${local}`)
+    fetch(`${url}/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
@@ -88,7 +88,7 @@ function cadastrarFotoDepois() {
         foto: fotinho,
     });
 
-    fetch(`https://app-ongdigital-backend.herokuapp.com/funcionario`, {
+    fetch(`${url}/funcionario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -151,7 +151,7 @@ function Atualizar() {
 
     console.log(data)
 
-    fetch(`https://app-ongdigital-backend.herokuapp.com/funcionarios`, {
+    fetch(`${url}/funcionarios`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

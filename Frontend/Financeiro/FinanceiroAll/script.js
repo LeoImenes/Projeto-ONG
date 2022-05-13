@@ -1,14 +1,14 @@
-// const url = `http://localhost:3000/funcionario/financas`
-const url = `https://app-ongdigital-backend.herokuapp.com/funcionario/financas`
 
-var body = document.querySelector('body').addEventListener('onload', getfinanceiro())
+
 
 
 function getfinanceiro() {
     var totalDespesas = 0;
     var totalReceitas = 0;
 
-    fetch(url)
+    
+
+    fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
         .then(data => {
 

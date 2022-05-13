@@ -604,6 +604,7 @@ const updateRelatorioID = (req, res) => {
     }   
 }
 
+
 module.exports = {
     getAll,
     getID,
@@ -626,4 +627,5 @@ module.exports = {
     relatorioPost,
     getRelatorioID,
     updateRelatorioID,
+    
 }

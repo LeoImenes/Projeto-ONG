@@ -25,7 +25,7 @@ adcFoto.addEventListener("click", () => {
 });
 
 function getAssistido() {
-    fetch(`https://app-ongdigital-backend.herokuapp.com/assistidos/${func}`)
+    fetch(`${url}/assistidos/${func}`)
         .then((response) => {
             return response.json();
         })
@@ -116,7 +116,7 @@ function cadastrarAssistido() {
             foto_antes: fotoAntes,
         });
 
-    fetch("https://app-ongdigital-backend.herokuapp.com/assistido/update", {
+    fetch(`${url}/assistido/update`, {
              method: "PUT",
             headers: {
                 "Content-Type": "application/json",

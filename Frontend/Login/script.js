@@ -1,3 +1,4 @@
+
  function conectar() {
      let email = document.querySelector(".email")
      let senha = document.querySelector(".senha")
@@ -6,7 +7,7 @@
          senha: senha.value,
      });
 
-     fetch('https://app-ongdigital-backend.herokuapp.com/funcionarios', {
+     fetch(`${url}/funcionarios`, {
              method: "POST",
              headers: {
                  "Content-Type": "application/json",

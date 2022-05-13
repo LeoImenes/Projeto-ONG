@@ -90,7 +90,7 @@ function cadastrarAssistido() {
     })
 
     // fetch("http://10.87.207.11:3000/assistidos", {
-    fetch("https://app-ongdigital-backend.herokuapp.com/assistidos", {
+    fetch(`${url}/assistidos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -120,7 +120,7 @@ function cadastrarAssistido() {
                         }
 
                         // fetch("http://localhost:3000/assistido/saude", {
-                                fetch("https://app-ongdigital-backend.herokuapp.com/assistido/saude", {
+                                fetch(`${url}/assistido/saude`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -185,7 +185,7 @@ function getComorbidades() {
     let liDoenca = document.createElement("p")
     let liDroga = document.createElement("p")
 
-    fetch("https://app-ongdigital-backend.herokuapp.com/assistido/comorbidade")
+    fetch(`${url}/assistido/comorbidade`)
     // fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
