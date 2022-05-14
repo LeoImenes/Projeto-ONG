@@ -103,3 +103,12 @@ function getfinanceiro() {
 
         })
 }
+
+function cadastrarLancamento(i){
+    var cardReceitas = document.querySelector(".cardReceitas")
+    var cardDespesas = document.querySelector(".cardDespesas")
+
+    cardDespesas.style.display = "none"
+    cardReceitas.style.display = "none"
+
+}

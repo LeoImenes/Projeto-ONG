@@ -84,7 +84,10 @@ section {
     cursor: pointer;
     transition: all 0.5s;
     background-color: var(--primary-color);
-    color: #fff;
+    text-transform: uppercase;
+    text-overflow: inherit;
+    color: white;
+    
 }
 
 .styleBall-bottom-right {
@@ -100,6 +103,7 @@ section {
     bottom: 9%;
     opacity: 0.9;
 }
+
 
 .styleBall-bottom-left {
     position: fixed;

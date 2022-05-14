@@ -24,6 +24,42 @@ adcFoto.addEventListener("click", () => {
     fileInp.click();
 });
 
+function cadastrarFotoDepois() {
+
+    var local = localStorage.getItem("assistido");
+    let data = JSON.stringify({
+        'id_assistido': local,
+        'foto_depois': fotinho,
+    });
+
+    if(fotinho === undefined){
+        alert("Foto não atualizada")
+        fotinho = null;
+    }else{
+        alert("foto atualizada")
+    }
+
+
+    // fetch(`http://10.87.207.11:3000/assistido_foto_depois`, {
+    fetch(`${url}/assistido_foto_depois`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+
+            // window.location.href = "http://127.0.0.1:5500/Assistidos/VerAssistido/index.html"
+
+        });
+
+}
+
+
 function getAssistido() {
     fetch(`${url}/assistidos/${func}`)
         .then((response) => {
@@ -116,6 +152,8 @@ function cadastrarAssistido() {
             foto_antes: fotoAntes,
         });
 
+        console.log(data)
+
     fetch(`${url}/assistido/update`, {
              method: "PUT",
             headers: {
@@ -131,6 +169,6 @@ function cadastrarAssistido() {
             }
         })
         .then((data) => {
-            window.location.href = "../VerAssistido/index.html";
+            // window.location.href = "../VerAssistido/index.html";
         });
 }
