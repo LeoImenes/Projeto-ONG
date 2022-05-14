@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, StatusBar, ScrollView, TextInput, TouchableOpacity,ToastAndroid, } from "react-native"
+import { StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity,ToastAndroid, } from "react-native"
 
 import global from "../../Global/Style"
 
@@ -9,8 +9,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 
 import ToggleButton from '../../Components/ToggleButton/Index';
+import StatusBar from '../../Components/StatusBar/Index';
 
-export default function NovaAssistencia({ navigation }) {
+export default function AssistenciaRefeicao({ navigation }) {
     const [dataCriacao, setDataCriacao] = useState("");
     const [lista, setLista] = useState([]);
     const [dados, setDados] = useState([]);
@@ -22,7 +23,8 @@ export default function NovaAssistencia({ navigation }) {
     const getFunc = async () => {
         let value = await AsyncStorage.getItem('userdata');
 
-        fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
+        fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
+        // fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
             .then(resp => { return resp.json() })
             .then(async data => {
                 const id = JSON.parse(data[0].id_funcionario)
@@ -44,8 +46,8 @@ export default function NovaAssistencia({ navigation }) {
             setDataCriacao(data)
             getFunc()
 
-            // fetch(`http://192.168.0.104:3000/assistidos`)
-            fetch(`http://10.87.207.20:3000/assistidos`)
+            fetch(`http://192.168.0.104:3000/assistidos`)
+            // fetch(`http://10.87.207.20:3000/assistidos`)
                 .then(resp => { return resp.json() })
                 .then(data => {
                     setLista(data);
@@ -53,7 +55,8 @@ export default function NovaAssistencia({ navigation }) {
                 })
                 .catch(err => { console.log(err) });
 
-            fetch(`http://10.87.207.20:3000/itens`)
+            fetch(`http://192.168.0.104:3000/itens`)
+            // fetch(`http://10.87.207.20:3000/itens`)
                 .then(resp => { return resp.json() })
                 .then(data => {
 
@@ -80,7 +83,7 @@ export default function NovaAssistencia({ navigation }) {
             "itens": valuePicker
         }
 
-        fetch(`http://10.87.207.20:3000/funcionario/assistencias`, {
+        fetch(`http://192.168.0.104:3000/funcionario/assistencias`, {
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json"
@@ -104,11 +107,7 @@ export default function NovaAssistencia({ navigation }) {
 
     return (
         <View style={global.body}>
-            <StatusBar
-                barStyle="dark-content"
-                hidden={false}
-                backgroundColor="transparent"
-                translucent={true} />
+            <StatusBar/>
             <View style={{ width: "100%", height: 200, backgroundColor: "#166B8A", borderBottomRightRadius: 40, borderBottomLeftRadius: 40, justifyContent: "center" }}>
                 <View style={{ width: "100%", height: "20%", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
                     <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => { navigation.navigate("Home") }} />
