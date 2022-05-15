@@ -12,7 +12,9 @@ import ListarFuncionario from '../Funcionarios/ListarFuncionarios/Index';
 import MeuPerfil from '../Funcionarios/MeuPerfil/Index';
 import VerFuncionario from '../Funcionarios/VerFuncionario/Index';
 import Home from '../Geral/Home/Index';
-import NovaAssistencia from '../Assistencias/NovaAssistencia/Index';
+import AssistenciaRefeicao from '../Assistencias/AssistenciaRefeicao/Index';
+import OutrasAssistencias from '../Assistencias/OutrasAssistencias/Index'
+import Financeiro from '../Financeiro/Index'
 
 const Drawer = createDrawerNavigator();
 
@@ -27,8 +29,8 @@ export default function ContainerHome() {
             value = JSON.parse(value);
 
             // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
-            // fetch(`http://192.168.137.1:3000/funcionarios/${value}`)
-            fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
+            fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
+            // fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
             .then(resp => {return resp.json()})
             .then(data => {
                 setFoto(data[0].foto);
@@ -70,7 +72,15 @@ export default function ContainerHome() {
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} /> */}
-              <Drawer.Screen name="NovaAssistencia" component={NovaAssistencia} options={{
+            <Drawer.Screen name="Financeiro" component={Financeiro} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} />
+            <Drawer.Screen name="OutrasAssistencias" component={OutrasAssistencias} options={{
+                drawerLabel: () => {return (null)},
+                drawerItemStyle: {display: "none" }
+            }} />
+              <Drawer.Screen name="AssistenciaRefeicao" component={AssistenciaRefeicao} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} />

@@ -124,6 +124,7 @@ function menuDownDoenca() {
 }
 
 function list() {
+    
     getComorbidadeAssistido()
 
     var local = localStorage.getItem("assistido");
@@ -138,6 +139,7 @@ function list() {
             }
         })
         .then((data) => {
+            console.log(data.foto_depois)
             var antes = document.querySelector("#assistidoAntes");
             antes.src = data.foto_antes;
             antes.style.borderRadius = "50%";
@@ -253,47 +255,21 @@ var newImg = document.querySelector("#assistidoDepois");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
 
-// fileInp.addEventListener("change", (e) => {
-//     var fr = new FileReader();
-//     fr.onloadend = (foto) => {
-//         fotinho = foto.target.result;
-//         newImg.src = foto.target.result;
-//         newImg.style.width = "70px";
-//         newImg.style.height = "70px";
-//         newImg.style.borderRadius = "50%";
-//     };
-//     fr.readAsDataURL(e.target.files[0]);
+fileInp.addEventListener("change", (e) => {
+    var fr = new FileReader();
+    fr.onloadend = (foto) => {
+        fotinho = foto.target.result;
+        newImg.src = foto.target.result;
+        newImg.style.width = "70px";
+        newImg.style.height = "70px";
+        newImg.style.borderRadius = "50%";
+    };
+    fr.readAsDataURL(e.target.files[0]);
 
-// });
-// adcFoto.style.cursor = "pointer";
-// adcFoto.addEventListener("click", () => {
-//     fileInp.click();
+});
+adcFoto.style.cursor = "pointer";
+adcFoto.addEventListener("click", () => {
+    fileInp.click();
 
-// });
+});
 
-// function cadastrarFotoDepois() {
-//     var local = localStorage.getItem("assistido");
-//     let data = JSON.stringify({
-//         'id_assistido': local,
-//         'foto_depois': fotinho,
-//     });
-
-
-//     // fetch(`http://10.87.207.11:3000/assistido_foto_depois`, {
-//     fetch(`http://localhost:3000/assistido_foto_depois`, {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: data
-//         })
-//         .then((response) => {
-//             return response.json();
-//         })
-//         .then((data) => {
-
-//             window.location.href = "http://127.0.0.1:5500/Assistidos/VerAssistido/index.html"
-
-//         });
-
-// }

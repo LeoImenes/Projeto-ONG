@@ -1,6 +1,12 @@
 function getfinanceiro() {
     var totalDespesas = 0;
+<<<<<<< HEAD
     var totalReceitas = 0;    
+=======
+    var totalReceitas = 0;
+
+
+>>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -61,7 +67,7 @@ function getfinanceiro() {
             var total = (-totalDespesas) + (totalReceitas)
 
             var pTotal = document.createElement("p")
-            var cardTotal= document.querySelector(".totalCont")
+            var cardTotal = document.querySelector(".totalCont")
             var pTotalText = document.createElement("p")
 
             var cardTotalRec = document.querySelector(".totalreceitaContent")
@@ -71,14 +77,14 @@ function getfinanceiro() {
             pDespText.innerHTML = "Total das Despesas: "
             pRectext.innerHTML = "Total das Receitas: "
             pTotalText.innerHTML = "Diferença: "
-            // pRectext.style.marginRight = "20px"
-            // pDespText.style.marginRight = "20px"
+                // pRectext.style.marginRight = "20px"
+                // pDespText.style.marginRight = "20px"
             pTotalDesp.innerHTML = `R$${totalDespesas.toFixed(2)}`
             pTotalRec.innerHTML = `R$${totalReceitas.toFixed(2)}`
 
-            if(total < 0){
+            if (total < 0) {
                 pTotal.style.color = "red"
-            }else{
+            } else {
                 pTotal.style.color = "green"
             }
             pTotal.innerHTML = `R$ ${total.toFixed(2)}`
@@ -94,4 +100,13 @@ function getfinanceiro() {
             cardTotal.appendChild(pTotal)
 
         })
+}
+
+function cadastrarLancamento(i){
+    var cardReceitas = document.querySelector(".cardReceitas")
+    var cardDespesas = document.querySelector(".cardDespesas")
+
+    cardDespesas.style.display = "none"
+    cardReceitas.style.display = "none"
+
 }

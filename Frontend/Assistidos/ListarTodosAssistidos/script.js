@@ -6,6 +6,10 @@ function list() {
     let names = []
     var body = document.querySelector(body)
 
+<<<<<<< HEAD
+=======
+    // fetch("http://10.87.207.11:3000/Assistidos")
+>>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
     fetch(`${url}/Assistidos`)
         .then(response => {
             if (response.ok) {} else {

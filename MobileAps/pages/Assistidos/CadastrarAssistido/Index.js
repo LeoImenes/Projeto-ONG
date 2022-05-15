@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid, StatusBar } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TextInput, Text, TouchableOpacity, ToastAndroid } from 'react-native';
 
 import global from "../../Global/Style"
 import SelectMultiple from 'react-native-select-multiple'
@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import { Camera } from 'expo-camera';
 import { useFocusEffect } from '@react-navigation/native';
+import StatusBar from "../../Components/StatusBar/Index"
 
 import * as FileSystem from 'expo-file-system';
 
@@ -202,11 +203,7 @@ export default function CadastrarAssistido({ navigation }) {
 
     return (
         <View style={global.body}>
-            <StatusBar
-                barStyle="dark-content"
-                hidden={false}
-                backgroundColor="transparent"
-                translucent={true} />
+            <StatusBar/>
             {
                 (cam === true)
                     ?

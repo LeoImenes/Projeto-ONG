@@ -30,8 +30,12 @@ section {
     height: 70%;
     justify-content: space-around;
     align-items: center;
-    background-color: #166b8a;
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    background: var(--casa-azul);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, var(--casa-azul), #002a6e);
+    box-shadow: 0 50px 50px 0 rgba(0, 0, 0, 0.24), 0 57px 50px 0 rgba(0, 0, 0, 0.19);
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }
@@ -63,7 +67,8 @@ section {
 .styleBall-bottom-right {
     position: fixed;
     width: 11%;
-    background-color: #e5e5e5;
+    background-color: #ffffff;
+    border: 1px solid #c6c6c6;
     height: 200px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 0%;
@@ -71,26 +76,32 @@ section {
     z-index: 1;
     left: 76%;
     bottom: 9%;
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 .styleBall-bottom-left {
     position: fixed;
-    background-color: #e5e5e5;
+    background-color: #ffffff;
+    border: 1px solid #c6c6c6;
     width: 11%;
     height: 200px;
     border-top-right-radius: 50%;
-    border-bottom-left-radius: 0%;
+    border-bottom-left-radius: 20px;
     z-index: 1;
     right: 76%;
     bottom: 9%;
-    opacity: 0.4;
+    opacity: 0.8;
 }
 
 .addAssistido:hover,
 .infoAssistido:hover {
     box-shadow: none;
-    background-color: gray;
+    border: 2px solid #ffffff;
+    background: var(--casa-azul);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, var(--casa-azul), #002a6e);
     padding: auto;
     cursor: pointer;
     transition: all 0.5s;
@@ -99,6 +110,14 @@ section {
 }
 
 @media (max-width: 600px) {
+    .styleBall-bottom-right {
+        width: 17%;
+        left: 77%;
+    }
+    .styleBall-bottom-left {
+        width: 17%;
+        right: 77%;
+    }
     .card {
         display: flex;
         flex-direction: column;
@@ -124,5 +143,9 @@ section {
         border-top-left-radius: 30px;
         border-bottom-right-radius: 30px;
         box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+    .infoAssistido p,
+    .addAssistido p {
+        font-size: 16px;
     }
 }
