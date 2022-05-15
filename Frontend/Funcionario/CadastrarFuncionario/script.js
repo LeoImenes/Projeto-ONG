@@ -50,12 +50,7 @@ function cadastrarFunc() {
         "estado_civil": ""
     })
 
-<<<<<<< HEAD
-    // fetch("https://app-ongdigital-backend.herokuapp.com/funcionario", {
-    fetch("http://localhost:3000/funcionario", {
-=======
     fetch(`${url}/funcionario`, {
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +69,6 @@ function cadastrarFunc() {
         })
 
     .then(data => {
-
         window.location.href = '../ListarFuncionarios/'
     })
 }

@@ -3,12 +3,7 @@ function list() {
     let names = []
     var body = document.querySelector(body)
 
-<<<<<<< HEAD
-    // fetch("https://app-ongdigital-backend.herokuapp.com/funcionarios")
-    fetch("http://localhost:3000/funcionarios")
-=======
     fetch(`${url}/funcionarios`)
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
         .then(response => { return response.json() })
         .then(data => {
             console.log(data)
@@ -61,7 +56,6 @@ function list() {
 
             })
 
-
         })
 }
 
@@ -71,7 +65,7 @@ function buscar() {
     let card = document.querySelectorAll(".cardFuncionario")
 
     filtro.forEach((item, index) => {
-        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex" : card[index].style.display = "none";
     })
 }
 
@@ -83,7 +77,7 @@ function buscarInativos() {
     if (inativo.checked == 1) {
         inativo.value = "i"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
+            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex" : card[index].style.display = "none";
         })
     } else {
         filtro.forEach((item, index) => {
@@ -91,7 +85,6 @@ function buscarInativos() {
         })
     }
 }
-
 
 function buscarAtivos() {
     let filtro = document.querySelectorAll("h3");
@@ -102,7 +95,7 @@ function buscarAtivos() {
 
         ativo.value = "a"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
+            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex" : card[index].style.display = "none";
         })
     } else {
         filtro.forEach((item, index) => {

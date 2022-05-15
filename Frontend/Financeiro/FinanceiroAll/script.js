@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-// const url = `https://app-ongdigital-backend.herokuapp.com/funcionario/financas`
-const url = `http://localhost:3000/funcionario/financas`
-=======
->>>>>>> eac630cf1c7b14aa7e67fe7647e3a383b6aac1b7
-
-
-
-
 function getfinanceiro() {
     var totalDespesas = 0;
-    var totalReceitas = 0;
-
-    
+    var totalReceitas = 0;    
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -31,8 +20,6 @@ function getfinanceiro() {
                     var p = document.createElement("p")
                     var pData = document.createElement("p")
 
-
-
                     h2.innerHTML = item.descricao
                     p.innerHTML = `R$ ${item.valor}`
                     p.style.color = "red"
@@ -42,8 +29,6 @@ function getfinanceiro() {
                     div.appendChild(p)
                     div.appendChild(pData)
                     despesaCard.appendChild(div)
-
-
 
                 } else if (item.tipo === 1) {
                     console.log("Lancamentos")
@@ -107,8 +92,6 @@ function getfinanceiro() {
             cardTotalDesp.appendChild(pTotalDesp)
             cardTotal.appendChild(pTotalText)
             cardTotal.appendChild(pTotal)
-
-
 
         })
 }

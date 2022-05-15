@@ -99,7 +99,7 @@ function cadastrarAssistido() {
         sexOutr.value = "Outro";
         sex.push(sexOutr.value);
     } else if ((sex = getSexo))
-        var data = JSON.stringify({
+        var datas = JSON.stringify({
             id_assistido: JSON.parse(func),
             nome_completo: nome.value,
             nome_social: nomesoc.value,
@@ -116,6 +116,8 @@ function cadastrarAssistido() {
             foto_antes: fotoAntes,
         });
 
+        console.log(`%c ${datas}`, "color:red")
+
     fetch(`${url}/assistido/update`, {
              method: "PUT",
             headers: {
@@ -131,6 +133,7 @@ function cadastrarAssistido() {
             }
         })
         .then((data) => {
-            window.location.href = "../VerAssistido/index.html";
+            // window.location.href = "../VerAssistido/index.html";
+            console.log(data)
         });
 }

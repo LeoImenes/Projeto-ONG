@@ -16,7 +16,6 @@ const postAssistido = (req, res) => {
     let foto_antes
     let foto_depois
 
-    console.log(req)
     if (req.body.nome_social === undefined) {
         nome_social = null
     } else {
@@ -64,16 +63,6 @@ const postAssistido = (req, res) => {
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json({...req.body, id_assistido: result.insertId }).end()
-            // id_comorbidades 
-            // 01 - HIV
-            // 02 - Hipertensão
-            // 03 - Diabetes
-            // 04 - Depressão
-            // 05 - Maconha
-            // 06 - Cocaína 
-            // 07 - Crack
-            // 08 - OX
-            // 09 - Álcool
         } else {
             res.status(400).json({ "Erro:" : err.message }).end()
         }
@@ -453,9 +442,8 @@ const postFamiliar = (req, res) => {
     let telefone = req.body.telefone
     let email = req.body.email
     let endereco = req.body.endereco
-    let id_assistido = req.body.id_assistido
-    let parentesco = req.body.parentesco
-    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}',
+    // mexi
+    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}', '${endereco}',
         '${email}','${endereco}')`
     if (nome_completo !== undefined) {
         con.query(stringFamiliares, (err, result) => {
@@ -521,7 +509,7 @@ const postRelacionamentoFamiliar = (req, res) => {
 const getVWFamiliar = (req, res) => {
     let id_assistido = req.params.id_assistido
     if (id_assistido !== undefined) {
-        let string = `select * from vw_familiar02 where id_assistido = ${id_assistido}`
+        let string = `select * from vw_familiar where id_assistido = ${id_assistido}`
         con.query(string, (err, result) => {
             if (err === null) {
                 res.status(200).json(result).end()
@@ -626,6 +614,5 @@ module.exports = {
     getRelatorio,
     relatorioPost,
     getRelatorioID,
-    updateRelatorioID,
-    
+    updateRelatorioID,    
 }
