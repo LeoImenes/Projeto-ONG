@@ -58,9 +58,9 @@ CREATE TABLE saude(
 
 CREATE TABLE familiares(
 	id_familiar INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	nome_completo VARCHAR(40),
-	rg VARCHAR(15),
-	telefone VARCHAR(15),
+	nome_completo VARCHAR(50),
+	rg VARCHAR(20),
+	telefone VARCHAR(20),
 	email VARCHAR(30),
 	endereco VARCHAR(100)
 );
@@ -253,4 +253,11 @@ FROM
 	assistidos a
 	INNER JOIN saude s ON a.id_assistido = s.id_assistido
 	INNER JOIN comorbidades c ON s.id_comorbidade = c.id_comorbidade;
+	
+	
+	CLEARDB_DATABASE_URL
+	
+	mysql://casairmaanto_casa:Antonia-TI@casairmaantonia.org/casairmaanto_bd?reconnect=true
+	
+	
 

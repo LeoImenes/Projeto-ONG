@@ -246,7 +246,7 @@ const postSaude = async(req, res) => {
                     .then(() => {
                         if (index + 1 === values.length) {
                             con.commit();
-                            res.status(200).json({ ok: "ok" });
+                            res.status(200).json({ Status: "Cadastrado com sucesso" });
                             comerro = true;
                         }
                     })
@@ -268,7 +268,7 @@ const postSaude = async(req, res) => {
 // CONSULTAR SAUDE DO ASSISTIDO POR ID DO ASSISTIDO
 const getSaudeID = (req, res) => {
     let id_assistido = req.params.id_assistido
-    let string = `select * from vw_saude02 where id_assistido = ${id_assistido}`
+    let string = `select * from vw_saude where id_assistido = ${id_assistido}`
     if (id_assistido !== undefined) {
         con.query(string, (err, result) => {
             console.log(result)
@@ -376,7 +376,7 @@ const updateSaude = async(req, res) => {
                                     .then(() => {
                                         if (newIndice + 1 === comorbidades.length) {
                                             con.commit()
-                                            res.status(200).json({ ok: "ok" })
+                                            res.status(200).json({ Mensagem : "Comorbidades atualizadas com sucesso" })
                                             newCommerro = true
                                         }
                                     }).catch((err) => {
@@ -428,7 +428,7 @@ const getComorbidades = (req, res) => {
         if (err == null) {
             res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -442,8 +442,9 @@ const postFamiliar = (req, res) => {
     let telefone = req.body.telefone
     let email = req.body.email
     let endereco = req.body.endereco
-    // mexi
-    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}', '${endereco}',
+    let id_assistido = req.body.id_assistido
+    let parentesco = req.body.parentesco
+    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}',
         '${email}','${endereco}')`
     if (nome_completo !== undefined) {
         con.query(stringFamiliares, (err, result) => {
@@ -463,7 +464,7 @@ const postFamiliar = (req, res) => {
                 con.query(stringAssisFam, (err02, result02) => {
                     if (err02 === null) {
                         let id_assisFam = result02.insertId
-                        let stringResult = `select * from vw_familiar02 where id_familiar = ${id_familiar}`
+                        let stringResult = `select * from vw_familiar where id_familiar = ${id_familiar}`
                         con.query(stringResult, (err03, result03) => {
                             if (err03 === null) {
                                 res.status(200).json(result03)
@@ -540,7 +541,7 @@ const relatorioPost = (req, res) => {
             }
         })
     } else {
-        res.status(400).json({ "err":"Erro informe os comapos id_assistido, id_funcionario e relatório"})
+        res.status(400).json({ "err":"Erro informe os comapos id_assistido, id_funcionario e relatório"}).end()
     }       
 }
 
@@ -551,7 +552,7 @@ const getRelatorio = (req,res) => {
         if (err === null) {
             res.status(200).json(result).end()
         } else {
-            res.status(400).json({"hjhj": "gjghjgjgj"}).end();
+            res.status(400).json({err: "Erro ao consultar relarórios"}).end();
         }
     })
 }
@@ -579,7 +580,7 @@ const updateRelatorioID = (req, res) => {
         con.query(string, (err, result) => {
             if (err == null) {            
                 if(result.affectedRows === 0){
-                    res.status(400).json({"err": "id do relatorio não existe"})
+                    res.status(400).json({"err": "Id do relatorio não existe"})
                 }else{
                     res.status(200).json(result).end()
                 }
