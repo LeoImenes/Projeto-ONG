@@ -1,10 +1,14 @@
 function getfinanceiro() {
     var totalDespesas = 0;
+<<<<<<< HEAD
+    var totalReceitas = 0;    
+=======
     var totalReceitas = 0;
     var receitasinputs = document.querySelector(".Receitainputs")
     receitasinputs.style.display = "none";
 
 
+>>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -24,8 +28,6 @@ function getfinanceiro() {
                     var p = document.createElement("p")
                     var pData = document.createElement("p")
 
-
-
                     h2.innerHTML = item.descricao
                     p.innerHTML = `R$ ${item.valor}`
                     p.style.color = "red"
@@ -35,8 +37,6 @@ function getfinanceiro() {
                     div.appendChild(p)
                     div.appendChild(pData)
                     despesaCard.appendChild(div)
-
-
 
                 } else if (item.tipo === 1) {
                     console.log("Lancamentos")
@@ -100,8 +100,6 @@ function getfinanceiro() {
             cardTotalDesp.appendChild(pTotalDesp)
             cardTotal.appendChild(pTotalText)
             cardTotal.appendChild(pTotal)
-
-
 
         })
 }

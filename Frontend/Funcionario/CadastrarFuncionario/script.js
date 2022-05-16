@@ -69,7 +69,6 @@ function cadastrarFunc() {
         })
 
     .then(data => {
-
         window.location.href = '../ListarFuncionarios/'
     })
 }
