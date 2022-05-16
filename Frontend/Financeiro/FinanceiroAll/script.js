@@ -1,6 +1,8 @@
 function getfinanceiro() {
     var totalDespesas = 0;
     var totalReceitas = 0;
+    var receitasinputs = document.querySelector(".Receitainputs")
+    receitasinputs.style.display = "none";
 
 
 
@@ -104,11 +106,19 @@ function getfinanceiro() {
         })
 }
 
-function cadastrarLancamento(i){
+function cadastrarReceita(){
+    var receitas = document.querySelector(".Receitas")
     var cardReceitas = document.querySelector(".cardReceitas")
-    var cardDespesas = document.querySelector(".cardDespesas")
+    var receitasinputs = document.querySelector(".Receitainputs")
+    
+    // var cardDespesas = document.querySelector(".cardDespesas")
 
-    cardDespesas.style.display = "none"
-    cardReceitas.style.display = "none"
+    // cardDespesas.style.display = "none"
+    cardReceitas.style.display = "none";
+    receitasinputs.style.display = "flex"
+
+   
+
+
 
 }
