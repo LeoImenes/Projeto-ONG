@@ -53,12 +53,8 @@ function cadastrarAssistido() {
 
     var sexMasc = document.querySelector("#Masculino");
     var sexFem = document.querySelector("#Feminino");
-<<<<<<< HEAD
-    var sexOutr = document.querySelector("#Outro");    
-=======
     var sexOutr = document.querySelector("#Outro");
 
->>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
 
     var sex = [];
 
@@ -120,13 +116,7 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-<<<<<<< HEAD
                             fetch(`${url}/assistido/saude`, {
-=======
-
-                        // fetch("http://localhost:3000/assistido/saude", {
-                        fetch(`${url}/assistido/saude`, {
->>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",

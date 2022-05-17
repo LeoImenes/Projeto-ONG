@@ -1,6 +1,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
      :root {
-        --casa-azul: #166b8a;
+        --casa-azul: rgb(22, 107, 138);
         --gradient: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
         /* Chrome 10-25, Safari 5.1-6 */
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

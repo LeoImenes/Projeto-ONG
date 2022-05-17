@@ -1,14 +1,9 @@
 function getfinanceiro() {
     var totalDespesas = 0;
-<<<<<<< HEAD
-    var totalReceitas = 0;    
-=======
     var totalReceitas = 0;
-    var receitasinputs = document.querySelector(".Receitainputs")
-    receitasinputs.style.display = "none";
+   
 
 
->>>>>>> aa90b4f3d8e2996a64d6095aaeba4ac309ca09a7
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -104,19 +99,74 @@ function getfinanceiro() {
         })
 }
 
+
+var receitasinputs = document.querySelector(".inputs").style.display = "none"
 function cadastrarReceita(){
-    var receitas = document.querySelector(".Receitas")
-    var cardReceitas = document.querySelector(".cardReceitas")
-    var receitasinputs = document.querySelector(".Receitainputs")
+    var buttonDiv = document.querySelector(".button")
     
-    // var cardDespesas = document.querySelector(".cardDespesas")
+    var cardReceitas = document.querySelector(".cardReceitas")
+    var receitasinputs = document.querySelector(".inputs")
+
+// var cardDespesas = document.querySelector(".cardDespesas")
 
     // cardDespesas.style.display = "none"
-    cardReceitas.style.display = "none";
     receitasinputs.style.display = "flex"
+    cardReceitas.style.display = "none";
+    buttonDiv.style.display= "none"
 
-   
+    
+    if(receitasinputs.style.display == "none"){
+        receitasinputs.style.display = "flex"
+        
+        
+    }
+
+    var receitaSpan = document.querySelector("span").addEventListener(("click"), () => {
+        receitasinputs.style.display = "none"
+        cardReceitas.style.display = "flex"
+        cardReceitas.style.flexDirection = "column"
+    buttonDiv.style.display= "flex"
+    });
+
+}
 
 
+function fetchReceitas(){
 
+    var descricao = document.querySelector(".RecDesc").value;;
+    var valor = document.querySelector(".valDesc").value;
+
+    console.log(descricao);
+    console.log(valor);
+
+    console.log(localStorage.getItem('userdata').id_funcionario)
+
+    var data =JSON.stringify({
+        "id_funcionario": localStorage.getItem('userdata').id_funcionario,
+        "tipo": 1,
+        "descricao": descricao,
+        "valor": valor
+    })
+
+    fetch(`${url}/funcionario/financas`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Cadastro efetuado com sucesso")
+            return response.json()
+
+        } else {
+            alert("Falha ao Cadastrar")
+        }
+
+    })
+
+.then(data => {
+    // window.location.href = '../ListarFuncionarios/'
+})
 }
