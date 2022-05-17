@@ -1,4 +1,6 @@
 function getfinanceiro() {
+    
+
     var totalDespesas = 0;
     var totalReceitas = 0;
    
@@ -73,7 +75,7 @@ function getfinanceiro() {
 
             pDespText.innerHTML = "Total das Despesas: "
             pRectext.innerHTML = "Total das Receitas: "
-            pTotalText.innerHTML = "Diferença: "
+            pTotalText.innerHTML = "Saldo: "
                 // pRectext.style.marginRight = "20px"
                 // pDespText.style.marginRight = "20px"
             pTotalDesp.innerHTML = `R$${totalDespesas.toFixed(2)}`
@@ -121,7 +123,7 @@ function cadastrarReceita(){
         
     }
 
-    var receitaSpan = document.querySelector("span").addEventListener(("click"), () => {
+    var receitaSpan = document.querySelector(".closeRec").addEventListener(("click"), () => {
         receitasinputs.style.display = "none"
         cardReceitas.style.display = "flex"
         cardReceitas.style.flexDirection = "column"
@@ -131,7 +133,10 @@ function cadastrarReceita(){
 }
 
 
+
+
 function fetchReceitas(){
+    var func = localStorage.getItem('userdata')
 
     var descricao = document.querySelector(".RecDesc").value;;
     var valor = document.querySelector(".valDesc").value;
@@ -142,7 +147,7 @@ function fetchReceitas(){
     console.log(localStorage.getItem('userdata').id_funcionario)
 
     var data =JSON.stringify({
-        "id_funcionario": localStorage.getItem('userdata').id_funcionario,
+        "id_funcionario": JSON.parse(func).id_funcionario,
         "tipo": 1,
         "descricao": descricao,
         "valor": valor
@@ -167,6 +172,83 @@ function fetchReceitas(){
     })
 
 .then(data => {
-    // window.location.href = '../ListarFuncionarios/'
+    window.location.reload()
+})
+}
+
+var despesainput = document.querySelector(".inputsDesp").style.display = "none"
+function cadastrarDespesa(){
+    var buttonDiv = document.querySelector(".buttonDesp")
+    
+    var cardDespesas = document.querySelector(".cardDespesas")
+    var despesainput = document.querySelector(".inputsDesp")
+
+// var cardDespesas = document.querySelector(".cardDespesas")
+
+    // cardDespesas.style.display = "none"
+    despesainput.style.display = "flex"
+    cardDespesas.style.display = "none";
+    buttonDiv.style.display= "none"
+
+    
+    if(despesainput.style.display == "none"){
+        despesainput.style.display = "flex"
+        
+        
+    }
+
+    var receitaSpan = document.querySelector(".closeDesp").addEventListener(("click"), () => {
+        despesainput.style.display = "none"
+        cardDespesas.style.display = "flex"
+        cardDespesas.style.flexDirection = "column"
+    buttonDiv.style.display= "flex"
+    });
+
+}
+
+
+
+
+
+
+
+function fetchDespesas(){
+    var func = localStorage.getItem('userdata')
+
+    var descricao = document.querySelector(".DespDesc").value;;
+    var valor = document.querySelector(".valDesp").value;
+
+    console.log(descricao);
+    console.log(valor);
+
+    console.log(localStorage.getItem('userdata').id_funcionario)
+
+    var data =JSON.stringify({
+        "id_funcionario": JSON.parse(func).id_funcionario,
+        "tipo": 0,
+        "descricao": descricao,
+        "valor": valor
+    })
+
+    fetch(`${url}/funcionario/financas`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Cadastro efetuado com sucesso")
+            return response.json()
+
+        } else {
+            alert("Falha ao Cadastrar")
+        }
+
+    })
+
+.then(data => {
+    window.location.reload()
 })
 }
