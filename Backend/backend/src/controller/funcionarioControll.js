@@ -139,7 +139,7 @@ const updateFotoFuncionario = (req, res) => {
 // MÉTODO DELETAR FUNCIONARIO (NÃO USAR)
 const deletarFuncionario = (req, res) => {
     let string = `delete from funcionarios where id_funcionario = ${req.params.matricula};`
-    con.query(string, (err, result) => {
+    con.query(string, (err, res) => {
         if (err == null) {
             res.status(200).json({ ...req.body }).end();
         } else {

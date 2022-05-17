@@ -212,11 +212,13 @@ CREATE VIEW vw_familiar AS
 select
 	a.id_assistido,
 	a.nome_completo AS Assistido,
+	f.id_familiar,
 	f.nome_completo AS Familiar,
 	fa.parentesco As Parentesco,
 	f.telefone AS Telefone_familiar,
 	f.email AS Email_Familiar,
 	f.endereco AS Endereco_Familiar
+	
 from
 	assistidos a
 	inner join familiarAssistido fa on a.id_assistido = fa.id_assistido

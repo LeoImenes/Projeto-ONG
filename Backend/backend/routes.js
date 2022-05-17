@@ -50,6 +50,9 @@ route.get("/assistido/comorbidade", assistidoControll.getComorbidades)
 // *** FAMILIAR *** //
 route.post("/assistido/familiar", assistidoControll.postFamiliar)
 route.post("/assistido_familiar", assistidoControll.postRelacionamentoFamiliar)
+route.put("/assistido/update_familiar", assistidoControll.updateFamiliar)
+route.get("/assistido/getAll_familiar", assistidoControll.listarFamiliar)
+route.delete("/assistido/delete_familiar/:id_familiar", assistidoControll.deleteFamiliar)
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
 
 // *** RELATÓRIO *** //
