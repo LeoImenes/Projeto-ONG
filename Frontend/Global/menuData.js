@@ -91,7 +91,8 @@ function mascaraMoeda(i) {
     }
 
     i.setAttribute("maxlength", "12");
-    
-  
-    
+
+    if(v.length == 3) i.value += ".";
+
+
 }

@@ -161,7 +161,21 @@ input[type="text"]{
     align-items: center;
     justify-content: center;
     background-color: var(--casa-branco);
-    font-size: clamp(10px, 19px, 15px )
+    font-size: clamp(10px, 19px, 15px );
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover,.btnDesp:hover{
+    background: #373B44;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, var(--casa-azul), #002a6e);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-size: clamp(10px, 19px, 15px );
+    color: aliceblue;
+    border: 1px solid #e5e5e5;
 }
 
 input[type="text"],
@@ -222,13 +236,12 @@ input[type="number"]::placeholder{
     
 }
 
-.button,.buttonDesp{    
+.button{    
     font-size: 12px;
     height: 50%;
     display: flex;
     align-items: center;
     justify-content:center;
-    
 }
 .btnCad{
     width: 100%;
