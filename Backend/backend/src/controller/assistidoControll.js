@@ -16,7 +16,6 @@ const postAssistido = (req, res) => {
     let foto_antes
     let foto_depois
 
-    console.log(req)
     if (req.body.nome_social === undefined) {
         nome_social = null
     } else {
@@ -59,23 +58,13 @@ const postAssistido = (req, res) => {
     }
     let string = `insert into assistidos(id_funcionario, nome_completo, nome_social, rg,
         cpf, data_nascimento, estado_civil, naturalidade, sexo, cartao_cidadao, cartao_sus, foto_antes, foto_depois)
-        values (${req.body.id_funcionario}, "${req.body.nome_completo}", "${nome_social}", "${rg}", "${cpf}", "${req.body.data_nascimento}", "${ req.body.estado_civil}",
+        values (${req.body.id_funcionario}, "${req.body.nome_completo}", "${nome_social}", "${rg}", "${cpf}", "${req.body.data_nascimento}", "${req.body.estado_civil}",
             "${naturalidade}", "${req.body.sexo}", "${cartao_cidadao}", "${cartao_sus}", "${foto_antes}", "${foto_depois}");`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json({...req.body, id_assistido: result.insertId }).end()
-            // id_comorbidades 
-            // 01 - HIV
-            // 02 - Hipertensão
-            // 03 - Diabetes
-            // 04 - Depressão
-            // 05 - Maconha
-            // 06 - Cocaína 
-            // 07 - Crack
-            // 08 - OX
-            // 09 - Álcool
+            res.status(200).json({ ...req.body, id_assistido: result.insertId }).end()
         } else {
-            res.status(400).json({ "Erro:" : err.message }).end()
+            res.status(400).json({ "Erro:": err.message }).end()
         }
     })
 }
@@ -153,21 +142,21 @@ const buscarAssistidoRG = (req, res) => {
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO ASSISTIDO
 const updateAssistido = (req, res) => {
-    let id_assistido = req.body.id_assistido
-    let id_funcionario = req.body.id_funcionario
-    let nome_completo = req.body.nome_completo
-    let nome_social = req.body.nome_social
-    let rg = req.body.rg
-    let cpf = req.body.cpf
-    let antecedente_criminal = req.body.antecedente_criminal
-    let data_nascimento = req.body.data_nascimento
-    let estado_civil = req.body.estado_civil
-    let naturalidade = req.body.naturalidade
-    let sexo = req.body.sexo
-    let cartao_cidadao = req.body.cartao_cidadao
-    let cartao_sus = req.body.cartao_sus
-    let foto_antes = req.body.foto_antes
-    let foto_depois = req.body.foto_depois
+    let id_assistido = req.body.id_assistido;
+    let id_funcionario = req.body.id_funcionario;
+    let nome_completo = req.body.nome_completo;
+    let nome_social = req.body.nome_social;
+    let rg = req.body.rg;
+    let cpf = req.body.cpf;
+    let antecedente_criminal = req.body.antecedente_criminal;
+    let data_nascimento = req.body.data_nascimento;
+    let estado_civil = req.body.estado_civil;
+    let naturalidade = req.body.naturalidade;
+    let sexo = req.body.sexo;
+    let cartao_cidadao = req.body.cartao_cidadao;
+    let cartao_sus = req.body.cartao_sus;
+    let foto_antes = req.body.foto_antes;
+    let foto_depois = req.body.foto_depois;
 
     let string = `update assistidos set nome_completo = "${nome_completo}", nome_social = "${nome_social}", rg = "${rg}", cpf = "${cpf}", 
     antecedente_criminal = "${antecedente_criminal}", data_nascimento = "${data_nascimento}", estado_civil = "${estado_civil}",
@@ -176,9 +165,9 @@ const updateAssistido = (req, res) => {
 
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json(result)
+            res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -191,13 +180,13 @@ const updateFotoAssistido = (req, res) => {
     if (req.body.foto !== undefined && req.body.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(400).json({...req.body })
+                res.status(200).json({ ...req.body }).end()
             } else {
-                res.status(400).json({ err: err.message })
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.json({ "err": "Informe os campos de id e foto" })
+        res.json({ "err": "Informe os campos de id e foto" }).end()
     }
 }
 
@@ -210,7 +199,7 @@ const updateFotoDepoisAssistido = (req, res) => {
     if (req.body.id_assistido !== undefined && req.body.foto_depois !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.json({...req.body })
+                res.json({ ...req.body })
             } else {
                 res.status(400).json({ err: err.message })
             }
@@ -233,7 +222,7 @@ const asynqQuery = (query) => {
 }
 
 // MÉTODO CADASTRAR SAÚDE 
-const postSaude = async(req, res) => {
+const postSaude = async (req, res) => {
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
     if (id_assistido !== undefined && comorbidades.length !== 0) {
@@ -257,7 +246,7 @@ const postSaude = async(req, res) => {
                     .then(() => {
                         if (index + 1 === values.length) {
                             con.commit();
-                            res.status(200).json({ ok: "ok" });
+                            res.status(200).json({ Status: "Cadastrado com sucesso" });
                             comerro = true;
                         }
                     })
@@ -279,7 +268,7 @@ const postSaude = async(req, res) => {
 // CONSULTAR SAUDE DO ASSISTIDO POR ID DO ASSISTIDO
 const getSaudeID = (req, res) => {
     let id_assistido = req.params.id_assistido
-    let string = `select * from vw_saude02 where id_assistido = ${id_assistido}`
+    let string = `select * from vw_saude where id_assistido = ${id_assistido}`
     if (id_assistido !== undefined) {
         con.query(string, (err, result) => {
             console.log(result)
@@ -307,20 +296,20 @@ const getAssistSaude = (req, res) => {
 }
 
 // promise do update 
-getEmployeeNames = function(id_assistido) {
-    return new Promise(function(resolve, reject) {
-            con.query(
-                `select id_saude from saude where id_assistido = ${id_assistido}`,
-                function(err, rows) {
-                    if (rows === undefined) {
-                        reject(new Error("Error rows is undefined"));
-                    } else {
-                        resolve(rows);
+getEmployeeNames = function (id_assistido) {
+    return new Promise(function (resolve, reject) {
+        con.query(
+            `select id_saude from saude where id_assistido = ${id_assistido}`,
+            function (err, rows) {
+                if (rows === undefined) {
+                    reject(new Error("Error rows is undefined"));
+                } else {
+                    resolve(rows);
 
-                    }
                 }
-            )
-        }
+            }
+        )
+    }
     )
 }
 
@@ -340,7 +329,7 @@ async function deleteSaude(string) {
 }
 
 // MÉTODO ATUALIZAR SAÚDE DO ASSISTIDO
-const updateSaude = async(req, res) => {
+const updateSaude = async (req, res) => {
     let id_assistido = req.body.id_assistido
     let comorbidades = req.body.comorbidades
     let string
@@ -351,7 +340,7 @@ const updateSaude = async(req, res) => {
     let newString
     if (req.body.id_assistido !== undefined) {
         let resultado = getEmployeeNames(id_assistido)
-            .then(async(results) => {
+            .then(async (results) => {
                 if (results.length > 0) {
                     //res.status(200).json(results).end()
                     try {
@@ -359,7 +348,7 @@ const updateSaude = async(req, res) => {
                         do {
                             string = `delete from saude where id_saude = ${results[index].id_saude}`
                             let novaResponse = await deleteSaude(string)
-                            .then(() => {
+                                .then(() => {
                                     if (index + 1 === results.length) {
                                         // término da exclusão das comorbidades antigas
                                         // lógica para saída do laço do while
@@ -384,33 +373,33 @@ const updateSaude = async(req, res) => {
                                 do {
                                     newString = `insert into saude (id_assistido, id_comorbidade, data_de_registro) values (${id_assistido}, ${comorbidades[newIndice].value}, curdate())`
                                     let executeQuery = await inserirComorbidades(newString)
-                                    .then(() => {
-                                        if (newIndice + 1 === comorbidades.length) {
-                                            con.commit()
-                                            res.status(200).json({ ok: "ok" })
+                                        .then(() => {
+                                            if (newIndice + 1 === comorbidades.length) {
+                                                con.commit()
+                                                res.status(200).json({ Mensagem: "Comorbidades atualizadas com sucesso" })
+                                                newCommerro = true
+                                            }
+                                        }).catch((err) => {
+                                            con.rollback()
+                                            res.status(400).json({ err })
                                             newCommerro = true
-                                        }
-                                    }).catch((err) => {
-                                        con.rollback()
-                                        res.status(400).json({ err })
-                                        newCommerro = true
-                                    })
+                                        })
                                     newIndice++
                                 } while (!newCommerro)
                             } catch {
-                                res.status(400).json({ err: err.message })
+                                res.status(400).json({ err: err.message }).end()
                             }
                         } else {
-                            res.status(400).json({ "err": "campos de comorbidades vazios" })
+                            res.status(400).json({ "err": "campos de comorbidades vazios" }).end()
                         }
                     } catch (err) {
-                        res.status(400).json({ err: err.message })
+                        res.status(400).json({ err: err.message }).end()
                     }
                 } else {
                     res.status(400).json({ "err": "este assistido não possui comorbidades" }).end()
                 }
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 res.status(400).json({ "err": "este assistido não possui comorbidades" }).end()
             })
     } else {
@@ -439,7 +428,7 @@ const getComorbidades = (req, res) => {
         if (err == null) {
             res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -448,15 +437,16 @@ const getComorbidades = (req, res) => {
 
 // MÉTODO CADASTRAR FAMILIAR 
 const postFamiliar = (req, res) => {
-    let nome_completo = req.body.nome_completo
-    let rg = req.body.rg
-    let telefone = req.body.telefone
-    let email = req.body.email
-    let endereco = req.body.endereco
-    let id_assistido = req.body.id_assistido
-    let parentesco = req.body.parentesco
-    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}',
-        '${email}','${endereco}')`
+    let nome_completo = req.body.nome_completo;
+    let rg = req.body.rg;
+    let telefone = req.body.telefone;
+    let email = req.body.email;
+    let endereco = req.body.endereco;
+    let id_assistido = req.body.id_assistido;
+    let parentesco = req.body.parentesco;
+
+    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}', '${email}','${endereco}')`;
+
     if (nome_completo !== undefined) {
         con.query(stringFamiliares, (err, result) => {
             if (err === null) {
@@ -475,7 +465,7 @@ const postFamiliar = (req, res) => {
                 con.query(stringAssisFam, (err02, result02) => {
                     if (err02 === null) {
                         let id_assisFam = result02.insertId
-                        let stringResult = `select * from vw_familiar02 where id_familiar = ${id_familiar}`
+                        let stringResult = `select * from vw_familiar where id_familiar = ${id_familiar}`
                         con.query(stringResult, (err03, result03) => {
                             if (err03 === null) {
                                 res.status(200).json(result03)
@@ -492,17 +482,17 @@ const postFamiliar = (req, res) => {
             }
         })
     } else {
-        res.status(400).json({ "err": "informe pelo menos o campo 'nome_completo'" }).end()
+        res.status(400).json({ "err": "informe pelo menos o 'nome_completo'" }).end()
     }
 }
 
 // MÉTODO POST RELACIONAMENTO FAMILIAR / ASSISTIDO
 const postRelacionamentoFamiliar = (req, res) => {
-    let id_assistido = req.body.id_assistido
-    let rg_familiar = req.body.rg
-    let parentesco
+    let id_assistido = req.body.id_assistido;
+    let rg_familiar = req.body.rg;
+    let parentesco;
     let par = !(parentesco === undefined) ? parentesco = null : parentesco = req.body.parentesco
-    let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco)values (curdate(),${id_assistido}, 
+    let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco) values (curdate(),  ${id_assistido}, 
     (select id_familiar from familiares where rg = '${rg_familiar}'),'${par}')`
     if (id_assistido !== undefined && rg_familiar !== undefined) {
         con.query(string, (err, result) => {
@@ -517,11 +507,55 @@ const postRelacionamentoFamiliar = (req, res) => {
     }
 }
 
+// MÉTODO ATUALIZAR FAMILIAR DO ASSISTIDO
+const updateFamiliar = (req, res) => {
+    let id_familiar = req.body.id_familiar;
+    let nome_completo = req.body.nome_completo;
+    let rg = req.body.rg;
+    let telefone = req.body.telefone;
+    let email = req.body.email;
+    let endereco = req.body.endereco;
+
+    let string = `UPDATE familiares SET nome_completo="${nome_completo}", rg="${rg}", telefone="${telefone}", email="${email}", endereco="${endereco}" where id_familiar = ${id_familiar} `
+    if (req.body.id_familiar !== undefined) {
+        con.query(string, (err, result) => {
+            if (err === null) {
+                res.status(200).json({ ...req.body }).end()
+            } else {
+                res.status(400).json({ err: err.message }).end
+            }
+        })
+    }
+}
+//METODO LISTAR TODOS OS FAMILIARES
+const listarFamiliar = (req, res) => {
+    let string = `select * from familiares`
+    con.query(string, (err, result) => {
+        if (err === null) {
+            res.status(200).json(result).end();
+        } else {
+            res.status(400).json({"RG" : "RG não encontrado"}).end();
+        }
+    })
+}
+
+// MÉTODO DELETAR FAMILIAR DO ASSISTIDO
+const deleteFamiliar = (req, res) => {
+    let string = `delete from familiares where rg = "${req.params.rg}";`
+    con.query(string, (err, result) => {
+        if (err === null) {
+            res.status(200).json({"Mensagem":"Familiar excluido com sucesso"}).end();
+        } else {
+            res.status(400).json({"RG" : "RG não encontrado"}).end();
+        }
+    })
+}
+
 // MÉTODO GET VW FAMILIAR
 const getVWFamiliar = (req, res) => {
     let id_assistido = req.params.id_assistido
     if (id_assistido !== undefined) {
-        let string = `select * from vw_familiar02 where id_assistido = ${id_assistido}`
+        let string = `select * from vw_familiar where id_assistido = ${id_assistido}`
         con.query(string, (err, result) => {
             if (err === null) {
                 res.status(200).json(result).end()
@@ -540,59 +574,59 @@ const relatorioPost = (req, res) => {
     let id_assistido = req.body.id_assistido
     let id_funcionario = req.body.id_funcionario
     let relatorio = req.body.relatorio
-     
+
     let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values (${id_assistido}, ${id_funcionario}, "${relatorio}", curdate())`;
-    
-    if(id_assistido !== undefined || id_funcionario !== undefined || relatorio !== undefined){
+
+    if (id_assistido !== undefined || id_funcionario !== undefined || relatorio !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json({result,...req.body}).end()
-            }else{
-                res.status(400).json({err:err.message}).end()
+                res.status(200).json({ result, ...req.body }).end()
+            } else {
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).json({ "err":"Erro informe os comapos id_assistido, id_funcionario e relatório"})
-    }       
+        res.status(400).json({ "err": "Erro informe os comapos id_assistido, id_funcionario e relatório" }).end()
+    }
 }
 
 // MÉTODO CONSULTAR TODO OS RELARÓRIO DOS ASSISTIDOS
-const getRelatorio = (req,res) => {
+const getRelatorio = (req, res) => {
     let string = `select * from relatorios`
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json(result).end()
         } else {
-            res.status(400).json({"hjhj": "gjghjgjgj"}).end();
+            res.status(400).json({ err: "Erro ao consultar relarórios" }).end();
         }
     })
 }
 
 // MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
 const getRelatorioID = (req, res) => {
-        let string = `select * from relatorios where id_assistido = ${req.params.id_assistido};`
-        if (req.params.id_assistido !== undefined) {
-            con.query(string, (err, result) => {
-                if (err == null) {
-                    res.status(200).json(result).end()
-                } else {
-                    res.status(400).json({ err: err.message }).end();
-                }
-            })
-        } else {
-            res.status(400).json({ "err" : "Informe o Id do Assistido"})
-        }   
+    let string = `select * from relatorios where id_assistido = ${req.params.id_assistido};`
+    if (req.params.id_assistido !== undefined) {
+        con.query(string, (err, result) => {
+            if (err == null) {
+                res.status(200).json(result).end()
+            } else {
+                res.status(400).json({ err: err.message }).end();
+            }
+        })
+    } else {
+        res.status(400).json({ "err": "Informe o Id do Assistido" })
     }
+}
 
 // MÉTODO ATUALIZAR RELARÓRIO DO ASSISTIDO
 const updateRelatorioID = (req, res) => {
     let string = `update relatorios set relatorio = "${req.body.relatorio}", id_funcionario = ${req.body.id_funcionario} where id_relatorio = ${req.body.id_relatorio};`
     if (req.body.id_relatorio !== undefined || req.body.relatorio) {
         con.query(string, (err, result) => {
-            if (err == null) {            
-                if(result.affectedRows === 0){
-                    res.status(400).json({"err": "id do relatorio não existe"})
-                }else{
+            if (err == null) {
+                if (result.affectedRows === 0) {
+                    res.status(400).json({ "err": "Id do relatorio não existe" })
+                } else {
                     res.status(200).json(result).end()
                 }
             } else {
@@ -600,8 +634,8 @@ const updateRelatorioID = (req, res) => {
             }
         })
     } else {
-        res.status(400).json({ "err" : "Informe o Id do Relatorio"})
-    }   
+        res.status(400).json({ "err": "Informe o Id do Relatorio" })
+    }
 }
 
 
@@ -622,10 +656,12 @@ module.exports = {
     getComorbidades,
     postFamiliar,
     postRelacionamentoFamiliar,
+    updateFamiliar,
+    listarFamiliar,
+    deleteFamiliar,
     getVWFamiliar,
     getRelatorio,
     relatorioPost,
     getRelatorioID,
     updateRelatorioID,
-    
 }

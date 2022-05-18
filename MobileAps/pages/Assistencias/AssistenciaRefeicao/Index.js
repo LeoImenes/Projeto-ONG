@@ -23,8 +23,8 @@ export default function AssistenciaRefeicao({ navigation }) {
     const getFunc = async () => {
         let value = await AsyncStorage.getItem('userdata');
 
-        fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
-        // fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
+        // fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
+        fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
             .then(resp => { return resp.json() })
             .then(async data => {
                 const id = JSON.parse(data[0].id_funcionario)
@@ -46,8 +46,8 @@ export default function AssistenciaRefeicao({ navigation }) {
             setDataCriacao(data)
             getFunc()
 
-            fetch(`http://192.168.0.104:3000/assistidos`)
-            // fetch(`http://10.87.207.20:3000/assistidos`)
+            // fetch(`http://192.168.0.104:3000/assistidos`)
+            fetch(`http://10.87.207.20:3000/assistidos`)
                 .then(resp => { return resp.json() })
                 .then(data => {
                     setLista(data);
@@ -55,8 +55,8 @@ export default function AssistenciaRefeicao({ navigation }) {
                 })
                 .catch(err => { console.log(err) });
 
-            fetch(`http://192.168.0.104:3000/itens`)
-            // fetch(`http://10.87.207.20:3000/itens`)
+            // fetch(`http://192.168.0.104:3000/itens`)
+            fetch(`http://10.87.207.20:3000/itens`)
                 .then(resp => { return resp.json() })
                 .then(data => {
 
@@ -83,7 +83,9 @@ export default function AssistenciaRefeicao({ navigation }) {
             "itens": valuePicker
         }
 
-        fetch(`http://192.168.0.104:3000/funcionario/assistencias`, {
+        // console.log(item)
+        // fetch(`http://192.168.0.104:3000/funcionario/assistencias`, {
+            fetch(`http://10.87.207.20:3000/funcionario/assistencias`, {
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json"
@@ -94,6 +96,7 @@ export default function AssistenciaRefeicao({ navigation }) {
             .then(async data => {
                 if (data.err !== undefined) {
                     ToastAndroid.show('Falha ao registrar assistência!', ToastAndroid.SHORT)
+                    console.log(data.err)
                 } else {
                     ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
                 }

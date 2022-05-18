@@ -54,8 +54,6 @@ function getFamiliares() {
                 var litxtend = document.createElement("li")
                 var litgeend = document.createElement("li")
 
-
-
                 litxtNome.innerHTML = "Nome: "
                 litgetNome.innerHTML = item.nome_familiar
                 litxtrg.innerHTML = "RG: "
@@ -68,8 +66,6 @@ function getFamiliares() {
                 litgetemail.innerHTML = item.email_familiar
                 litxtend.innerHTML = "Endereço: "
                 litgeend.innerHTML = item.endereco_familiar
-
-
 
                 ul_email.appendChild(litxtemail)
                 ul_email.appendChild(litgetemail)
@@ -202,7 +198,6 @@ function list() {
                 cartCid.innerHTML = data.cartao_cidadao;
             }
 
-
             nome.innerHTML = data.nome_completo;
             nomeSoc
             rg.innerHTML = data.rg;
@@ -237,7 +232,6 @@ function getComorbidadeAssistido() {
                     liDoenca.innerHTML = item.comorbidade;
                     ulDoenca.appendChild(liDoenca);
                 }
-
 
             });
         });

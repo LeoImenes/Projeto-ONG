@@ -51,7 +51,6 @@ function cadastrarAssistido() {
         inpNomeCom.appendChild(nomeerr)
     }
 
-
     var sexMasc = document.querySelector("#Masculino");
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
@@ -86,10 +85,9 @@ function cadastrarAssistido() {
         "cartao_sus": cartSus.value,
         "foto": fotinho,
         "antecedente_criminal": ante
-            // "foto_depois": fotinho
+        // "foto_depois": fotinho
     })
 
-    // fetch("http://10.87.207.11:3000/assistidos", {
     fetch(`${url}/assistidos`, {
             method: "POST",
             headers: {
@@ -118,9 +116,7 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-
-                        // fetch("http://localhost:3000/assistido/saude", {
-                        fetch(`${url}/assistido/saude`, {
+                            fetch(`${url}/assistido/saude`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -144,8 +140,6 @@ function cadastrarAssistido() {
             window.location.reload();
         })
 }
-
-
 
 function showMenu() {
     let menuPsco = document.querySelector(".listadrogas")

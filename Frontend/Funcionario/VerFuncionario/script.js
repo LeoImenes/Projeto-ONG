@@ -44,7 +44,6 @@ function list() {
                     botaoEditar.disabled = true;
                 }
 
-
                 liNome.innerHTML = item.nome_completo;
                 liEstadoCivil.innerHTML = item.estado_civil;
                 liMatricula.innerHTML = item.matricula;
@@ -137,7 +136,6 @@ function Atualizar() {
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
     var matricula = document.querySelector("#Matricula").value
-
 
     cargo.placeholder = getCargo
     matricula.placeholder = getMatricula

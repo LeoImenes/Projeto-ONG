@@ -71,12 +71,33 @@
 
                         </div>
                         <div class="receitasContent">
-
+                        
                         </div>
                     </div>
-                    <div class="button" onclick="cadastrarLancamento(this)">
-                        <button class="btn">Acdicionar Receita</button>
+                    <div class="button" onclick="cadastrarReceita()">
+                        <button class="btn">Adicionar Receita</button>
 
+                    </div>
+                    <div class="inputs">
+                        <div class="texts">
+                            <div class="title">
+                            <h2>Adicionar Receita</h2>
+                        </div>
+                        <div class="closeRec">
+                            <span>X</span>
+                        </div>
+                        </div>
+                        <div class="inpDesc">
+                            <input type="text" placeholder="Descricao..." class="RecDesc">
+                            
+                        </div>
+                        <div class="inpVal">
+                            <input type="text" placeholder="Valor..." class="valDesc"  value="00.00">
+                        </div>
+                        <div class="button" onclick="fetchReceitas()">
+                            <button class="btnCad">Adicionar Receita</button>
+    
+                        </div>
                     </div>
                 </div>
                 <div class="cardTotais">
@@ -110,9 +131,31 @@
                         </div>
                        
                     </div>
-                <div class="button">
-                    <button class="btn" onclick="cadastrarLancamento(this)"><p>Adicionar Despesas</p></button>
+                <div class="buttonDesp" onclick="cadastrarDespesa()">
+                    <button class="btnDesp"><p>Adicionar Despesas</p></button>
                 </div>
+                <div class="inputsDesp">
+                    <div class="texts">
+                        <div class="title">
+                        <h2>Adicionar Despesa</h2>
+                    </div>
+                    <div class="closeDesp">
+                        <span>X</span>
+                    </div>
+                    </div>
+                    <div class="inpDesc">
+                        <input type="text" placeholder="Descricao..." class="DespDesc">
+                        
+                    </div>
+                    <div class="inpVal">
+                        <input type="text" placeholder="Valor..." class="valDesp"  value="00.00">
+                    </div>
+                    <div class="button" onclick="fetchDespesas()">
+                        <button class="btnCad">Adicionar Despesas</button>
+
+                    </div>
+                </div>
+
                 </div>
             </div>
         </div>

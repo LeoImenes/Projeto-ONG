@@ -43,8 +43,8 @@ export default function OutrasAssistencias({ navigation }) {
   const getFunc = async () => {
     let value = await AsyncStorage.getItem('userdata');
 
-    fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
-      // fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
+    // fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
+      fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
       .then(resp => { return resp.json() })
       .then(async data => {
         const id = JSON.parse(data[0].id_funcionario)
@@ -60,8 +60,8 @@ export default function OutrasAssistencias({ navigation }) {
   useEffect(() => {
     getFunc()
 
-    fetch(`http://192.168.0.104:3000/assistidos`)
-      // fetch(`http://10.87.207.20:3000/assistidos`)
+    // fetch(`http://192.168.0.104:3000/assistidos`)
+      fetch(`http://10.87.207.20:3000/assistidos`)
       .then(resp => { return resp.json() })
       .then(data => {
         setLista(data);
@@ -69,8 +69,8 @@ export default function OutrasAssistencias({ navigation }) {
       })
       .catch(err => { console.log(err) });
 
-    fetch(`http://192.168.0.104:3000/itens`)
-      // fetch(`http://10.87.207.20:3000/itens`)
+    // fetch(`http://192.168.0.104:3000/itens`)
+      fetch(`http://10.87.207.20:3000/itens`)
       .then(resp => { return resp.json() })
       .then(data => {
         let temp = JSON.stringify(data);
@@ -200,7 +200,7 @@ const css = StyleSheet.create({
   },
   modalView: {
     width: 300,
-    height: 150,
+    height: 280,
     backgroundColor: "white",
     borderRadius: 20,
     alignItems: "center",

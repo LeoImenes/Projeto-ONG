@@ -72,14 +72,14 @@ export default function ContainerHome() {
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} /> */}
-            <Drawer.Screen name="Financeiro" component={Financeiro} options={{
+            {/* <Drawer.Screen name="Financeiro" component={Financeiro} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
             }} />
             <Drawer.Screen name="OutrasAssistencias" component={OutrasAssistencias} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
-            }} />
+            }} /> */}
               <Drawer.Screen name="AssistenciaRefeicao" component={AssistenciaRefeicao} options={{
                 drawerLabel: () => {return (null)},
                 drawerItemStyle: {display: "none" }
