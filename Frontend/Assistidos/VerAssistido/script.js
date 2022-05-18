@@ -240,9 +240,6 @@ var telaUPDT = document.querySelector("#telaUPDT").addEventListener("click", () 
     window.location.href = "../Atualizar/"
 });;
 
-var telaRELATORIO = document.querySelector("#telaRELATORIO").addEventListener("click", () => {
-    window.location.href = "../Relatorio/"
-});;
 
 var telaFamiliar = document.querySelector("#telaFamiliar").addEventListener("click", () => {
     window.location.href = "../../Familiar/"
@@ -255,21 +252,27 @@ var newImg = document.querySelector("#assistidoDepois");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
 
-fileInp.addEventListener("change", (e) => {
-    var fr = new FileReader();
-    fr.onloadend = (foto) => {
-        fotinho = foto.target.result;
-        newImg.src = foto.target.result;
-        newImg.style.width = "70px";
-        newImg.style.height = "70px";
-        newImg.style.borderRadius = "50%";
-    };
-    fr.readAsDataURL(e.target.files[0]);
+// fileInp.addEventListener("change", (e) => {
+//     var fr = new FileReader();
+//     fr.onloadend = (foto) => {
+//         fotinho = foto.target.result;
+//         newImg.src = foto.target.result;
+//         newImg.style.width = "70px";
+//         newImg.style.height = "70px";
+//         newImg.style.borderRadius = "50%";
+//     };
+//     fr.readAsDataURL(e.target.files[0]);
 
-});
-adcFoto.style.cursor = "pointer";
-adcFoto.addEventListener("click", () => {
-    fileInp.click();
+//  });
+// adcFoto.style.cursor = "pointer";
+// adcFoto.addEventListener("click", () => {
+//     fileInp.click();
 
-});
+// });
+
+var relatorio = document.querySelector(".relatoriobtn").addEventListener(("click"), ()=>{
+    window.location.href = "../OpcoesRelatorio/"
+})
+
+
 
