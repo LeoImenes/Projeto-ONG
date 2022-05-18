@@ -492,7 +492,7 @@ const postRelacionamentoFamiliar = (req, res) => {
     let rg_familiar = req.body.rg;
     let parentesco;
     let par = !(parentesco === undefined) ? parentesco = null : parentesco = req.body.parentesco
-    let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco)values (curdate(),${id_assistido}, 
+    let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco) values (curdate(),  ${id_assistido}, 
     (select id_familiar from familiares where rg = '${rg_familiar}'),'${par}')`
     if (id_assistido !== undefined && rg_familiar !== undefined) {
         con.query(string, (err, result) => {
@@ -532,7 +532,7 @@ const listarFamiliar = (req, res) => {
     let string = `select * from familiares`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json({string}).end();
+            res.status(200).json(result).end();
         } else {
             res.status(400).json({"RG" : "RG não encontrado"}).end();
         }
@@ -541,7 +541,7 @@ const listarFamiliar = (req, res) => {
 
 // MÉTODO DELETAR FAMILIAR DO ASSISTIDO
 const deleteFamiliar = (req, res) => {
-    let string = `delete from familiares where rg = ${req.params.rg};`
+    let string = `delete from familiares where rg = "${req.params.rg}";`
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json({"Mensagem":"Familiar excluido com sucesso"}).end();

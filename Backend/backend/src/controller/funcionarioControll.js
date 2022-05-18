@@ -303,7 +303,6 @@ const postAssistencia = (req, res) => {
 };
 
 // MÉTODO fazer assistencia para varios assistidos
-
 const postmultAssis = (req, res) => {
     let id_funcionario = req.body.id_funcionario
     let assistidos = req.body.assistidos;
@@ -354,7 +353,6 @@ const postmultAssis = (req, res) => {
         res.status(400).json({ "err": "Informe os campos 'id_funcionario', 'id_assistido','itens'" }).end
     }
 }
-
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
 const getAllAssistencias = (req, res) => {
@@ -485,9 +483,6 @@ const getItensAssistencia = (req, res) => {
         }
     })
 }
-
-
-
 
 module.exports = {
     postFuncionario,
