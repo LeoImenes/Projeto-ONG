@@ -1,4 +1,9 @@
+var pw = "";
 
+function setPw(e) {
+    pw = md5(e.value);
+}
+ 
  function conectar() {
      let email = document.querySelector(".email")
      let senha = document.querySelector(".senha")
