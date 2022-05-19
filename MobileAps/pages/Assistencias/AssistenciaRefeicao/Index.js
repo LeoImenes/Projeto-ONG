@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity,ToastAndroid, } from "react-native"
 
 import global from "../../Global/Style"
+import global2 from "../../Global/index"
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
@@ -46,8 +47,8 @@ export default function AssistenciaRefeicao({ navigation }) {
             setDataCriacao(data)
             getFunc()
 
-            // fetch(`http://192.168.0.104:3000/assistidos`)
-            fetch(`http://10.87.207.20:3000/assistidos`)
+            fetch(`http://192.168.0.104:3000/assistidos`)
+            // fetch(`http://10.87.207.20:3000/assistidos`)
                 .then(resp => { return resp.json() })
                 .then(data => {
                     setLista(data);
@@ -55,8 +56,8 @@ export default function AssistenciaRefeicao({ navigation }) {
                 })
                 .catch(err => { console.log(err) });
 
-            // fetch(`http://192.168.0.104:3000/itens`)
-            fetch(`http://10.87.207.20:3000/itens`)
+            fetch(`http://192.168.0.104:3000/itens`)
+            // fetch(`http://10.87.207.20:3000/itens`)
                 .then(resp => { return resp.json() })
                 .then(data => {
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import {View, Text, Image} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import global from '../Global/Style'
+import url from '../Global/index'
 
 import CadastrarAssistido from '../Assistidos/CadastrarAssistido/Index';
 import ListarAssistidos from '../Assistidos/ListarAssistidos/Index';
@@ -29,7 +30,7 @@ export default function ContainerHome() {
             value = JSON.parse(value);
 
             // fetch(`http://192.168.0.29:3000/funcionarios/${value.matricula}`)
-            fetch(`http://192.168.0.104:3000/funcionarios/${value}`)
+            fetch(`http://url/funcionarios/${value}`)
             // fetch(`http://10.87.207.20:3000/funcionarios/${value}`)
             .then(resp => {return resp.json()})
             .then(data => {

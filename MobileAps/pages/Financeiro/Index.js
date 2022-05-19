@@ -7,6 +7,7 @@ import StatusBar from "../Components/StatusBar/Index"
 import { useFocusEffect } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import url from '../Global/index'
 
 export default function Financeiro({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
