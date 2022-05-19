@@ -32,10 +32,10 @@ function cadastrarFotoDepois() {
         'foto_depois': fotinho,
     });
 
-    if(fotinho === undefined){
+    if (fotinho === undefined) {
         alert("Foto não atualizada")
         fotinho = null;
-    }else{
+    } else {
         alert("foto atualizada")
     }
 
@@ -61,6 +61,8 @@ function cadastrarFotoDepois() {
 
 
 function getAssistido() {
+    getComorbidades()
+
     fetch(`${url}/assistidos/${func}`)
         .then((response) => {
             return response.json();
@@ -135,28 +137,28 @@ function cadastrarAssistido() {
         sexOutr.value = "Outro";
         sex.push(sexOutr.value);
     } else if ((sex = getSexo))
-        
-    var data = JSON.stringify({
-            id_assistido: JSON.parse(func),
-            nome_completo: nome.value,
-            nome_social: nomesoc.value,
-            rg: rg.value,
-            cpf: cpf.value,
-            data_nascimento: `${dataUS(nasc)}`,
-            estado_civil: est.value,
-            naturalidade: nat.value,
-            sexo: sex === undefined ? getSexo : sex,
-            cartao_cidadao: cartCid.value,
-            cartao_sus: cartSus.value,
-            foto_depois: fotinho,
-            antecedente_criminal: ante.value,
-            foto_antes: fotoAntes,
-        });
 
-        console.log(`%c ${data}`, "color:red")
+        var data = JSON.stringify({
+        id_assistido: JSON.parse(func),
+        nome_completo: nome.value,
+        nome_social: nomesoc.value,
+        rg: rg.value,
+        cpf: cpf.value,
+        data_nascimento: `${dataUS(nasc)}`,
+        estado_civil: est.value,
+        naturalidade: nat.value,
+        sexo: sex === undefined ? getSexo : sex,
+        cartao_cidadao: cartCid.value,
+        cartao_sus: cartSus.value,
+        foto_depois: fotinho,
+        antecedente_criminal: ante.value,
+        foto_antes: fotoAntes,
+    });
+
+    console.log(`%c ${data}`, "color:red")
 
     fetch(`${url}/assistido/update`, {
-             method: "PUT",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -173,4 +175,78 @@ function cadastrarAssistido() {
             // window.location.href = "../VerAssistido/index.html";
             console.log(data)
         });
+}
+
+function getComorbidades() {
+    let listaDrogas = document.querySelector(".listadrogas")
+    let listaDoencas = document.querySelector(".listadoencas")
+    let ulDoenca = document.createElement("ul")
+    let ulDroga = document.createElement("ul")
+    let liDoenca = document.createElement("p")
+    let liDroga = document.createElement("p")
+
+    fetch(`${url}/assistido/comorbidade`)
+        // fetch("http://localhost:3000/assistido/comorbidade")
+        .then(response => { return response.json() })
+        .then(data => {
+            data.forEach((item) => {
+                let inpDoenca = document.createElement("input")
+                let inpDroga = document.createElement("input")
+
+                inpDroga.type = "checkbox"
+                inpDoenca.type = "checkbox"
+                inpDroga.className = "Comorbidade"
+                inpDoenca.className = "Comorbidade"
+
+                if (item.tipo === 1) {
+                    liDoenca.innerHTML = item.comorbidade
+                    inpDoenca.value = item.id_comorbidade
+                    liDoenca.appendChild(inpDoenca)
+                    ulDoenca.appendChild(liDoenca.cloneNode(true));
+                    // ul.appendChild(liinp.cloneNode(true));
+                    listaDoencas.appendChild(ulDoenca)
+                } else if (item.tipo === 0) {
+                    inpDroga.value = item.id_comorbidade
+                    liDroga.innerHTML = item.comorbidade
+                    liDroga.appendChild(inpDroga)
+                    ulDroga.appendChild(liDroga.cloneNode(true));
+                    // ul.appendChild(liinp.cloneNode(true));
+                    listaDrogas.appendChild(ulDroga)
+                }
+
+            })
+
+
+        })
+
+}
+
+function showMenu() {
+    let menuPsco = document.querySelector(".listadrogas")
+    let menuimgPsco = document.querySelector(".pscArrow")
+    menuPsco.classList.toggle("psDown")
+    menuimgPsco.style.transform = "rotate(0deg)"
+
+    if (menuPsco.classList.contains("psDown")) {
+        menuPsco.style.display = "flex";
+        menuimgPsco.style.transform = "rotate(180deg)"
+    } else {
+        menuPsco.style.display = "none"
+        menuimgPsco.style.transform = "rotate(0deg)"
+    }
+}
+
+function showMenuDoenca() {
+    let menuDoenca = document.querySelector(".listadoencas")
+    let menuimgDoen = document.querySelector(".doArrow")
+    menuDoenca.classList.toggle("doDown")
+    menuimgDoen.style.transform = "rotate(0deg)"
+
+    if (menuDoenca.classList.contains("doDown")) {
+        menuDoenca.style.display = "flex";
+        menuimgDoen.style.transform = "rotate(180deg)"
+    } else {
+        menuDoenca.style.display = "none"
+        menuimgDoen.style.transform = "rotate(0deg)"
+    }
 }

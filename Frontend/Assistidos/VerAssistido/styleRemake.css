@@ -67,8 +67,8 @@ p {
     display: grid;
     justify-content: flex-end;
     align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
     width: 100%;
     border-right: 1px solid var(--casa-azul);
 }
@@ -91,14 +91,15 @@ p {
 .sexo,
 .Antecedente {
     width: 90%;
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
     height: 90%;
     justify-content: space-evenly;
     text-align: center;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border: 1px solid rgb(151, 151, 151);
-    border-radius: 20px 30px 20px 30px;
+    /* border-radius: 20px 30px 20px 30px; */
 }
 
 .faDown {
@@ -324,7 +325,8 @@ p {
         display: grid;
         justify-content: flex-end;
         align-items: center;
-        grid-template-columns: .5fr .5fr .5fr;
+        grid-template-columns: .5fr .5fr;
+        grid-template-rows: repeat(5, 1fr);
         width: 100%;
         border-right: 0px;
     }
@@ -337,12 +339,9 @@ p {
     .cartaoSus,
     .sexo,
     .Antecedente {
+        font-size: clamp(0.7em, .8em + .8vw, 1.5em);
         width: 95%;
         height: 95%;
-        justify-content: space-evenly;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
         align-items: center;
         border: 1px solid rgb(151, 151, 151);
     }
@@ -355,7 +354,7 @@ p {
     }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 600px) {
     .btns {
         font-size: 9px
     }
@@ -379,10 +378,6 @@ p {
     .Antecedente {
         width: 95%;
         height: 95%;
-        justify-content: space-evenly;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
         align-items: center;
         border: 1px solid rgb(151, 151, 151);
         border-radius: 0px
@@ -397,6 +392,15 @@ p {
     .fotos img {
         width: 60px;
         height: 60px;
+    }
+    .saude {
+        flex-direction: column;
+    }
+    .pscoativo,
+    .doencas,
+    .familia {
+        width: 100%;
+        border-radius: 0px;
     }
 }
 
@@ -442,5 +446,33 @@ p {
     .fotos img {
         width: 50px;
         height: 50px;
+    }
+}
+
+@media (max-height: 500px) {
+    .container,
+    .card {
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        /* z-index: -1; */
+    }
+    .title {
+        font-size: 0px;
+    }
+    .styleBall-bottom-right,
+    .styleBall-bottom-left,
+    .styleBall-top-left {
+        display: none;
+    }
+    .btns {
+        height: 100%;
+    }
+    .btns button {
+        height: 80%;
+    }
+    .btn {
+        margin-top: 5em;
+        height: 20%;
     }
 }
