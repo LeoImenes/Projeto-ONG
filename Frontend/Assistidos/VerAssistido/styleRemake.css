@@ -1,0 +1,446 @@
+@import url("../../Global/globalHeaderMenu.css");
+section {
+    /* background-color: antiquewhite; */
+    height: 90vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 90%;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+
+.card {
+    width: 90%;
+    background-color: var(--casa-branco);
+    height: 85%;
+    box-shadow: var(--sombra);
+    z-index: 0;
+}
+
+.cardAssistido {
+    /* background-color: yellow; */
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    height: 100%;
+}
+
+.dadosAssistido {
+    /* background-color: aliceblue; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.fotos {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* border-right: 1px solid #ccc; */
+}
+
+.fotos img {
+    width: 80px;
+    height: 80px;
+}
+
+.telaEsquerda {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 5% 80%
+}
+
+.dadosPessoais {
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 100%;
+    border-right: 1px solid var(--casa-azul);
+}
+
+.title h1 {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.nomeCompleto,
+.nomeSocial,
+.rg,
+.cpf,
+.nascimento,
+.cartCidadao,
+.cartaoSus,
+.sexo,
+.Antecedente {
+    width: 90%;
+    height: 90%;
+    justify-content: space-evenly;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(151, 151, 151);
+    border-radius: 20px 30px 20px 30px;
+}
+
+.faDown {
+    display: flex;
+    flex-direction: row;
+}
+
+.btns {
+    height: 50%;
+    display: flex;
+    align-self: center;
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+    justify-content: space-around
+}
+
+.relatoriobtn,
+.editarbtn {
+    width: 40%;
+}
+
+.dadosExtras {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.saude {
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+
+.saude img {
+    width: 10px;
+    height: 10px;
+}
+
+.pscoativo,
+.doencas {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgb(151, 151, 151);
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+}
+
+.pscoativo h2,
+.doencas h2,
+.familia h1 {
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.pscoativo ul,
+.doencas ul {
+    width: 100%;
+    height: 150px;
+    justify-content: space-between;
+    align-content: space-around;
+    flex-direction: column;
+    padding: .5rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+    display: none;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    /* box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.familia {
+    margin-left: 50%;
+    transform: translate(-50%);
+    width: 60%;
+    display: grid;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(151, 151, 151);
+}
+
+.dadosFamilia {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    display: none;
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.itens {
+    width: 500px;
+    height: 100%;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-right: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* border: 1px solid black; */
+}
+
+.itens ul {
+    width: 120px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+}
+
+.itens li {
+    width: 100%
+}
+
+.familia h1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.familia img {
+    width: 15px;
+    margin-left: .3rem;
+}
+
+.button {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    font-size: clamp(0.2em, .1em + .8vw, 1.5em);
+}
+
+.styleBall-bottom-right {
+    position: fixed;
+    width: 11%;
+    background-color: #166B8A;
+    height: 200px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 0%;
+    z-index: 1;
+    left: 79.5%;
+    bottom: 10.5%;
+    opacity: 0.2;
+}
+
+.styleBall-bottom-left {
+    position: fixed;
+    width: 11%;
+    background-color: #166B8A;
+    height: 25%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 0%;
+    border-bottom-left-radius: 0px;
+    z-index: 1;
+    left: 9.5%;
+    bottom: 10.5%;
+    opacity: 0.2;
+}
+
+.styleBall-top-left {
+    position: fixed;
+    background-color: #166B8A;
+    width: 11%;
+    height: 25%;
+    border-radius: 0px 0 30% 0;
+    z-index: -1;
+    right: 79.5%;
+    top: 20.5%;
+    opacity: 0.2;
+}
+
+@media (max-width: 1000px) {
+    .styleBall-bottom-right,
+    .styleBall-bottom-left,
+    .styleBall-top-left {
+        display: none;
+    }
+    .container,
+    .card {
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        /* z-index: -1; */
+    }
+    .btns {
+        font-size: 12px
+    }
+    .cardAssistido {
+        width: 100%;
+        /* background-color: yellow; */
+        display: grid;
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.4fr;
+        height: 100%;
+    }
+    .fotos {
+        width: 100%;
+        height: 10%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        /* border-right: 1px solid #ccc; */
+    }
+    .dadosAssistido {
+        height: 200%;
+        grid-template-columns: 1fr;
+    }
+    .telaEsquerda {
+        height: 100%;
+    }
+    .dadosExtras {
+        height: 100%;
+    }
+    .dadosPessoais {
+        display: grid;
+        justify-content: flex-end;
+        align-items: center;
+        grid-template-columns: .5fr .5fr .5fr;
+        width: 100%;
+        border-right: 0px;
+    }
+    .nomeCompleto,
+    .nomeSocial,
+    .rg,
+    .cpf,
+    .nascimento,
+    .cartCidadao,
+    .cartaoSus,
+    .sexo,
+    .Antecedente {
+        width: 95%;
+        height: 95%;
+        justify-content: space-evenly;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid rgb(151, 151, 151);
+    }
+    .button {
+        width: 100%;
+        font-size: 12px
+    }
+    .button button {
+        width: 40%;
+    }
+}
+
+@media (max-width: 350px) {
+    .btns {
+        font-size: 9px
+    }
+    .dadosPessoais {
+        display: grid;
+        justify-content: flex-end;
+        align-items: center;
+        grid-template-columns: .5fr .5fr;
+        grid-template-rows: repeat(5, 1fr);
+        width: 100%;
+        border-right: 0px;
+    }
+    .nomeCompleto,
+    .nomeSocial,
+    .rg,
+    .cpf,
+    .nascimento,
+    .cartCidadao,
+    .cartaoSus,
+    .sexo,
+    .Antecedente {
+        width: 95%;
+        height: 95%;
+        justify-content: space-evenly;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid rgb(151, 151, 151);
+        border-radius: 0px
+    }
+    .button {
+        width: 100%;
+        font-size: 9px
+    }
+    .button button {
+        width: 40%;
+    }
+    .fotos img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 270px) {
+    .button {
+        width: 100%;
+        font-size: 9px;
+        align-items: flex-start
+    }
+    .saude {
+        flex-direction: column;
+    }
+    .pscoativo,
+    .doencas,
+    .familia {
+        width: 100%;
+        border-radius: 0px;
+    }
+    .dadosPessoais {
+        grid-template-columns: 1fr;
+        justify-content: flex-start;
+        grid-template-rows: repeat(9, 1fr);
+    }
+    .nomeCompleto,
+    .nomeSocial,
+    .rg,
+    .cpf,
+    .nascimento,
+    .cartCidadao,
+    .cartaoSus,
+    .sexo,
+    .Antecedente {
+        width: 100%;
+        height: 95%;
+        justify-content: space-evenly;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid rgb(151, 151, 151);
+        border-radius: 0px
+    }
+    .fotos img {
+        width: 50px;
+        height: 50px;
+    }
+}

@@ -1,13 +1,17 @@
 function menuDown() {
-    let menuFam = document.querySelector(".dadosFamilia");
-    let littlearrow = document.querySelector(".faArrow");
-    menuFam.classList.toggle(".faDown");
 
-    if (menuFam.classList.contains(".faDown")) {
-        menuFam.style.display = "flex";
+    let menuAco = document.querySelector(".dadosFamilia");
+    let littlearrow = document.querySelector(".faArrow");
+    menuAco.classList.remove(".dadosFamilia");
+    menuAco.classList.toggle(".faDown");
+
+    if (menuAco.classList.contains(".faDown")) {
+        menuAco.style.display = "flex";
+        menuAco.style.width = "100%";
+        menuAco.style.height = "100%";
         littlearrow.style.transform = "rotate(180deg)";
     } else {
-        menuFam.style.display = "none";
+        menuAco.style.display = "none";
         littlearrow.style.transform = "rotate(0deg)";
     }
 }
@@ -124,7 +128,7 @@ function menuDownDoenca() {
 }
 
 function list() {
-    
+
     getComorbidadeAssistido()
 
     var local = localStorage.getItem("assistido");
@@ -240,9 +244,6 @@ var telaUPDT = document.querySelector("#telaUPDT").addEventListener("click", () 
     window.location.href = "../Atualizar/"
 });;
 
-var telaRELATORIO = document.querySelector("#telaRELATORIO").addEventListener("click", () => {
-    window.location.href = "../Relatorio/"
-});;
 
 var telaFamiliar = document.querySelector("#telaFamiliar").addEventListener("click", () => {
     window.location.href = "../../Familiar/"
@@ -255,21 +256,24 @@ var newImg = document.querySelector("#assistidoDepois");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
 
-fileInp.addEventListener("change", (e) => {
-    var fr = new FileReader();
-    fr.onloadend = (foto) => {
-        fotinho = foto.target.result;
-        newImg.src = foto.target.result;
-        newImg.style.width = "70px";
-        newImg.style.height = "70px";
-        newImg.style.borderRadius = "50%";
-    };
-    fr.readAsDataURL(e.target.files[0]);
+// fileInp.addEventListener("change", (e) => {
+//     var fr = new FileReader();
+//     fr.onloadend = (foto) => {
+//         fotinho = foto.target.result;
+//         newImg.src = foto.target.result;
+//         newImg.style.width = "70px";
+//         newImg.style.height = "70px";
+//         newImg.style.borderRadius = "50%";
+//     };
+//     fr.readAsDataURL(e.target.files[0]);
 
-});
-adcFoto.style.cursor = "pointer";
-adcFoto.addEventListener("click", () => {
-    fileInp.click();
+//  });
+// adcFoto.style.cursor = "pointer";
+// adcFoto.addEventListener("click", () => {
+//     fileInp.click();
 
-});
+// });
 
+var relatorio = document.querySelector(".relatoriobtn").addEventListener(("click"), () => {
+    window.location.href = "../OpcoesRelatorio/"
+})

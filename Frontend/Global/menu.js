@@ -37,7 +37,7 @@ let Funcionario = document.querySelector(".Funcionario")
 Funcionario.style.cursor = "pointer"
 Funcionario.addEventListener("click", () => {
     window.location.href = "../../Funcionario/OpcoesFuncionario/index.html"
-    localStorage.clear
+    
 })
 
 

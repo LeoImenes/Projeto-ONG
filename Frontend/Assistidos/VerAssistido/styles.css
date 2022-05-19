@@ -699,7 +699,6 @@ section {
         align-items: center;
         justify-content: center;
         border: 1px solid black;
-        border-left: 0px;
     }
     .itens li {
         width: 100%;
@@ -714,6 +713,13 @@ section {
 }
 
 @media (max-width: 600px) {
+    .faArrow {
+        display: flex;
+        margin-top: .3rem;
+        margin-left: .3rem;
+        width: 10px;
+        height: 15px;
+    }
     section {
         height: 90vh;
         display: flex;
@@ -749,6 +755,7 @@ section {
         display: flex;
         flex-direction: column;
         padding: 0.02em;
+        border: 1px solid black;
     }
     .itens ul {
         width: 39.2vw;
@@ -757,7 +764,6 @@ section {
         align-items: center;
         justify-content: center;
         border: 1px solid black;
-        border-left: 0px;
     }
     .itens li {
         width: 100%;
@@ -836,6 +842,10 @@ section {
 }
 
 @media (max-width:500px) {
+    .faArrow img {
+        width: 10px;
+        height: 10px;
+    }
     .card {
         display: flex;
         height: 100%;
@@ -848,7 +858,8 @@ section {
     }
     .telaEsquerda {
         width: 100%;
-        height: 100%;
+        height: 90%;
+        border-bottom: 1px solid #e5e5e5;
         justify-content: space-evenly;
     }
     .dadosAssistido {
@@ -867,7 +878,7 @@ section {
         flex-direction: column;
         align-items: center;
         width: 200px;
-        height: 70%;
+        height: 0%;
         overflow-y: scroll;
         overflow-x: hidden;
     }
@@ -898,9 +909,12 @@ section {
         display: flex;
         justify-content: center;
     }
+    .faDown {
+        /* background-color: #166B8A */
+        height: 50%;
+    }
     .itens {
         width: 100vh;
-        height: 100%;
         display: flex;
         flex-direction: column;
         padding: 10em;
@@ -935,10 +949,10 @@ section {
     }
     .saude {
         width: 100%;
-        flex-direction: column;
+        /* flex-direction: column; */
         align-items: center;
         justify-content: space-around;
-        height: 30%;
+        height: 60%;
     }
     .dadosExtras {
         width: 100vw;
@@ -961,11 +975,11 @@ section {
     }
     .btns {
         width: 100%;
-        height: 10%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         margin-top: 3em;
+        margin-bottom: 3em;
         /* background-color: #166B8A; */
     }
     .editarbtn,
@@ -973,29 +987,33 @@ section {
         width: 30%;
     }
     #telaFamiliar {
-        width: 60%;
+        width: 100%;
+    }
+    #telaFamiliar {
+        justify-content: flex-start;
+        width: 70%;
+        height: 50px;
+        margin-bottom: 1em;
+        border: 1px solid black;
     }
 }
 
 @media (max-height: 768px) {
-
     section {
         height: 90vh;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
     }
-    
     .container {
         width: 80%;
         height: 90%;
     }
-    
     .card {
         display: flex;
         height: 100%;
-        box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        /* box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); */
     }
     .dadosAssistido {
         width: 100%;
@@ -1003,16 +1021,15 @@ section {
         display: flex;
         /* flex-direction: column; */
     }
-    .dadosPessoais{
+    .dadosPessoais {
         height: 80%;
     }
-
-    .btns{
+    .btns {
         height: 20%;
     }
     .editarbtn,
-    .relatoriobtn{
-        height:50%;
+    .relatoriobtn {
+        height: 50%;
     }
     .styleBall-bottom-right {
         position: fixed;
@@ -1026,7 +1043,6 @@ section {
         bottom: 4.5%;
         opacity: 0.4;
     }
-    
     .styleBall-bottom-left {
         position: fixed;
         background-color: #166B8A;
@@ -1039,7 +1055,6 @@ section {
         bottom: 4.5%;
         opacity: 0.4;
     }
-    
     .styleBall-top-left {
         position: fixed;
         background-color: #166B8A;
@@ -1051,13 +1066,69 @@ section {
         top: 14.5%;
         opacity: 0.4;
     }
-    
+}
+
+@media (max-width: 300px) {
+    .telaEsquerda {
+        border: 0px;
+    }
 }
 
 @media (max-height: 1140px) {
-    .itens{
+    .itens {
         margin-right: 5.5em;
         margin-left: 5.5em
     }
-    
+}
+
+@media (max-height: 767px) {
+    .itens {
+        margin-right: 5.5em;
+        margin-left: 5.5em
+    }
+    .styleBall-bottom-right {
+        position: fixed;
+        width: 11%;
+        background-color: #166B8A;
+        height: 150px;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        left: 79%;
+        bottom: 4.5%;
+        opacity: 0.4;
+    }
+    .styleBall-bottom-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 0%;
+        z-index: -1;
+        right: 79%;
+        bottom: 4.5%;
+        opacity: 0.4;
+    }
+    .styleBall-top-left {
+        position: fixed;
+        background-color: #166B8A;
+        width: 11%;
+        height: 150px;
+        border-bottom-right-radius: 50%;
+        z-index: -1;
+        right: 79%;
+        top: 14.5%;
+        opacity: 0.4;
+        display: none;
+    }
+    .btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .relatoriobtn,
+    .editarbtn {
+        width: 40%;
+    }
 }
