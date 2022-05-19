@@ -12,31 +12,30 @@ function Relatorio() {
 
 
     fetch(`${url}/relatorio/assistido`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
 
-        body: data
-    })
+            body: data
+        })
         .then((resp) => {
-            if(resp.ok){
+            if (resp.ok) {
                 alert("Cadastrado com sucesso")
                 return resp.json();
             }
-            
+
         })
         .then((data) => {
             console.log(data)
-            // localStorage.setItem("userdata", JSON.stringify(data));
-            // window.location.href = "../../Assistidos/VerAssistido";
+                // localStorage.setItem("userdata", JSON.stringify(data));
+                // window.location.href = "../../Assistidos/VerAssistido";
 
-        }
-        );
+        });
 }
 
 function getAssistido() {
-    var h1 = document.querySelector("h1")
+    var p = document.querySelector(".infoAssistido  p")
     var img = document.querySelector(".ImgAssistido")
 
     var local = localStorage.getItem("assistido");
@@ -47,9 +46,8 @@ function getAssistido() {
             return response.json();
         })
         .then((data) => {
-            h1.innerHTML = ` ${data.nome_completo}`
+            p.innerHTML = ` ${data.nome_completo}`
             img.src = `${data.foto_antes}`
             console.log(data)
-        }
-    )
+        })
 }

@@ -1,13 +1,17 @@
 function menuDown() {
-    let menuFam = document.querySelector(".dadosFamilia");
-    let littlearrow = document.querySelector(".faArrow");
-    menuFam.classList.toggle(".faDown");
 
-    if (menuFam.classList.contains(".faDown")) {
-        menuFam.style.display = "flex";
+    let menuAco = document.querySelector(".dadosFamilia");
+    let littlearrow = document.querySelector(".faArrow");
+    menuAco.classList.remove(".dadosFamilia");
+    menuAco.classList.toggle(".faDown");
+
+    if (menuAco.classList.contains(".faDown")) {
+        menuAco.style.display = "flex";
+        menuAco.style.width = "100%";
+        menuAco.style.height = "100%";
         littlearrow.style.transform = "rotate(180deg)";
     } else {
-        menuFam.style.display = "none";
+        menuAco.style.display = "none";
         littlearrow.style.transform = "rotate(0deg)";
     }
 }
@@ -124,7 +128,7 @@ function menuDownDoenca() {
 }
 
 function list() {
-    
+
     getComorbidadeAssistido()
 
     var local = localStorage.getItem("assistido");
@@ -270,9 +274,6 @@ var fileInp = document.querySelector("#inpFoto");
 
 // });
 
-var relatorio = document.querySelector(".relatoriobtn").addEventListener(("click"), ()=>{
+var relatorio = document.querySelector(".relatoriobtn").addEventListener(("click"), () => {
     window.location.href = "../OpcoesRelatorio/"
 })
-
-
-

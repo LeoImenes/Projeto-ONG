@@ -79,6 +79,10 @@
         color: #fff;
     }
     
+    #inp::placeholder {
+        color: #fff;
+    }
+    
     .input {
         width: 100%;
         height: 30%;
@@ -148,13 +152,18 @@
         }
         .input {
             width: 100%;
-            flex-direction: column;
+            flex-direction: column-reverse;
         }
         #inp {
             width: 80%;
+            margin-bottom: 2rem;
+            font-size: 12px;
         }
         .input ul {
-            width: 90%;
+            width: 80%;
+        }
+        .input ul p {
+            font-size: 12px
         }
         .fotoUsuario {
             width: 50px;
