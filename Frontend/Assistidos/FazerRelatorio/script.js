@@ -28,9 +28,6 @@ function Relatorio() {
         })
         .then((data) => {
             console.log(data)
-                // localStorage.setItem("userdata", JSON.stringify(data));
-                // window.location.href = "../../Assistidos/VerAssistido";
-
         });
 }
 
