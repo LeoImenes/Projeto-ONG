@@ -10,7 +10,7 @@ let linkAssistencia = document.querySelector(`.cardAssistencia`).addEventListene
     window.location.href = '../Funcionario/Assistencia'
 })
 let linkFinanceiro = document.querySelector(`.cardLancamento`).addEventListener("click", () => {
-    window.location.href = '../Financeiro/FinanceiroAll'
+    window.location.href = '../Financeiro/FinanceiroAll/index.html'
 })
 
 
