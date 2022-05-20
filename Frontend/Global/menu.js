@@ -40,6 +40,12 @@ Funcionario.addEventListener("click", () => {
     
 })
 
+let Financeiro = document.querySelector(".Lancamentos")
+Financeiro.style.cursor = "pointer"
+Financeiro.addEventListener("click", () => {
+    window.location.href = "../../Financeiro/FinanceiroAll"
+})
+
 
 let Assistido = document.querySelector(".Assistidos")
 Assistido.style.cursor = "pointer"

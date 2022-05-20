@@ -1,0 +1,395 @@
+@import url("../../Global/globalHeaderMenu.css");
+body {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.ham {
+    width: 50px
+}
+
+section {
+    width: 100vw;
+    height: 90vh;
+}
+
+.foto {
+    width: 70px
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formAssis {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: .3fr 1fr;
+    border-right: 1px solid var(--casa-azul);
+}
+
+.userform {
+    display: grid;
+    height: 90%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(22, 107, 138, 0.2);
+    border-radius: 0% 0% 30px 30px;
+}
+
+.userform ul {
+    display: grid;
+    text-align: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr ;
+}
+
+.inputDados {
+    display: grid;
+    height: 95%;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    width: 90%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--casa-azul);
+    border-radius: 20px;
+    /* background-color: rgba(22, 107, 138, 0.157); */
+}
+
+.inputDados input {
+    font-size: clamp(0.68em, .1em + .1vw, 1.5em);
+    width: 90%;
+    margin-left: .5em;
+    transform: translate(.5em, .5em);
+    text-align: center;
+}
+
+.Sex {
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* background-color: rgba(22, 107, 138, 0.157) */
+    border-radius: 0px 0px 20px 20px;
+}
+
+.sexstyle {
+    width: 100%;
+    justify-self: center;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr
+}
+
+.sexstyle ul {
+    width: 100%;
+    font-size: clamp(0.68em, .1em + 1vw, 1.5em);
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: 1fr 1fr
+}
+
+input[type="checkbox"] {
+    width: clamp(0.1em, 1em + .7vw, 1.5em);
+    height: 20px;
+}
+
+.Famcard {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: .8fr 1fr .8fr
+}
+
+.outros {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: flex-end;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+.pscoativos img,
+.saude img {
+    width: 10px;
+    margin-left: .5em;
+}
+
+.pscoativos,
+.saude {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    border: 1px solid rgb(151, 151, 151);
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+}
+
+.pscoativos b,
+.saude b {
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.listadrogas,
+.listadoencas {
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100px;
+}
+
+.listadrogas p,
+.listadoencas p {
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.listadrogas input[type="checkbox"],
+.listadoencas input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-left: 1em;
+}
+
+.listadrogas ul,
+.listadoencas ul {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.listadrogas ul p,
+.listadoencas ul p {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    padding: .8em;
+}
+
+.pscoativos h2,
+.saude h2 {
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+}
+
+.button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    font-size: clamp(0.7em, .1em + .8vw, 1.5em);
+    background-color: rgba(22, 107, 138, 0.2);
+    border-radius: 30px 30px 0 0;
+}
+
+.btn:hover {
+    background-color: #166B8A;
+    box-shadow: none;
+    transition: all 0.25s;
+    padding: 0 0px 0px 7px;
+    color: white;
+}
+
+@media (max-width: 900px) {
+
+    .userform,.button{
+        background-color:transparent 
+    }
+    .card {
+        width: 100%;
+        height: 100%;
+        box-shadow: 0px 0px 0px
+    }
+    .inputDados {
+        width: 95%;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        grid-template-columns: 1fr;
+    }
+    .inputDados input {
+        width: 90%;
+        display: flex;
+        justify-self: center;
+    }
+    input[type="checkbox"] {
+        width: 15px;
+    }
+    .Sex {
+        border-radius: 0px;
+    }
+    .sexstyle {
+        grid-template-columns: 1fr;
+    }
+    .sexstyle ul {
+        grid-template-columns: 1fr;
+    }
+    .button {
+        width: 100%;
+    }
+    .button input {
+        width: 40%;
+    }
+    .outros {
+        grid-template-columns: 1fr;
+    }
+    .pscoativos,
+    .saude {
+        height: 80%;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        overflow-y: scroll;
+    }
+    .inputDados {
+        background-color: transparent;
+        border: 0px;
+        margin-bottom: .5rem
+    }
+    .card {
+        grid-template-columns: 1fr;
+        box-shadow: 0px 0px 0px
+    }
+    .Sex {
+        height: 100%;
+        background-color: transparent;
+    }
+    .sexstyle {
+        height: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .sexstyle ul {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .Famcard {
+        height: 100%
+    }
+    .foto {
+        width: 50px;
+    }
+    .outros {
+        grid-template-columns: 1fr 1fr;
+    }
+    .pscoativos,
+    .saude {
+        width: 90%;
+        height: 80%;
+    }
+    .listadrogas,
+    .listadoencas {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 250px) {
+   .outros{
+       display: flex;
+       flex-direction: column;
+   }
+   .sexstyle{
+       display:grid;
+       grid-template-columns: 1fr 1fr;
+   }
+}
+
+@media (max-height: 500px) {
+    .userform {
+        height: 100%;
+    }
+    .userform ul {
+        display: flex;
+        align-items: center;
+        /* background-color: #166B8A; */
+    }
+    .pscoativos,
+    .saude {
+        width: 90%;
+        height: 80%;
+    }
+    .card {
+        width: 100%;
+        height: 100%;
+    }
+    .foto {
+        width: 50px;
+        margin-right: 1em;
+    }
+    .btn {
+        height: 40%;
+    }
+}
+
+@media (max-height: 400px) {
+    body {
+        overflow-y: scroll;
+    }
+    .inputDados {
+        background-color: transparent;
+        border: 0px;
+        margin-bottom: .5rem
+    }
+    .card {
+        grid-template-columns: 1fr;
+        box-shadow: 0px 0px 0px
+    }
+    .Sex {
+        height: 100%;
+        background-color: transparent;
+    }
+    .sexstyle {
+        height: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .sexstyle ul {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .Famcard {
+        height: 100%
+    }
+    .foto {
+        width: 50px;
+    }
+    .outros {
+        grid-template-columns: 1fr 1fr;
+    }
+    .pscoativos,
+    .saude {
+        width: 70%;
+        height: 80px;
+    }
+    .listadrogas,
+    .listadoencas {
+        justify-content: center;
+    }
+}

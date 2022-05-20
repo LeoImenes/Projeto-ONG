@@ -1,4 +1,4 @@
-var func = localStorage.getItem("assistido");
+var assis = localStorage.getItem("assistido");
 var fotoAntes;
 var getSexo;
 
@@ -42,12 +42,12 @@ function cadastrarFotoDepois() {
 
     // fetch(`http://10.87.207.11:3000/assistido_foto_depois`, {
     fetch(`${url}/assistido_foto_depois`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data
-        })
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data
+    })
         .then((response) => {
             return response.json();
         })
@@ -59,15 +59,34 @@ function cadastrarFotoDepois() {
 
 }
 
+function getAll(){
+    getComorbidades();
+    getAssistido();
+    getComorbidadeAssistido();
+}
+
 
 function getAssistido() {
-    getComorbidades()
+    
+    var sexMasc = document.querySelector("#Masculino");
+    var sexFem = document.querySelector("#Feminino");
+    var sexOutr = document.querySelector("#Outro");
 
-    fetch(`${url}/assistidos/${func}`)
+    fetch(`${url}/assistidos/${assis}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+            console.log(data)
+
+        if(data.sexo.toLowerCase() === 'masculino'){
+            sexMasc.checked = true;
+        }else if(data.sexo.toLowerCase() === 'feminino'){
+            sexFem.checked = true;
+        }else{
+            sexOutr.checked = true;
+        }
+
             fotoAntes = data.foto_antes;
             getSexo = data.sexo;
             var inpNomeCom = document.querySelector(".nome-Completo");
@@ -81,7 +100,6 @@ function getAssistido() {
             var cartCid = document.querySelector(".cartCid");
             var cartSus = document.querySelector(".cartSus");
             var ante = document.querySelector(".ant");
-
 
             nome.value = data.nome_completo;
             nomesoc.value = data.nome_social;
@@ -139,31 +157,31 @@ function cadastrarAssistido() {
     } else if ((sex = getSexo))
 
         var data = JSON.stringify({
-        id_assistido: JSON.parse(func),
-        nome_completo: nome.value,
-        nome_social: nomesoc.value,
-        rg: rg.value,
-        cpf: cpf.value,
-        data_nascimento: `${dataUS(nasc)}`,
-        estado_civil: est.value,
-        naturalidade: nat.value,
-        sexo: sex === undefined ? getSexo : sex,
-        cartao_cidadao: cartCid.value,
-        cartao_sus: cartSus.value,
-        foto_depois: fotinho,
-        antecedente_criminal: ante.value,
-        foto_antes: fotoAntes,
-    });
+            id_assistido: JSON.parse(assis),
+            nome_completo: nome.value,
+            nome_social: nomesoc.value,
+            rg: rg.value,
+            cpf: cpf.value,
+            data_nascimento: `${dataUS(nasc)}`,
+            estado_civil: est.value,
+            naturalidade: nat.value,
+            sexo: sex === undefined ? getSexo : sex,
+            cartao_cidadao: cartCid.value,
+            cartao_sus: cartSus.value,
+            foto_depois: fotinho,
+            antecedente_criminal: ante.value,
+            foto_antes: fotoAntes,
+        });
 
     console.log(`%c ${data}`, "color:red")
 
     fetch(`${url}/assistido/update`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -172,12 +190,18 @@ function cadastrarAssistido() {
             }
         })
         .then((data) => {
+            if (data.ok) {
+                getComorbidades()
+                console.log("Deu certo")
+            }
+
             // window.location.href = "../VerAssistido/index.html";
             console.log(data)
         });
 }
 
 function getComorbidades() {
+    var listaComorbidade = document.querySelectorAll(".Comorbidade")
     let listaDrogas = document.querySelector(".listadrogas")
     let listaDoencas = document.querySelector(".listadoencas")
     let ulDoenca = document.createElement("ul")
@@ -197,6 +221,8 @@ function getComorbidades() {
                 inpDoenca.type = "checkbox"
                 inpDroga.className = "Comorbidade"
                 inpDoenca.className = "Comorbidade"
+                liDoenca.className = "doenca"
+                liDroga.className = 'droga'
 
                 if (item.tipo === 1) {
                     liDoenca.innerHTML = item.comorbidade
@@ -221,6 +247,44 @@ function getComorbidades() {
 
 }
 
+function updateComorbidades() {
+    var listaComorbidade = document.querySelectorAll(".Comorbidade");
+    listaComorbidade.forEach((item, index) => {
+
+        if (item.checked === true) {
+            var comor = {
+                "id_assistido": JSON.parse(assis),
+                "comorbidades": [{
+                    "value": `${item.value}`
+                }]
+
+               
+            }
+
+            console.log(comor)
+            fetch(`${url}/assistido/saude`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(comor)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        alert("Falha ao Cadastrar Comorbidades")
+                    }
+                })
+                .then(data => {
+
+                })
+        }
+    });
+}
+
+
+
 function showMenu() {
     let menuPsco = document.querySelector(".listadrogas")
     let menuimgPsco = document.querySelector(".pscArrow")
@@ -237,6 +301,7 @@ function showMenu() {
 }
 
 function showMenuDoenca() {
+    
     let menuDoenca = document.querySelector(".listadoencas")
     let menuimgDoen = document.querySelector(".doArrow")
     menuDoenca.classList.toggle("doDown")
@@ -249,4 +314,20 @@ function showMenuDoenca() {
         menuDoenca.style.display = "none"
         menuimgDoen.style.transform = "rotate(0deg)"
     }
+}
+
+function getComorbidadeAssistido() {
+    var listaComorbidade = document.querySelector(".droga").innerHTML
+    var Comorbidadesinputs = document.querySelectorAll(".Comorbidade input")
+    fetch(`${url}/assistido/saudeID/${assis}`)
+    .then(response => { return response.json()})
+    .then(data => {
+        console.log(listaComorbidade)
+        data.forEach(item => {
+            
+            if(listaComorbidade.contains(item.comorbidade)){
+                console.log(item.comorbidade)
+            }
+        })
+    })
 }

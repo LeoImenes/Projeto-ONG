@@ -9,7 +9,7 @@
 }
 
 p {
-    font-size: clamp(0.5rem, 1rem, 1.5rem)
+    font-size: 14px
 }
 
 h1 {
@@ -81,7 +81,7 @@ input[type="text"]{
 .receitas,
 .despesas {
     width: 90%;
-    height: 20%;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -277,4 +277,8 @@ input[type="number"]::placeholder{
 
 span{
     cursor: pointer;
+}
+
+@media (max-width: 832px) {
+    
 }
