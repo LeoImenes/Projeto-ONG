@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Assistido</title>
     <link rel="sortcut icon" href="../../Assets/icones/icone_i.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styleRemake.css">
 </head>
 
 <body onload="getComorbidades(),getfunc()">
@@ -65,9 +65,7 @@
         <div class="container">
             <div class="card">
                 <div class="Assiscard">
-                    <h1>Cadastrar Assistido</h1>
                     <div class="formAssis">
-
                         <div class="userform">
                             <ul>
                                 <li><img src="../../Assets/icones/user.png" alt="User" class="foto"></li>
@@ -80,69 +78,71 @@
                             </ul>
                         </div>
 
-                        <div class="inputs">
-                            <div class="inputDados">
-                                <div class="nome-Completo">
-                                    <input type="text" placeholder="Nome Completo..." class="nome">
-                                </div>
-                                <div class="antecedente">
-                                    <input type="text" placeholder="Antecedente Criminal" class="ante">
-                                </div>
-                                <div class="nome-social">
-                                    <input type="text" placeholder="Nome Social..." class="nome-soc">
-                                </div>
-                                <div class="Rg">
-                                    <input type="text" placeholder="RG..." class="rg" oninput="mascaraRG(this)">
-                                </div>
-                                <div class="Cpf">
-                                    <input type="text" placeholder="CPF..." class="cpf" oninput="mascaraCPF(this)">
-                                </div>
-                                <div class="Nascimento">
-                                    <input type="text" placeholder="Nascimento DD/MM/AAAA..." class="nasc" oninput="mascaraData(this)">
-                                </div>
-                                <div class="Estado">
-                                    <input type="text" placeholder="Estado civil..." class="estado">
-                                </div>
-                                <div class="Naturalidade">
-                                    <input type="text" placeholder="Naturalidade..." class="naturalidade">
-                                </div>
-                                <div class="CartaoCidadao">
-                                    <input type="text" placeholder="Cartão cidadão..." class="cartCid">
-                                </div>
-                                <div class="CartaoSus">
-                                    <input type="text" placeholder="Cartão do SUS..." class="cartSus">
-                                </div>
+                        <div class="inputDados">
+                            <div class="nome-Completo">
+                                <input type="text" placeholder="Nome Completo..." class="nome">
                             </div>
-                            <div class="Sex">
-                                <p><b>Sexo:</b></p>
-                                <ul class="sexstyle">
-                                    <li>
-                                        <p> Masculino</p>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="" id="Masculino">
-
-                                    </li>
-
-                                    <li>
-                                        <p>Feminino</p>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="" id="Feminino">
-                                    </li>
-
-                                    <li>
-                                        <p>Outro</p>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="" id="Outro">
-                                    </li>
-                                </ul>
+                            <div class="antecedente">
+                                <input type="text" placeholder="Antecedente Criminal" class="ante">
+                            </div>
+                            <div class="nome-social">
+                                <input type="text" placeholder="Nome Social..." class="nome-soc">
+                            </div>
+                            <div class="Rg">
+                                <input type="text" placeholder="RG..." class="rg" oninput="mascaraRG(this)">
+                            </div>
+                            <div class="Cpf">
+                                <input type="text" placeholder="CPF..." class="cpf" oninput="mascaraCPF(this)">
+                            </div>
+                            <div class="Nascimento">
+                                <input type="text" placeholder="Nascimento" class="nasc" oninput="mascaraData(this)">
+                            </div>
+                            <div class="Estado">
+                                <input type="text" placeholder="Estado civil..." class="estado">
+                            </div>
+                            <div class="Naturalidade">
+                                <input type="text" placeholder="Naturalidade..." class="naturalidade">
+                            </div>
+                            <div class="CartaoCidadao">
+                                <input type="text" placeholder="Cartão cidadão..." class="cartCid">
+                            </div>
+                            <div class="CartaoSus">
+                                <input type="text" placeholder="Cartão do SUS..." class="cartSus">
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="Famcard">
+                    <div class="Sex">
+                        <p><b>Sexo:</b></p>
+                        <ul class="sexstyle">
+                            <ul>
+                                <li>
+                                    <p> Masculino</p>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="" id="Masculino">
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <p>Feminino</p>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="" id="Feminino">
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <p>Outro</p>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="" id="Outro">
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
                     <div class="outros">
                         <div class="pscoativos">
                             <p><b>Piscoativos</b><img src="../../Assets/icones/down-chevron.png" class="pscArrow" onclick="showMenu() " style="cursor: pointer;"></p>
@@ -155,18 +155,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="button">
+                        <input type="button" value="Cadastrar" class="btn" onclick="cadastrarAssistido()">
+                    </div>
 
-                    <!-- <div class="anexo">
-                        <ul>
-                            <li>
-                                <p>Anexar arquivo do Assistido</p>
-                            </li>
-                            <li>
-                                <input type="file" name="" id="">
-                            </li>
-                        </ul>
-                    </div> -->
-                    <input type="button" value="Cadastrar" class="btn" onclick="cadastrarAssistido()">
 
                 </div>
             </div>

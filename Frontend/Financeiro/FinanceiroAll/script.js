@@ -198,6 +198,10 @@ function cadastrarDespesa(){
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 78dc75122f4e8f05adda12ad6a9501423747b2f4
 function fetchDespesas(){
     var func = localStorage.getItem('userdata')
 

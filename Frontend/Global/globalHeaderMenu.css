@@ -7,14 +7,18 @@ h3 {
 }
 
 input:focus {
+<<<<<<< HEAD
     color: rgb(13, 13, 13);
+=======
+    color: rgb(0, 0, 0);
+>>>>>>> 78dc75122f4e8f05adda12ad6a9501423747b2f4
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: white
+    -webkit-box-shadow: rgb(0, 0, 0)
 }
 
 input:-webkit-autofill {
@@ -43,7 +47,7 @@ input:-webkit-autofill {
 
 .menuJS {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 1%;
     display: flex;
     align-items: center;
@@ -259,5 +263,25 @@ li h2:hover {
     }
     .menucontent {
         width: 35%;
+    }
+}
+
+@media (max-height:700px) {
+    .userimg {
+        width: 75px;
+        height: 75px
+    }
+}
+
+@media (max-height:500px) {
+    .userimg {
+        width: 50px;
+        height: 50px
+    }
+    p{
+        font-size: 12px;
+    }
+    .pagelist ul li{
+        font-size: 2px;
     }
 }

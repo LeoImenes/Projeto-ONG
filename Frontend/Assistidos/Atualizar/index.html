@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="getAssistido(),getfunc()">
+<body onload="getAll(),getfunc()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -83,7 +83,7 @@
                                 <input type="text" placeholder="Nome Completo..." class="nome">
                             </div>
                             <div class="antecedente">
-                                <input type="text" placeholder="Antecedente Criminal" class="ante">
+                                <input type="text" placeholder="Antecedente Criminal" class="ant">
                             </div>
                             <div class="nome-social">
                                 <input type="text" placeholder="Nome Social..." class="nome-soc">
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="button">
-                        <input type="button" value="Atualizar" class="btn" onclick="cadastrarAssistido()">
+                        <input type="button" value="Atualizar" class="btn" onclick="cadastrarAssistido(),updateComorbidades()">
                     </div>
 
 
