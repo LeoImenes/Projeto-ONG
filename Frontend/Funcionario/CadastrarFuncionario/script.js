@@ -33,7 +33,6 @@ function cadastrarFunc() {
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
     var getSenha = document.querySelector(".getSenha").value
 
-
     var data = JSON.stringify({
         "foto": fotinho,
         "matricula": getMatricula,
@@ -45,7 +44,7 @@ function cadastrarFunc() {
         "sexo": getSexo,
         "data_admissao": `${dataUS(getDataAdmissao)}`,
         "email": getEmail,
-        "senha": getSenha,
+        "senha": md5(getSenha),
         "status": status,
         "estado_civil": ""
     })

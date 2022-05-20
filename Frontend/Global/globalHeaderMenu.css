@@ -7,7 +7,7 @@ h3 {
 }
 
 input:focus {
-    color: white;
+    color: rgb(13, 13, 13);
 }
 
 input:-webkit-autofill,

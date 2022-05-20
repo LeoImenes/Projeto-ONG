@@ -1,11 +1,7 @@
 function getfinanceiro() {
-    
 
     var totalDespesas = 0;
     var totalReceitas = 0;
-   
-
-
 
     fetch(`${url}/funcionario/financas`)
         .then(response => { return response.json() })
@@ -132,9 +128,6 @@ function cadastrarReceita(){
 
 }
 
-
-
-
 function fetchReceitas(){
     var func = localStorage.getItem('userdata')
 
@@ -192,8 +185,7 @@ function cadastrarDespesa(){
 
     
     if(despesainput.style.display == "none"){
-        despesainput.style.display = "flex"
-        
+        despesainput.style.display = "flex"        
         
     }
 
@@ -205,12 +197,6 @@ function cadastrarDespesa(){
     });
 
 }
-
-
-
-
-
-
 
 function fetchDespesas(){
     var func = localStorage.getItem('userdata')

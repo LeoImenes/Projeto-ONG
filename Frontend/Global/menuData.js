@@ -1,4 +1,7 @@
 function getfunc() {
+    var LocalStgFuncionario = localStorage.getItem('userdata')
+    let funcionario = JSON.parse(LocalStgFuncionario)
+
     let user = document.querySelector(".Username");
     let foto = document.querySelector(".userimg");
     user.innerHTML = funcionario.nome_completo

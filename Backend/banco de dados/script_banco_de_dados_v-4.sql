@@ -16,7 +16,7 @@ CREATE TABLE funcionarios(
 	data_admissao DATE NOT NULL,
 	data_demissao DATE,
 	email VARCHAR(30) NOT NULL UNIQUE,
-	senha VARCHAR(50) NOT NULL,
+	senha VARCHAR(250) NOT NULL,
 	status BOOLEAN,
 	foto LONGTEXT
 );

@@ -5,8 +5,6 @@ let pgFuncionario = document.querySelector(".Funcionario")
 let pgAssistido = document.querySelector(".Assistido")
 let logout = document.querySelector(".logout")
 
-
-
 menuContent.style.marginLeft = "-550px";
 
 function abrirMenu() {
@@ -51,3 +49,9 @@ Assistido.addEventListener("click", () => {
 let dados = localStorage.getItem('userdata')
 let funcionario = JSON.parse(dados)
 console.log(funcionario)
+
+let Financeiro=document.querySelector(".Lancamentos")
+Financeiro.style.cursor = "pointer"
+Financeiro.addEventListener("click", () => {
+    window.location.href = '../../Financeiro/FinanceiroAll/index.html'
+})

@@ -8,7 +8,7 @@ function conectar() {
         nova_senha: nova_senha.value,
     });
 
-    fetch(`${url}/reset_senha`, {
+    fetch(`http://localhost:3000/reset_senha`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -22,6 +22,7 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
+            console.log(data)
             window.location.href = "../../Login/"
         });
 }

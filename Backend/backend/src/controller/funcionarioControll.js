@@ -164,7 +164,6 @@ const login = (req, res) => {
                         delete item.rg
                         delete item.cpf
                         delete item.data_nascimento
-                        delete item.cargo
                         delete item.sexo
                         delete item.data_admissao
                         delete item.data_demissao

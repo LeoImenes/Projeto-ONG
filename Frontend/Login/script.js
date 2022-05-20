@@ -1,16 +1,12 @@
-var pw = "";
-
-function setPw(e) {
-    pw = md5(e.value);
-}
- 
- function conectar() {
+function conectar() {
      let email = document.querySelector(".email")
      let senha = document.querySelector(".senha")
      let data = JSON.stringify({
          email: email.value,
-         senha: senha.value,
+         senha: md5(senha.value),
      });
+
+     console.log(data)
 
      fetch(`${url}/funcionarios`, {
              method: "POST",
@@ -21,7 +17,7 @@ function setPw(e) {
          })
          .then((resp) => {
              if (resp.status == 400) {
-                 alert("Usuario ou senha errados")
+                 alert("Usuario ou senha incorretos")
              }
              return resp.json();
          })
@@ -29,6 +25,7 @@ function setPw(e) {
              if (data.id_funcionario !== undefined) {
                  localStorage.setItem("userdata", JSON.stringify(data));
                  window.location.href = "../../Home";
+                //  console.log(data)
 
              } else {
                  alert("Usuario ou Senha invalidos");
