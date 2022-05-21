@@ -99,36 +99,37 @@ function getfinanceiro() {
 
 
 var receitasinputs = document.querySelector(".inputs").style.display = "none"
-function cadastrarReceita(){
+
+function cadastrarReceita() {
     var buttonDiv = document.querySelector(".button")
-    
+
     var cardReceitas = document.querySelector(".cardReceitas")
     var receitasinputs = document.querySelector(".inputs")
 
-// var cardDespesas = document.querySelector(".cardDespesas")
+    // var cardDespesas = document.querySelector(".cardDespesas")
 
     // cardDespesas.style.display = "none"
-    receitasinputs.style.display = "flex"
+    receitasinputs.style.display = "grid"
     cardReceitas.style.display = "none";
-    buttonDiv.style.display= "none"
+    buttonDiv.style.display = "none"
 
-    
-    if(receitasinputs.style.display == "none"){
-        receitasinputs.style.display = "flex"
-        
-        
+
+    if (receitasinputs.style.display == "none") {
+        receitasinputs.style.display = "grid"
+
+
     }
 
     var receitaSpan = document.querySelector(".closeRec").addEventListener(("click"), () => {
         receitasinputs.style.display = "none"
-        cardReceitas.style.display = "flex"
+        cardReceitas.style.display = "grid"
         cardReceitas.style.flexDirection = "column"
-    buttonDiv.style.display= "flex"
+        buttonDiv.style.display = "flex"
     });
 
 }
 
-function fetchReceitas(){
+function fetchReceitas() {
     var func = localStorage.getItem('userdata')
 
     var descricao = document.querySelector(".RecDesc").value;;
@@ -139,7 +140,7 @@ function fetchReceitas(){
 
     console.log(localStorage.getItem('userdata').id_funcionario)
 
-    var data =JSON.stringify({
+    var data = JSON.stringify({
         "id_funcionario": JSON.parse(func).id_funcionario,
         "tipo": 1,
         "descricao": descricao,
@@ -147,62 +148,59 @@ function fetchReceitas(){
     })
 
     fetch(`${url}/funcionario/financas`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Cadastro efetuado com sucesso")
+                return response.json()
+
+            } else {
+                alert("Falha ao Cadastrar")
+            }
+
+        })
+
+    .then(data => {
+        window.location.reload()
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Cadastro efetuado com sucesso")
-            return response.json()
-
-        } else {
-            alert("Falha ao Cadastrar")
-        }
-
-    })
-
-.then(data => {
-    window.location.reload()
-})
 }
 
 var despesainput = document.querySelector(".inputsDesp").style.display = "none"
-function cadastrarDespesa(){
+
+function cadastrarDespesa() {
     var buttonDiv = document.querySelector(".buttonDesp")
-    
+
     var cardDespesas = document.querySelector(".cardDespesas")
     var despesainput = document.querySelector(".inputsDesp")
 
-// var cardDespesas = document.querySelector(".cardDespesas")
+    // var cardDespesas = document.querySelector(".cardDespesas")
 
     // cardDespesas.style.display = "none"
     despesainput.style.display = "flex"
     cardDespesas.style.display = "none";
-    buttonDiv.style.display= "none"
+    buttonDiv.style.display = "none"
 
-    
-    if(despesainput.style.display == "none"){
-        despesainput.style.display = "flex"        
-        
+
+    if (despesainput.style.display == "none") {
+        despesainput.style.display = "flex"
+
     }
 
     var receitaSpan = document.querySelector(".closeDesp").addEventListener(("click"), () => {
         despesainput.style.display = "none"
-        cardDespesas.style.display = "flex"
-        cardDespesas.style.flexDirection = "column"
-    buttonDiv.style.display= "flex"
+        cardDespesas.style.display = "grid"
+            // cardDespesas.style.flexDirection = "column"
+        buttonDiv.style.display = "flex"
     });
 
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 78dc75122f4e8f05adda12ad6a9501423747b2f4
-function fetchDespesas(){
+function fetchDespesas() {
     var func = localStorage.getItem('userdata')
 
     var descricao = document.querySelector(".DespDesc").value;;
@@ -213,7 +211,7 @@ function fetchDespesas(){
 
     console.log(localStorage.getItem('userdata').id_funcionario)
 
-    var data =JSON.stringify({
+    var data = JSON.stringify({
         "id_funcionario": JSON.parse(func).id_funcionario,
         "tipo": 0,
         "descricao": descricao,
@@ -221,24 +219,24 @@ function fetchDespesas(){
     })
 
     fetch(`${url}/funcionario/financas`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Cadastro efetuado com sucesso")
+                return response.json()
+
+            } else {
+                alert("Falha ao Cadastrar")
+            }
+
+        })
+
+    .then(data => {
+        window.location.reload()
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Cadastro efetuado com sucesso")
-            return response.json()
-
-        } else {
-            alert("Falha ao Cadastrar")
-        }
-
-    })
-
-.then(data => {
-    window.location.reload()
-})
 }

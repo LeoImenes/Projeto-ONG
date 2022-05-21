@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./Remake.css">
     <link rel="sortcut icon" href="../../Assets/icones/icone_i.png">
     <title>Financeiro</title>
 </head>
@@ -71,32 +71,33 @@
 
                         </div>
                         <div class="receitasContent">
-                        
+
+                        </div>
+                        <div class="button" onclick="cadastrarReceita()">
+                            <button class="btn">Adicionar Receita</button>
+
                         </div>
                     </div>
-                    <div class="button" onclick="cadastrarReceita()">
-                        <button class="btn">Adicionar Receita</button>
 
-                    </div>
                     <div class="inputs">
                         <div class="texts">
                             <div class="title">
-                            <h2>Adicionar Receita</h2>
-                        </div>
-                        <div class="closeRec">
-                            <span>X</span>
-                        </div>
+                                <h2>Adicionar Receita</h2>
+                            </div>
+                            <div class="closeRec">
+                                <span>X</span>
+                            </div>
                         </div>
                         <div class="inpDesc">
                             <input type="text" placeholder="Descricao..." class="RecDesc">
-                            
+
                         </div>
                         <div class="inpVal">
-                            <input type="text" placeholder="Valor..." class="valDesc"  value="00.00">
+                            <input type="text" placeholder="Valor..." class="valDesc" value="00.00">
                         </div>
                         <div class="button" onclick="fetchReceitas()">
                             <button class="btnCad">Adicionar Receita</button>
-    
+
                         </div>
                     </div>
                 </div>
@@ -106,16 +107,16 @@
 
                         </div>
                     </div>
-                 <div class="totalDespesa">
-                    <div class="totaldespCont">
+                    <div class="totalDespesa">
+                        <div class="totaldespCont">
 
+                        </div>
                     </div>
-                </div>
                     <div class="diferencas">
                         <div class="totalCont">
 
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -128,32 +129,33 @@
                         <div class="despesaContent">
 
                         </div>
-                       
-                    </div>
-                <div class="buttonDesp" onclick="cadastrarDespesa()">
-                    <button class="btnDesp"><p>Adicionar Despesas</p></button>
-                </div>
-                <div class="inputsDesp">
-                    <div class="texts">
-                        <div class="title">
-                        <h2>Adicionar Despesa</h2>
-                    </div>
-                    <div class="closeDesp">
-                        <span>X</span>
-                    </div>
-                    </div>
-                    <div class="inpDesc">
-                        <input type="text" placeholder="Descricão..." class="DespDesc">
-                        
-                    </div>
-                    <div class="inpVal">
-                        <input type="text" placeholder="Valor..." class="valDesp"  oninput="mascaraMoeda(this)">
-                    </div>
-                    <div class="button" onclick="fetchDespesas()">
-                        <button class="btnCad">Adicionar Despesas</button>
+                        <div class="buttonDesp" onclick="cadastrarDespesa()">
+                            <button class="btnDesp"><p>Adicionar Despesas</p></button>
+                        </div>
 
                     </div>
-                </div>
+
+                    <div class="inputsDesp">
+                        <div class="texts">
+                            <div class="title">
+                                <h2>Adicionar Despesa</h2>
+                            </div>
+                            <div class="closeDesp">
+                                <span>X</span>
+                            </div>
+                        </div>
+                        <div class="inpDesc">
+                            <input type="text" placeholder="Descricão..." class="DespDesc">
+
+                        </div>
+                        <div class="inpVal">
+                            <input type="text" placeholder="Valor..." class="valDesp" oninput="mascaraMoeda(this)">
+                        </div>
+                        <div class="button" onclick="fetchDespesas()">
+                            <button class="btnCad">Adicionar Despesas</button>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>

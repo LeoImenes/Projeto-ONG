@@ -35,7 +35,7 @@ let Funcionario = document.querySelector(".Funcionario")
 Funcionario.style.cursor = "pointer"
 Funcionario.addEventListener("click", () => {
     window.location.href = "../../Funcionario/OpcoesFuncionario/index.html"
-    
+
 })
 
 let Financeiro = document.querySelector(".Lancamentos")
@@ -55,9 +55,3 @@ Assistido.addEventListener("click", () => {
 let dados = localStorage.getItem('userdata')
 let funcionario = JSON.parse(dados)
 console.log(funcionario)
-
-let Financeiro=document.querySelector(".Lancamentos")
-Financeiro.style.cursor = "pointer"
-Financeiro.addEventListener("click", () => {
-    window.location.href = '../../Financeiro/FinanceiroAll/index.html'
-})
