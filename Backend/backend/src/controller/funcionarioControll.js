@@ -70,10 +70,10 @@ const getMatricula = (req, res) => {
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO FUNCIONARIO
 const updateFuncionario = async (req, res) => {
     let matricula = req.body.matricula;
-    let cargo = req.body.cargo
-    let matricula_funcionario = req.body.matricula_funcionario
-    let data_demissao = req.body.data_demissao
-    let status = (data_demissao == undefined) ? 1 : 0
+    let cargo = req.body.cargo;
+    let matricula_funcionario = req.body.matricula_funcionario;
+    let data_demissao = req.body.data_demissao;
+    let status = (data_demissao == undefined) ? 1 : 0;
     let verificacao = false
     let auth = await getAuthorization(matricula)
         .then((auth) => {
