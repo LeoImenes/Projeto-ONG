@@ -1,3 +1,10 @@
+var homme = document.querySelector(".homme")
+
+function home(){
+    window.location.href = '../../Home/'
+
+};
+
 function Relatorio() {
     let relatorio = document.querySelector(".relatorio").value;
     let btn = document.querySelector(".btnLog");
@@ -22,11 +29,12 @@ function Relatorio() {
         .then((resp) => {
             if (resp.ok) {
                 alert("Cadastrado com sucesso")
-                return resp.json();
+                return resp.json();             
             }
 
         })
         .then((data) => {
+            window.location.href = '../OpcoesRelatorio/'
             console.log(data)
         });
 }
@@ -41,10 +49,12 @@ function getAssistido() {
     fetch(`${url}/assistidos/${local}`)
         .then((response) => {
             return response.json();
+            
         })
         .then((data) => {
             p.innerHTML = ` ${data.nome_completo}`
             img.src = `${data.foto_antes}`
-            console.log(data)
+            console.log(data)         
+            
         })
 }

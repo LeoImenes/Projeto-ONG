@@ -180,7 +180,6 @@ function getComorbidades() {
     let liDroga = document.createElement("p")
 
     fetch(`${url}/assistido/comorbidade`)
-        // fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {
