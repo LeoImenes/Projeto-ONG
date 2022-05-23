@@ -12,7 +12,7 @@ function abrirMenu() {
     menuImg.classList.toggle("down");
     if (!menuImg.classList.contains("down")) {
         menuContent.style.marginLeft = "0px";
-        menuContent.style.transition = "all 0.5s linear";
+        menuContent.style.transition = "all 0.2s ";
         menuImg.style.display = "none";
     }
 }

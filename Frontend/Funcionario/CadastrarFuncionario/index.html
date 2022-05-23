@@ -64,12 +64,7 @@
         </div>
         <div class="cards">
             <div class="card">
-                <div class="styleBall-bottom-right"></div>
-                <div class="styleBall-bottom-left"></div>
-                <div class="styleBall-top-right"></div>
-                <div class="styleBall-top-left"></div>
                 <ul>
-
                     <li><img src="../../Assets/icones/user.png" alt="User" id="Funcfoto"></li>
                     <li>
                         <p class="adcFoto" style="font-size:12px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
@@ -77,58 +72,45 @@
                     </li>
                 </ul>
             </div>
-            <div class="cardForm">
-                <div class="familia">
-                    <div class="famform">
-                        <div class="DadosFuncionario">
-                            <ul>
-                                <input type="text" class="getNome" placeholder="Nome...">
-                            </ul>
-                            <ul>
+            <div class="funform">
+                    <div class="DadosFuncionario">
+                         <ul>
+                             <input type="text" class="getNome" placeholder="Nome...">
+                         </ul>
+                         <ul>
+                            <input type="email" class="getEmail" placeholder="Email...">
+                        </ul>
+                         <ul>
+                            <input type="text" class="getMatricula" placeholder="Matricula...">
+                        </ul>
+                        <ul>
+                             <input type="text" class="getRG" placeholder="RG..." oninput="mascaraRG(this)">
+                        </ul>
+                        <ul>
+                            <input type="text" class="getCPF" placeholder="CPF..." oninput="mascaraCPF(this)">
+                        </ul>
+                        <ul>
+                             <input type="text" class="getDataNasc" placeholder="Nascimento... " oninput="mascaraData(this)">
+                        </ul>
+                        <ul>
+                            <input type="text" class="getCargo" placeholder="Cargo">
+                        </ul>
+                        <ul>
+                            <input type="text" class="getSexo" placeholder="Sexo">
+                        </ul>
+                        <ul>
+                            <input type="text" class="getDataAdmissao" placeholder="Admissão" oninput="mascaraData(this)">
+                        </ul>
+                        <ul>
 
-                                <input type="email" class="getEmail" placeholder="Email...">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getMatricula" placeholder="Matricula...">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getRG" placeholder="RG..." oninput="mascaraRG(this)">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getCPF" placeholder="CPF..." oninput="mascaraCPF(this)">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getDataNasc" placeholder="Data de Nascimento... " oninput="mascaraData(this)">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getCargo" placeholder="Cargo">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getSexo" placeholder="Sexo">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getDataAdmissao" placeholder="Data de Admissão" oninput="mascaraData(this)">
-                            </ul>
-                            <ul>
-
-                                <input type="text" class="getSenha " placeholder="Senha ">
-                            </ul>
+                            <input type="text" class="getSenha " placeholder="Senha ">
+                        </ul>
 
                         </div>
-
+                        <div class="btn-div">
+                            <button class="btn " onclick=" cadastrarFunc() ">Cadastrar</button>
+                        </div>
                     </div>
-
-                </div>
-                <div class="btn-div ">
-                    <button class="btn " onclick=" cadastrarFunc() ">Cadastrar</button>
-                </div>
 
             </div>
 
