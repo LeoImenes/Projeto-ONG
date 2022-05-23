@@ -39,8 +39,6 @@ function cadastrarFotoDepois() {
         alert("foto atualizada")
     }
 
-
-    // fetch(`http://10.87.207.11:3000/assistido_foto_depois`, {
     fetch(`${url}/assistido_foto_depois`, {
         method: "PUT",
         headers: {
@@ -210,7 +208,6 @@ function getComorbidades() {
     let liDroga = document.createElement("p")
 
     fetch(`${url}/assistido/comorbidade`)
-        // fetch("http://localhost:3000/assistido/comorbidade")
         .then(response => { return response.json() })
         .then(data => {
             data.forEach((item) => {
@@ -257,7 +254,6 @@ function updateComorbidades() {
                 "comorbidades": [{
                     "value": `${item.value}`
                 }]
-
                
             }
 
@@ -282,8 +278,6 @@ function updateComorbidades() {
         }
     });
 }
-
-
 
 function showMenu() {
     let menuPsco = document.querySelector(".listadrogas")

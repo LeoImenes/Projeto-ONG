@@ -73,12 +73,12 @@ function mascaraRG(i) {
 
 function mascaraTEL(i) {
     var v = i.value;
-    if (isNaN(v[v.length - 1])) {
+    if (isNaN(v[v.length -1])) {
         i.value = v.substring(0, v.length - 1);
         return;
     }
 
-    i.setAttribute("maxlength", "16");
+    i.setAttribute("maxlength", "15");
     
     if (v.length == 1) i.value = "(";
     if (v.length == 3) i.value += ")";
@@ -96,6 +96,4 @@ function mascaraMoeda(i) {
     i.setAttribute("maxlength", "12");
 
     if(v.length == 3) i.value += ".";
-
-
 }

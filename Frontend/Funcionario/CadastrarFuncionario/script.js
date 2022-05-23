@@ -62,7 +62,7 @@ function cadastrarFunc() {
                 return response.json()
 
             } else {
-                alert("Falha ao Cadastrar")
+                alert("Falha ao cadastrar, todos os campos são obrigatórios")
             }
 
         })

@@ -1,0 +1,75 @@
+ANOTAÇÕES
+
+FUNÇÕES QUE NÃO ESTA FUNCIONANDO
+	TELA DO ASSISTIDO, NÃO ESTA CARREGANDO PSICOATIVOS, SAÚDE, FAMIAR (UNDEFINED):
+	DEMISSÃO FUNCIONÁRIO, EXECUTANDO OS DOIS ALERT(FALHA E SUCESSO):
+	MASCARA DO TELEFONE, FAMILIAR DO ASSISTIDO: +/-
+	EDITAR ASSISTIDO: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO O BACKEND TypeError: Cannot read property 'end' of undefined.
+	ASSISTÊNCIAS NÃO ESTA FUNCIONANDO NO INSOMINIA:
+	
+	
+
+AJUSTES E MELHORIAS
+
+- MUDAR A BARRA DE TITULO PARA - App Ong Digital - V1.0.0 (EXEMPLO TELA LOGIN)
+- COLOCAR NOME NAS JANELAS
+- TODOS USAR O BANCO DE DADOS V4, TODOS OS AJUSTE QUE SER FEITO, AJUSTAR SCRIPT.
+- * NOS CAMPOS OBRIGATÓRIOS NOT NULL.
+- ADICIONAR BOTÃO EM TODAS AS PAGINAS DIRECIONANDO PARA HOME - OK
+- ADICIONAR CONTATO DO SUPORTE NA TELA LOGIN/HOME: ti@casairmaantonia.org
+- DETALHES NA MATRICULA DO FUNCIONARIO(NO CADASTRO PODE TER DUVIDA, QUAL FOI A ULTIMA MATRICULA).
+- NO CADASTRO DO FUNCIONÁRIO, CARGO E SEXO (MASCULINO, FEMENINO, NÃO INFORMADO) USAR SELECT, DEIXAR O CAMPO SENHA PROXIMO AO EMAIL.
+- OPÇÃO PARA CADASTRAR MAIS DE UM TELEFONE, ASSISTIDO, FUNCIONÁRIO, FAMILIAR
+
+-----------------------------------------------------------------------------------------------
+					CHECKLIST
+
+TELA LOGIN: OK
+
+-----------------------------------------------------------------------------------------------
+
+TELA HOME: falta ajustar a funcionalidade de alguns botões
+-----------------------------------------------------------------------------------------------
+
+TELA ASSISTIDOS:
+	VER ASSISTIDOS: ok
+		(pscoativos, saúde, familiares):
+		EDITAR INFORMAÇÕES: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO TypeError: Cannot read property 'end' of undefined.
+		RELATÓRIO:
+		CADASTRAR FAMILIAR: ajustar a mascara do telefone
+
+	CADASTRAR ASSITIDOS: ok
+-----------------------------------------------------------------------------------------------
+
+TELA FUNCIONÁRIOS:
+	VER FUNCIONÁRIOS: OK
+		EDITAR FUNCIONARIO/FOTO: OK
+			DEMISSÃO: não funcionando
+		
+	CADASTRAR FUNCIONÁRIO:OK
+-----------------------------------------------------------------------------------------------
+
+TELA FINANCEIRO: 100%
+	ADICINAR RECEITAS: OK
+	ADICIONAR DESPESAS: OK
+
+-----------------------------------------------------------------------------------------------
+TELA RELATÓRIO
+	VER RELATÓRIOS:terminar
+	FAZER RELATÓRIOS: OK
+	EDITAR RELATÓRIO: SEM PREORIDADE
+
+-----------------------------------------------------------------------------------------------
+TELA ASSISTÊNCIAS
+	FAZER ASSISTÊNCIAS:
+	CONSULTAR ASSISTÊNCIAS:
+	EDITAR ASSISTÊNCIA: SEM PRIORIDADE
+-----------------------------------------------------------------------------------------------
+TELA ENCAMINHAMENTO
+	FAZER ENCAMINHAMENTO:
+	CONSULTAR ENCAMINHAMENTOS:
+	EDITAR ENCAMINHAMENTOS: SEM PRIORIDADE
+
+
+
+	
