@@ -262,14 +262,14 @@ const postAssistencia = (req, res) => {
     let comerro = false
     let stringSolicitacao
     if (id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
-        let stringAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values (id_assistido = ${id_assistido}, id_funcionario = ${id_funcionario}, data_registro = curdate());`
+        let stringAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values (${id_assistido}, ${id_funcionario}, curdate());`
         try {
             con.beginTransaction()
             con.query(stringAssistencia, async (err, result) => {
                 if (err === null) {
                     let id_assistencia = result.insertId
                     do {
-                        stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(id_assitencia = ${id_assistencia}, id_item = ${itens[index].id_item})`;
+                        stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values (${id_assistencia}, ${itens[index].id_item})`;
                         // console.log("string sql:" + stringSolicitacao)
                         // console.log("index: " + index)
                         let response = await executarQuery(stringSolicitacao)

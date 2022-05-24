@@ -75,7 +75,7 @@ const getAll = (req, res) => {
         if (err == null) {
             res.json(result)
         } else {
-            res.status(400).json({ err: err.message }).end();
+            res.status(400).json({ err: err.message })
         }
     })
 }

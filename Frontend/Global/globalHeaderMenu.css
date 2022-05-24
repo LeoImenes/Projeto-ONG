@@ -6,6 +6,7 @@ h3 {
     font-size: .9em
 }
 
+<<<<<<< HEAD
 input:focus {
     color: rgb(13, 13, 13);
 }
@@ -41,6 +42,8 @@ input:-webkit-autofill {
     border-radius: 10px;
 }
 
+=======
+>>>>>>> 2cea8ac17a2d9bbab1e00ed16c1321e526944b48
 .menuJS {
     position: fixed;
     top: 15%;
