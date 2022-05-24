@@ -3,7 +3,7 @@ function conectar() {
     let senha = document.querySelector(".senha")
     let data = JSON.stringify({
         email: email.value,
-        senha: (senha.value),
+        senha: md5(senha.value),
     });
 
     console.log(data)

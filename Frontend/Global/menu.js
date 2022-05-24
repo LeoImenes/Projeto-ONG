@@ -4,6 +4,7 @@ let pgAssistencia = document.querySelector(".Assistencia")
 let pgFuncionario = document.querySelector(".Funcionario")
 let pgAssistido = document.querySelector(".Assistido")
 let logout = document.querySelector(".logout")
+let home = document.querySelector(".config")
 
 menuContent.style.marginLeft = "-550px";
 
@@ -50,6 +51,12 @@ Assistido.style.cursor = "pointer"
 Assistido.addEventListener("click", () => {
     window.location.href = "../../Assistidos/OpcoesAssistido/index.html"
     localStorage.clear
+})
+
+let Home = document.querySelector(".config")
+Home.style.cursor = "pointer"
+Home.addEventListener("click", () => {
+    window.location.href = "../../Home/index.html"
 })
 
 let dados = localStorage.getItem('userdata')
