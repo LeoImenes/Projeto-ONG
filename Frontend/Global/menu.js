@@ -5,10 +5,6 @@ let pgFuncionario = document.querySelector(".Funcionario")
 let pgAssistido = document.querySelector(".Assistido")
 let logout = document.querySelector(".logout")
 let home = document.querySelector(".config")
-<<<<<<< HEAD
-=======
-
->>>>>>> 2cea8ac17a2d9bbab1e00ed16c1321e526944b48
 menuContent.style.marginLeft = "-550px";
 
 function abrirMenu() {

@@ -29,7 +29,7 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto == null || fun.foto.length == 0) {
+                if (fun.foto == null || fun.foto.length == 0 || fun.foto == "undefined") {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto
@@ -65,7 +65,7 @@ function buscar() {
     let card = document.querySelectorAll(".cardFuncionario")
 
     filtro.forEach((item, index) => {
-        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex" : card[index].style.display = "none";
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "flex": card[index].style.display = "none";
     })
 }
 
@@ -77,7 +77,7 @@ function buscarInativos() {
     if (inativo.checked == 1) {
         inativo.value = "i"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex" : card[index].style.display = "none";
+            (item.innerHTML.toLowerCase().startsWith(inativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
         })
     } else {
         filtro.forEach((item, index) => {
@@ -95,7 +95,7 @@ function buscarAtivos() {
 
         ativo.value = "a"
         filtro.forEach((item, index) => {
-            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex" : card[index].style.display = "none";
+            (item.innerHTML.toLowerCase().startsWith(ativo.value)) ? card[index].style.display = "flex": card[index].style.display = "none";
         })
     } else {
         filtro.forEach((item, index) => {
