@@ -61,7 +61,7 @@ const postAssistido = (req, res) => {
             "${naturalidade}", "${req.body.sexo}", "${cartao_cidadao}", "${cartao_sus}", "${foto_antes}", "${foto_depois}");`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json({ ...req.body, id_assistido: result.insertId }).end();
+            res.status(200).json({...req.body, id_assistido: result.insertId }).end();
         } else {
             res.status(400).json({ "Erro:": err.message }).end();
         }
@@ -179,7 +179,7 @@ const updateFotoAssistido = (req, res) => {
     if (req.body.foto !== undefined && req.body.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json({ ...req.body }).end();
+                res.status(200).json({...req.body }).end();
             } else {
                 res.status(400).json({ err: err.message }).end();
             }
@@ -198,7 +198,7 @@ const updateFotoDepoisAssistido = (req, res) => {
     if (req.body.id_assistido !== undefined && req.body.foto_depois !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.json({ ...req.body }).end();
+                res.json({...req.body }).end();
             } else {
                 res.status(400).json({ err: err.message }).end();
             }
@@ -221,7 +221,7 @@ const asynqQuery = (query) => {
 }
 
 // MÉTODO CADASTRAR SAÚDE 
-const postSaude = async (req, res) => {
+const postSaude = async(req, res) => {
     let id_assistido = req.body.id_assistido;
     let comorbidades = req.body.comorbidades;
     if (id_assistido !== undefined && comorbidades.length !== 0) {
@@ -295,11 +295,11 @@ const getAssistSaude = (req, res) => {
 }
 
 // promise do update 
-getEmployeeNames = function (id_assistido) {
-    return new Promise(function (resolve, reject) {
+getEmployeeNames = function(id_assistido) {
+    return new Promise(function(resolve, reject) {
         con.query(
             `select id_saude from saude where id_assistido = ${id_assistido}`,
-            function (err, rows) {
+            function(err, rows) {
                 if (rows === undefined) {
                     reject(new Error("Error rows is undefined")).end();
                 } else {
@@ -308,8 +308,7 @@ getEmployeeNames = function (id_assistido) {
                 }
             }
         )
-    }
-    )
+    })
 }
 
 // MÉTODO DELETAR SAÚDE
@@ -328,7 +327,7 @@ async function deleteSaude(string) {
 }
 
 // MÉTODO ATUALIZAR SAÚDE DO ASSISTIDO
-const updateSaude = async (req, res) => {
+const updateSaude = async(req, res) => {
     let id_assistido = req.body.id_assistido;
     let comorbidades = req.body.comorbidades;
     let string;
@@ -339,7 +338,7 @@ const updateSaude = async (req, res) => {
     let newString;
     if (req.body.id_assistido !== undefined) {
         let resultado = getEmployeeNames(id_assistido)
-            .then(async (results) => {
+            .then(async(results) => {
                 if (results.length > 0) {
                     //res.status(200).json(results).end();
                     try {
@@ -397,7 +396,7 @@ const updateSaude = async (req, res) => {
                     res.status(400).json({ "err": "este assistido não possui comorbidades" }).end();
                 }
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 res.status(400).json({ "err": "este assistido não possui comorbidades" }).end();
             })
     } else {
@@ -453,6 +452,7 @@ const postFamiliar = (req, res) => {
                     `insert into familiarassistido (id_assistido,id_familiar, data_cadastro) values (${id_assistido}, ${id_familiar}, curdate())`,
                     `insert into familiarassistido (id_assistido,id_familiar,parentesco,data_cadastro) values (${id_assistido}, ${id_familiar}, '${parentesco}', curdate());`
                 ]
+
                 function retString(paren) {
                     if (paren === undefined) {
                         return queries[0]
@@ -507,32 +507,32 @@ const postRelacionamentoFamiliar = (req, res) => {
 
 // MÉTODO ATUALIZAR FAMILIAR DO ASSISTIDO
 const updateFamiliar = (req, res) => {
-    let id_familiar = req.body.id_familiar;
-    let nome_completo = req.body.nome_completo;
-    let rg = req.body.rg;
-    let telefone = req.body.telefone;
-    let email = req.body.email;
-    let endereco = req.body.endereco;
+        let id_familiar = req.body.id_familiar;
+        let nome_completo = req.body.nome_completo;
+        let rg = req.body.rg;
+        let telefone = req.body.telefone;
+        let email = req.body.email;
+        let endereco = req.body.endereco;
 
-    let string = `UPDATE familiares SET nome_completo="${nome_completo}", rg="${rg}", telefone="${telefone}", email="${email}", endereco="${endereco}" where id_familiar = ${id_familiar} `
-    if (req.body.id_familiar !== undefined) {
-        con.query(string, (err, result) => {
-            if (err === null) {
-                res.status(200).json({ ...req.body }).end();
-            } else {
-                res.status(400).json({ err: err.message }).end();
-            }
-        })
+        let string = `UPDATE familiares SET nome_completo="${nome_completo}", rg="${rg}", telefone="${telefone}", email="${email}", endereco="${endereco}" where id_familiar = ${id_familiar} `
+        if (req.body.id_familiar !== undefined) {
+            con.query(string, (err, result) => {
+                if (err === null) {
+                    res.status(200).json({...req.body }).end();
+                } else {
+                    res.status(400).json({ err: err.message }).end();
+                }
+            })
+        }
     }
-}
-//METODO LISTAR TODOS OS FAMILIARES
+    //METODO LISTAR TODOS OS FAMILIARES
 const listarFamiliar = (req, res) => {
     let string = `select * from familiares`
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json(result).end();
         } else {
-            res.status(400).json({"RG" : "RG não encontrado"}).end();
+            res.status(400).json({ "RG": "RG não encontrado" }).end();
         }
     })
 }
@@ -542,9 +542,9 @@ const deleteFamiliar = (req, res) => {
     let string = `delete from familiares where rg = "${req.params.rg}";`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json({"Mensagem":"Familiar excluido com sucesso"}).end();
+            res.status(200).json({ "Mensagem": "Familiar excluido com sucesso" }).end();
         } else {
-            res.status(400).json({"RG" : "RG não encontrado"}).end();
+            res.status(400).json({ "RG": "RG não encontrado" }).end();
         }
     })
 }

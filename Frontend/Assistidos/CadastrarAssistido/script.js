@@ -32,33 +32,37 @@ function cadastrarAssistido() {
     var cpf = document.querySelector(".cpf");
     var est = document.querySelector(".estado");
     var nat = document.querySelector(".naturalidade");
-    var nasc = document.querySelector(".nasc").value;
+    var nasc = document.querySelector(".nasc");
     var cartCid = document.querySelector(".cartCid");
     var cartSus = document.querySelector(".cartSus");
-    var ante = document.querySelector(".ante").value
+    var ante = document.querySelector(".ante").value;
+    var nomeerr = document.createElement("p")
+    nomeerr.innerHTML = "* Preencha este campo"
+    nomeerr.style.display = "flex"
+    nomeerr.style.marginTop = "5px"
+    nomeerr.style.color = "red"
+    nomeerr.style.width = "100%"
+    nomeerr.style.fontSize = "10px"
 
-    var dia = nasc.split("/")[0]
-    var mes = nasc.split("/")[1]
-    var ano = nasc.split("/")[2]
-
-    if ((nome.value == "")) {
-        var nomeerr = document.createElement("p")
-        nomeerr.innerHTML = "* Preencha este campo"
-        nomeerr.style.display = "flex"
-        nomeerr.style.color = "red"
-        nomeerr.style.width = "90%"
-        nomeerr.style.fontSize = "14px"
+    if ((nome.value == "") && ((nasc.value == ""))) {
         inpNomeCom.appendChild(nomeerr)
+        document.querySelector(".Nascimento").appendChild(nomeerr)
+    } else if ((nome.value == "")) {
+        inpNomeCom.appendChild(nomeerr)
+    } else if (nasc.value == "") {
+        document.querySelector(".Nascimento").appendChild(nomeerr)
+
     }
 
     var sexMasc = document.querySelector("#Masculino");
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
 
+    console.log(sexMasc.value)
 
     var sex = [];
 
-    if (sexMasc.check) {
+    if (sexMasc.checked == 1) {
         sexMasc.value = "Masculino";
         sex.push(sexMasc.value)
     } else if (sexFem.checked == 1) {
@@ -77,7 +81,7 @@ function cadastrarAssistido() {
         "nome_social": nomesoc.value,
         "rg": rg.value,
         "cpf": cpf.value,
-        "data_nascimento": `${ano}-${mes}-${dia}`,
+        "data_nascimento": `${dataUS(nasc.value)}`,
         "estado_civil": est.value,
         "naturalidade": nat.value,
         "sexo": sex,
@@ -85,8 +89,10 @@ function cadastrarAssistido() {
         "cartao_sus": cartSus.value,
         "foto": fotinho,
         "antecedente_criminal": ante
-        // "foto_depois": fotinho
+            // "foto_depois": fotinho
     })
+
+    console.log(data)
 
     fetch(`${url}/assistidos`, {
             method: "POST",
@@ -116,7 +122,7 @@ function cadastrarAssistido() {
                                 "value": `${item.value}`
                             }]
                         }
-                            fetch(`${url}/assistido/saude`, {
+                        fetch(`${url}/assistido/saude`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -137,6 +143,7 @@ function cadastrarAssistido() {
                     }
                 });
             }
+
             window.location.reload();
         })
 }

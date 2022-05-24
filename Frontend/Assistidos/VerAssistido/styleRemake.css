@@ -195,7 +195,7 @@ p {
 }
 
 .itens {
-    width: 500px;
+    width: 1000px;
     height: 100%;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -206,14 +206,15 @@ p {
 }
 
 .itens ul {
-    width: 120px;
+    width: 10vw;
     text-align: center;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
     margin-bottom: 1rem;
 }
 
 .itens li {
-    width: 100%
+    width: 100%;
+    height: 35%;
 }
 
 .familia h1 {
@@ -352,6 +353,9 @@ p {
     .button button {
         width: 40%;
     }
+    .itens ul {
+        width: 20vw;
+    }
 }
 
 @media (max-width: 600px) {
@@ -402,6 +406,9 @@ p {
         width: 100%;
         border-radius: 0px;
     }
+    .itens ul {
+        width: 40vw;
+    }
 }
 
 @media (max-width: 270px) {
@@ -446,6 +453,9 @@ p {
     .fotos img {
         width: 50px;
         height: 50px;
+    }
+    .itens ul {
+        width: 70vw;
     }
 }
 

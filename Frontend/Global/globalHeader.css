@@ -9,6 +9,7 @@
         --sombra: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
         --card: 10px 1px 10px 0 rgba(0, 0, 0, 0.24), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
     }
+    
     input:focus {
         color: rgb(0, 0, 0);
     }
@@ -24,32 +25,29 @@
         -webkit-background-clip: text;
     }
     
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
         width: 20px;
     }
-    
-    
     /* Track */
     
      ::-webkit-scrollbar-track {
         box-shadow: inset 0 0 5px grey;
         border-radius: 10px;
     }
-    
-    
     /* Handle */
     
      ::-webkit-scrollbar-thumb {
         background: #166B8A;
         border-radius: 10px;
     }
+    
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
     
-    .btn {
+    button {
         width: 10vw;
         height: 5vh;
         border: none;
@@ -57,6 +55,14 @@
         background-color: white;
         font: 1.2em sans-serif;
         box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+    button:hover {
+        background-color: #166b8a;
+        box-shadow: none;
+        transition: all 0.25s;
+        padding: 0 0px 0px 7px;
+        color: white;
     }
     
     header {

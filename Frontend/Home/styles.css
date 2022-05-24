@@ -1,79 +1,67 @@
 @import url("../Global/globalHeaderMenu.css");
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.menucontent {
-    top: 0%;
-    left: 0%;
-}
-
 section {
-    display: flex;
-    align-self: center;
-    justify-self: center;
-    position: fixed;
     width: 100%;
-    height: 90%;
-    align-items: center;
+    height: 90vh;
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .cards-container {
-    width: 70%;
+    width: 80%;
     height: 80%;
     background: var(--casa-azul);
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, var(--casa-azul), #002a6e);
-    display: flex;
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 30px 0 30px 0;
 }
 
 .cards {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.uppercards {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.cardAssistido,
-.cardFuncionario,
-.cardAssistencia {
-    height: 10;
-    padding: 7vh 5vw 7vh 5vw;
-    background-color: #e5e5e5;
-    text-align: center;
-    box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: .5fr
 }
 
 .cardLancamento {
-    height: 10;
-    padding: 7vh 5vw 7vh 5vw;
+    width: 70%;
+    height: 40%;
+    align-self: center;
     background-color: #e5e5e5;
+    justify-self: center;
+    grid-column-start: 2;
     text-align: center;
-    box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px 0 30px 0;
+    font-size: 18px
 }
 
-.lower-cards :hover,
-.uppercards :hover {
+.cardFuncionario,
+.cardAssistencia,
+.cardAssistido {
+    background-color: #e5e5e5;
+    width: 70%;
+    height: 40%;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px 0 30px 0;
+    font-size: 18px
+}
+
+.cardLancamento:hover,
+.cardFuncionario:hover,
+.cardAssistencia:hover,
+.cardAssistido:hover {
     box-shadow: none;
     background: var(--casa-azul);
     /* fallback for old browsers */
@@ -83,11 +71,10 @@ section {
     padding: auto;
     cursor: pointer;
     transition: all 0.5s;
-    background-color: var(--primary-color);
     text-transform: uppercase;
     text-overflow: inherit;
+    background-color: transparent;
     color: white;
-    
 }
 
 .styleBall-bottom-right {
@@ -99,11 +86,10 @@ section {
     border-bottom-left-radius: 0%;
     border-bottom-right-radius: 30px;
     z-index: 1;
-    left: 74%;
+    left: 79%;
     bottom: 9%;
     opacity: 0.9;
 }
-
 
 .styleBall-bottom-left {
     position: fixed;
@@ -113,81 +99,50 @@ section {
     border-top-right-radius: 50%;
     border-bottom-left-radius: 0%;
     z-index: 1;
-    right: 74%;
+    right: 79%;
     bottom: 9%;
     opacity: 0.9;
 }
 
-@media (max-width: 900px) {
-    .cards-container {
-        width: 70%;
+@media (max-width:501px) {
+    .cards {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: none
     }
-    p {
-        font-size: 15px
-    }
-    .cardAssistido,
-    .cardFuncionario,
-    .cardAssistencia {
-        height: 10;
-        padding: 5vh 3vw 5vh 3vw;
-        background-color: #e5e5e5;
-        text-align: center;
-        box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
-        border-top-left-radius: 30px;
-        border-bottom-right-radius: 30px;
-    }
-    .cardLancamento {
-        height: 10;
-        padding: 5vh 3vw 5vh 3vw;
-        background-color: #e5e5e5;
-        text-align: center;
-        box-shadow: 4px 5px 5px rgba(46, 46, 46, 0.445);
-        border-top-left-radius: 30px;
-        border-bottom-right-radius: 30px;
+    .styleBall-bottom-right,
+    .styleBall-bottom-left {
+        display: none;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width:300px) {
+    header {
+        background-color: white;
+    }
+    body {
+        background: var(--casa-azul);
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, var(--casa-azul), #002a6e);
+    }
     .cards-container {
-        display: flex;
-        flex-direction: column;
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        background: none
     }
     .cards {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         width: 100%;
         height: 100%;
     }
-    .uppercards {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-    }
-    .lower-cards {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-    }
-    .cardAssistido,
+    .cardLancamento,
     .cardFuncionario,
-    .cardAssistencia {
-        border-top-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
-    .cardFuncionario,
-    .cardAssistencia {
-        margin-top: 1em
-    }
-    .cardLancamento {
-        width: 100%;
-        border-top-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
-    .cardLancamento {
-        display: flex;
-        flex-direction: column;
-        margin-top: 1em;
+    .cardAssistencia,
+    .cardAssistido {
+        width: 80%;
     }
 }

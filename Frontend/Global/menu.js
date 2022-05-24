@@ -4,7 +4,7 @@ let pgAssistencia = document.querySelector(".Assistencia")
 let pgFuncionario = document.querySelector(".Funcionario")
 let pgAssistido = document.querySelector(".Assistido")
 let logout = document.querySelector(".logout")
-
+let home = document.querySelector(".config")
 menuContent.style.marginLeft = "-550px";
 
 function abrirMenu() {
@@ -44,6 +44,10 @@ Financeiro.addEventListener("click", () => {
     window.location.href = "../../Financeiro/FinanceiroAll"
 })
 
+home.style.cursor = "pointer"
+home.addEventListener("click", () => {
+    window.location.href = "../../Home/"
+})
 
 let Assistido = document.querySelector(".Assistidos")
 Assistido.style.cursor = "pointer"

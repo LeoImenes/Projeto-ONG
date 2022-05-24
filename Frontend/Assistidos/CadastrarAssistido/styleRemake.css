@@ -55,7 +55,7 @@ section {
     display: grid;
     text-align: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
 }
 
 .inputDados {
@@ -129,7 +129,6 @@ input[type="checkbox"] {
     align-items: flex-end;
     justify-content: space-between;
     grid-template-columns: 1fr 1fr;
-    
 }
 
 .pscoativos img,
@@ -218,9 +217,16 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 900px) {
-
-    .userform,.button{
-        background-color:transparent 
+    .userform,
+    .button {
+        background-color: transparent
+    }
+    .userform {
+        height: 20%
+    }
+    .formAssis {
+        grid-template-columns: 1;
+        grid-template-rows: 5% 1fr;
     }
     .card {
         width: 100%;
@@ -229,6 +235,7 @@ input[type="checkbox"] {
     }
     .inputDados {
         width: 95%;
+        height: 80%;
         align-items: center;
         justify-content: center;
         align-self: center;
@@ -265,6 +272,9 @@ input[type="checkbox"] {
     .pscoativos,
     .saude {
         height: 80%;
+    }
+    .btn {
+        width: 40%;
     }
 }
 
@@ -313,14 +323,14 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 250px) {
-   .outros{
-       display: flex;
-       flex-direction: column;
-   }
-   .sexstyle{
-       display:grid;
-       grid-template-columns: 1fr 1fr;
-   }
+    .outros {
+        display: flex;
+        flex-direction: column;
+    }
+    .sexstyle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-height: 500px) {

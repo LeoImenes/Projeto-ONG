@@ -1,3 +1,9 @@
+function getAll() {
+    getfunc()
+    list()
+    getFamiliares()
+}
+
 function menuDown() {
 
     let menuAco = document.querySelector(".dadosFamilia");
@@ -19,12 +25,13 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
+    console.log(local)
     fetch(`${url}/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-
+            console.log(data)
             var dadosFamilia = document.querySelector(".dadosFamilia")
             data.forEach((item, index) => {
 
@@ -59,17 +66,17 @@ function getFamiliares() {
                 var litgeend = document.createElement("li")
 
                 litxtNome.innerHTML = "Nome: "
-                litgetNome.innerHTML = item.nome_familiar
+                litgetNome.innerHTML = item.Familiar
                 litxtrg.innerHTML = "RG: "
-                litgetrg.innerHTML = item.rg_familiar
+                litgetrg.innerHTML = item.Rg_familiar
                 litxtpar.innerHTML = "Parentesco: "
-                litgetpar.innerHTML = item.parentesco
+                litgetpar.innerHTML = item.Parentesco
                 litxttel.innerHTML = "Telefone: "
-                litgettel.innerHTML = item.telefone_familiar
+                litgettel.innerHTML = item.Telefone_familiar
                 litxtemail.innerHTML = "Email: "
-                litgetemail.innerHTML = item.email_familiar
+                litgetemail.innerHTML = item.Email_Familiar
                 litxtend.innerHTML = "Endereço: "
-                litgeend.innerHTML = item.endereco_familiar
+                litgeend.innerHTML = item.Endereco_Familiar
 
                 ul_email.appendChild(litxtemail)
                 ul_email.appendChild(litgetemail)
@@ -143,7 +150,6 @@ function list() {
             }
         })
         .then((data) => {
-            console.log(data.foto_depois)
             var antes = document.querySelector("#assistidoAntes");
             antes.src = data.foto_antes;
             antes.style.borderRadius = "50%";
@@ -224,16 +230,14 @@ function getComorbidadeAssistido() {
             return response.json();
         })
         .then((data) => {
-
             data.forEach((item, index) => {
-
                 if (item.tipo === 0) {
                     var liDroga = document.createElement("li");
-                    liDroga.innerHTML = item.comorbidade;
+                    liDroga.innerHTML = item.Comorbidades;
                     ulDroga.appendChild(liDroga);
                 } else {
                     var liDoenca = document.createElement("li");
-                    liDoenca.innerHTML = item.comorbidade;
+                    liDoenca.innerHTML = item.Comorbidades;
                     ulDoenca.appendChild(liDoenca);
                 }
 

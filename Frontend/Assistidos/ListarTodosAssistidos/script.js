@@ -35,7 +35,7 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined") || (fun.foto_antes === "null")) {
+                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined") || (fun.foto_antes === "null") || (fun.foto_antes === "")) {
                     img.src = "../../Assets/icones/user.png"
                 } else {
                     img.src = fun.foto_antes
