@@ -155,9 +155,6 @@ img {
 }
 
 @media (max-width: 635px) {
-    .useritens {
-        /* border-radius: 0; */
-    }
     p {
         font-size: 12px;
     }

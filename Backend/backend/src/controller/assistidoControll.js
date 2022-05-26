@@ -1,19 +1,20 @@
-const { con } = require('../database/Connection');
-const assistidoModelo = require('../model/assistidoModel');
+const { con } = require('../database/Connection')
+const assistidoModelo = require('../model/assistidoModel')
+
 
 
 // MÉTODO CADASTRAR ASSISTIDO
 const postAssistido = (req, res) => {
     req.connection.setTimeout(120000);
     // Campos referentes a tabela de assistidos do banco de dados 
-    let nome_social;
-    let rg;
-    let cpf;
-    let naturalidade;
-    let cartao_cidadao;
-    let cartao_sus;
-    let foto_antes;
-    let foto_depois;
+    let nome_social
+    let rg
+    let cpf
+    let naturalidade
+    let cartao_cidadao
+    let cartao_sus
+    let foto_antes
+    let foto_depois
 
     if (req.body.nome_social === undefined) {
         nome_social = null
@@ -61,9 +62,9 @@ const postAssistido = (req, res) => {
             "${naturalidade}", "${req.body.sexo}", "${cartao_cidadao}", "${cartao_sus}", "${foto_antes}", "${foto_depois}");`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json({...req.body, id_assistido: result.insertId }).end();
+            res.status(200).json({...req.body, id_assistido: result.insertId }).end()
         } else {
-            res.status(400).json({ "Erro:": err.message }).end();
+            res.status(400).json({ "Erro:": err.message }).end()
         }
     })
 }
@@ -85,9 +86,9 @@ const getID = (req, res) => {
     let string = `select * from assistidos where id_assistido = ${req.params.id_assistido}`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.json(result[0]).end();
+            res.json(result[0])
         } else {
-            res.status(400).json({ err: err.message }).end;
+            res.status(400).json({ err: err.message })
         }
     })
 }
@@ -98,44 +99,52 @@ const buscarAssistidoNomeCompleto = (req, res) => {
     let stringNomeCompleto = `select * from assistidos where nome_completo = '${nome_completo}';`
     con.query(stringNomeCompleto, (err, result) => {
         if (err === null) {
-            res.json(result).end();
+            res.json(result)
         } else {
-            res.status(400).json({ err: err.message }).end()
+            res.status(400).json({ err: err.message })
         }
     })
 }
 
 // MÉTODO CONSULTAR ASSISTIDO PELO CPF
 const buscarAssistidoCPF = (req, res) => {
-    let cpf = req.params.cpf;
-    let stringCPF = `select * from assistidos where cpf = '${cpf}';`
+    let cpf = req.params.cpf
+    let stringCPF = `select * from assistidos where cpf = '${cpf}'`
     if (req.params.cpf !== undefined) {
         con.query(stringCPF, (err, result) => {
             if (err === null) {
-                res.json(result).end();
+                res.json(result)
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message })
             }
         })
     } else {
-        res.status(400).end().json({ "err": "informe um cpf" }).end();
+        res.status(400).end().json({ "err": "informe um cpf" })
     }
 }
 
 // MÉTODO CONSULTAR ASSISTIDO PELO RG
 const buscarAssistidoRG = (req, res) => {
     let rg = req.params.rg
-    let stringRG = `select * from assistidos where rg = '${req.params.rg}';`
+    let stringRG = `select * from assistidos where rg = '${req.params.rg}'`
     if (rg !== undefined) {
         con.query(stringRG, (err, result) => {
             if (err === null) {
-                res.json(result).end();
+                res.json(result)
             } else {
+<<<<<<< HEAD
                 res.status(404).json({ err: err.message }).end();
             }
         })
     } else {
         res.status(400).json({ "err": "informe um rg" }).end();
+=======
+                res.status(404).end().json({ err: err.message })
+            }
+        })
+    } else {
+        res.status(400).end().json({ "err": "informe um rg" })
+>>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
     }
 }
 
@@ -164,47 +173,47 @@ const updateAssistido = (req, res) => {
 
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json(result).end();
+            res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message }).end();
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
 
 // MÉTODO ATUALIZAR FOTO DO ASSISTIDO
 const updateFotoAssistido = (req, res) => {
-    let foto = req.body.foto;
-    let id_assistido = req.body.id_assistido;
+    let foto = req.body.foto
+    let id_assistido = req.body.id_assistido
     let string = `update assistidos set foto = '${foto}' where id_assistido = ${id_assistido}`
     if (req.body.foto !== undefined && req.body.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json({...req.body }).end();
+                res.status(200).json({...req.body }).end()
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.json({ "err": "Informe os campos de id e foto" }).end();
+        res.json({ "err": "Informe os campos de id e foto" }).end()
     }
 }
 
 // MÉTODO ATUALIZAR FOTO DEPOIS DO ASSISTIDO
 const updateFotoDepoisAssistido = (req, res) => {
-    let foto_depois = req.body.foto_depois;
-    let id_assistido = req.body.id_assistido;
+    let foto_depois = req.body.foto_depois
+    let id_assistido = req.body.id_assistido
 
     let string = `update assistidos set foto_depois = '${foto_depois}' where id_assistido = ${id_assistido}`
     if (req.body.id_assistido !== undefined && req.body.foto_depois !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.json({...req.body }).end();
+                res.json({...req.body })
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message })
             }
         })
     } else {
-        res.status(400).json({ "err": "informe os campos id e foto" }).end();
+        res.status(400).json({ "err": "informe os campos id e foto" })
     }
 }
 
@@ -214,7 +223,7 @@ const asynqQuery = (query) => {
     return new Promise((resolve, reject) => {
         con.query(query, (err, result) => {
             if (err) reject(err);
-            // console.log(result)
+            console.log(result)
             resolve(result);
         });
     })
@@ -222,8 +231,8 @@ const asynqQuery = (query) => {
 
 // MÉTODO CADASTRAR SAÚDE 
 const postSaude = async(req, res) => {
-    let id_assistido = req.body.id_assistido;
-    let comorbidades = req.body.comorbidades;
+    let id_assistido = req.body.id_assistido
+    let comorbidades = req.body.comorbidades
     if (id_assistido !== undefined && comorbidades.length !== 0) {
         let string;
         let values = [];
@@ -231,7 +240,7 @@ const postSaude = async(req, res) => {
         let index = 0;
         try {
             comorbidades.forEach((item, index) => {
-                values.push(comorbidades[index].value).end();
+                values.push(comorbidades[index].value)
             })
 
         } catch (err) {
@@ -240,7 +249,7 @@ const postSaude = async(req, res) => {
         try {
             con.beginTransaction();
             do {
-                string = `insert into saude (id_assistido,id_comorbidade,data_de_registro) values (${id_assistido}, ${values[index]}, curdate());`
+                string = `insert into saude (id_assistido,id_comorbidade,data_de_registro) values (${id_assistido}, ${values[index]}, curdate())`
                 const response = await asynqQuery(string)
                     .then(() => {
                         if (index + 1 === values.length) {
@@ -257,28 +266,28 @@ const postSaude = async(req, res) => {
                 index++;
             } while (!comerro)
         } catch (err) {
-            res.status(400).json({ err: err.message }).end();
+            res.status(400).json({ err: err.message })
         }
     } else {
-        res.status(400).json({ "err": "informe os campos de id_assistido e comorbidades" }).end();
+        res.status(400).json({ "err": "informe os campos de id_assistido e comorbidades" })
     }
 }
 
 // CONSULTAR SAUDE DO ASSISTIDO POR ID DO ASSISTIDO
 const getSaudeID = (req, res) => {
-    let id_assistido = req.params.id_assistido;
+    let id_assistido = req.params.id_assistido
     let string = `select * from vw_saude where id_assistido = ${id_assistido}`
     if (id_assistido !== undefined) {
         con.query(string, (err, result) => {
             console.log(result)
             if (err === null) {
-                res.status(200).json(result).end();
+                res.status(200).json(result).end()
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message })
             }
         })
     } else {
-        res.status(400).json({ "err": "informe o id_assistido" }).end();
+        res.status(400).json({ "err": "informe o id_assistido" })
     }
 }
 
@@ -287,7 +296,11 @@ const getAssistSaude = (req, res) => {
     let string = `select * from vw_saude;`
     con.query(string, (err, result) => {
         if (err == null) {
+<<<<<<< HEAD
             res.status(200).json(result)
+=======
+            res.status(200).json(result).end()
+>>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
         } else {
             res.status(400).json({ err: err.message })
         }
@@ -301,9 +314,15 @@ getEmployeeNames = function(id_assistido) {
             `select id_saude from saude where id_assistido = ${id_assistido}`,
             function(err, rows) {
                 if (rows === undefined) {
+<<<<<<< HEAD
                     reject(new Error("Error rows is undefined"))
                 } else {
                     resolve(rows)
+=======
+                    reject(new Error("Error rows is undefined"));
+                } else {
+                    resolve(rows);
+>>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
 
                 }
             }
@@ -316,11 +335,15 @@ async function deleteSaude(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
             if (err === null) {
+<<<<<<< HEAD
                 // console.log(result)
+=======
+                console.log(result)
+>>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
                 resolve(result)
             } else {
-                // console.log(err)
-                reject(err).end();
+                console.log(err)
+                reject(err)
             }
         })
     })
@@ -328,23 +351,23 @@ async function deleteSaude(string) {
 
 // MÉTODO ATUALIZAR SAÚDE DO ASSISTIDO
 const updateSaude = async(req, res) => {
-    let id_assistido = req.body.id_assistido;
-    let comorbidades = req.body.comorbidades;
-    let string;
-    let comerro = false;
-    let index = 0;
-    let newIndice = 0;
-    let newCommerro = false;
-    let newString;
+    let id_assistido = req.body.id_assistido
+    let comorbidades = req.body.comorbidades
+    let string
+    let comerro = false
+    let index = 0
+    let newIndice = 0
+    let newCommerro = false
+    let newString
     if (req.body.id_assistido !== undefined) {
         let resultado = getEmployeeNames(id_assistido)
             .then(async(results) => {
                 if (results.length > 0) {
-                    //res.status(200).json(results).end();
+                    //res.status(200).json(results).end()
                     try {
-                        con.beginTransaction().end();
+                        con.beginTransaction()
                         do {
-                            string = `delete from saude where id_saude = ${results[index].id_saude};`
+                            string = `delete from saude where id_saude = ${results[index].id_saude}`
                             let novaResponse = await deleteSaude(string)
                                 .then(() => {
                                     if (index + 1 === results.length) {
@@ -360,6 +383,7 @@ const updateSaude = async(req, res) => {
                                 .catch((err) => {
                                     con.rollback()
                                     res.status(400).json({ err })
+
                                     comerro = true
                                 })
                             index++
@@ -368,39 +392,39 @@ const updateSaude = async(req, res) => {
                         if (comorbidades.length > 0) {
                             try {
                                 do {
-                                    newString = `insert into saude (id_assistido, id_comorbidade, data_de_registro) values (${id_assistido}, ${comorbidades[newIndice].value}, curdate());`
+                                    newString = `insert into saude (id_assistido, id_comorbidade, data_de_registro) values (${id_assistido}, ${comorbidades[newIndice].value}, curdate())`
                                     let executeQuery = await inserirComorbidades(newString)
                                         .then(() => {
                                             if (newIndice + 1 === comorbidades.length) {
-                                                con.commit();
-                                                res.status(200).json({ Mensagem: "Comorbidades atualizadas com sucesso" });
-                                                newCommerro = true;
+                                                con.commit()
+                                                res.status(200).json({ Mensagem: "Comorbidades atualizadas com sucesso" })
+                                                newCommerro = true
                                             }
                                         }).catch((err) => {
-                                            con.rollback();
-                                            res.status(400).json({ err });
-                                            newCommerro = true;
+                                            con.rollback()
+                                            res.status(400).json({ err })
+                                            newCommerro = true
                                         })
-                                    newIndice++;
+                                    newIndice++
                                 } while (!newCommerro)
                             } catch {
-                                res.status(400).json({ err: err.message }).end();
+                                res.status(400).json({ err: err.message }).end()
                             }
                         } else {
-                            res.status(400).json({ "err": "campos de comorbidades vazios" }).end();
+                            res.status(400).json({ "err": "campos de comorbidades vazios" }).end()
                         }
                     } catch (err) {
-                        res.status(400).json({ err: err.message }).end();
+                        res.status(400).json({ err: err.message }).end()
                     }
                 } else {
-                    res.status(400).json({ "err": "este assistido não possui comorbidades" }).end();
+                    res.status(400).json({ "err": "este assistido não possui comorbidades" }).end()
                 }
             })
             .catch(function(err) {
-                res.status(400).json({ "err": "este assistido não possui comorbidades" }).end();
+                res.status(400).json({ "err": "este assistido não possui comorbidades" }).end()
             })
     } else {
-        res.status(400).json({ "err": "informe a comorbidade e o id_saude" }).end();
+        res.status(400).json({ "err": "informe a comorbidade e o id_saude" }).end()
     }
 }
 
@@ -410,25 +434,25 @@ async function inserirComorbidades(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
             if (err === null) {
-                resolve(result).end();
+                resolve(result)
             } else {
-                reject(err).end();
-            };
-        });
-    });
-};
+                reject(err)
+            }
+        })
+    })
+}
 
 // MÉTODO CONSULTAR COMORBIDADES
 const getComorbidades = (req, res) => {
     let string = `select * from comorbidades;`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json(result).end();
+            res.status(200).json(result).end()
         } else {
-            res.status(400).json({ err: err.message }).end();
-        };
-    });
-};
+            res.status(400).json({ err: err.message }).end()
+        }
+    })
+}
 
 // ***** - FAMILIAR DO ASSISTIDO - *****//
 
@@ -442,7 +466,7 @@ const postFamiliar = (req, res) => {
     let id_assistido = req.body.id_assistido;
     let parentesco = req.body.parentesco;
 
-    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}', '${email}','${endereco}');`;
+    let stringFamiliares = `insert into familiares (nome_completo, rg, telefone, email, endereco) values ('${nome_completo}', '${rg}', '${telefone}', '${email}','${endereco}')`;
 
     if (nome_completo !== undefined) {
         con.query(stringFamiliares, (err, result) => {
@@ -450,7 +474,7 @@ const postFamiliar = (req, res) => {
                 let id_familiar = result.insertId
                 let queries = [
                     `insert into familiarassistido (id_assistido,id_familiar, data_cadastro) values (${id_assistido}, ${id_familiar}, curdate())`,
-                    `insert into familiarassistido (id_assistido,id_familiar,parentesco,data_cadastro) values (${id_assistido}, ${id_familiar}, '${parentesco}', curdate());`
+                    `insert into familiarassistido (id_assistido,id_familiar,parentesco,data_cadastro) values (${id_assistido}, ${id_familiar}, '${parentesco}', curdate())`
                 ]
 
                 function retString(paren) {
@@ -463,24 +487,24 @@ const postFamiliar = (req, res) => {
                 con.query(stringAssisFam, (err02, result02) => {
                     if (err02 === null) {
                         let id_assisFam = result02.insertId
-                        let stringResult = `select * from vw_familiar where id_familiar = ${id_familiar};`
+                        let stringResult = `select * from vw_familiar where id_familiar = ${id_familiar}`
                         con.query(stringResult, (err03, result03) => {
                             if (err03 === null) {
-                                res.status(200).json(result03).end();
+                                res.status(200).json(result03)
                             } else {
-                                res.status(400).json({ err03: err03.message }).end();
+                                res.status(400).json({ err03: err03.message }).end()
                             }
                         })
                     } else {
-                        res.status(400).json({ err02: err02.message }).end();
+                        res.status(400).json({ err02: err02.message }).end()
                     }
                 })
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).json({ "err": "informe pelo menos o 'nome_completo'" }).end();
+        res.status(400).json({ "err": "informe pelo menos o 'nome_completo'" }).end()
     }
 }
 
@@ -491,17 +515,17 @@ const postRelacionamentoFamiliar = (req, res) => {
     let parentesco;
     let par = !(parentesco === undefined) ? parentesco = null : parentesco = req.body.parentesco
     let string = `insert into familiarassistido (data_cadastro,id_assistido,id_familiar,parentesco) values (curdate(),  ${id_assistido}, 
-    (select id_familiar from familiares where rg = '${rg_familiar}'),'${par}');`
+    (select id_familiar from familiares where rg = '${rg_familiar}'),'${par}')`
     if (id_assistido !== undefined && rg_familiar !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json(result).end();
+                res.status(200).json(result).end()
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).json({ "err": "Informe os campos de id_assistido e rg" }).end();
+        res.status(400).json({ "err": "Informe os campos de id_assistido e rg" }).end()
     }
 }
 
@@ -518,9 +542,9 @@ const updateFamiliar = (req, res) => {
         if (req.body.id_familiar !== undefined) {
             con.query(string, (err, result) => {
                 if (err === null) {
-                    res.status(200).json({...req.body }).end();
+                    res.status(200).json({...req.body }).end()
                 } else {
-                    res.status(400).json({ err: err.message }).end();
+                    res.status(400).json({ err: err.message }).end
                 }
             })
         }
@@ -556,49 +580,49 @@ const getVWFamiliar = (req, res) => {
         let string = `select * from vw_familiar where id_assistido = ${id_assistido}`
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json(result).end();
+                res.status(200).json(result).end()
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).json({ "err": "Informe o id_assistido" }).end();
+        res.status(400).json({ "err": "informe o id_assistido" }).end()
     }
 }
 
 //***** - RELATÓRIOS DO ASSISTIDO - *****//
 // MÉTODO FAZER RELARÓRIO DO ASSISTIDO
 const relatorioPost = (req, res) => {
-    let id_assistido = req.body.id_assistido;
-    let id_funcionario = req.body.id_funcionario;
-    let relatorio = req.body.relatorio;
+    let id_assistido = req.body.id_assistido
+    let id_funcionario = req.body.id_funcionario
+    let relatorio = req.body.relatorio
 
-    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values (${id_assistido}, ${id_funcionario}, "${relatorio}", curdate());`;
+    let string = `insert into relatorios (id_assistido,id_funcionario,relatorio, data_relatorio) values (${id_assistido}, ${id_funcionario}, "${relatorio}", curdate())`;
 
     if (id_assistido !== undefined || id_funcionario !== undefined || relatorio !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.status(200).json({ result, ...req.body }).end();
+                res.status(200).json({ result, ...req.body }).end()
             } else {
-                res.status(400).json({ err: err.message }).end();
+                res.status(400).json({ err: err.message }).end()
             }
-        });
+        })
     } else {
-        res.status(400).json({ "err": "Erro informe os comapos id_assistido, id_funcionario e relatório" }).end();
+        res.status(400).json({ "err": "Erro informe os comapos id_assistido, id_funcionario e relatório" }).end()
     }
-};
+}
 
 // MÉTODO CONSULTAR TODO OS RELARÓRIO DOS ASSISTIDOS
 const getRelatorio = (req, res) => {
     let string = `select * from relatorios`
     con.query(string, (err, result) => {
         if (err === null) {
-            res.status(200).json(result).end();
+            res.status(200).json(result).end()
         } else {
             res.status(400).json({ err: "Erro ao consultar relarórios" }).end();
-        };
-    });
-};
+        }
+    })
+}
 
 // MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
 const getRelatorioID = (req, res) => {
@@ -606,13 +630,13 @@ const getRelatorioID = (req, res) => {
     if (req.params.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err == null) {
-                res.status(200).json(result).end();
+                res.status(200).json(result).end()
             } else {
                 res.status(400).json({ err: err.message }).end();
             }
         })
     } else {
-        res.status(400).json({ "err": "Informe o Id do Assistido" }).end();
+        res.status(400).json({ "err": "Informe o Id do Assistido" })
     }
 }
 
@@ -623,7 +647,7 @@ const updateRelatorioID = (req, res) => {
         con.query(string, (err, result) => {
             if (err == null) {
                 if (result.affectedRows === 0) {
-                    res.status(400).json({ "err": "Id do relatorio não existe" }).end();
+                    res.status(400).json({ "err": "Id do relatorio não existe" })
                 } else {
                     res.status(200).json(result).end()
                 }
@@ -632,7 +656,7 @@ const updateRelatorioID = (req, res) => {
             }
         })
     } else {
-        res.status(400).json({ "err": "Informe o Id do Relatorio" }).end();
+        res.status(400).json({ "err": "Informe o Id do Relatorio" })
     }
 }
 
