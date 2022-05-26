@@ -30,9 +30,10 @@
         border-radius: 10px;
         box-shadow: 15px 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
         overflow-y: scroll;
+  
     }
     
-    .cardFuncionario {
+    .cardRelatorio {
         width: 100%;
         height: 100%;
         padding: 6vh;
@@ -43,7 +44,7 @@
         text-align: center;
     }
     
-    .cardFuncionario:hover {
+    .cardRelatorio:hover {
         cursor: pointer;
         background-color: #0883b0;
         transition: all 0.5s;
@@ -135,7 +136,7 @@
         .fotoUsuario img {
             width: 20px;
         }
-        .cardFuncionario {
+        .cardRelatorio {
             flex-direction: column;
             justify-content: center;
             align-items: center;

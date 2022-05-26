@@ -1,9 +1,9 @@
-var homme = document.querySelector(".homme")
+// var homme = document.querySelector(".homme")
 
-function home(){
-    window.location.href = '../../Home/'
+// function home(){
+//     window.location.href = '../../Home/'
 
-};
+// };
 
 function Relatorio() {
     let relatorio = document.querySelector(".relatorio").value;
@@ -44,7 +44,7 @@ function getAssistido() {
     var img = document.querySelector(".ImgAssistido")
 
     var local = localStorage.getItem("assistido");
-    console.log(local)
+    // console.log(local)
 
     fetch(`${url}/assistidos/${local}`)
         .then((response) => {
@@ -54,7 +54,7 @@ function getAssistido() {
         .then((data) => {
             p.innerHTML = ` ${data.nome_completo}`
             img.src = `${data.foto_antes}`
-            console.log(data)         
+            // console.log(data)         
             
         })
 }

@@ -230,6 +230,7 @@ select
 	f.telefone AS Telefone_familiar,
 	f.email AS Email_Familiar,
 	f.endereco AS Endereco_Familiar
+	f.rg as RG
 	
 from
 	assistidos a

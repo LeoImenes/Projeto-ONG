@@ -131,11 +131,11 @@ const buscarAssistidoRG = (req, res) => {
             if (err === null) {
                 res.json(result).end();
             } else {
-                res.status(404).end().json({ err: err.message }).end();
+                res.status(404).json({ err: err.message }).end();
             }
         })
     } else {
-        res.status(400).end().json({ "err": "informe um rg" }).end();
+        res.status(400).json({ "err": "informe um rg" }).end();
     }
 }
 
@@ -287,9 +287,9 @@ const getAssistSaude = (req, res) => {
     let string = `select * from vw_saude;`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json(result).end();
+            res.status(200).json(result)
         } else {
-            res.status(400).json({ err: err.message }).end();
+            res.status(400).json({ err: err.message })
         }
     })
 }
@@ -301,9 +301,9 @@ getEmployeeNames = function(id_assistido) {
             `select id_saude from saude where id_assistido = ${id_assistido}`,
             function(err, rows) {
                 if (rows === undefined) {
-                    reject(new Error("Error rows is undefined")).end();
+                    reject(new Error("Error rows is undefined"))
                 } else {
-                    resolve(rows).end();
+                    resolve(rows)
 
                 }
             }
@@ -317,7 +317,7 @@ async function deleteSaude(string) {
         con.query(string, (err, result) => {
             if (err === null) {
                 // console.log(result)
-                resolve(result).end();
+                resolve(result)
             } else {
                 // console.log(err)
                 reject(err).end();

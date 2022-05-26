@@ -36,8 +36,9 @@ function listarRelatorios() {
                 // } else {
                 //     img.src = assistido.foto
                 // }
-
+                
                 nomeAssistido.innerHTML = `${Assist.id_relatorio}`
+            
 
                 divimg.appendChild(img)
                 divnome.appendChild(nomeAssistido)

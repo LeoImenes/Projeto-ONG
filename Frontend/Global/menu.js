@@ -46,7 +46,7 @@ Financeiro.addEventListener("click", () => {
 
 home.style.cursor = "pointer"
 home.addEventListener("click", () => {
-    window.location.href = "../../Home/"
+    window.location.href = "../../Home/index.html"
 })
 
 let Assistido = document.querySelector(".Assistidos")

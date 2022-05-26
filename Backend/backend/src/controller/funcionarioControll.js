@@ -142,7 +142,7 @@ const deletarFuncionario = (req, res) => {
     let string = `delete from funcionarios where matricula = "${req.params.matricula}";`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({ "Funcionário Excluido: ":req.params }).end();
+            res.status(200).json({ "Funcionário Excluido: ": req.params }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -195,7 +195,7 @@ const resetSenha = (req, res) => {
                 if (result.affectedRows === 0) {
                     res.status(401).json({ "err": "Não foi possível alterar a senha" }).end();
                 } else {
-                    res.status(200).json({"Mensagem: " : "Senha alterada com sucesso"}).end();
+                    res.status(200).json({ "Mensagem: ": "Senha alterada com sucesso" }).end();
                 }
             } else {
                 res.status(400).json({ err: err.message }).end();
@@ -252,58 +252,57 @@ async function executarQuery(string) {
     })
 }
 
-// MÉTODO FAZER ASSISTÊNCIA AOS ASSISTIDOS
-const postAssistencia = (req, res) => {
-    console.log(req.body)
-    let id_funcionario = req.body.id_funcionario
-    let id_assistido = req.body.id_assistido
-    let itens = req.body.itens
-    let index = 0
-    let comerro = false
-    let stringSolicitacao
-    if (id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
-        let stringAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values (${id_assistido}, ${id_funcionario}, curdate());`
-        try {
-            con.beginTransaction()
-            con.query(stringAssistencia, async (err, result) => {
-                if (err === null) {
-                    let id_assistencia = result.insertId
-                    do {
-                        stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values (${id_assistencia}, ${itens[index].id_item})`;
-                        // console.log("string sql:" + stringSolicitacao)
-                        // console.log("index: " + index)
-                        let response = await executarQuery(stringSolicitacao)
-                            .then(() => {
-                                if (index + 1 === itens.length) {
-                                    console.log(itens)
-                                    con.commit()
-                                    res.status(200).json({ "Assistência": " Lançada com sucesso" })
-                                    comerro = true
-                                }
+// MÉTODO FAZER ASSISTÊNCIA A UM ASSISTIDOS *** função esta com problema ***
+// const postAssistencia = (req, res) => {
+//     let id_funcionario = req.body.id_funcionario
+//     let id_assistido = req.body.id_assistido
+//     let itens = req.body.itens
+//     let index = 0
+//     let comerro = false
+//     let stringSolicitacao
+//     if (id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
+//         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
+//         try {
+//             con.beginTransaction()
+//             con.query(strinAssistencia, async (err, result) => {
+//                 if (err === null) {
+//                     let id_assistencia = result.insertId
+//                     do {
+//                         stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
+//                         console.log("string sql:" + stringSolicitacao)
+//                         console.log("index: " + index)
+//                         let response = await executarQuery(stringSolicitacao)
+//                             .then(() => {
+//                                 if (index + 1 === itens.length) {
+//                                     console.log(itens)
+//                                     con.commit()
+//                                     res.status(200).json({ "ok": "ok" })
+//                                     comerro = true
+//                                 }
 
-                            }).catch((err) => {
-                                con.rollback()
-                                res.status(400).json({ err: err.message })
-                                comerro = true
-                            })
+//                             }).catch((err) => {
+//                                 con.rollback()
+//                                 res.status(400).json({ err: err.message })
+//                                 comerro = true
+//                             })
 
-                        index++
-                    } while (!comerro)
-                } else {
-                    res.status(400).json({ err: err.message })
-                }
-            })
+//                         index++
+//                     } while (!comerro)
+//                 } else {
+//                     res.status(400).json({ err: err.message })
+//                 }
+//             })
 
-        } catch (err) {
-            con.rollback()
-            res.status(400).json({ err: err.message })
-        }
-    } else {
-        res.status(400).json({ "err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'" })
-    }
-};
+//         } catch (err) {
+//             con.rollback()
+//             res.status(400).json({ err: err.message })
+//         }
+//     } else {
+//         res.status(400).json({ "err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'" })
+//     }
+// };
 
-// MÉTODO fazer assistencia para varios assistidos
+// MÉTODO FAZER ASSISTÊNCIA PARA VARIOS ASSISTIDOS
 const postmultAssis = (req, res) => {
     let id_funcionario = req.body.id_funcionario;
     let assistidos = req.body.assistidos;
@@ -495,7 +494,7 @@ module.exports = {
     login,
     resetSenha,
     getAuthorization,
-    postAssistencia,
+    // postAssistencia,
     getAllAssistencias,
     getAssistenciasID,
     postFinanca,
