@@ -117,94 +117,94 @@ function getAssistido() {
         });
 }
 
-function updateAssistido() {
-    var inpNomeCom = document.querySelector(".nome-Completo");
-    var nome = document.querySelector(".nome");
-    var nomesoc = document.querySelector(".nome-soc");
-    var rg = document.querySelector(".rg");
-    var cpf = document.querySelector(".cpf");
-    var est = document.querySelector(".estado");
-    var nat = document.querySelector(".naturalidade");
-    var nasc = document.querySelector(".nasc");
-    var cartCid = document.querySelector(".cartCid");
-    var cartSus = document.querySelector(".cartSus");
-    var ante = document.querySelector(".ant");
-    var inputs = document.querySelectorAll("input");
-    var nomeerr = document.createElement("p")
-    nomeerr.innerHTML = "* Preencha este campo"
-    nomeerr.style.display = "flex"
-    nomeerr.style.marginTop = "5px"
-    nomeerr.style.color = "red"
-    nomeerr.style.width = "100%"
-    nomeerr.style.fontSize = "10px"
+// function updateAssistido() {
+//     var inpNomeCom = document.querySelector(".nome-Completo");
+//     var nome = document.querySelector(".nome");
+//     var nomesoc = document.querySelector(".nome-soc");
+//     var rg = document.querySelector(".rg");
+//     var cpf = document.querySelector(".cpf");
+//     var est = document.querySelector(".estado");
+//     var nat = document.querySelector(".naturalidade");
+//     var nasc = document.querySelector(".nasc");
+//     var cartCid = document.querySelector(".cartCid");
+//     var cartSus = document.querySelector(".cartSus");
+//     var ante = document.querySelector(".ant");
+//     var inputs = document.querySelectorAll("input");
+//     var nomeerr = document.createElement("p")
+//     nomeerr.innerHTML = "* Preencha este campo"
+//     nomeerr.style.display = "flex"
+//     nomeerr.style.marginTop = "5px"
+//     nomeerr.style.color = "red"
+//     nomeerr.style.width = "100%"
+//     nomeerr.style.fontSize = "10px"
 
 
-    var sexMasc = document.querySelector("#Masculino");
-    var sexFem = document.querySelector("#Feminino");
-    var sexOutr = document.querySelector("#Outro");
+//     var sexMasc = document.querySelector("#Masculino");
+//     var sexFem = document.querySelector("#Feminino");
+//     var sexOutr = document.querySelector("#Outro");
 
-    console.log(sexMasc.value)
+//     console.log(sexMasc.value)
 
-    var sex = [];
+//     var sex = [];
 
-    if (sexMasc.checked == 1) {
-        sexMasc.value = "Masculino";
-        sex.push(sexMasc.value)
-    } else if (sexFem.checked == 1) {
-        sexFem.value = "Feminino";
-        sex.push(sexFem.value)
-    } else if (sexOutr.checked == 1) {
-        sexOutr.value = "Outro";
-        sex.push(sexOutr.value);
-    } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
-        alert("Selecione pelo menos uma opção (Sexo)")
-    }
+//     if (sexMasc.checked == 1) {
+//         sexMasc.value = "Masculino";
+//         sex.push(sexMasc.value)
+//     } else if (sexFem.checked == 1) {
+//         sexFem.value = "Feminino";
+//         sex.push(sexFem.value)
+//     } else if (sexOutr.checked == 1) {
+//         sexOutr.value = "Outro";
+//         sex.push(sexOutr.value);
+//     } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
+//         alert("Selecione pelo menos uma opção (Sexo)")
+//     }
 
-    if (fotinho === undefined) {
-        fotinho = fotogetAssisitdo
-    }
+//     if (fotinho === undefined) {
+//         fotinho = fotogetAssisitdo
+//     }
 
-    var dadosAtt = JSON.stringify({
-        id_assistido: assis,
-        nome_completo: nome.value,
-        nome_social: nomesoc.value,
-        rg: rg.value,
-        cpf: cpf.value,
-        antecedente_criminal: ante.value,
-        data_nascimento: `${dataUS(nasc.value)}`,
-        naturalidade: nat.value,
-        estado_civil: est.value,
-        sexo: sex,
-        cartao_cidadao: cartCid.value,
-        cartao_sus: cartSus.value,
-        foto_depois: fotinho
-    })
+//     var dadosAtt = JSON.stringify({
+//         id_assistido: assis,
+//         nome_completo: nome.value,
+//         nome_social: nomesoc.value,
+//         rg: rg.value,
+//         cpf: cpf.value,
+//         antecedente_criminal: ante.value,
+//         data_nascimento: `${dataUS(nasc.value)}`,
+//         naturalidade: nat.value,
+//         estado_civil: est.value,
+//         sexo: sex,
+//         cartao_cidadao: cartCid.value,
+//         cartao_sus: cartSus.value,
+//         foto_depois: fotinho
+//     })
 
-    if ((nome.value == "") && ((nasc.value == ""))) {
-        inpNomeCom.appendChild(nomeerr)
-        document.querySelector(".Nascimento").appendChild(nomeerr)
-    } else if ((nome.value == "")) {
-        inpNomeCom.appendChild(nomeerr)
-    } else if ((nasc.value == "") || (nasc.value == 00 / 00 / 0000)) {
-        document.querySelector(".Nascimento").appendChild(nomeerr)
+//     if ((nome.value == "") && ((nasc.value == ""))) {
+//         inpNomeCom.appendChild(nomeerr)
+//         document.querySelector(".Nascimento").appendChild(nomeerr)
+//     } else if ((nome.value == "")) {
+//         inpNomeCom.appendChild(nomeerr)
+//     } else if ((nasc.value == "") || (nasc.value == 00 / 00 / 0000)) {
+//         document.querySelector(".Nascimento").appendChild(nomeerr)
 
-    }
-    console.log(nasc.value)
-    fetch(`${url}/assistido/update`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: dadosAtt
-        })
-        .then(response => {
-            if ((nome.value !== "") && ((nasc.value !== ""))) {
-                alert('Dados Atualizados com Sucesso')
-                return response.json()
-            }
-        })
-        .then(data => {
-            console.log(data)
-        })
-}
+//     }
+//     console.log(nasc.value)
+//     fetch(`${url}/assistido/update`, {
+//             method: "PUT",
+//             headers: { "Content-Type": "application/json" },
+//             body: dadosAtt
+//         })
+//         .then(response => {
+//             if ((nome.value !== "") && ((nasc.value !== ""))) {
+//                 alert('Dados Atualizados com Sucesso')
+//                 return response.json()
+//             }
+//         })
+//         .then(data => {
+//             console.log(data)
+//         })
+// }
 
 function getComorbidades() {
     var listaComorbidade = document.querySelectorAll(".Comorbidade")
@@ -253,38 +253,38 @@ function getComorbidades() {
 }
 
 function updateComorbidades() {
+    var comor;
     var listaComorbidade = document.querySelectorAll(".Comorbidade");
     listaComorbidade.forEach((item, index) => {
 
         if (item.checked === true) {
-            var comor = {
-                "id_assistido": JSON.parse(assis),
-                "comorbidades": [{
-                    "value": `${item.value}`
-                }]
 
-            }
-
-            console.log(comor)
-            fetch(`${url}/assistido/saude`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(comor)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        alert("Falha ao Cadastrar Comorbidades")
-                    }
-                })
-                .then(data => {
-
-                })
         }
     });
+    comor = {
+        "id_assistido": JSON.parse(assis),
+        "comorbidades": [{
+            "value": 1
+        }]
+
+    }
+    console.log(comor)
+    fetch(`${url}/assistido/saude`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(comor)
+        })
+        .then(response => {
+
+            return response.json()
+
+        })
+        .then(data => {
+            console.log(data)
+
+        })
 }
 
 function showMenu() {

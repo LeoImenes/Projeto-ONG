@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body onload="list(),getfunc()">
+<body onload="getfunc(), list()">
     <header>
         <div class="header">
             <ul class="nav-bar">
                 <li>
-                    <h2>--- Funcionário ---</h2>
+                    <h2>--- Cadastar Funcionário ---</h2>
                 </li>
 
             </ul>
@@ -65,79 +65,72 @@
         <div class="cards">
             <div class="card">
                 <ul>
-
                     <li><img src="../../Assets/icones/user.png" alt="User" id="Funcfoto"></li>
                     <li>
-                        <p class="adcFoto" style="font-size:16px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
+                        <p class="adcFoto" style="font-size:12px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
                         <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
                     </li>
-                    <li><button class="btn-ft" onclick="cadastrarFotoDepois()">Atualizar Foto</button></li>
                 </ul>
             </div>
-            <div class="cardForm">
-                <div class="familia">
-                    <div class="famform">
-                        <div class="EditarDados">
-                            <ul>
-                                <input type="text" placeholder="Matricula..." id="Matricula">
-                            </ul>
-                            <ul>
-                                <input type="text" placeholder="Data de Demissão..." id="Data" oninput="mascaraData(this)">
-                            </ul>
-                            <ul>
-                                <input type="text" placeholder="Cargo..." id="cargo">
-                            </ul>
-                        </div>
-                        <div class="DadosFuncionario">
-                            <ul>
-                                <li>Nome: </li>
-                                <li class="getNome"></li>
-                            </ul>
-                            <ul>
-                                <li>Email: </li>
-                                <li class="getEmail"></li>
-                            </ul>
-                            <ul>
-                                <li>Matricula: </li>
-                                <li class="getMatricula"></li>
-                            </ul>
-                            <ul>
-                                <li>RG: </li>
-                                <li class="getRG"></li>
-                            </ul>
-                            <ul>
-                                <li>CPF: </li>
-                                <li class="getCPF"></li>
-                            </ul>
-                            <ul>
-                                <li>Nascimento: </li>
-                                <li class="getDataNasc"></li>
-                            </ul>
-                            <ul>
-                                <li>Cargo: </li>
-                                <li class="getCargo"></li>
-                            </ul>
-                            <ul>
-                                <li>Sexo: </li>
-                                <li class="getSexo"></li>
-                            </ul>
-                            <ul>
-                                <li>Admissão: </li>
-                                <li class="getDataAdmissao"></li>
-                            </ul>
-                            <ul>
-                                <li>Demissão: </li>
-                                <li class="getDemissao"></li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="funform">
+                <div class="EditarDados">
+                    <ul>
+                        <input type="text" placeholder="Matricula..." id="Matricula">
+                    </ul>
+                    <ul>
+                        <input type="text" placeholder="Data de Demissão..." id="Data" oninput="mascaraData(this)">
+                    </ul>
+                    <ul>
+                        <input type="text" placeholder="Cargo..." id="cargo">
+                    </ul>
+                </div>
+                <div class="DadosFuncionario">
+                    <ul>
+                        <li>Nome: </li>
+                        <li class="getNome"></li>
+                    </ul>
+                    <ul>
+                        <li>Email: </li>
+                        <li class="getEmail"></li>
+                    </ul>
+                    <ul>
+                        <li>Matricula: </li>
+                        <li class="getMatricula"></li>
+                    </ul>
+                    <ul>
+                        <li>RG: </li>
+                        <li class="getRG"></li>
+                    </ul>
+                    <ul>
+                        <li>CPF: </li>
+                        <li class="getCPF"></li>
+                    </ul>
+                    <ul>
+                        <li>Nascimento: </li>
+                        <li class="getDataNasc"></li>
+                    </ul>
+                    <ul>
+                        <li>Cargo: </li>
+                        <li class="getCargo"></li>
+                    </ul>
+                    <ul>
+                        <li>Sexo: </li>
+                        <li class="getSexo"></li>
+                    </ul>
+                    <ul>
+                        <li>Admissão: </li>
+                        <li class="getDataAdmissao"></li>
+                    </ul>
+                    <ul>
+                        <li>Demissão: </li>
+                        <li class="getDemissao"></li>
+                    </ul>
+
                 </div>
                 <div class="btn-div">
-                    <button class="btn" onclick=" editarDados() ">Editar Dados</button>
-                    <button class="btn-Updt" onclick=" Atualizar() ">Editar Dados</button>
+                    <button class="btn " onclick=" cadastrarFunc() ">Cadastrar</button>
                 </div>
             </div>
-
 
         </div>
 
@@ -149,5 +142,6 @@
 <script src="../../Global/menu.js "></script>
 <script src="../../Global/menuData.js "></script>
 <script src="../../Global/url.js"></script>
+<script src="../../Global/md5.js"></script>
 
 </html>
