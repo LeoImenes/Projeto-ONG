@@ -1,10 +1,3 @@
-// var homme = document.querySelector(".homme")
-
-// function home(){
-//     window.location.href = '../../Home/'
-
-// };
-
 function Relatorio() {
     let relatorio = document.querySelector(".relatorio").value;
     let btn = document.querySelector(".btnLog");
