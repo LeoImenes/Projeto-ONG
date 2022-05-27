@@ -132,19 +132,11 @@ const buscarAssistidoRG = (req, res) => {
             if (err === null) {
                 res.json(result)
             } else {
-<<<<<<< HEAD
-                res.status(404).json({ err: err.message }).end();
-            }
-        })
-    } else {
-        res.status(400).json({ "err": "informe um rg" }).end();
-=======
                 res.status(404).end().json({ err: err.message })
             }
         })
     } else {
         res.status(400).end().json({ "err": "informe um rg" })
->>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
     }
 }
 
@@ -296,11 +288,7 @@ const getAssistSaude = (req, res) => {
     let string = `select * from vw_saude;`
     con.query(string, (err, result) => {
         if (err == null) {
-<<<<<<< HEAD
-            res.status(200).json(result)
-=======
             res.status(200).json(result).end()
->>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
         } else {
             res.status(400).json({ err: err.message })
         }
@@ -314,15 +302,9 @@ getEmployeeNames = function(id_assistido) {
             `select id_saude from saude where id_assistido = ${id_assistido}`,
             function(err, rows) {
                 if (rows === undefined) {
-<<<<<<< HEAD
-                    reject(new Error("Error rows is undefined"))
-                } else {
-                    resolve(rows)
-=======
                     reject(new Error("Error rows is undefined"));
                 } else {
                     resolve(rows);
->>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
 
                 }
             }
@@ -335,11 +317,7 @@ async function deleteSaude(string) {
     return new Promise((resolve, reject) => {
         con.query(string, (err, result) => {
             if (err === null) {
-<<<<<<< HEAD
-                // console.log(result)
-=======
                 console.log(result)
->>>>>>> edde9e41d35c289e26a86900db9652fb8a94bba9
                 resolve(result)
             } else {
                 console.log(err)

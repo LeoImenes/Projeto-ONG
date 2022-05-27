@@ -68,7 +68,7 @@ function getFamiliares() {
                 litxtNome.innerHTML = "Nome: "
                 litgetNome.innerHTML = item.Familiar
                 litxtrg.innerHTML = "RG: "
-                litgetrg.innerHTML = item.Rg_familiar
+                litgetrg.innerHTML = item.RG
                 litxtpar.innerHTML = "Parentesco: "
                 litgetpar.innerHTML = item.Parentesco
                 litxttel.innerHTML = "Telefone: "

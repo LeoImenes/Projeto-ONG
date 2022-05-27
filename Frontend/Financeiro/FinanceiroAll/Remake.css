@@ -98,8 +98,8 @@ section {
     justify-content: center;
 }
 
-
-.btnDesp,.btn{
+.btnDesp,
+.btn {
     font-size: clamp(0.2em, .5em + .8vw, 1.5em);
     width: 70%;
 }
@@ -175,8 +175,6 @@ input[type="number"]::placeholder{
     font-weight: bold;
 }
 
-
-
 .btnCad {
     width: 100%;
     height: 6.5vh;
@@ -187,6 +185,10 @@ input[type="number"]::placeholder{
     cursor: pointer;
     border: 4px solid #00000025;
     border-radius: 10px;
+}
+
+.button-Desp {
+    width: 70%;
 }
 
 .btnCad:hover {
@@ -211,57 +213,57 @@ span {
 }
 
 @media (max-width: 570px) {
-    .cards{
+    .cards {
         width: 100%;
         height: 100%;
     }
-    
 }
 
 @media (max-width: 600px) {
-    header{
+    header {
         background-color: white;
     }
-    body{
+    body {
         background: var(--casa-azul);
         /* fallback for old browsers */
         background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
         /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to top, var(--casa-azul), #002a6e);
     }
-    .cards{
+    .cards {
         width: 100%;
         height: 90vh;
-        grid-template-columns:100%;
+        grid-template-columns: 100%;
         grid-template-rows: 70% 50% 70%;
-        
     }
-    .Receitas,.Despesas,.CardTotais{
+    .Receitas,
+    .Despesas,
+    .CardTotais {
         width: 90%;
         height: 90%;
     }
-    
 }
 
 @media (max-height:584px) {
-    header{
+    header {
         background-color: white;
     }
-    body{
+    body {
         background: var(--casa-azul);
         /* fallback for old browsers */
         background: -webkit-linear-gradient(to top, var(--casa-azul), #0045b4);
         /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to top, var(--casa-azul), #002a6e);
     }
-    .cards{
+    .cards {
         width: 80%;
         height: 95vh;
-        grid-template-columns:100%;
+        grid-template-columns: 100%;
         grid-template-rows: 100% 100% 100%;
-        
     }
-    .Receitas,.Despesas,.CardTotais{
+    .Receitas,
+    .Despesas,
+    .CardTotais {
         width: 90%;
         height: 90%;
     }

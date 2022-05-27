@@ -29,7 +29,7 @@ function Relatorio() {
         .then((resp) => {
             if (resp.ok) {
                 alert("Cadastrado com sucesso")
-                return resp.json();             
+                return resp.json();
             }
 
         })
@@ -49,12 +49,16 @@ function getAssistido() {
     fetch(`${url}/assistidos/${local}`)
         .then((response) => {
             return response.json();
-            
+
         })
         .then((data) => {
             p.innerHTML = ` ${data.nome_completo}`
-            img.src = `${data.foto_antes}`
+            if (data.foto_depois !== null || data.foto_depois !== "null" || data.foto_depois !== undefined || data.foto_depois !== "undefined" || data.foto_depois !== "") {
+                img.src = `${data.foto_depois}`
+            } else {
+                img.src = " ../../Assets/icones/user.png"
+            }
             // console.log(data)         
-            
+
         })
 }

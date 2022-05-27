@@ -45,7 +45,7 @@ section {
     display: grid;
     text-align: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 
 .card li:nth-child(2) {
@@ -101,7 +101,11 @@ section {
     border-top: 1px solid #e5e5e5;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+.Demissao {
+    width: 45%;
 }
 
 input {
@@ -113,8 +117,12 @@ input {
 }
 
 .btn {
-    width: 25%;
+    width: 45%;
     height: 5vh;
+}
+
+.Selfoto {
+    display: none
 }
 
 @media (max-width:480px) {
@@ -138,7 +146,7 @@ input {
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     }
     .btn {
-        width: 75%;
+        width: 45%;
         height: 5vh;
     }
 }

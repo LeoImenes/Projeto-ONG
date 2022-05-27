@@ -19,6 +19,7 @@ textarea {
     width: 90%;
     height: 60vh;
     font-size: 20px;
+    border-radius: 20px;
 }
 
 .infoRelatorio {

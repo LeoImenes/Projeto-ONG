@@ -15,6 +15,7 @@ section {
 
 .foto {
     width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
@@ -204,6 +205,11 @@ input[type="checkbox"] {
         height: 100%;
         box-shadow: 0px 0px 0px
     }
+    .foto {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
     .inputDados {
         width: 95%;
         align-items: center;
@@ -243,6 +249,9 @@ input[type="checkbox"] {
     .saude {
         height: 80%;
     }
+    .button button {
+        width: 50%;
+    }
 }
 
 @media (max-width: 400px) {
@@ -274,6 +283,7 @@ input[type="checkbox"] {
     }
     .foto {
         width: 50px;
+        height: 50px;
     }
     .outros {
         grid-template-columns: 1fr 1fr;
@@ -286,6 +296,9 @@ input[type="checkbox"] {
     .listadrogas,
     .listadoencas {
         justify-content: center;
+    }
+    .button button {
+        width: 50%;
     }
 }
 

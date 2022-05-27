@@ -15,7 +15,7 @@
         <div class="header">
             <ul class="nav-bar">
                 <li>
-                    <h2>--- Cadastar Funcionário ---</h2>
+                    <h2>---Funcionário ---</h2>
                 </li>
 
             </ul>
@@ -66,7 +66,7 @@
             <div class="card">
                 <ul>
                     <li><img src="../../Assets/icones/user.png" alt="User" id="Funcfoto"></li>
-                    <li>
+                    <li class="Selfoto">
                         <p class="adcFoto" style="font-size:12px;font-weight: bold;text-decoration: underline;">Selecionar nova Foto 📸</p>
                         <input type="file" name="" id="inpFoto" hidden accept="image/png, image/gif, image/jpeg" />
                     </li>
@@ -74,16 +74,23 @@
             </div>
             <div class="funform">
                 <div class="EditarDados">
-                    <ul>
-                        <input type="text" placeholder="Matricula..." id="Matricula">
-                    </ul>
-                    <ul>
-                        <input type="text" placeholder="Data de Demissão..." id="Data" oninput="mascaraData(this)">
-                    </ul>
-                    <ul>
-                        <input type="text" placeholder="Cargo..." id="cargo">
-                    </ul>
+                    <div class="Demitir">
+
+                        <ul>
+                            <input type="text" placeholder="Matricula..." id="Matricula">
+                        </ul>
+                        <ul>
+                            <input type="text" placeholder="Data de Demissão..." id="Data" oninput="mascaraData(this)">
+                        </ul>
+                        <ul>
+                            <input type="text" placeholder="Cargo..." id="cargo">
+                        </ul>
+                    </div>
+                    <div class="Att-btn">
+                        <button class="btn-Updt">Atualizar</button>
+                    </div>
                 </div>
+
                 <div class="DadosFuncionario">
                     <ul>
                         <li>Nome: </li>
@@ -128,7 +135,8 @@
 
                 </div>
                 <div class="btn-div">
-                    <button class="btn " onclick=" cadastrarFunc() ">Cadastrar</button>
+                    <button class="btn">Editar</button>
+                    <button class="Demissao" onclick=" editarDados() ">Registrar Desligamento</button>
                 </div>
             </div>
 
