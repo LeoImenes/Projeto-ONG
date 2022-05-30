@@ -229,7 +229,7 @@ select
 	fa.parentesco As Parentesco,
 	f.telefone AS Telefone_familiar,
 	f.email AS Email_Familiar,
-	f.endereco AS Endereco_Familiar
+	f.endereco AS Endereco_Familiar,
 	f.rg as RG
 	
 from
@@ -245,8 +245,8 @@ select
 	a.id_assistido As Id_Assistido,
 	a.nome_completo AS Assistido,
 	a.sexo As Sexo,
-	a.cartao_cidadao As Catão_Cidadão,
-	a.cartao_sus As Cartão_SUS,
+	a.cartao_cidadao As Cartao_Cidadao,
+	a.cartao_sus As Cartao_SUS,
 	a.foto_antes As Foto,
 	s.id_saude AS Id_Saude,
 	s.data_de_registro As Data_do_Registro,
