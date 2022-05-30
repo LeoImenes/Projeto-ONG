@@ -2,7 +2,6 @@ var content = document.querySelector(".content");
 
 function getAll() {
     listarRelatorios()
-    getRelModal()
     getfunc()
 }
 
@@ -55,8 +54,12 @@ function listarRelatorios() {
 
             cardRelatorio.addEventListener("click", () => {
                 openModal(),
-                    console.log(cardRelatorio)
-            })
+                    localStorage.setItem("rela",JSON.stringify(Assist.id_relatorio))
+                    if(Assist.id_relatorio !== 0){
+                        modalInfo()
+                    }else{
+                        alert("Não foi possivel realizar operação")
+                    }            })
 
             img.className = "fotoAssistido"
             divimg.className = "img"
@@ -95,25 +98,18 @@ function buscarData() {
 
 }
 
-function getRelModal() {
-    let local = localStorage.getItem("assistido");
-    fetch(`${url}/assistidos/${local}`)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert("Falha ao Listar Assistido")
-            }
+function modalInfo(){
+    let local = localStorage.getItem("rela");
+    fetch(`${url}/relatorio/assistido/get/${local}`)
+    .then(res => {return res.json()})
+    .then(data => {
+        data.forEach(item => {
+            let relnum = document.querySelector(".Relnum")
+            let textarea = document.querySelector("#textarea")
+
+            textarea.value = item.relatorio
+            console.log(item)
         })
-        .then((data) => {
-            if ((data.foto_depois === null) || (data.foto_depois === "undefined") || (data.foto_depois == "null") || (data.foto_depois == "null")) {
-                document.querySelector(".fotoAssistido").src = "../../Assets/icones/user.png"
-            } else {
-                document.querySelector(".fotoAssistido").src = data.foto_depois
-            }
-
-            console.log(data)
-
-        });
-
+    })
 }
+

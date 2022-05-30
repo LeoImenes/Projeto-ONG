@@ -10,8 +10,11 @@ function getfunc() {
     fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {
+            console.log(data[0].foto)
             user.innerHTML = data[0].nome_completo
-            foto.src = data[0].foto
+            if((data[0].foto == null)){
+                foto.src = `../../Assets/icones/user.png`
+            }
 
 
         }
@@ -80,7 +83,7 @@ function mascaraTEL(i) {
 
     i.setAttribute("maxlength", "15");
     
-    if (v.length == 1) i.value = "(";
+    if (v.length == 1) i.value = `(${v}`;
     if (v.length == 3) i.value += ")";
     if (v.length == 5) i.value += ".";
     if (v.length == 10) i.value += "-";
