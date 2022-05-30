@@ -1,13 +1,13 @@
 import React, { useState, useFocusEffect, useEffect } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, ScrollView } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, ScrollView, Dimensions } from "react-native";
 
 import gStyle from "../../global/style"
 import Url from '../../global/index'
-import StatusBar from "../../Components/StatusBar/Index"
 import ToggleButton from '../../Components/ToggleButton/Index';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import SelectMultiple from 'react-native-select-multiple'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function OutrasAssistencias({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,6 +18,7 @@ export default function OutrasAssistencias({ navigation }) {
   const [lista, setLista] = useState([]);
   const [dados, setDados] = useState([]);
   const [valuePicker, setValuePicker] = useState();
+  const SCREEN_HEIGHT = Dimensions.get('window').height;
 
   const renderLabel = (label, style) => {
     return (
@@ -44,7 +45,7 @@ export default function OutrasAssistencias({ navigation }) {
   const getFunc = async () => {
     let value = await AsyncStorage.getItem('userdata');
 
-      fetch(`${Url.URL}/funcionarios/${value}`)
+    fetch(`${Url.URL}/funcionarios/${value}`)
       .then(resp => { return resp.json() })
       .then(async data => {
         const id = JSON.parse(data[0].id_funcionario)
@@ -60,7 +61,7 @@ export default function OutrasAssistencias({ navigation }) {
   useEffect(() => {
     getFunc()
 
-      fetch(`${Url.URL}/assistidos`)
+    fetch(`${Url.URL}/assistidos`)
       .then(resp => { return resp.json() })
       .then(data => {
         setLista(data);
@@ -68,7 +69,7 @@ export default function OutrasAssistencias({ navigation }) {
       })
       .catch(err => { console.log(err) });
 
-      fetch(`${Url.URL}/itens`)
+    fetch(`${Url.URL}/itens`)
       .then(resp => { return resp.json() })
       .then(data => {
         let temp = JSON.stringify(data);
@@ -92,7 +93,7 @@ export default function OutrasAssistencias({ navigation }) {
     temp = temp.replace(/value/g, "id_item");
     temp = temp.replace(/label/g, "item");
     temp = JSON.parse(temp);
-    
+
     let item = {
       "id_funcionario": idFunc,
       "assistidos": selecionados,
@@ -100,7 +101,7 @@ export default function OutrasAssistencias({ navigation }) {
     }
 
     console.log(item)
-    
+
     // fetch(`http://192.168.0.104:3000/funcionario/assistencias`, {
     //   "method": "POST",
     //   "headers": {
@@ -120,8 +121,7 @@ export default function OutrasAssistencias({ navigation }) {
 
   return (
     <View style={gStyle.body}>
-      <StatusBar />
-      <View style={{ width: "100%", height: 200, backgroundColor: "#166B8A", borderBottomRightRadius: 40, borderBottomLeftRadius: 40, justifyContent: "center" }}>
+      <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={[css.header, (SCREEN_HEIGHT <= 592) ? { height: 160 } : {}]}>
         <View style={{ width: "100%", height: "20%", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
           <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => { navigation.navigate("Home") }} />
           <View style={{ width: "80%" }}>
@@ -134,7 +134,7 @@ export default function OutrasAssistencias({ navigation }) {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert("O modal foi fechado!")
+              Alert.alert("Você cancelou esta ação!")
               setModalVisible(!modalVisible);
             }}
           >
@@ -167,10 +167,11 @@ export default function OutrasAssistencias({ navigation }) {
             <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>A-Z</Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <Text style={{ color: "black", fontSize: 20, fontWeight: "bold", marginTop: 5 }}>Selecione:</Text>
-      <Text style={{ color: "#166B8A", fontSize: 20, fontWeight: "bold" }}>- - - - - - - - - - - - - - - - - - - - - - </Text>
-      <View style={{ width: "100%", height: 450 }}>
+      </LinearGradient>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5}]}>Selecione:</Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+      <View style={((SCREEN_HEIGHT - (css.header.height)) < 400) ? { height: 250 } : { height: 450 }}>
+        {console.log(SCREEN_HEIGHT - (css.header.height))}
         <ScrollView>
           {
             lista.map((item, index) => {
@@ -181,9 +182,9 @@ export default function OutrasAssistencias({ navigation }) {
           }
         </ScrollView>
       </View>
-      <Text style={{ color: "#166B8A", fontSize: 20, fontWeight: "bold" }}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
       <TouchableOpacity style={{ backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, marginTop: "5%", alignSelf: "center", marginBottom: "20%" }} onPress={() => { cadastrar() }}>
-        <Text style={gStyle.buttonText1}>SALVAR</Text>
+        <Text style={gStyle.buttonText}>Salvar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -246,5 +247,13 @@ const css = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "whitesmoke",
     display: "flex"
+  },
+  header:{
+    width: "100%",
+    height: 200,
+    backgroundColor: "#166B8A",
+    borderBottomRightRadius: 40,
+    borderBottomLeftRadius: 40,
+    justifyContent: "center" 
   }
 });

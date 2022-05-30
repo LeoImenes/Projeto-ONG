@@ -76,33 +76,36 @@ export default function Financeiro({ navigation }) {
     }
 
     const lancar = () => {
+        let val1 = valor.split('R$')[1];
+        let val2 = val1.replace(/[.*+?^${}()|[\]\\]/g, '');
+        let val3 = val2.replace(",",".");
+
         let item = {
             "id_funcionario": 3,
             "tipo": valuePicker,
             "descricao": descricao,
-            "valor": valor,
+            "valor": val3
         }
-        console.log(item);
 
-        // fetch(`${Url.URL}/funcionario/financas`, {
-        //     "method": "POST",
-        //     "headers": {
-        //         "Content-Type": "application/json"
-        //     },
-        //     "body": JSON.stringify(item),
-        // })
-        //     .then(resp => { return resp.json() })
-        //     .then(async data => {
-        //         if (data.err !== undefined) {
-        //             ToastAndroid.show('Falha ao lançar!', ToastAndroid.SHORT)
-        //         } else {
-        //             ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
-        //             setDescricao("")
-        //             setValor("")
-        //             setValuePicker()
-        //             calc()
-        //         }
-        //     })
+        fetch(`${Url.URL}/funcionario/financas`, {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": JSON.stringify(item),
+        })
+            .then(resp => { return resp.json() })
+            .then(async data => {
+                if (data.err !== undefined) {
+                    ToastAndroid.show('Falha ao lançar!', ToastAndroid.SHORT)
+                } else {
+                    ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
+                    setDescricao("")
+                    setValor("")
+                    setValuePicker()
+                    calc()
+                }
+            })
     }
 
     return (
@@ -140,14 +143,14 @@ export default function Financeiro({ navigation }) {
                         }
                     </TouchableOpacity>
                 </View>
-                <View style={{ width: "100%", maxHeight: 420 }}>
+                <View style={(SCREEN_HEIGHT - (gStyle.logo.height) <= 500) ? { maxHeight: SCREEN_HEIGHT - 350 } : { maxHeight: 420 }}>
                     <ScrollView>
                         {
                             (mostrarFinancas === true)
                                 ?
                                 financas.map((item, index) => {
                                     return (
-                                        <TouchableOpacity style={css.card} key={index}>
+                                        <View style={css.card} key={index}>
                                             <View style={css.div}>
                                                 {
                                                     (item.tipo === 0)
@@ -163,7 +166,7 @@ export default function Financeiro({ navigation }) {
                                                 <Text style={{ fontSize: 16 }}>R$ {item.valor.toFixed(2)}</Text>
                                                 <Text>{formatDate.formatBr(new Date(item.data_lancamento))}</Text>
                                             </View>
-                                        </TouchableOpacity>
+                                        </View>
                                     )
                                 })
                                 :
@@ -177,8 +180,11 @@ export default function Financeiro({ navigation }) {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert("O modal foi fechado!")
+                    Alert.alert("Você cancelou esta ação!")
                     setModalVisible(!modalVisible);
+                    setDescricao("")
+                    setValor("")
+                    setValuePicker()
                 }}
             >
                 <View style={css.centeredView}>
@@ -196,10 +202,8 @@ export default function Financeiro({ navigation }) {
                                 }
                             </Picker>
                         </View>
-                        {/* <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." style={gStyle.info}></TextInput> */}
                         <TextInput value={descricao} onChangeText={setDescricao} placeholder='Descrição...' placeholderTextColor="gray" style={css.inputs}></TextInput>
                         <TextInputMask type={'money'} value={valor} onChangeText={setValor} placeholder='Valor...' placeholderTextColor="gray" style={css.inputs} />
-                        {/* <TextInput value={valor} onChangeText={setValor} placeholder='Valor...' placeholderTextColor="gray" style={css.inputs}></TextInput> */}
                         <Pressable
                             style={[css.button, css.buttonClose, { marginTop: 20, marginBottom: 20 }]}
                             onPress={() => { setModalVisible(!modalVisible), lancar() }}
@@ -221,14 +225,15 @@ export default function Financeiro({ navigation }) {
 
 const css = StyleSheet.create({
     saldo: {
-        width: "80%",
-        height: 100,
-        backgroundColor: "whitesmoke",
+        width: "85%",
+        minHeight: 80,
+        backgroundColor: "rgba(100, 100, 100, 0.10)",
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
-        borderRadius: 10,
-        alignSelf: "center"
+        borderRadius: 50,
+        alignSelf: "center",
+        marginTop: "5%"
     },
     text: {
         fontWeight: "bold",
@@ -242,7 +247,7 @@ const css = StyleSheet.create({
         borderBottomColor: "lightgray",
         padding: 2,
         paddingRight: 5,
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
     },
     textPattern: {
         color: "black",
@@ -251,19 +256,23 @@ const css = StyleSheet.create({
     },
     historico: {
         width: "90%",
-        backgroundColor: "whitesmoke",
-        marginTop: 10
+        backgroundColor: "rgba(100, 100, 100, 0.10)",
+        marginTop: 10, 
+        alignSelf: "center",
+        borderWidth: 2,
+        borderColor: "#166B8A",
+        borderRadius: 5
     },
     div: {
         width: "100%",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        padding: 5
     },
     centeredView: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        // backgroundColor: "rgba(255, 255, 255, 0.8)"
+        alignItems: "center"
     },
     modalView: {
         width: 300,

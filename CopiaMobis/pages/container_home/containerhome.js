@@ -15,6 +15,7 @@ import CadastrarFuncionario from '../Funcionario/CadastrarFuncionario';
 import MeuPerfil from '../Funcionario/MeuPerfil';
 import Financeiro from '../Financeiro';
 import AssistenciaRefeicao from '../Assistencia/AssistenciaRefeicao';
+import OutrasAssistencias from '../Assistencia/OutrasAssistencias';
 
 const Drawer = createDrawerNavigator();
 
@@ -121,6 +122,10 @@ export default function ContainerHome() {
                 drawerItemStyle: { display: "none" }
             }} />
             <Drawer.Screen name="AssistenciaRefeicao" component={AssistenciaRefeicao} options={{
+                drawerLabel: () => { return (null) },
+                drawerItemStyle: { display: "none" }
+            }} />
+            <Drawer.Screen name="OutrasAssistencias" component={OutrasAssistencias} options={{
                 drawerLabel: () => { return (null) },
                 drawerItemStyle: { display: "none" }
             }} />

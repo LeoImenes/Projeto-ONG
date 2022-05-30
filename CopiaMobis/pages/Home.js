@@ -48,11 +48,11 @@ export default function Home({ navigation }) {
                         <Text style={css.title}>Funcionários</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={gStyle.card}>
+                <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("AssistenciaRefeicao") }}>
                     <MaterialCommunityIcons name="food-variant" size={24} color="black" />
                     <Text style={css.title}>Alimentação</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={gStyle.card}>
+                <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("OutrasAssistencias") }}>
                     <MaterialCommunityIcons name="home-assistant" size={24} color="black" />
                     <Text style={css.title}>Assistência</Text>
                 </TouchableOpacity>
