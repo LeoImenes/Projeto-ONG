@@ -171,7 +171,6 @@ export default function OutrasAssistencias({ navigation }) {
       <Text style={[css.textStyle, { fontSize: 20, marginTop: 5}]}>Selecione:</Text>
       <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
       <View style={((SCREEN_HEIGHT - (css.header.height)) < 400) ? { height: 250 } : { height: 450 }}>
-        {console.log(SCREEN_HEIGHT - (css.header.height))}
         <ScrollView>
           {
             lista.map((item, index) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Modal, TextInput, Text, TouchableOpacity, ToastAndroid, Alert, Pressable, Dimensions } from 'react-native';
 
 import gStyle from "../global/style"
-import { Ionicons, FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, AntDesign, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -78,7 +78,7 @@ export default function Financeiro({ navigation }) {
     const lancar = () => {
         let val1 = valor.split('R$')[1];
         let val2 = val1.replace(/[.*+?^${}()|[\]\\]/g, '');
-        let val3 = val2.replace(",",".");
+        let val3 = val2.replace(",", ".");
 
         let item = {
             "id_funcionario": 3,
@@ -111,7 +111,7 @@ export default function Financeiro({ navigation }) {
     return (
         <View style={gStyle.body}>
             <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }, (SCREEN_HEIGHT <= 592) ? { height: 110 } : {}]}>
-                <Ionicons name="arrow-back-circle-outline" size={35} color="#166B8A" onPress={() => { navigation.navigate('Home')}} />
+                <Ionicons name="arrow-back-circle-outline" size={35} color="#166B8A" onPress={() => { navigation.navigate('Home') }} />
                 <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={gStyle.logo}>
                     <Text style={gStyle.headerText}>CASA ACOLHEDORA</Text>
                     <Text style={gStyle.headerText}>IRMÃ ANTÔNIA</Text>
@@ -148,29 +148,38 @@ export default function Financeiro({ navigation }) {
                         {
                             (mostrarFinancas === true)
                                 ?
-                                financas.map((item, index) => {
-                                    return (
-                                        <View style={css.card} key={index}>
-                                            <View style={css.div}>
-                                                {
-                                                    (item.tipo === 0)
-                                                        ?
-                                                        <MaterialIcons name="money-off" size={25} color="orangered" />
-                                                        :
-                                                        <MaterialIcons name="attach-money" size={25} color="green" />
-                                                }
+                                <View>
+                                    {
+                                        (financas.length !== 0)
+                                        ?
+                                        financas.map((item, index) => {
+                                            return (
+                                                <View style={css.card} key={index}>
+                                                    <View style={css.div}>
+                                                        {
+                                                            (item.tipo === 0)
+                                                                ?
+                                                                <MaterialIcons name="money-off" size={25} color="orangered" />
+                                                                :
+                                                                <MaterialIcons name="attach-money" size={25} color="green" />
+                                                        }
 
-                                                <Text style={{ fontWeight: "bold", fontSize: 16 }}>{item.descricao}</Text>
-                                            </View>
-                                            <View style={[css.div, { justifyContent: "space-evenly" }]}>
-                                                <Text style={{ fontSize: 16 }}>R$ {item.valor.toFixed(2)}</Text>
-                                                <Text>{formatDate.formatBr(new Date(item.data_lancamento))}</Text>
-                                            </View>
-                                        </View>
-                                    )
-                                })
+                                                        <Text style={{ fontWeight: "bold", fontSize: 16 }}>{item.descricao}</Text>
+                                                    </View>
+                                                    <View style={[css.div, { justifyContent: "space-evenly" }]}>
+                                                        <Text style={{ fontSize: 16 }}>R$ {item.valor.toFixed(2)}</Text>
+                                                        <Text>{formatDate.formatBr(new Date(item.data_lancamento))}</Text>
+                                                    </View>
+                                                </View>
+                                            )
+                                        })
+                                        :
+                                        <Text style={[gStyle.textInfo, {color: "gray", marginBottom: 10}]}>Nenhuma transação efetuada!</Text>
+                                    }
+                                </View>
+
                                 :
-                                <View></View>
+                                <View />
                         }
                     </ScrollView>
                 </View>
@@ -257,7 +266,7 @@ const css = StyleSheet.create({
     historico: {
         width: "90%",
         backgroundColor: "rgba(100, 100, 100, 0.10)",
-        marginTop: 10, 
+        marginTop: 10,
         alignSelf: "center",
         borderWidth: 2,
         borderColor: "#166B8A",
