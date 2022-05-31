@@ -160,21 +160,7 @@ INSERT INTO `assistidos` (`id_assistido`, `id_funcionario`, `nome_completo`, `no
 
 -- *** Inserindo Funcionarios *** --
 
-INSERT INTO funcionarios (matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values
-("001", "Adminstrador", "00.000.000-00", "000.000.000-oo", "00/00/00", "Diretor", "Masculino", "2022-05-15", "administrador@gmail.com", "123@123", true);
-
-INSERT INTO funcionarios (matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values
-("002", "jaqueline", "33.555.444-3", "444.555.666.33", "05/04/1995", "Mobile", "Feminino", "01/06/2018", "jaquelie@gmail.com", "123", false);
-
-INSERT INTO funcionarios (matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values
-("003", "Leonardo", "22.444.444-5", "888.333.333.33", "04/04/1993", "FrontEnd", "Masculino", "01/04/2018", "leonardo@gmail.com", "123", true);
-
-INSERT INTO funcionarios (matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values
-("004", "Roberto", "12.222.444-5", "154.333.654.32", "06/04/1984", "ti", "Masculino", "2018-06-12", "roberto@gmail.com", "123", true);
-
-INSERT INTO funcionarios (matricula,nome_completo,rg,cpf,data_nascimento,cargo,sexo,data_admissao,email,senha,status) values
-("005", "Teste", "12.222.444-55", "154.333.654.02", "06/04/1984", "teste", "Masculino", "2018-06-12", "teste@gmail.com", "123", true);
-
+rs
 -- *** Inserindo Comorbidades *** --
 
 INSERT INTO comorbidades VALUES
@@ -229,7 +215,7 @@ select
 	fa.parentesco As Parentesco,
 	f.telefone AS Telefone_familiar,
 	f.email AS Email_Familiar,
-	f.endereco AS Endereco_Familiar
+	f.endereco AS Endereco_Familiar,
 	f.rg as RG
 	
 from
@@ -245,8 +231,8 @@ select
 	a.id_assistido As Id_Assistido,
 	a.nome_completo AS Assistido,
 	a.sexo As Sexo,
-	a.cartao_cidadao As Catão_Cidadão,
-	a.cartao_sus As Cartão_SUS,
+	a.cartao_cidadao As Cartao_Cidadao,
+	a.cartao_sus As Cartao_SUS,
 	a.foto_antes As Foto,
 	s.id_saude AS Id_Saude,
 	s.data_de_registro As Data_do_Registro,
@@ -268,6 +254,21 @@ FROM
 	assistidos a
 	INNER JOIN saude s ON a.id_assistido = s.id_assistido
 	INNER JOIN comorbidades c ON s.id_comorbidade = c.id_comorbidade;
+
+
+Create VIEW vw_relatorio 
+as select
+ r.id_relatorio as 'Numero',
+  r.relatorio, 
+  a.nome_completo as 'assistido', 
+  a.foto_antes as 'foto',
+  f.nome_completo as 'funcionario', 
+  r.data_relatorio 
+  from relatorios r 
+  inner join funcionarios f on r.id_funcionario = f.id_funcionario 
+  inner join assistidos a on a.id_assistido = r.id_assistido;
+
+
 	
 	
 	CLEARDB_DATABASE_URL

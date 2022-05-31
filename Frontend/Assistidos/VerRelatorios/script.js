@@ -1,9 +1,22 @@
 var content = document.querySelector(".content");
+var relatorio_id;
 
 function getAll() {
     listarRelatorios()
-    listFunc()
     getfunc()
+}
+
+function openModal() {
+    let modal = document.querySelector(".modal");
+    let close = document.querySelector(".closeRel");
+
+    modal.style.display = "flex"
+
+    close.addEventListener("click", () => {
+        modal.style.display = "none"
+    })
+
+
 }
 
 function listarRelatorios() {
@@ -13,29 +26,35 @@ function listarRelatorios() {
     .then(response => { return response.json() })
 
     .then(data => {
-        console.log(data)
-
         data.forEach(Assist => {
             var divimg = document.createElement("div");
-            var divnome = document.createElement("div");
+            var divRela = document.createElement("div");
+            var divData = document.createElement("div");
             var cardRelatorio = document.createElement("div");
             var cont = document.querySelector(".content");
             var img = document.createElement("img");
-            var nomeAssistido = document.createElement("h1");
             var idRelatorio = document.createElement("h3");
+            var dataRelat = document.createElement("h1");
 
             names.push(Assist.id_assistido)
 
             cardRelatorio.className = "cardRelatorio"
-            cardRelatorio.addEventListener("click", () => {
+            divRela.className = "dataRelatorio"
 
-                let store = localStorage.setItem("relatorio", Assist.relatorio);
-                window.location.href = "../FazerRelatorio/index.html"
-            })
+            cardRelatorio.addEventListener("click", () => {
+                openModal(),
+                    localStorage.setItem("rela",JSON.stringify(Assist.id_relatorio))
+                    if(Assist.id_relatorio !== 0){
+                        modalInfo()
+                    }else{
+                        alert("Não foi possivel realizar operação")
+                    }            })
 
             img.className = "fotoAssistido"
             divimg.className = "img"
-            divnome.className = "nomeAssistido"
+            divData.className = "dataRelat"
+            idRelatorio.innerHTML = `Relatório ${Assist.id_relatorio}`
+
 
             // if (fun.foto == null || assistido.foto.length == 0) {
             //     img.src = "../../Assets/icones/user.png"
@@ -43,37 +62,89 @@ function listarRelatorios() {
             //     img.src = assistido.foto
             // }
 
-            nomeAssistido.innerHTML = `${dataCoverter(Assist.data_relatorio)}`
-
+            dataRelat.innerHTML = `${dataCoverter(Assist.data_relatorio)}`
 
             divimg.appendChild(img)
-            divnome.appendChild(nomeAssistido)
+            divRela.appendChild(idRelatorio)
+            divData.appendChild(dataRelat)
             cardRelatorio.appendChild(divimg)
-            cardRelatorio.appendChild(divnome)
+            cardRelatorio.appendChild(divRela)
+            cardRelatorio.appendChild(divData)
             cont.appendChild(cardRelatorio)
         })
 
     })
 }
 
-function listFunc() {
-    let local = localStorage.getItem("funcionario");
-
-    fetch(`${url}/funcionarios/${local}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data)
-        });
-}
 
 function buscarData() {
     let input = document.querySelector('#inp').value;
-    let card = document.querySelectorAll('.nomeAssistido h1')
+    let cardRelatorio = document.querySelectorAll('.cardRelatorio');
+    let card = document.querySelectorAll('.dataRelat h1')
 
-    card.forEach(item => {
-        item.innerHTML.includes(dataCoverter(input)) ? console.log("sim") : console.log("Nao")
+    card.forEach((item, index)=> {
+        !item.innerHTML.includes(dataCoverter(input)) ? cardRelatorio[index].style.display = "none" : cardRelatorio[index].style.display = "flex"
     })
 
 }
+
+function modalInfo(){
+    let local = localStorage.getItem("rela");
+    fetch(`${url}/relatorio/assistido/get/${local}`)
+    .then(res => {return res.json()})
+    .then(data => {
+        data.forEach(item => {
+
+            relatorio_id = item.Numero
+            let relnum = document.querySelector(".Relnum")
+            let textarea = document.querySelector("#textarea")
+            let reldata = document.querySelector(".Reldata")
+            let relfunc = document.querySelector(".RelFunc")
+            let relassis = document.querySelector(".RelAssis")
+            let relimg = document.querySelector(".RelImg")
+            
+            relimg.src = item.foto
+            relassis.innerHTML= item.assistido
+            relnum.innerHTML = `Relatório: ${item.Numero}`
+            relfunc.innerHTML = `Funcionario: ${item.funcionario}`
+            reldata.innerHTML = `Data:  ${dataCoverter(item.data_relatorio)}`
+            textarea.value = item.relatorio
+            console.log(item)
+        })
+    })
+}
+
+function updataeRelatorio(){
+    var id_func = localStorage.getItem("userdata")
+    let textarea = document.querySelector("#textarea")
+
+    var data = JSON.stringify({
+       "id_relatorio" : relatorio_id,
+        "id_funcionario" : JSON.parse(id_func).id_funcionario,
+        "relatorio": textarea.value
+        
+    })
+
+    fetch(`${url}/relatorio/put`,{
+        method : "Put",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+}).then(response => {
+    if(response.status === 200) {
+        alert("Atualiazado com sucesso")
+        return response.json}
+        else{
+            alert("Falha ao atualizar")
+        }
+    }
+   
+    )
+.then(data => {
+window.location.reload()
+})
+
+
+}
+

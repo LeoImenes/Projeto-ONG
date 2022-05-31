@@ -604,7 +604,7 @@ const getRelatorio = (req, res) => {
 
 // MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
 const getRelatorioID = (req, res) => {
-    let string = `select * from relatorios where id_assistido = ${req.params.id_assistido};`
+    let string = `select * from vw_relatorio where numero = ${req.params.id_assistido};`
     if (req.params.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err == null) {
