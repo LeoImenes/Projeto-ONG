@@ -1,13 +1,13 @@
 import React, { useState, useFocusEffect, useEffect } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, ScrollView, Dimensions } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, ScrollView, Dimensions, ToastAndroid } from "react-native";
 
 import gStyle from "../../global/style"
 import Url from '../../global/index'
 import ToggleButton from '../../Components/ToggleButton/Index';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
-import SelectMultiple from 'react-native-select-multiple'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
+import MultiSelect from 'react-native-multiple-select';
 
 export default function OutrasAssistencias({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,20 +19,6 @@ export default function OutrasAssistencias({ navigation }) {
   const [dados, setDados] = useState([]);
   const [valuePicker, setValuePicker] = useState();
   const SCREEN_HEIGHT = Dimensions.get('window').height;
-
-  const renderLabel = (label, style) => {
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ marginLeft: 5 }}>
-          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{label}</Text>
-        </View>
-      </View>
-    )
-  }
-
-  const onSelectionsChange = (selected) => {
-    setSelected(selected);
-  }
 
   const listar = () => {
     let newDados = [...dados];
@@ -80,9 +66,8 @@ export default function OutrasAssistencias({ navigation }) {
         let tempB = [];
 
         temp.forEach(item => {
-          if (item.tipo != 0) tempB.push(item);
+          if (item.tipo !== 1) tempB.push(item);
         })
-
         setItens(tempB)
       })
       .catch(err => { console.log(err) });
@@ -102,22 +87,27 @@ export default function OutrasAssistencias({ navigation }) {
 
     console.log(item)
 
-    // fetch(`http://192.168.0.104:3000/funcionario/assistencias`, {
-    //   "method": "POST",
-    //   "headers": {
-    //     "Content-Type": "application/json"
-    //   },
-    //   "body": JSON.stringify(item),
-    // })
-    //   .then(resp => { return resp.json() })
-    //   .then(async data => {
-    //     if (data.err !== undefined) {
-    //       ToastAndroid.show('Falha ao registrar assistência!', ToastAndroid.SHORT)
-    //     } else {
-    //       ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
-    //     }
-    //   })
+    fetch(`${Url.URL}/funcionario/assistencias`, {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": JSON.stringify(item),
+    })
+      .then(resp => { return resp.json() })
+      .then(async data => {
+        if (data.err !== undefined) {
+          ToastAndroid.show('Falha ao registrar assistência!', ToastAndroid.SHORT)
+          console.log(data.err)
+        } else {
+          ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
+        }
+      })
   }
+
+  const onSelectedItemsChange = (selected) => {
+    setSelected(selected);
+  };
 
   return (
     <View style={gStyle.body}>
@@ -140,13 +130,10 @@ export default function OutrasAssistencias({ navigation }) {
           >
             <View style={css.centeredView}>
               <View style={css.modalView}>
-                <View style={{ flex: 1, width: '100%', height: 100, alignItems: "center", alignSelf: "center" }}>
-                  <SelectMultiple
-                    items={itens}
-                    renderLabel={renderLabel}
-                    selectedItems={selected}
-                    onSelectionsChange={onSelectionsChange}
-                  />
+                <View style={{ flex: 1, height: 110, alignItems: "center", alignSelf: "center" }}>
+                  <MultiSelect items={itens} uniqueKey="value" onSelectedItemsChange={onSelectedItemsChange} selectedItems={selected} selectText="Selecionar..." searchInputPlaceholderText="Pesquisar..."
+                    searchInputStyle={{ color: '#CCC', height: 60}} tagRemoveIconColor="#CCC" tagBorderColor="#CCC" tagTextColor="#CCC" selectedItemTextColor="#CCC" selectedItemIconColor="#4169E1"
+                    itemTextColor="#000" displayKey="label" submitButtonColor="#4169E1" submitButtonText="Adicionar" styleDropdownMenuSubsection={{paddingLeft: 10}} styleDropdownMenu={{width: 250}} styleListContainer={{ width: 250, height: 130}}/>
                 </View>
                 <Pressable
                   style={[css.button, css.buttonClose]}
@@ -168,8 +155,8 @@ export default function OutrasAssistencias({ navigation }) {
           </TouchableOpacity>
         </View>
       </LinearGradient>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5}]}>Selecione:</Text>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 10}]}>Selecione:</Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>--------------------------------------</Text>
       <View style={((SCREEN_HEIGHT - (css.header.height)) < 400) ? { height: 250 } : { height: 450 }}>
         <ScrollView>
           {
@@ -181,7 +168,7 @@ export default function OutrasAssistencias({ navigation }) {
           }
         </ScrollView>
       </View>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>--------------------------------------</Text>
       <TouchableOpacity style={{ backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, marginTop: "5%", alignSelf: "center", marginBottom: "20%" }} onPress={() => { cadastrar() }}>
         <Text style={gStyle.buttonText}>Salvar</Text>
       </TouchableOpacity>
@@ -193,12 +180,11 @@ const css = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.8)"
+    alignItems: "center"
   },
   modalView: {
-    width: 300,
-    height: 280,
+    width: 310,
+    height: 300,
     backgroundColor: "white",
     borderRadius: 20,
     alignItems: "center",
@@ -217,6 +203,7 @@ const css = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 20,
     padding: 1,
+    marginBottom: 5,
     elevation: 2
   },
   buttonOpen: {
@@ -247,12 +234,12 @@ const css = StyleSheet.create({
     backgroundColor: "whitesmoke",
     display: "flex"
   },
-  header:{
+  header: {
     width: "100%",
     height: 200,
     backgroundColor: "#166B8A",
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 40,
-    justifyContent: "center" 
+    justifyContent: "center"
   }
 });
