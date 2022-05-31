@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Ong Digital - V1.0.0</title>
-    <link rel="sortcut icon" href="../../Assets/icones/icone_i.png">
-    <link rel="stylesheet" href="../../Global/globalHeaderMenu.css">
+    <title>Assistência</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
-<body onload="getAll()">
+<body>
     <header>
         <div class="header">
             <ul class="nav-bar">
                 <li>
-                    <h2>--- Relatórios ---</h2>
+                    <h2>--- Assistencia---</h2>
                 </li>
 
             </ul>
@@ -63,39 +59,10 @@
             </div>
             </ul>
         </div>
-        <div class="container">
-            <div class="card">
-                <div class="input">
-                    <input type="date" name="" id="inp" onchange="buscarData()">
-                </div>
-                <div class="content">
-
-                </div>
-            </div>
-            <div class="modal">
-                <div class="conte">
-                    <div class="Relatorioheader">
-                        <img src="../../Assets/icones/user.png" alt="" srcset="" class="RelImg">
-                        <h1  class="RelAssis">Maria das Dores</h1>
-                        <p class="closeRel">X</p>
-                    </div>
-                    <div class="Relatorio">
-                        <ul class="infosRel">
-                            <li class="Relnum">Relatorio:</li>
-                            <li class="Reldata">Data:</li>
-                            <li class="RelFunc">Funcionario:</li>
-                        </ul>
-                        <textarea name="text" placeholder="oi" id="textarea"></textarea>
-                        <button type="submit" onclick="updataeRelatorio()">Editar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 <script src="script.js "></script>
 <script src="../../Global/menu.js "></script>
 <script src="../../Global/menuData.js "></script>
 <script src="../../Global/url.js"></script>
-
+<script src="../../Global/md5.js"></script>
 </html>

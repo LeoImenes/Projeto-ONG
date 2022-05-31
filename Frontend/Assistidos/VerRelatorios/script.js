@@ -1,4 +1,5 @@
 var content = document.querySelector(".content");
+var relatorio_id;
 
 function getAll() {
     listarRelatorios()
@@ -25,24 +26,12 @@ function listarRelatorios() {
     .then(response => { return response.json() })
 
     .then(data => {
-        console.log(data)
-
         data.forEach(Assist => {
             var divimg = document.createElement("div");
-
-
             var divRela = document.createElement("div");
-
-
             var divData = document.createElement("div");
-
-
             var cardRelatorio = document.createElement("div");
-
-
             var cont = document.querySelector(".content");
-
-
             var img = document.createElement("img");
             var idRelatorio = document.createElement("h3");
             var dataRelat = document.createElement("h1");
@@ -90,10 +79,11 @@ function listarRelatorios() {
 
 function buscarData() {
     let input = document.querySelector('#inp').value;
+    let cardRelatorio = document.querySelectorAll('.cardRelatorio');
     let card = document.querySelectorAll('.dataRelat h1')
 
-    card.forEach(item => {
-        item.innerHTML.includes(dataCoverter(input)) ? console.log("sim") : console.log("Nao")
+    card.forEach((item, index)=> {
+        !item.innerHTML.includes(dataCoverter(input)) ? cardRelatorio[index].style.display = "none" : cardRelatorio[index].style.display = "flex"
     })
 
 }
@@ -104,12 +94,57 @@ function modalInfo(){
     .then(res => {return res.json()})
     .then(data => {
         data.forEach(item => {
+
+            relatorio_id = item.Numero
             let relnum = document.querySelector(".Relnum")
             let textarea = document.querySelector("#textarea")
-
+            let reldata = document.querySelector(".Reldata")
+            let relfunc = document.querySelector(".RelFunc")
+            let relassis = document.querySelector(".RelAssis")
+            let relimg = document.querySelector(".RelImg")
+            
+            relimg.src = item.foto
+            relassis.innerHTML= item.assistido
+            relnum.innerHTML = `Relatório: ${item.Numero}`
+            relfunc.innerHTML = `Funcionario: ${item.funcionario}`
+            reldata.innerHTML = `Data:  ${dataCoverter(item.data_relatorio)}`
             textarea.value = item.relatorio
             console.log(item)
         })
     })
+}
+
+function updataeRelatorio(){
+    var id_func = localStorage.getItem("userdata")
+    let textarea = document.querySelector("#textarea")
+
+    var data = JSON.stringify({
+       "id_relatorio" : relatorio_id,
+        "id_funcionario" : JSON.parse(id_func).id_funcionario,
+        "relatorio": textarea.value
+        
+    })
+
+    fetch(`${url}/relatorio/put`,{
+        method : "Put",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+}).then(response => {
+    if(response.status === 200) {
+        alert("Atualiazado com sucesso")
+        return response.json}
+        else{
+            alert("Falha ao atualizar")
+        }
+    }
+   
+    )
+.then(data => {
+window.location.reload()
+})
+
+
 }
 

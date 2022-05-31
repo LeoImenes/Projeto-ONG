@@ -5,7 +5,7 @@ function getfunc() {
     let user = document.querySelector(".Username");
     let foto = document.querySelector(".userimg");
     user.innerHTML = funcionario.nome_completo
-    foto.src = funcionario.foto
+    // foto.src = funcionario.foto
 
     fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
