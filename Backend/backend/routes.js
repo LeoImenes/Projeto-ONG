@@ -21,7 +21,6 @@ route.get("/funcionario/financa/:id_financa", funcionarioControll.getIDFinanca)
 route.put("/funcionario/financa", funcionarioControll.updateFinanca)
 
 // *** ASSISTÊNCIA *** //
-// route.post("/funcionario/assistencia", funcionarioControll.postAssistencia)
 route.post("/funcionario/assistencias/", funcionarioControll.postmultAssis)
 route.get("/funcionario/all_assistencias", funcionarioControll.getAllAssistencias)
 route.get("/funcionario/assistencias_id", funcionarioControll.getAssistenciasID)

@@ -61,7 +61,7 @@ export default function AssistenciaRefeicao({ navigation }) {
                     let tempA = [], tempD = [];
 
                     data.forEach(item => {
-                        if (item.tipo == 0) {
+                        if (item.tipo === 1) {
                             tempA.push(item);
                         } else {
                             tempD.push(item);
@@ -75,11 +75,17 @@ export default function AssistenciaRefeicao({ navigation }) {
     );
 
     const cadastrar = () => {
+        let tempSelecionados = new Array();
+        selecionados.forEach((item) => {
+            tempSelecionados.push({ "id_assistido": item });
+        })
+
         let item = {
             "id_funcionario": idFunc,
-            "assistidos": selecionados,
-            "itens": valuePicker
+            "assistidos": tempSelecionados,
+            "itens": [{ "id_item": valuePicker}]
         }
+        console.log(item)
 
         fetch(`${Url.URL}/funcionario/assistencias`, {
             "method": "POST",
@@ -95,9 +101,16 @@ export default function AssistenciaRefeicao({ navigation }) {
                     console.log(data.err)
                 } else {
                     ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
+                    navigation.navigate("Home")
+                    limpar()
                 }
             })
     }
+
+    const limpar = () => {
+        setValuePicker()
+        setLista([])
+      }
 
     const add = (idAss, idCard) => {
         if (selecionados.includes(idAss)) selecionados.splice(selecionados.indexOf(idAss), 1)
@@ -132,8 +145,8 @@ export default function AssistenciaRefeicao({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Text style={{ color: "black", fontSize: 20, fontWeight: "bold", marginTop: 5 }}>Selecione:</Text>
-            <Text style={{ color: "#166B8A", fontSize: 20, fontWeight: "bold" }}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+            <Text style={[css.textStyle, { fontSize: 20, marginTop: 10 }]}>Selecione:</Text>
+            <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A" }]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
             <View style={{ width: "100%", height: 450 }}>
                 <ScrollView>
                     {
@@ -145,7 +158,7 @@ export default function AssistenciaRefeicao({ navigation }) {
                     }
                 </ScrollView>
             </View>
-            <Text style={{ color: "#166B8A", fontSize: 20, fontWeight: "bold" }}>- - - - - - - - - - - - - - - - - - - - - - </Text>
+            <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A" }]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
             <TouchableOpacity style={{ backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, marginTop: "5%", alignSelf: "center", marginBottom: "20%" }} onPress={() => { cadastrar() }}>
                 <Text style={gStyle.buttonText}>Salvar</Text>
             </TouchableOpacity>
@@ -177,5 +190,11 @@ const css = StyleSheet.create({
         marginTop: 10,
         backgroundColor: "rgba(255, 255, 255, 0.8)",
         borderRadius: 10,
+    },
+    textStyle: {
+        color: "black",
+        fontWeight: "bold",
+        fontSize: 17,
+        textAlign: "center"
     }
 });

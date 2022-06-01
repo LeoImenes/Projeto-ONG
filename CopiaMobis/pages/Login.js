@@ -144,7 +144,6 @@ export default function Login({ navigation }) {
                         <TouchableOpacity style={[gStyle.cardButton]} onPress={() => authenticator()}>
                             <Text style={gStyle.buttonText}>ENTRAR</Text>
                         </TouchableOpacity>
-
                     </View>
             }
         </View>

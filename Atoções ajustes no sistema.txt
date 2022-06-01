@@ -6,8 +6,8 @@ FUNÇÕES QUE NÃO ESTA FUNCIONANDO
 	- ASSISTÊNCIAS UM ASSISTIDO NÃO ESTA FUNCIONANDO NO INSOMINIA: OK, DESATIVADO ESSA FUNÇÃO, VAI USAR A SEGUNDA, QUE FAZ TUDO.
 	- ASSISTÊNCIA MAIS DE UM ASSISTIDO, CADASTAR COM MAIS DE UM ASSISTIDO, PORÉM DA ERRO NO INSOMINIA:OK JÁ ESTA FUNCIONANDO
 	- DEMISSÃO FUNCIONÁRIO, EXECUTANDO OS DOIS ALERT(FALHA E SUCESSO):
-	- MASCARA DO TELEFONE, FAMILIAR DO ASSISTIDO: +/-
-	- EDITAR ASSISTIDO: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO O BACKEND TypeError: Cannot read property 'end' of undefined.
+	- MASCARA DO TELEFONE, FAMILIAR DO ASSISTIDO: OK
+	- EDITAR ASSISTIDO: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO O BACKEND TypeError: Cannot read property 'end' of undefined: OK
 	
 	
 	
@@ -39,11 +39,11 @@ TELA ASSISTIDOS:
 		
 	EDITAR INFORMAÇÕES: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO TypeError: Cannot read property 'end' of undefined. (pscoativos, saúde, familiares CARREGANDO UDEFINED):
 
-	RELATÓRIO: ok
+	RELATÓRIO: OK
 
-	CADASTRAR FAMILIAR: ajustar a mascara do telefone
+	CADASTRAR FAMILIAR: OK
 
-	CADASTRAR ASSITIDOS: ok
+	CADASTRAR ASSITIDOS: OK
 -----------------------------------------------------------------------------------------------
 
 TELA FUNCIONÁRIOS:

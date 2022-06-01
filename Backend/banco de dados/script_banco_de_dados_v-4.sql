@@ -141,7 +141,7 @@ CREATE TABLE estoque(
 	id_funcionario INTEGER NOT NULL,
 	item VARCHAR(100) NOT NULL, 
 	quantidade INTEGER NOT NULL,
-	tipo TINYINT NOT NULL,	
+	data_lancamento Date,
 	CONSTRAINT fk_funcionario05 FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

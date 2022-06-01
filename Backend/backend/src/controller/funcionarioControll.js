@@ -122,6 +122,11 @@ const updateFuncionario = async (req, res) => {
 
 }
 
+// MÉTODO ATUALIZAR TODAS AS INFORMAÇÕES DO FUNCIONARIO
+const updateFullFuncionario = (req, res) => {
+
+};
+
 // MÉTOD ATUALIZAR FOTO DO FUNCIONARIO
 const updateFotoFuncionario = (req, res) => {
     let cpf = req.body.cpf;
@@ -152,7 +157,7 @@ const deletarFuncionario = (req, res) => {
 //  MÉTODO LOGIN
 const login = (req, res) => {
     if (req.body.email !== undefined && req.body.senha !== undefined) {
-        let string = `select * from funcionarios where email = '${req.body.email}' and senha = '${req.body.senha}';`
+        let string = `select * from funcionarios where email = '${req.body.email}' and senha = '${req.body.senha}' and status = 1;`
         con.query(string, (err, result) => {
             if (err === null) {
                 if (result.length == 0) {
@@ -496,7 +501,6 @@ module.exports = {
     login,
     resetSenha,
     getAuthorization,
-    // postAssistencia,
     getAllAssistencias,
     getAssistenciasID,
     postFinanca,
