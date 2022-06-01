@@ -6,7 +6,7 @@ function conectar() {
         senha: md5(senha.value),
     });
 
-    console.log(data)
+    // console.log(data)
 
     fetch(`${url}/funcionarios`, {
             method: "POST",
