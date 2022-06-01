@@ -21,6 +21,7 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFunc() {
+    var data;
     var status = 1;
     var getNome = document.querySelector(".getNome").value
     var getEmail = document.querySelector(".getEmail").value
@@ -32,8 +33,25 @@ function cadastrarFunc() {
     var getSexo = document.querySelector(".getSexo").value
     var getDataAdmissao = document.querySelector(".getDataAdmissao").value
     var getSenha = document.querySelector(".getSenha").value
+    var inputs = document.querySelectorAll(".DadosFuncionario input")
 
-    var data = JSON.stringify({
+    var nomeerr = document.createElement("p")
+    nomeerr.innerHTML = "* Preencha este campo"
+    nomeerr.style.display = "flex"
+    nomeerr.style.marginTop = "5px"
+    nomeerr.style.color = "red"
+    nomeerr.style.width = "100%"
+    nomeerr.style.fontSize = "10px"
+
+    inputs.forEach((item, index) => {(item.value == "")?data = null: console.log(data)})
+    if(data == null){
+        alert("Todos os campos estão em branco")
+    }else if(getNome == "" || getEmail == "" || getMatricula || getRG ||
+    getCPF || getDataNasc || getCargo || getDataAdmissao)
+
+
+
+     data = JSON.stringify({
         "foto": fotinho,
         "matricula": getMatricula,
         "nome_completo": getNome,
@@ -49,25 +67,27 @@ function cadastrarFunc() {
         "estado_civil": ""
     })
 
-    fetch(`${url}/funcionario`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Cadastro efetuado com sucesso")
-                return response.json()
 
-            } else {
-                alert("Falha ao cadastrar, todos os campos são obrigatórios")
-            }
 
-        })
+    // fetch(`${url}/funcionario`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: data,
+    //     })
+    //     .then(response => {
+    //         if (response.ok) {
+    //             alert("Cadastro efetuado com sucesso")
+    //             return response.json()
 
-    .then(data => {
-        window.location.href = '../ListarFuncionarios/'
-    })
+    //         } else {
+    //             alert("Falha ao cadastrar, todos os campos são obrigatórios")
+    //         }
+
+    //     })
+
+    // .then(data => {
+    //     window.location.href = '../ListarFuncionarios/'
+    // })
 }

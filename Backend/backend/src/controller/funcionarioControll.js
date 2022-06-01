@@ -304,12 +304,14 @@ async function executarQuery(string) {
 
 // MÉTODO FAZER ASSISTÊNCIA PARA VARIOS ASSISTIDOS
 const postmultAssis = (req, res) => {
+    console.log(req.body)
     let id_funcionario = req.body.id_funcionario;
     let assistidos = req.body.assistidos;
     let strinAssistencia;
     let itens = req.body.itens;
     let index = 0;
     let comerro = false;
+
     let stringSolicitacao;
 
     if (id_funcionario !== undefined && assistidos.length !== undefined && itens.length > 0) {
@@ -326,7 +328,7 @@ const postmultAssis = (req, res) => {
                         let id_assistencia = result.insertId
                         itens.forEach(async (item, index) => {
                             stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
-                            // console.log(stringSolicitacao)
+                            console.log(stringSolicitacao)
                             asynqQuery(stringSolicitacao)
                                 .then(() => {
                                     if (index + 1 === itens.length) {
@@ -356,7 +358,7 @@ const postmultAssis = (req, res) => {
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
 const getAllAssistencias = (req, res) => {
-    let string = `select * from vw_assistencia`
+    let string = `select * from vw_assistencia order by funcionario`
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json(result).end();
