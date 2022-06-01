@@ -15,9 +15,9 @@ export default function OutrasAssistencias({ navigation }) {
   const [selecionados, setSelecionados] = useState([]);
   const [itens, setItens] = useState([])
   const [selected, setSelected] = useState([]);
+  const [sendSelected, setSendselected] = useState([]);
   const [lista, setLista] = useState([]);
   const [dados, setDados] = useState([]);
-  const [valuePicker, setValuePicker] = useState();
   const SCREEN_HEIGHT = Dimensions.get('window').height;
 
   const listar = () => {
@@ -74,19 +74,18 @@ export default function OutrasAssistencias({ navigation }) {
   }, [])
 
   const cadastrar = () => {
-    let temp = JSON.stringify(selected);
-    temp = temp.replace(/value/g, "id_item");
-    temp = temp.replace(/label/g, "item");
-    temp = JSON.parse(temp);
+    let tempSelecionados = new Array();
+    selecionados.forEach((item) => {
+      tempSelecionados.push({ "id_assistido": item });
+    })
 
     let item = {
       "id_funcionario": idFunc,
-      "assistidos": selecionados,
-      "itens": temp
+      "assistidos": tempSelecionados,
+      "itens": sendSelected
     }
 
     console.log(item)
-
     fetch(`${Url.URL}/funcionario/assistencias`, {
       "method": "POST",
       "headers": {
@@ -101,11 +100,24 @@ export default function OutrasAssistencias({ navigation }) {
           console.log(data.err)
         } else {
           ToastAndroid.show('Resgitro efetuado!', ToastAndroid.SHORT)
+          limpar()
+          navigation.navigate("Home")
         }
       })
   }
 
+  const limpar = () => {
+    setSendselected([]);
+    setSelected([]);
+    setLista([])
+  }
+
   const onSelectedItemsChange = (selected) => {
+    let temp = new Array();
+    selected.forEach((item) => {
+      temp.push({ "id_item": item });
+    })
+    setSendselected(temp);
     setSelected(selected);
   };
 
@@ -115,7 +127,7 @@ export default function OutrasAssistencias({ navigation }) {
         <View style={{ width: "100%", height: "20%", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
           <Ionicons name="arrow-back-circle-outline" size={34} color="white" onPress={() => { navigation.navigate("Home") }} />
           <View style={{ width: "80%" }}>
-            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Selecione os itens:</Text>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Itens da assistência:</Text>
           </View>
         </View>
         <View style={css.filter}>
@@ -132,8 +144,8 @@ export default function OutrasAssistencias({ navigation }) {
               <View style={css.modalView}>
                 <View style={{ flex: 1, height: 110, alignItems: "center", alignSelf: "center" }}>
                   <MultiSelect items={itens} uniqueKey="value" onSelectedItemsChange={onSelectedItemsChange} selectedItems={selected} selectText="Selecionar..." searchInputPlaceholderText="Pesquisar..."
-                    searchInputStyle={{ color: '#CCC', height: 60}} tagRemoveIconColor="#CCC" tagBorderColor="#CCC" tagTextColor="#CCC" selectedItemTextColor="#CCC" selectedItemIconColor="#4169E1"
-                    itemTextColor="#000" displayKey="label" submitButtonColor="#4169E1" submitButtonText="Adicionar" styleDropdownMenuSubsection={{paddingLeft: 10}} styleDropdownMenu={{width: 250}} styleListContainer={{ width: 250, height: 130}}/>
+                    searchInputStyle={{ color: '#CCC', height: 60 }} tagRemoveIconColor="#4169E1" tagBorderColor="#CCC" tagTextColor="#CCC" selectedItemTextColor="#CCC" selectedItemIconColor="#4169E1"
+                    itemTextColor="#000" displayKey="label" submitButtonColor="#4169E1" submitButtonText="Adicionar" styleDropdownMenuSubsection={{ paddingLeft: 10, height: 50}} styleDropdownMenu={{ width: 250, height: 60 }} styleListContainer={{ width: 250, height: 130 }} />
                 </View>
                 <Pressable
                   style={[css.button, css.buttonClose]}
@@ -155,8 +167,8 @@ export default function OutrasAssistencias({ navigation }) {
           </TouchableOpacity>
         </View>
       </LinearGradient>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 10}]}>Selecione:</Text>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>--------------------------------------</Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 10 }]}>Assistidos</Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A" }]}>--------------------------------------</Text>
       <View style={((SCREEN_HEIGHT - (css.header.height)) < 400) ? { height: 250 } : { height: 450 }}>
         <ScrollView>
           {
@@ -168,7 +180,7 @@ export default function OutrasAssistencias({ navigation }) {
           }
         </ScrollView>
       </View>
-      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A"}]}>--------------------------------------</Text>
+      <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A" }]}>--------------------------------------</Text>
       <TouchableOpacity style={{ backgroundColor: "rgb(22,107,138)", width: "35%", height: 45, alignItems: "center", justifyContent: "center", borderRadius: 5, marginTop: "5%", alignSelf: "center", marginBottom: "20%" }} onPress={() => { cadastrar() }}>
         <Text style={gStyle.buttonText}>Salvar</Text>
       </TouchableOpacity>
