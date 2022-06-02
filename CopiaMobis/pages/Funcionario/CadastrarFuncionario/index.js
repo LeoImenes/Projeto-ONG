@@ -10,6 +10,7 @@ import { Picker } from '@react-native-picker/picker';
 import { TextInputMask } from 'react-native-masked-text';
 import { LinearGradient } from 'expo-linear-gradient';
 import formatDate from '../../Components/FormatDate/index'
+import md5 from 'md5';
 
 export default function CadastrarFuncionario({ navigation }) {
     const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -59,7 +60,7 @@ export default function CadastrarFuncionario({ navigation }) {
             sexo: sexo,
             cargo: cargo,
             email: email,
-            senha: senha,
+            senha: md5(senha),
             data_admissao: formatDate.formatUs(dataAdmissao),
             foto: foto
         }

@@ -17,8 +17,11 @@ function list() {
     let local;
     if (JSON.parse(cargo).cargo.toLowerCase() === 'diretor') {
         local = localStorage.getItem("funcionario");
+   
     } else {
         local = JSON.parse(cargo).id_funcionario
+        let demissao = document.querySelector(".Demissao");
+        demissao.style.display = "none"
 
     }
 
