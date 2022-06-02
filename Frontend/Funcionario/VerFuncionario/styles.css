@@ -79,7 +79,32 @@ section {
 }
 
 .EditarDados {
-    display: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Demitir {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.Demitir input {
+    width: 50%;
+}
+
+.Att-btn {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .DadosFuncionario ul {
@@ -91,8 +116,6 @@ section {
     border-radius: 5px 5px 5px 5px;
     border: 2px solid #e5e5e5;
 }
-
-.DadosFuncionario ul li:nth-child(2) {}
 
 .btn-div {
     width: 100%;
@@ -116,7 +139,15 @@ input {
     /* border-bottom: 1px solid white; */
 }
 
-.btn {
+#Funcfoto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%
+}
+
+.btn,
+.btn-Updt,
+.btn-voltar {
     width: 45%;
     height: 5vh;
 }
@@ -126,6 +157,11 @@ input {
 }
 
 @media (max-width:480px) {
+    #Funcfoto {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%
+    }
     body {
         background: white
     }

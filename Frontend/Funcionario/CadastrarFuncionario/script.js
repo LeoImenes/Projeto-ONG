@@ -43,51 +43,57 @@ function cadastrarFunc() {
     nomeerr.style.width = "100%"
     nomeerr.style.fontSize = "10px"
 
-    inputs.forEach((item, index) => {(item.value == "")?data = null: console.log(data)})
-    if(data == null){
-        alert("Todos os campos estão em branco")
-    }else if(getNome == "" || getEmail == "" || getMatricula || getRG ||
-    getCPF || getDataNasc || getCargo || getDataAdmissao)
+    if (getNome == "" || getEmail == "" || getMatricula == "" || getRG == "" ||
+        getCPF == "" || getDataNasc == "" || getCargo == "" || getDataAdmissao == "" || getSenha == "") {
+        alert("Todos os campos devem ser preenchidos")
+        data = null
+        window.location.reload()
+    } else {
+        data = JSON.stringify({
+            "foto": fotinho,
+            "matricula": getMatricula,
+            "nome_completo": getNome,
+            "rg": getRG,
+            "cpf": getCPF,
+            "data_nascimento": `${dataUS(getDataNasc)}`,
+            "cargo": getCargo,
+            "sexo": getSexo,
+            "data_admissao": `${dataUS(getDataAdmissao)}`,
+            "email": getEmail,
+            "senha": md5(getSenha),
+            "status": status,
+            "estado_civil": ""
+        })
+
+        fetch(`${url}/funcionario`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Cadastro efetuado com sucesso")
+                    return response.json()
+
+                } else {
+                    alert("Falha ao cadastrar, todos os campos são obrigatórios")
+                }
+
+            })
+
+        .then(data => {
+            window.location.href = '../ListarFuncionarios/'
+        })
+
+    }
 
 
 
-     data = JSON.stringify({
-        "foto": fotinho,
-        "matricula": getMatricula,
-        "nome_completo": getNome,
-        "rg": getRG,
-        "cpf": getCPF,
-        "data_nascimento": `${dataUS(getDataNasc)}`,
-        "cargo": getCargo,
-        "sexo": getSexo,
-        "data_admissao": `${dataUS(getDataAdmissao)}`,
-        "email": getEmail,
-        "senha": md5(getSenha),
-        "status": status,
-        "estado_civil": ""
-    })
 
 
 
-    // fetch(`${url}/funcionario`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: data,
-    //     })
-    //     .then(response => {
-    //         if (response.ok) {
-    //             alert("Cadastro efetuado com sucesso")
-    //             return response.json()
 
-    //         } else {
-    //             alert("Falha ao cadastrar, todos os campos são obrigatórios")
-    //         }
 
-    //     })
-
-    // .then(data => {
-    //     window.location.href = '../ListarFuncionarios/'
-    // })
 }

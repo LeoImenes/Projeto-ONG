@@ -1,19 +1,33 @@
+var ulEditarDados = document.querySelector(".EditarDados");
+ulEditarDados.style.display = "none"
+
+
 var cpf;
 var func = localStorage.getItem("userdata")
 var matriculaLogado = JSON.parse(func).matricula
 var getMatricula;
 var getCargo;
 
+let voltar = document.querySelector(".btn-voltar").addEventListener("click", () => {
+    window.location.reload()
+
+})
+
 function list() {
-    let local = localStorage.getItem("funcionario");
+    let local;
+    if (JSON.parse(cargo).cargo.toLowerCase() === 'diretor') {
+        local = localStorage.getItem("funcionario");
+    } else {
+        local = JSON.parse(cargo).id_funcionario
+
+    }
+
 
     fetch(`${url}/funcionarios/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-
-
             data.forEach((item, index) => {
                 getMatricula = item.matricula
                 getCargo = item.cargo
@@ -114,6 +128,7 @@ function editarDados() {
     var ulDadosFunc = document.querySelector(".DadosFuncionario");
     var btnDadosFunc = document.querySelector(".btn");
     var btnAtualizarDados = document.querySelector(".btn-Updt");
+    var Demissao = document.querySelector(".Demissao");
     var cargo = document.querySelector("#cargo");
     var matricula = document.querySelector("#Matricula")
     cargo.value = getCargo
@@ -125,6 +140,7 @@ function editarDados() {
         ulEditarDados.style.display = "flex";
         btnDadosFunc.style.display = "none";
         btnAtualizarDados.style.display = "block";
+        Demissao.style.display = "none"
     }
 }
 
@@ -140,42 +156,46 @@ function Atualizar() {
     cargo.placeholder = getCargo
     matricula.placeholder = getMatricula
 
-    const data = JSON.stringify({
-        matricula: matriculaLogado,
-        matricula_funcionario: matricula,
-        cargo: cargo,
-        data_demissao: `${dataUS(dataDemissao)}`,
-    });
 
-    console.log(data)
 
-    fetch(`${url}/funcionarios`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then((resp) => {
-            if (resp.ok) {
+
+
+    if (dataDemissao === "" || cargo === "" || matricula === "") {
+        alert("todos os campos devem ser preenchidos")
+    } else {
+        const data = JSON.stringify({
+            matricula: matriculaLogado,
+            matricula_funcionario: matricula,
+            cargo: cargo,
+            data_demissao: `${dataUS(dataDemissao)}`,
+        });
+
+        fetch(`${url}/funcionarios`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+            .then((resp) => {
                 return resp.json();
-            } else {
-                alert("Falha ao Atualizar")
+            })
+            .then((data) => {
+
+                alert("Atualizado com sucesso");
                 ulDadosFunc.style.display = "flex";
                 btnDadosFunc.style.display = "block";
                 ulEditarDados.style.display = "none";
                 btnAtualizarDados.style.display = "none";
-            }
-        })
-        .then((data) => {
-            console.log(data)
-            alert("Atualizado com sucesso");
-            ulDadosFunc.style.display = "flex";
-            btnDadosFunc.style.display = "block";
-            ulEditarDados.style.display = "none";
-            btnAtualizarDados.style.display = "none";
 
-            window.location.reload()
+                window.location.reload()
 
-        });
+
+
+
+            });
+    }
+
+
+
 }

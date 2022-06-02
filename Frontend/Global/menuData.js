@@ -5,20 +5,21 @@ function getfunc() {
     let user = document.querySelector(".Username");
     let foto = document.querySelector(".userimg");
     user.innerHTML = funcionario.nome_completo
-    // foto.src = funcionario.foto
+        // foto.src = funcionario.foto
 
     fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {
             console.log(data[0].foto)
             user.innerHTML = data[0].nome_completo
-            if((data[0].foto == null)){
+            if ((data[0].foto == null)) {
                 foto.src = `../../Assets/icones/user.png`
+            } else {
+                foto.src = data[0].foto
             }
 
 
-        }
-    )
+        })
 }
 
 function dataCoverter(data) {
@@ -76,13 +77,13 @@ function mascaraRG(i) {
 
 function mascaraTEL(i) {
     var v = i.value;
-    if (isNaN(v[v.length -1])) {
+    if (isNaN(v[v.length - 1])) {
         i.value = v.substring(0, v.length - 1);
         return;
     }
 
     i.setAttribute("maxlength", "15");
-    
+
     if (v.length == 1) i.value = `(${v}`;
     if (v.length == 3) i.value += ")";
     if (v.length == 5) i.value += ".";
@@ -98,5 +99,5 @@ function mascaraMoeda(i) {
 
     i.setAttribute("maxlength", "12");
 
-    if(v.length == 3) i.value += ".";
+    if (v.length == 3) i.value += ".";
 }

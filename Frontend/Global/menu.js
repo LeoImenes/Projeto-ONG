@@ -1,3 +1,5 @@
+var cargo = localStorage.getItem('userdata')
+
 let menuImg = document.querySelector(".menuJS")
 let menuContent = document.querySelector(".menucontent")
 let pgAssistencia = document.querySelector(".Assistencia")
@@ -24,18 +26,29 @@ function closeMenu() {
     menuImg.classList.toggle("down");
 }
 
+if (JSON.parse(cargo).cargo.toLowerCase() === 'diretor') {
+    let Funcionario = document.querySelector(".Funcionario")
+    Funcionario.style.cursor = "pointer"
+    Funcionario.addEventListener("click", () => {
+        window.location.href = "../../Funcionario/OpcoesFuncionario/index.html"
+
+    })
+} else {
+    let Funcionario = document.querySelector(".Funcionario")
+    let p = document.querySelector(".Funcionario p")
+    p.innerHTML = "Meu Perfil"
+    Funcionario.style.cursor = "pointer"
+    Funcionario.addEventListener("click", () => {
+        window.location.href = "../../Funcionario/VerFuncionario/index.html"
+
+    })
+}
+
 let sair = document.querySelector(".logout")
 sair.style.cursor = "pointer"
 sair.addEventListener("click", () => {
     window.location.href = "../../Login/index.html"
     localStorage.clear
-})
-
-let Funcionario = document.querySelector(".Funcionario")
-Funcionario.style.cursor = "pointer"
-Funcionario.addEventListener("click", () => {
-    window.location.href = "../../Funcionario/OpcoesFuncionario/index.html"
-
 })
 
 let Financeiro = document.querySelector(".Lancamentos")
