@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { TextInputMask } from 'react-native-masked-text';
 import Url from './global/index';
+import md5 from 'md5';
 
 export default function Login({ navigation }) {
     const [recPassword, setRecpassword] = useState(false);
@@ -28,7 +29,7 @@ export default function Login({ navigation }) {
     const authenticator = () => {
         let funcionario = {
             email: email,
-            senha: password
+            senha: md5(password)
         }
 
         fetch(`${Url.URL}/funcionarios`, {
@@ -38,7 +39,12 @@ export default function Login({ navigation }) {
             },
             "body": JSON.stringify(funcionario),
         })
-            .then(resp => { return resp.json() })
+            .then(resp => {
+                if(resp.status === 403){
+                    ToastAndroid.show('Funcionário desligado!', ToastAndroid.LONG);
+                }
+                 return resp.json() 
+                })
             .then(async data => {
                 if (data.id_funcionario !== undefined) {
                     await AsyncStorage.setItem('userdata', JSON.stringify(data.matricula));
@@ -57,7 +63,7 @@ export default function Login({ navigation }) {
         let funcionario = {
             email: newEmail,
             cpf: cpf,
-            nova_senha: newPassword
+            nova_senha: md5(newPassword)
         }
 
         fetch(`${Url.URL}/funcionario/reset_senha`, {
