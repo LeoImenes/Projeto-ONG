@@ -154,9 +154,9 @@ export default function VerAssistido({ navigation }) {
                         "Content-Type": "application/json"
                     },
                     "body": JSON.stringify({
-                            id_assistido: assistido.id_assistido,
-                            comorbidades: selected
-                        }),
+                        id_assistido: assistido.id_assistido,
+                        comorbidades: selected
+                    }),
                 })
                     .then(resp => { return resp.json() })
                     .then(async data => {
@@ -431,34 +431,32 @@ export default function VerAssistido({ navigation }) {
                                                                     {
                                                                         DadosFamiliar.map((item, index) => {
                                                                             return (
-                                                                                <View>
-                                                                                    <View key={index} style={{ width: 370, height: 400 }}>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>Nome:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.Familiar}</Text>
-                                                                                        </View>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>Parentesco:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.Parentesco}</Text>
-                                                                                        </View>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>RG:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.RG}</Text>
-                                                                                        </View>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>Telefone:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.Telefone_familiar}</Text>
-                                                                                        </View>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>E-mail:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.Email_Familiar}</Text>
-                                                                                        </View>
-                                                                                        <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                                                            <Text style={gStyle.textInfo}>Endereço:</Text>
-                                                                                            <Text style={gStyle.textInfo}>{item.Endereco_Familiar}</Text>
-                                                                                        </View>
-                                                                                        <FontAwesome name="pencil" size={24} color="#166B8A" style={{ alignSelf: "center", marginTop: 5 }} onPress={() => { setEditarFam(true), dadosFamiliar(item) }} />
+                                                                                <View key={index} style={{ width: 370, height: 400 }}>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>Nome:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.Familiar}</Text>
                                                                                     </View>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>Parentesco:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.Parentesco}</Text>
+                                                                                    </View>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>RG:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.RG}</Text>
+                                                                                    </View>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>Telefone:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.Telefone_familiar}</Text>
+                                                                                    </View>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>E-mail:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.Email_Familiar}</Text>
+                                                                                    </View>
+                                                                                    <View style={[gStyle.cardInfo, gStyle.info]}>
+                                                                                        <Text style={gStyle.textInfo}>Endereço:</Text>
+                                                                                        <Text style={gStyle.textInfo}>{item.Endereco_Familiar}</Text>
+                                                                                    </View>
+                                                                                    <FontAwesome name="pencil" size={24} color="#166B8A" style={{ alignSelf: "center", marginTop: 5 }} onPress={() => { setEditarFam(true), dadosFamiliar(item) }} />
                                                                                 </View>
 
                                                                             )
@@ -478,7 +476,7 @@ export default function VerAssistido({ navigation }) {
                                                                     <TouchableOpacity onPress={() => { limpar(), setEditarFam(false), carregarFam() }} style={{ alignItems: 'center', justifyContent: 'center', width: "35%" }}>
                                                                         <Text style={{ fontSize: 18, color: "#166B8A", fontWeight: "bold" }}>Cancelar</Text>
                                                                     </TouchableOpacity>
-                                                                    <TouchableOpacity style={[gStyle.cardButton, { marginTop: 0 }]} onPress={() => { atualizarFamiliar()}}>
+                                                                    <TouchableOpacity style={[gStyle.cardButton, { marginTop: 0 }]} onPress={() => { atualizarFamiliar() }}>
                                                                         <Text style={gStyle.buttonText}>Atualizar</Text>
                                                                     </TouchableOpacity>
                                                                 </View>
@@ -522,7 +520,7 @@ export default function VerAssistido({ navigation }) {
                                         <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                         <TextInput value={nomeSocial} onChangeText={setNomeSocial} placeholder="Nome social..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                         <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
-                                        <TextInputMask type={'cpf'} value={cpf} onChangeText={setCpf} placeholder="CPF..." style={[gStyle.cardInfo, gStyle.info]}/>
+                                        <TextInputMask type={'cpf'} value={cpf} onChangeText={setCpf} placeholder="CPF..." style={[gStyle.cardInfo, gStyle.info]} />
                                         <TextInput value={antCriminal} onChangeText={setAntCriminal} placeholder="Antecedente criminal..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                         <View style={{ width: "90%", alignSelf: "center", borderBottomWidth: 2, borderBottomColor: "lightgray" }}>
                                             <Picker
@@ -536,7 +534,7 @@ export default function VerAssistido({ navigation }) {
                                                 <Picker.Item label="Outro" value="Outro" />
                                             </Picker>
                                         </View>
-                                        <TextInputMask type={'datetime'} options={{format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]}/>
+                                        <TextInputMask type={'datetime'} options={{ format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} />
                                         <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civil..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                         <TextInput value={naturalidade} onChangeText={setNaturalidade} placeholder="Naturalidade..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                         <TextInput value={cartCid} onChangeText={setCartCid} placeholder="Cartão cidadão..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
