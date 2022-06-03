@@ -150,6 +150,7 @@ function list() {
             }
         })
         .then((data) => {
+            console.log(data)
             var antes = document.querySelector("#assistidoAntes");
             antes.src = data.foto_antes;
             antes.style.borderRadius = "50%";

@@ -9,6 +9,8 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { TextInputMask } from 'react-native-masked-text';
 import Url from './global/index';
 import md5 from 'md5';
+import LottieView from "lottie-react-native";
+import welcome from './assets/67485-welcome-plants.json'
 
 export default function Login({ navigation }) {
     const [recPassword, setRecpassword] = useState(false);
@@ -19,10 +21,13 @@ export default function Login({ navigation }) {
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [cpf, setCpf] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
         if (await AsyncStorage.getItem('userdata') !== null) {
             navigation.navigate("ContainerHome");
+        } else {
+            setLoading(false)
         }
     }, [])
 
@@ -40,11 +45,11 @@ export default function Login({ navigation }) {
             "body": JSON.stringify(funcionario),
         })
             .then(resp => {
-                if(resp.status === 403){
+                if (resp.status === 403) {
                     ToastAndroid.show('Funcionário desligado!', ToastAndroid.LONG);
                 }
-                 return resp.json() 
-                })
+                return resp.json()
+            })
             .then(async data => {
                 if (data.id_funcionario !== undefined) {
                     await AsyncStorage.setItem('userdata', JSON.stringify(data.matricula));
@@ -92,64 +97,74 @@ export default function Login({ navigation }) {
         <View style={gStyle.body}>
             <StatusBar />
             {
-                (recPassword)
+                (loading == true)
                     ?
-                    <View style={[css.container, { backgroundColor: "rgb(22,107,138)", paddingTop: 35 }]}>
-                        <Ionicons name="arrow-back-circle-outline" style={gStyle.arrow} size={35} color="white" onPress={() => setRecpassword(false)} />
-                        <Text style={[css.title, { color: "white" }]}>Recuperar senha</Text>
-                        <View style={[css.align, { height: "50%" }]}>
-                            <TextInput placeholder={"E-mail..."} value={newEmail} onChangeText={setNewEmail} placeholderTextColor={"white"} style={[gStyle.input, { borderBottomColor: "white", color: "white" }]}></TextInput>
-                            <TextInputMask
-                                style={[gStyle.input, { borderBottomColor: "white", color: "white" }]}
-                                placeholder="CPF..."
-                                placeholderTextColor="white"
-                                type={'cpf'}
-                                value={cpf}
-                                onChangeText={setCpf}
-                            />
-                            <View style={[gStyle.input, { flexDirection: "row", borderBottomColor: "white" }]}>
-                                <TextInput placeholder={"Nova senha..."} value={newPassword} onChangeText={setNewPassword} secureTextEntry={show2} placeholderTextColor={"white"} style={{ width: "90%", height: "100%", color: "white" }}></TextInput>
-                                <TouchableOpacity style={{ width: "10%", height: "100%" }} onPress={() => { setShow2(!show2) }}>
-                                    {
-                                        (show2 === true)
-                                            ?
-                                            <FontAwesome name="eye" size={24} color="white" />
-                                            :
-                                            <FontAwesome name="eye-slash" size={24} color="white" />
-                                    }
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <TouchableOpacity style={[gStyle.cardButton, { backgroundColor: "white" }]} onPress={() => { recPass() }}>
-                            <Text style={[gStyle.buttonText, { color: "rgb(22,107,138)" }]}>SALVAR</Text>
-                        </TouchableOpacity>
+                    <View style={{ width: "100%", height: "100%" }}>
+                        <LottieView source={welcome} autoPlay loop />
                     </View>
                     :
-                    <View style={css.container}>
-                        <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={gStyle.logo}>
-                            <Text style={gStyle.headerText}>CASA ACOLHEDORA</Text>
-                            <Text style={gStyle.headerText}>IRMÃ ANTÔNIA</Text>
-                        </LinearGradient>
-                        <Text style={[css.title]}>Login</Text>
-                        <View style={css.align}>
-                            <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={gStyle.input} />
-                            <View style={[gStyle.input, { flexDirection: "row" }]}>
-                                <TextInput placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry={show1} style={{ width: "90%", height: "100%" }} />
-                                <TouchableOpacity style={{ width: "10%", height: "100%" }} onPress={() => { setShow1(!show1) }}>
-                                    {
-                                        (show1 === true)
-                                            ?
-                                            <FontAwesome name="eye" size={24} color="black" />
-                                            :
-                                            <FontAwesome name="eye-slash" size={24} color="black" />
-                                    }
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={css.button} onPress={() => { setRecpassword(true) }}>Esqueci a senha</Text>
-                        </View>
-                        <TouchableOpacity style={[gStyle.cardButton]} onPress={() => authenticator()}>
-                            <Text style={gStyle.buttonText}>ENTRAR</Text>
-                        </TouchableOpacity>
+                    <View style={gStyle.body}>
+                        {
+                            (recPassword)
+                                ?
+                                <View style={[css.container, { backgroundColor: "rgb(22,107,138)", paddingTop: 35 }]}>
+                                    <Ionicons name="arrow-back-circle-outline" style={gStyle.arrow} size={35} color="white" onPress={() => setRecpassword(false)} />
+                                    <Text style={[css.title, { color: "white" }]}>Recuperar senha</Text>
+                                    <View style={[css.align, { height: "50%" }]}>
+                                        <TextInput placeholder={"E-mail..."} value={newEmail} onChangeText={setNewEmail} placeholderTextColor={"white"} style={[gStyle.input, { borderBottomColor: "white", color: "white" }]}></TextInput>
+                                        <TextInputMask
+                                            style={[gStyle.input, { borderBottomColor: "white", color: "white" }]}
+                                            placeholder="CPF..."
+                                            placeholderTextColor="white"
+                                            type={'cpf'}
+                                            value={cpf}
+                                            onChangeText={setCpf}
+                                        />
+                                        <View style={[gStyle.input, { flexDirection: "row", borderBottomColor: "white" }]}>
+                                            <TextInput placeholder={"Nova senha..."} value={newPassword} onChangeText={setNewPassword} secureTextEntry={show2} placeholderTextColor={"white"} style={{ width: "90%", height: "100%", color: "white" }}></TextInput>
+                                            <TouchableOpacity style={{ width: "10%", height: "100%" }} onPress={() => { setShow2(!show2) }}>
+                                                {
+                                                    (show2 === true)
+                                                        ?
+                                                        <FontAwesome name="eye" size={24} color="white" />
+                                                        :
+                                                        <FontAwesome name="eye-slash" size={24} color="white" />
+                                                }
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                    <TouchableOpacity style={[gStyle.cardButton, { backgroundColor: "white" }]} onPress={() => { recPass() }}>
+                                        <Text style={[gStyle.buttonText, { color: "rgb(22,107,138)" }]}>SALVAR</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <View style={css.container}>
+                                    <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={gStyle.logo}>
+                                        <Text style={gStyle.headerText}>CASA ACOLHEDORA</Text>
+                                        <Text style={gStyle.headerText}>IRMÃ ANTÔNIA</Text>
+                                    </LinearGradient>
+                                    <Text style={[css.title]}>Login</Text>
+                                    <View style={css.align}>
+                                        <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={gStyle.input} />
+                                        <View style={[gStyle.input, { flexDirection: "row" }]}>
+                                            <TextInput placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry={show1} style={{ width: "90%", height: "100%" }} />
+                                            <TouchableOpacity style={{ width: "10%", height: "100%" }} onPress={() => { setShow1(!show1) }}>
+                                                {
+                                                    (show1 === true)
+                                                        ?
+                                                        <FontAwesome name="eye" size={24} color="black" />
+                                                        :
+                                                        <FontAwesome name="eye-slash" size={24} color="black" />
+                                                }
+                                            </TouchableOpacity>
+                                        </View>
+                                        <Text style={css.button} onPress={() => { setRecpassword(true) }}>Esqueci a senha</Text>
+                                    </View>
+                                    <TouchableOpacity style={[gStyle.cardButton]} onPress={() => authenticator()}>
+                                        <Text style={gStyle.buttonText}>ENTRAR</Text>
+                                    </TouchableOpacity>
+                                </View>
+                        }
                     </View>
             }
         </View>

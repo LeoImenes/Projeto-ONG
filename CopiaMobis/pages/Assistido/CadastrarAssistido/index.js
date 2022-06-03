@@ -194,7 +194,7 @@ export default function CadastrarAssistido({ navigation }) {
             setCam(false)
         }
     }
-
+    
     return (
         <View style={gStyle.body}>
             {
@@ -202,7 +202,7 @@ export default function CadastrarAssistido({ navigation }) {
                     ?
                     <View style={{ flex: 1 }}>
                         <View style={{ height: '10%', backgroundColor: "#222", justifyContent: "center" }}></View>
-                        <Camera style={{ width: "100%", height: "90%" }} type={type} ref={camRef}>
+                        <Camera style={{ width: "100%", height: "90%" }} type={type} ref={camRef} pictureSize='oi'>
                             <View style={{ width: '100%', height: "10%", flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: "rgba(100, 100, 100, 0.30)", bottom: 0, position: "absolute" }}>
                                 <View style={css.buttons}>
                                     <Ionicons name="arrow-back-circle-outline" size={35} color="#fff" onPress={() => { setCam(false) }} />
