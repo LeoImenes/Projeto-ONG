@@ -7,7 +7,7 @@
     <title>Assistência</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body onload="list()">
     <header>
         <div class="header">
             <ul class="nav-bar">
@@ -76,36 +76,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="AssistenciaOutros">
+                    <div class="AssistenciaOutros" onclick="openModal()">
                         <p>Outras Assistencias</p>
                     </div>
-                        <div class="modalOutros">
-                            <div id="header">
-                                <div id="title">
-                                    <h1>Assistencia</h1>
-                                </div>
-                            </div>
-                            <div id="body">
-                                <div class="Itens">
-                                <div class="pscoativo">
-                                    <h2>Psicoativos <img src="../../Assets/icones/down-chevron.png" alt="" class="pscArrow" onclick="menuDownPsco() "></h2>
-                                    <ul class="psclist psDown">
 
-                                    </ul>
-                                </div>
-                            </div>
-                                <div class="Assistidos">
-                                    <h2>Assistidos <img src="../../Assets/icones/down-chevron.png" alt="" class="doArrow" onclick="menuDownDoenca()"></h2>
-                                    <ul class="doclist doDown">
+                </div>
 
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                            <div id="footer">
-                                <button type="submit" class="RegAssis">Registrar Assistencia</button>
-                            </div>
-                        </div>
+            </div>
+            <div class="modal">
+                <div class="conte">
+                    <div class="inputs">
+
+                    </div>
+                    <div class="content">
+
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions, TextInput, ToastAndroid } from 'react-native';
 
 import gStyle from "../../global/style"
 import Url from '../../global/index'
@@ -10,6 +10,7 @@ import gif from '../../assets/53184-user.json'
 import LottieView from "lottie-react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Picker } from '@react-native-picker/picker';
+import { TextInputMask } from 'react-native-masked-text';
 
 export default function MeuPerfil({ navigation }) {
     const [funcionario, setFuncionario] = useState({});
@@ -22,7 +23,7 @@ export default function MeuPerfil({ navigation }) {
     const [estdCivil, setEstdCivil] = useState("");
     const [sexo, setSexo] = useState("");
     const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    // const [senha, setSenha] = useState("");
     const [nascimento, setNascimento] = useState("");
 
     useEffect(() => {
@@ -43,12 +44,46 @@ export default function MeuPerfil({ navigation }) {
                     setRg(data[0].rg);
                     setCpf(data[0].cpf);
                     setSexo(data[0].sexo);
-                    setNascimento(data[0].data_nascimento);
+                    setNascimento(formatDate.formatBr(new Date(data[0].data_nascimento)));
                     setEstdCivil(data[0].estado_civil);
                     setEmail(data[0].email);
                 })
                 .catch(err => { console.log(err) })
         }
+    }
+
+    const att = async () => {
+        let value = await AsyncStorage.getItem('userdata');
+        value = JSON.parse(value);
+
+        let item = {
+            matricula: value,
+            nome_completo: nome,
+            rg: rg,
+            cpf: cpf,
+            data_nascimento: formatDate.formatUs(nascimento),
+            estado_civil: estdCivil,
+            sexo: sexo,
+            foto: funcionario.foto
+        }
+        console.log(item)
+        fetch(`${Url.URL}/funcionario/dados`, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": JSON.stringify(item),
+        })
+            .then(resp => { return resp.json() })
+            .then(data => {
+                console.log(data)
+                ToastAndroid.show('Dados atualizados!', ToastAndroid.SHORT)
+                setAtualizar(false)
+                limpar()
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     const limpar = () => {
@@ -59,7 +94,7 @@ export default function MeuPerfil({ navigation }) {
         setNascimento("");
         setEstdCivil("");
         setEmail("");
-        setSenha("");
+        // setSenha("");
     }
 
     return (
@@ -99,11 +134,12 @@ export default function MeuPerfil({ navigation }) {
                                             <Picker.Item label="Outro" value="Outro" />
                                         </Picker>
                                     </View>
-                                    <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} />
+                                    {/* <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} /> */}
+                                    <TextInputMask type={'datetime'} options={{format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]}/>
                                     <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civíl..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TextInput value={email} onChangeText={setEmail} placeholder="E-mail..." style={[gStyle.cardInfo, gStyle.info]} />
-                                    <TextInput style={[gStyle.cardInfo, gStyle.info]} placeholder="Nova senha" value={senha} onChangeText={setSenha} />
-                                    <TouchableOpacity style={gStyle.cardButton} onPress={() => {}}>
+                                    {/* <TextInput style={[gStyle.cardInfo, gStyle.info]} placeholder="Nova senha" value={senha} onChangeText={setSenha} /> */}
+                                    <TouchableOpacity style={gStyle.cardButton} onPress={() => { att() }}>
                                         <Text style={gStyle.buttonText}>Salvar</Text>
                                     </TouchableOpacity>
                                 </View>

@@ -74,7 +74,6 @@ export default function CadastrarFuncionario({ navigation }) {
         })
             .then(resp => { return resp.json() })
             .then(data => {
-                console.log(data)
                 if (data.err !== undefined) {
                     if (data.err.includes("Duplicate entry"))
                         ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)

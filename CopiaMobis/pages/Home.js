@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import gStyle from './global/style'
 import { Feather, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import StatusBar from './Components/StatusBar/Index'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Url from './global/index'
 
 export default function Home({ navigation }) {
+    useEffect(() => {
+        getUser()
+    }, []);
+
+    const getUser = async () => {
+        let value = await AsyncStorage.getItem('userdata');
+        if (value !== null) {
+            value = JSON.parse(value);
+
+            fetch(`${Url.URL}/funcionarios/${value}`)
+                .then(resp => { return resp.json() })
+                .then(data => {
+
+                })
+                .catch(err => { console.log(err) })
+        }
+    }
+
     return (
         <View style={gStyle.body}>
             <StatusBar />
