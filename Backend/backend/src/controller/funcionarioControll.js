@@ -183,7 +183,6 @@ const login = (req, res) => {
                     result.forEach((item, index) => {
                         delete item.senha
                         delete item.status
-                        delete item.nome_completo
                         delete item.rg
                         delete item.cpf
                         delete item.data_nascimento
@@ -508,6 +507,37 @@ const getItensAssistencia = (req, res) => {
     })
 }
 
+const encaminhamento = (req, res) => {
+    let id_funcionario = req.body.id_funcionario;
+    let id_assistido = req.body.id_assistido;
+    let encaminhamento = req.body.encaminhamento;
+    let query = `insert into encaminhamentos (id_funcionario, id_assistido, encaminhamento,data_registro) values (${id_funcionario},${id_assistido}, "${encaminhamento}",curdate());`
+    con.query(query, (err, result) => {
+        console.log(result)
+        if(err === null){
+            //res.status(200).json({...req.body, id_encaminhamento: result.insertId, data_registro: result.insertData}).end();
+            query = 'SELECT * FROM encaminhamentos WHERE id_encaminhamento = ' + result.insertId;
+            con.query(query, (err, result) => {
+                let retorno = result[0];
+                res.status(200).json(retorno).end();
+            })
+        } else {
+            res.status(400).json({ "Erro:": err.message }).end();
+        }
+    })
+};
+
+const getAllnomes = (req, res) => {
+    let string = `select nome_completo from assistidos`
+    con.query(string, (err, result) => {
+        if (err == null) {
+            res.json(result)
+        } else {
+            res.status(400).json({ err: err.message })
+        }
+    })
+}
+
 module.exports = {
     postFuncionario,
     getAll,
@@ -526,5 +556,7 @@ module.exports = {
     getIDFinanca,
     updateFinanca,
     postmultAssis,
-    getItensAssistencia
+    getItensAssistencia,
+    encaminhamento,
+    getAllnomes
 }

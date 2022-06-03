@@ -14,6 +14,8 @@ route.put('/funcionario/dados', funcionarioControll.updateDadosFuncionario)
 route.put('/funcionario', funcionarioControll.updateFotoFuncionario)
 route.delete('/funcionarios/:matricula', funcionarioControll.deletarFuncionario)
 route.put('/funcionario/reset_senha', funcionarioControll.resetSenha)
+route.post('/funcionario/encaminhamento', funcionarioControll.encaminhamento)
+route.get('/funcionario/getassistidos', funcionarioControll.getAllnomes)
 
 // *** FINANCEIRO *** //
 route.post("/funcionario/financas", funcionarioControll.postFinanca)
