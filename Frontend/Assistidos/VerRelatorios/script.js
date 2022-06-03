@@ -42,13 +42,15 @@ function listarRelatorios() {
             divRela.className = "dataRelatorio"
 
             cardRelatorio.addEventListener("click", () => {
+                let store = localStorage.setItem("rela", Assist.relatorio);
                 openModal(),
-                    localStorage.setItem("rela",JSON.stringify(Assist.id_relatorio))
-                    if(Assist.id_relatorio !== 0){
-                        modalInfo()
-                    }else{
-                        alert("Não foi possivel realizar operação")
-                    }            })
+                    localStorage.setItem("rela", JSON.stringify(Assist.id_relatorio))
+                if (Assist.id_relatorio !== 0) {
+                    modalInfo()
+                } else {
+                    alert("Não foi possivel realizar operação")
+                }
+            })
 
             img.className = "fotoAssistido"
             divimg.className = "img"
@@ -82,69 +84,76 @@ function buscarData() {
     let cardRelatorio = document.querySelectorAll('.cardRelatorio');
     let card = document.querySelectorAll('.dataRelat h1')
 
-    card.forEach((item, index)=> {
+    card.forEach((item, index) => {
         !item.innerHTML.includes(dataCoverter(input)) ? cardRelatorio[index].style.display = "none" : cardRelatorio[index].style.display = "flex"
     })
 
 }
 
-function modalInfo(){
+function modalInfo() {
     let local = localStorage.getItem("rela");
     fetch(`${url}/relatorio/assistido/get/${local}`)
-    .then(res => {return res.json()})
-    .then(data => {
-        data.forEach(item => {
+        .then(res => { return res.json() })
+        .then(data => {
+            console.log(data)
+            data.forEach(item => {
 
-            relatorio_id = item.Numero
-            let relnum = document.querySelector(".Relnum")
-            let textarea = document.querySelector("#textarea")
-            let reldata = document.querySelector(".Reldata")
-            let relfunc = document.querySelector(".RelFunc")
-            let relassis = document.querySelector(".RelAssis")
-            let relimg = document.querySelector(".RelImg")
-            
-            relimg.src = item.foto
-            relassis.innerHTML= item.assistido
-            relnum.innerHTML = `Relatório: ${item.Numero}`
-            relfunc.innerHTML = `Funcionario: ${item.funcionario}`
-            reldata.innerHTML = `Data:  ${dataCoverter(item.data_relatorio)}`
-            textarea.value = item.relatorio
-            console.log(item)
+                relatorio_id = item.Numero
+                let relnum = document.querySelector(".Relnum")
+                let textarea = document.querySelector("#textarea")
+                let reldata = document.querySelector(".Reldata")
+                let relfunc = document.querySelector(".RelFunc")
+                let relassis = document.querySelector(".RelAssis")
+                let relimg = document.querySelector(".RelImg")
+
+                if (item.foto === null || item.foto === undefined || item.foto === 'undefined') {
+                    relimg.src = "../../Assets/icones/user.png"
+                } else {
+                    relimg.src = item.foto
+                }
+
+
+
+                relassis.innerHTML = item.assistido
+                relnum.innerHTML = `Relatório: ${item.Numero}`
+                relfunc.innerHTML = `Funcionario: ${item.funcionario}`
+                reldata.innerHTML = `Data:  ${dataCoverter(item.data_relatorio)}`
+                textarea.value = item.relatorio
+                console.log(item)
+            })
         })
-    })
 }
 
-function updataeRelatorio(){
+function updataeRelatorio() {
     var id_func = localStorage.getItem("userdata")
     let textarea = document.querySelector("#textarea")
 
     var data = JSON.stringify({
-       "id_relatorio" : relatorio_id,
-        "id_funcionario" : JSON.parse(id_func).id_funcionario,
+        "id_relatorio": relatorio_id,
+        "id_funcionario": JSON.parse(id_func).id_funcionario,
         "relatorio": textarea.value
-        
+
     })
 
-    fetch(`${url}/relatorio/put`,{
-        method : "Put",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: data,
-}).then(response => {
-    if(response.status === 200) {
-        alert("Atualiazado com sucesso")
-        return response.json}
-        else{
-            alert("Falha ao atualizar")
-        }
-    }
-   
-    )
-.then(data => {
-window.location.reload()
-})
+    fetch(`${url}/relatorio/put`, {
+            method: "Put",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        }).then(response => {
+                if (response.status === 200) {
+                    alert("Atualiazado com sucesso")
+                    return response.json
+                } else {
+                    alert("Falha ao atualizar")
+                }
+            }
+
+        )
+        .then(data => {
+            window.location.reload()
+        })
 
 
 }
-

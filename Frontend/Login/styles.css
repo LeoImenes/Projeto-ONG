@@ -6,6 +6,43 @@
     font-family: "Open Sans", sans-serif;
 }
 
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(2, 113, 141) inset !important;
+}
+
+input,
+input::-webkit-input-placeholder {
+    color: white;
+}
+
+@keyframes movBanner {
+    0% {
+        transform: translateX(-100rem) rotateX(-30deg);
+    }
+    100% {
+        transform: translateX(0rem) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 img {
     width: 400px;
 }
@@ -18,17 +55,22 @@ section {
 
 .cards {
     display: flex;
+    animation: movBanner .8s .1s forwards;
     height: 70vh;
     width: 70vw;
     box-shadow: 4px 5px 5px 4px rgba(0, 0, 0, 0.288);
+    background-color: rgb(2, 113, 141);
+    /* animation: movBanner .5s .1s forwards; */
 }
 
 .cardImg {
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 70vh;
+    background-color: white;
+    border-radius: 0px 20% 20% 0;
 }
 
 .cardForm {
@@ -41,6 +83,10 @@ section {
 .look {
     width: 100%;
     display: flex;
+}
+
+.olhar {
+    color: white
 }
 
 .cardForm img {
@@ -63,6 +109,7 @@ form {
     display: flex;
     flex-direction: column;
     height: 45vh;
+    animation: movBanner .8s .1s forwards;
 }
 
 form input[type="text"],
@@ -73,10 +120,6 @@ input[type="password"] {
     border-bottom: 1.5px solid rgb(255, 255, 255);
     justify-content: flex-start;
     background-color: transparent;
-}
-
-input::-webkit-input-placeholder {
-    color: white;
 }
 
 form input[type="text"],
@@ -146,12 +189,19 @@ a {
 }
 
 h2 {
-    width: 90%;
+    width: 50%;
     height: 10%;
+    border-radius: 30%;
     border-bottom: 2px solid #e5e5e5;
-    border-radius: 100%;
     text-align: center;
     color: #e5e5e5;
+}
+
+.Suporte {
+    position: fixed;
+    top: 95vh;
+    color: rgb(0, 0, 0);
+    left: 50%;
 }
 
 @media (max-width: 1254px) {
@@ -178,10 +228,12 @@ h2 {
     }
     .cardImg {
         border-right: none;
+        border-radius: 0px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 50vh;
+        background-color: transparent;
     }
     .btnLog {
         width: 45%;
@@ -266,11 +318,10 @@ h2 {
     }
     .cards {
         display: flex;
-        height: 90vh;
+        height: 100vh;
         width: 100vw;
         box-shadow: 4px 5px 5px 4px rgba(0, 0, 0, 0.288);
     }
-
     .rec-senha p {
         font-size: 14px;
         text-decoration: blue;

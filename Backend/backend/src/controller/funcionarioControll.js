@@ -123,8 +123,25 @@ const updateFuncionario = async (req, res) => {
 }
 
 // MÉTODO ATUALIZAR TODAS AS INFORMAÇÕES DO FUNCIONARIO
-const updateFullFuncionario = (req, res) => {
-
+const updateDadosFuncionario = (req, res) => {
+    // console.log(req.body)
+    let matricula = req.body.matricula;
+    let nome_completo =  req.body.nome_completo;
+    let rg =  req.body.rg;
+    let cpf =  req.body.cpf;
+    let data_nascimento =  req.body.data_nascimento;
+    let estado_civil =  req.body.estado_civil;
+    let sexo =  req.body.sexo;
+    let foto =  req.body.foto;
+    let query = `UPDATE funcionarios SET nome_completo="${nome_completo}",rg="${rg}",cpf="${cpf}",data_nascimento="${data_nascimento}",estado_civil="${estado_civil}",sexo="${sexo}",foto="${foto}" WHERE matricula="${matricula}";`;
+    con.query(query, (err, result) => {
+        if(err == null) {
+            res.status(200).json({...req.body}).end();
+        }else {
+            res.status(400).json({err: err.message}).end();
+            // console.log(err)
+        }
+    })
 };
 
 // MÉTOD ATUALIZAR FOTO DO FUNCIONARIO
@@ -496,6 +513,7 @@ module.exports = {
     getAll,
     getMatricula,
     updateFuncionario,
+    updateDadosFuncionario,
     updateFotoFuncionario,
     deletarFuncionario,
     login,
