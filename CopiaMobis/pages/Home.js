@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import gStyle from './global/style'
@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Url from './global/index'
 
 export default function Home({ navigation }) {
+    const cargo = "v"
+
     useEffect(() => {
         getUser()
     }, []);
@@ -31,10 +33,10 @@ export default function Home({ navigation }) {
         <View style={gStyle.body}>
             <StatusBar />
             <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={[css.cardColor, { borderBottomLeftRadius: 112.5 }]}>
-                <View></View>
+                <View />
             </LinearGradient>
             <LinearGradient colors={['rgb(2, 64, 87)', 'transparent']} style={[css.cardColor, { bottom: 0, borderTopRightRadius: 112.5 }]}>
-                <View></View>
+                <View />
             </LinearGradient>
             <View style={css.header}>
                 <Feather onPress={() => { navigation.openDrawer() }} name="menu" size={35} color="white" />
@@ -44,42 +46,67 @@ export default function Home({ navigation }) {
                 </View>
             </View>
             <ScrollView style={css.scrollView}>
-                <View style={css.align}>
-                    <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("ListarAssistidos") }}>
-                        <Feather name="list" size={24} color="black" style={{ marginBottom: 10 }} />
-                        <Text style={css.title}>Listar</Text>
-                        <Text style={css.title}>Assistidos</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("CadastrarAssistido") }}>
-                        <FontAwesome5 name="address-card" size={24} color="black" style={{ marginBottom: 10 }} />
-                        <Text style={css.title}>Cadastrar</Text>
-                        <Text style={css.title}>Assistido</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={css.align}>
-                    <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("ListarFuncionarios") }}>
-                        <Feather name="list" size={24} color="black" style={{ marginBottom: 10 }} />
-                        <Text style={css.title}>Listar</Text>
-                        <Text style={css.title}>Funcionários</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("CadastrarFuncionario") }}>
-                        <FontAwesome5 name="address-card" size={24} color="black" style={{ marginBottom: 10 }} />
-                        <Text style={css.title}>Cadastrar</Text>
-                        <Text style={css.title}>Funcionários</Text>
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("AssistenciaRefeicao") }}>
-                    <MaterialCommunityIcons name="food-variant" size={24} color="black" />
-                    <Text style={css.title}>Alimentação</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("OutrasAssistencias") }}>
-                    <MaterialCommunityIcons name="home-assistant" size={24} color="black" />
-                    <Text style={css.title}>Assistência</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("Financeiro") }}>
-                    <MaterialCommunityIcons name="finance" size={24} color="black" />
-                    <Text style={css.title}>Financeiro</Text>
-                </TouchableOpacity>
+                {
+                    (cargo === "Diretor")
+                        ?
+                        <View>
+                            <View style={css.align}>
+                                <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("ListarAssistidos") }}>
+                                    <Feather name="list" size={24} color="black" style={{ marginBottom: 10 }} />
+                                    <Text style={css.title}>Listar</Text>
+                                    <Text style={css.title}>Assistidos</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("CadastrarAssistido") }}>
+                                    <FontAwesome5 name="address-card" size={24} color="black" style={{ marginBottom: 10 }} />
+                                    <Text style={css.title}>Cadastrar</Text>
+                                    <Text style={css.title}>Assistido</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={css.align}>
+                                <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("ListarFuncionarios") }}>
+                                    <Feather name="list" size={24} color="black" style={{ marginBottom: 10 }} />
+                                    <Text style={css.title}>Listar</Text>
+                                    <Text style={css.title}>Funcionários</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={css.card} onPress={() => { navigation.navigate("CadastrarFuncionario") }}>
+                                    <FontAwesome5 name="address-card" size={24} color="black" style={{ marginBottom: 10 }} />
+                                    <Text style={css.title}>Cadastrar</Text>
+                                    <Text style={css.title}>Funcionários</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("AssistenciaRefeicao") }}>
+                                <MaterialCommunityIcons name="food-variant" size={24} color="black" />
+                                <Text style={css.title}>Alimentação</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("OutrasAssistencias") }}>
+                                <MaterialCommunityIcons name="home-assistant" size={24} color="black" />
+                                <Text style={css.title}>Assistência</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={gStyle.card} onPress={() => { navigation.navigate("Financeiro") }}>
+                                <MaterialCommunityIcons name="finance" size={24} color="black" />
+                                <Text style={css.title}>Financeiro</Text>
+                            </TouchableOpacity>
+                        </View>
+                        :
+                        <View>
+                            <TouchableOpacity style={[gStyle.card, {height: 120, margin: "7%"}]} onPress={() => { navigation.navigate("ListarAssistidos") }}>
+                                <Feather name="list" size={24} color="black" style={{ marginBottom: 10 }} />
+                                <Text style={css.title}>Listar Assistidos</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[gStyle.card, {height: 120, margin: "7%"}]} onPress={() => { navigation.navigate("CadastrarAssistido") }}>
+                                <FontAwesome5 name="address-card" size={24} color="black" style={{ marginBottom: 10 }} />
+                                <Text style={css.title}>Cadastrar Assistido</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[gStyle.card, {height: 120, margin: "7%"}]} onPress={() => { navigation.navigate("AssistenciaRefeicao") }}>
+                                <MaterialCommunityIcons name="food-variant" size={24} color="black" />
+                                <Text style={css.title}>Alimentação</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[gStyle.card, {height: 120, margin: "7%"}]} onPress={() => { navigation.navigate("OutrasAssistencias") }}>
+                                <MaterialCommunityIcons name="home-assistant" size={24} color="black" />
+                                <Text style={css.title}>Assistência</Text>
+                            </TouchableOpacity>
+                        </View>
+                }
             </ScrollView>
         </View>
     )
