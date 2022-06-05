@@ -273,57 +273,7 @@ async function executarQuery(string) {
     })
 }
 
-// MÉTODO FAZER ASSISTÊNCIA A UM ASSISTIDOS *** função esta com problema ***
-// const postAssistencia = (req, res) => {
-//     let id_funcionario = req.body.id_funcionario
-//     let id_assistido = req.body.id_assistido
-//     let itens = req.body.itens
-//     let index = 0
-//     let comerro = false
-//     let stringSolicitacao
-//     if (id_funcionario !== undefined && id_assistido !== undefined && itens.length > 0) {
-//         let strinAssistencia = `insert into assistencias (id_assistido, id_funcionario, data_registro) values(${id_assistido}, ${id_funcionario}, curdate())`
-//         try {
-//             con.beginTransaction()
-//             con.query(strinAssistencia, async (err, result) => {
-//                 if (err === null) {
-//                     let id_assistencia = result.insertId
-//                     do {
-//                         stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
-//                         console.log("string sql:" + stringSolicitacao)
-//                         console.log("index: " + index)
-//                         let response = await executarQuery(stringSolicitacao)
-//                             .then(() => {
-//                                 if (index + 1 === itens.length) {
-//                                     console.log(itens)
-//                                     con.commit()
-//                                     res.status(200).json({ "ok": "ok" })
-//                                     comerro = true
-//                                 }
-
-//                             }).catch((err) => {
-//                                 con.rollback()
-//                                 res.status(400).json({ err: err.message })
-//                                 comerro = true
-//                             })
-
-//                         index++
-//                     } while (!comerro)
-//                 } else {
-//                     res.status(400).json({ err: err.message })
-//                 }
-//             })
-
-//         } catch (err) {
-//             con.rollback()
-//             res.status(400).json({ err: err.message })
-//         }
-//     } else {
-//         res.status(400).json({ "err": "informe os campos 'id_funcionario', 'id_assistido', 'itens'" })
-//     }
-// };
-
-// MÉTODO FAZER ASSISTÊNCIA PARA VARIOS ASSISTIDOS
+// MÉTODO FAZER ASSISTÊNCIA PARA UM OU VARIOS ASSISTIDOS
 const postmultAssis = (req, res) => {
     console.log(req.body)
     let id_funcionario = req.body.id_funcionario;
@@ -384,7 +334,7 @@ const getAllAssistencias = (req, res) => {
         if (err === null) {
             res.status(200).json(result).end();
         } else {
-            res.status(400).json({ err: err.message }).ende();
+            res.status(400).json({ err: err.message }).end();
         }
     })
 }
@@ -513,7 +463,7 @@ const encaminhamento = (req, res) => {
     let encaminhamento = req.body.encaminhamento;
     let query = `insert into encaminhamentos (id_funcionario, id_assistido, encaminhamento,data_registro) values (${id_funcionario},${id_assistido}, "${encaminhamento}",curdate());`
     con.query(query, (err, result) => {
-        console.log(result)
+        // console.log(result)
         if(err === null){
             //res.status(200).json({...req.body, id_encaminhamento: result.insertId, data_registro: result.insertData}).end();
             query = 'SELECT * FROM encaminhamentos WHERE id_encaminhamento = ' + result.insertId;
@@ -531,9 +481,9 @@ const getAllnomes = (req, res) => {
     let string = `select nome_completo from assistidos`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.json(result)
+            res.json(result).end();
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end();
         }
     })
 }
