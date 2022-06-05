@@ -457,6 +457,7 @@ const getItensAssistencia = (req, res) => {
     })
 }
 
+// FUNÇÃO ENCAMINHAMENTO DO ASSISTIDO
 const encaminhamento = (req, res) => {
     let id_funcionario = req.body.id_funcionario;
     let id_assistido = req.body.id_assistido;

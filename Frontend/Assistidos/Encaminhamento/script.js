@@ -3,11 +3,21 @@ func.innerHTML = JSON.parse(window.localStorage.getItem("userdata")).nome_comple
 
 const assistido = document.querySelector("#assistido");
 assistido.addEventListener("keyup", (e) => {
-let val = e.target.value;
+    let val = e.target.value;
 
-if(val.length >= 3) {
-    console.log(val)
-}
+    if (val.length >= 3) {
+        assistidos: [];
+        console.log(val)
+
+        if (val = 3) {
+            fetch(`${url}/funcionario/getassistidos`, {
+                method: "GET",
+            })   
+
+
+
+        }
+    }
 })
 
 // function encaminhamento(){
