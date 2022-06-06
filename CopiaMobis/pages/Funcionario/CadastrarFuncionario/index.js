@@ -161,7 +161,21 @@ export default function CadastrarFuncionario({ navigation }) {
                                 <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                 <TextInputMask type={'cpf'} value={cpf} onChangeText={setCpf} placeholder="CPF..." style={[gStyle.cardInfo, gStyle.info]} />
                                 <TextInputMask type={'datetime'} options={{ format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} />
-                                <TextInput value={cargo} onChangeText={setCargo} placeholder="Cargo..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
+                                <View style={{ height: 40, borderBottomWidth: 2, margin: 10, borderBottomColor: 'lightgray', width: "90%", alignSelf: "center", justifyContent: "center" }}>
+                                    <Picker
+                                        selectedValue={cargo}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            setCargo(itemValue)
+                                        }>
+                                        <Picker.Item label="Cargo..." value="" style={{ color: "gray", fontSize: 15 }} />
+                                        <Picker.Item label="Diretor" value="Diretor" style={{ fontSize: 15 }} />
+                                        <Picker.Item label="Assistente Social" value="Assistente Social" style={{ fontSize: 15 }} />
+                                        <Picker.Item label="Voluntário" value="Voluntário" style={{ fontSize: 15 }} />
+                                        <Picker.Item label="Psicólogo" value="Psicólogo" style={{ fontSize: 15 }} />
+                                        <Picker.Item label="Tesoureiro" value="Tesoureiro" style={{ fontSize: 15 }} />
+                                        <Picker.Item label="Auxiliar" value="Auxiliar" style={{ fontSize: 15 }} />
+                                    </Picker>
+                                </View>
                                 <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado Civíl..." style={[gStyle.cardInfo, gStyle.info]}></TextInput>
                                 <View style={{ height: 40, borderBottomWidth: 2, margin: 10, borderBottomColor: 'lightgray', width: "90%", alignSelf: "center", justifyContent: "center" }}>
                                     <Picker
