@@ -111,9 +111,6 @@ function modalInfo() {
                 } else {
                     relimg.src = item.foto
                 }
-
-
-
                 relassis.innerHTML = item.assistido
                 relnum.innerHTML = `Relatório: ${item.Numero}`
                 relfunc.innerHTML = `Funcionario: ${item.funcionario}`
@@ -154,6 +151,4 @@ function updataeRelatorio() {
         .then(data => {
             window.location.reload()
         })
-
-
 }

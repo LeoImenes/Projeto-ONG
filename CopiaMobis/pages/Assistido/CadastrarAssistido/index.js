@@ -183,6 +183,8 @@ export default function CadastrarAssistido({ navigation }) {
     async function takePicture() {
         if (camRef) {
             const data = await camRef.current.takePictureAsync();
+            data.width = 1000
+            data.height = 1000
             let base = await FileSystem.readAsStringAsync(data.uri, {
                 encoding: FileSystem.EncodingType.Base64,
             });
@@ -202,7 +204,7 @@ export default function CadastrarAssistido({ navigation }) {
                     ?
                     <View style={{ flex: 1 }}>
                         <View style={{ height: '10%', backgroundColor: "#222", justifyContent: "center" }}></View>
-                        <Camera style={{ width: "100%", height: "90%" }} type={type} ref={camRef} pictureSize='oi'>
+                        <Camera style={{ width: "100%", height: "90%" }} type={type} ref={camRef} quality={0}>
                             <View style={{ width: '100%', height: "10%", flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: "rgba(100, 100, 100, 0.30)", bottom: 0, position: "absolute" }}>
                                 <View style={css.buttons}>
                                     <Ionicons name="arrow-back-circle-outline" size={35} color="#fff" onPress={() => { setCam(false) }} />

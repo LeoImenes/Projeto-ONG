@@ -5,10 +5,10 @@ function conectar() {
     let data = JSON.stringify({
         email: email.value,
         cpf: cpf.value,
-        nova_senha: nova_senha.value,
+        nova_senha: md5(nova_senha.value),
     });
 
-    fetch(`http://localhost:3000/reset_senha`, {
+    fetch(`${url}/funcionario/reset_senha`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
