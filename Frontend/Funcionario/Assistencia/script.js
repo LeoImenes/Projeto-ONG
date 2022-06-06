@@ -4,10 +4,9 @@ function openModal() {
 
     modal.style.display = "flex"
 
-    close.addEventListener("click", () => {
-        modal.style.display = "none"
-    })
-
+    // close.addEventListener("click", () => {
+    //     modal.style.display = "none"
+    // })
 
 }
 
@@ -67,4 +66,14 @@ function list() {
 
 
         })
+}
+
+function buscar() {
+    let input = document.getElementById("inp").value.toLowerCase();
+    let filtro = document.querySelectorAll("h1");
+    let card = document.querySelectorAll(".cardAssistido")
+
+    filtro.forEach((item, index) => {
+        (item.innerHTML.toLowerCase().includes(input)) ? card.style.display = "flex": card.style.display = "none";
+    })
 }

@@ -1,8 +1,6 @@
 const { con } = require('../database/Connection')
 const assistidoModelo = require('../model/assistidoModel')
 
-
-
 // MÉTODO CADASTRAR ASSISTIDO
 const postAssistido = (req, res) => {
     req.connection.setTimeout(120000);
@@ -74,9 +72,9 @@ const getAll = (req, res) => {
     let string = `select * from assistidos`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.json(result)
+            res.json(result).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -86,9 +84,9 @@ const getID = (req, res) => {
     let string = `select * from assistidos where id_assistido = ${req.params.id_assistido}`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.json(result[0])
+            res.json(result[0]).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -99,9 +97,9 @@ const buscarAssistidoNomeCompleto = (req, res) => {
     let stringNomeCompleto = `select * from assistidos where nome_completo = '${nome_completo}';`
     con.query(stringNomeCompleto, (err, result) => {
         if (err === null) {
-            res.json(result)
+            res.json(result).end()
         } else {
-            res.status(400).json({ err: err.message })
+            res.status(400).json({ err: err.message }).end()
         }
     })
 }
@@ -113,9 +111,9 @@ const buscarAssistidoCPF = (req, res) => {
     if (req.params.cpf !== undefined) {
         con.query(stringCPF, (err, result) => {
             if (err === null) {
-                res.json(result)
+                res.json(result).end()
             } else {
-                res.status(400).json({ err: err.message })
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
@@ -130,13 +128,13 @@ const buscarAssistidoRG = (req, res) => {
     if (rg !== undefined) {
         con.query(stringRG, (err, result) => {
             if (err === null) {
-                res.json(result)
+                res.json(result).end()
             } else {
-                res.status(404).end().json({ err: err.message })
+                res.status(404).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).end().json({ "err": "informe um rg" })
+        res.status(400).json({ "err": "informe um rg" }).end()
     }
 }
 
@@ -199,13 +197,13 @@ const updateFotoDepoisAssistido = (req, res) => {
     if (req.body.id_assistido !== undefined && req.body.foto_depois !== undefined) {
         con.query(string, (err, result) => {
             if (err === null) {
-                res.json({...req.body })
+                res.json({...req.body }).end()
             } else {
-                res.status(400).json({ err: err.message })
+                res.status(400).json({ err: err.message }).end()
             }
         })
     } else {
-        res.status(400).json({ "err": "informe os campos id e foto" })
+        res.status(400).json({ "err": "informe os campos id e foto" }).end()
     }
 }
 
@@ -215,7 +213,7 @@ const asynqQuery = (query) => {
     return new Promise((resolve, reject) => {
         con.query(query, (err, result) => {
             if (err) reject(err);
-            console.log(result)
+            // console.log(result)
             resolve(result);
         });
     })
