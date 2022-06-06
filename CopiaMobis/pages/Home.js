@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import gStyle from './global/style'
@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Url from './global/index'
 
 export default function Home({ navigation }) {
-    const cargo = "v"
+    const [cargo, setCargo] = useState("")
 
     useEffect(() => {
         getUser()
@@ -23,7 +23,8 @@ export default function Home({ navigation }) {
             fetch(`${Url.URL}/funcionarios/${value}`)
                 .then(resp => { return resp.json() })
                 .then(data => {
-
+                    setCargo(data[0].cargo)
+                    // console.log(data[0].cargo);
                 })
                 .catch(err => { console.log(err) })
         }
@@ -47,7 +48,7 @@ export default function Home({ navigation }) {
             </View>
             <ScrollView style={css.scrollView}>
                 {
-                    (cargo === "Diretor")
+                    (cargo === "Diretor" || cargo === "Assistente Social")
                         ?
                         <View>
                             <View style={css.align}>
