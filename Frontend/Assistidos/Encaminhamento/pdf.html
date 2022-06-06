@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Ong Digital - V1.0.0</title>
+    <link rel="sortcut icon" href="../Assets/icones/icone_i.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <ul class="nav-bar">
+                <li>
+                    <h2>--- PDF ---</h2>
+                </li>
+
+            </ul>
+        </div>
+
+    </header>
+    <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p class="Username">Usuário</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li class="Assistencia">
+                        <p>Assistência</p>
+                    </li>
+                    <li class="Assistidos">
+                        <p>Assitidos</p>
+                    </li>
+                    <li class="Funcionario">
+                        <p>Funcionários</p>
+                    </li>
+                    <li class="Lancamentos">
+                        <p>Financeiro</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+            </ul>
+        </div>
+        <div>
+
+            <div class="conteudo">
+                <H1>Criar pdf</H1>
+
+                <button onclick="gerarPDF()">Gerar PDF</button>
+
+                <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+
+                <script>
+                    function gerarPDF() {
+                        //or in browser
+                        var pdfObject = jsPDFInvoiceTemplate.default(props); //returns number of pages created
+                        console.log("Objeto criado: ", pdfObject)
+                    }
+
+                    var props = {
+                        outputType: jsPDFInvoiceTemplate.OutputType.Save,
+                        returnJsPDFDocObject: true,
+                        fileName: "Invoice 2021",
+                        orientationLandscape: false,
+                        compress: true,
+                        logo: {
+                            src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/logo.png",
+                            type: 'PNG', //optional, when src= data:uri (nodejs case)
+                            width: 53.33, //aspect ratio = width/height
+                            height: 26.66,
+                            margin: {
+                                top: 0, //negative or positive num, from the current position
+                                left: 0 //negative or positive num, from the current position
+                            }
+                        },
+                        stamp: {
+                            inAllPages: true, //by default = false, just in the last page
+                            src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg",
+                            type: 'JPG', //optional, when src= data:uri (nodejs case)
+                            width: 20, //aspect ratio = width/height
+                            height: 20,
+                            margin: {
+                                top: 0, //negative or positive num, from the current position
+                                left: 0 //negative or positive num, from the current position
+                            }
+                        },
+                        business: {
+                            name: "Casa Acolhedora Irmã Antônia",
+                            address: "R. Mal. Floriano Peixoto, 443 - Jardim Berlim",
+                            phone: "(19) 2141-0082",
+                            email: "contato@casairmaantonia.org",
+                            website: "www.casairmaantonia.org",
+                        },
+                        contact: {
+                            label: "Invoice issued for:",
+                            Funcionário: "Client Name",
+                            Assistido: "Albania, Tirane, Astir",
+                            email: "client@website.al",
+                        },
+                        invoice: {
+                            label: "Encaminhamento #: ",
+                            invDate: "Payment Date: 01/01/2021 18:12",
+                            headerBorder: false,
+                            tableBodyBorder: false,
+                            header: [
+                                {
+                                    title: "#",
+                                    style: {
+                                        width: 10
+                                    }
+                                },
+                                {
+                                    title: "Title",
+                                    style: {
+                                        width: 30
+                                    }
+                                },
+                                {
+                                    title: "Description",
+                                    style: {
+                                        width: 80
+                                    }
+                                },
+                                { title: "Price" },
+                                { title: "Quantity" },
+                                { title: "Unit" },
+                                { title: "Total" }
+                            ],
+                            table: Array.from(Array(10), (item, index) => ([
+                                index + 1,
+                                "There are many variations ",
+                                "Lorem Ipsum is simply dummy text dummy text ",
+                                200.5,
+                                4.5,
+                                "m2",
+                                400.5
+                            ])),
+                            additionalRows: [{
+                                col1: 'Total:',
+                                col2: '145,250.50',
+                                col3: 'ALL',
+                                style: {
+                                    fontSize: 14 //optional, default 12
+                                }
+                            },
+                            {
+                                col1: 'VAT:',
+                                col2: '20',
+                                col3: '%',
+                                style: {
+                                    fontSize: 10 //optional, default 12
+                                }
+                            },
+                            {
+                                col1: 'SubTotal:',
+                                col2: '116,199.90',
+                                col3: 'ALL',
+                                style: {
+                                    fontSize: 10 //optional, default 12
+                                }
+                            }],
+                            invDescLabel: "Invoice Note",
+                            invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+                        },
+                        footer: {
+                            text: "The invoice is created on a computer and is valid without the signature and stamp.",
+                        },
+                        pageEnable: true,
+                        pageLabel: "Page ",
+                    };
+
+                </script>
+            </div>
+            <div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+<script src="script.js "></script>
+<script src="../../Global/menu.js "></script>
+<script src="../../Global/menuData.js "></script>
+<script src="../../Global/url.js"></script>
+
+</html>

@@ -464,9 +464,8 @@ const encaminhamento = (req, res) => {
     let encaminhamento = req.body.encaminhamento;
     let query = `insert into encaminhamentos (id_funcionario, id_assistido, encaminhamento,data_registro) values (${id_funcionario},${id_assistido}, "${encaminhamento}",curdate());`
     con.query(query, (err, result) => {
-        // console.log(result)
+        console.log(result)
         if(err === null){
-            //res.status(200).json({...req.body, id_encaminhamento: result.insertId, data_registro: result.insertData}).end();
             query = 'SELECT * FROM encaminhamentos WHERE id_encaminhamento = ' + result.insertId;
             con.query(query, (err, result) => {
                 let retorno = result[0];
@@ -479,7 +478,7 @@ const encaminhamento = (req, res) => {
 };
 
 const getAllnomes = (req, res) => {
-    let string = `select nome_completo from assistidos`
+    let string = `select nome_completo, id_assistido from assistidos where nome_completo LIKE '%${req.query.busca}%'`
     con.query(string, (err, result) => {
         if (err == null) {
             res.json(result).end();
