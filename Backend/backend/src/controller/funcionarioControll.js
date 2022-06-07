@@ -28,7 +28,7 @@ const postFuncionario = (req, res) => {
     ]
     con.query(string, [values], (err, result) => {
         if (err == null) {
-            res.status(200).json({ ...req.body, id: result.insertId, "status": status }).end();
+            res.status(200).json({...req.body, id: result.insertId, "status": status }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -41,7 +41,7 @@ const getAll = (req, res) => {
     con.query(string, (err, result) => {
         result.forEach((item, index) => {
             delete item.senha
-            // delete item.foto
+                // delete item.foto
         });
         res.json(result).end()
     })
@@ -68,7 +68,7 @@ const getMatricula = (req, res) => {
 }
 
 // MÉTODO ATUALIZAR DADOS CADASTRAIS DO FUNCIONARIO
-const updateFuncionario = async (req, res) => {
+const updateFuncionario = async(req, res) => {
     let matricula = req.body.matricula;
     let cargo = req.body.cargo;
     let matricula_funcionario = req.body.matricula_funcionario;
@@ -105,7 +105,7 @@ const updateFuncionario = async (req, res) => {
                 // console.log(resultado)
                 con.query(resultado, (err, result) => {
                     if (err == null) {
-                        res.status(200).json({ ...req.body }).end();
+                        res.status(200).json({...req.body }).end();
                     } else {
                         res.status(400).json({ err: err.message }).end();
                     }
@@ -126,19 +126,19 @@ const updateFuncionario = async (req, res) => {
 const updateDadosFuncionario = (req, res) => {
     // console.log(req.body)
     let matricula = req.body.matricula;
-    let nome_completo =  req.body.nome_completo;
-    let rg =  req.body.rg;
-    let cpf =  req.body.cpf;
-    let data_nascimento =  req.body.data_nascimento;
-    let estado_civil =  req.body.estado_civil;
-    let sexo =  req.body.sexo;
-    let foto =  req.body.foto;
+    let nome_completo = req.body.nome_completo;
+    let rg = req.body.rg;
+    let cpf = req.body.cpf;
+    let data_nascimento = req.body.data_nascimento;
+    let estado_civil = req.body.estado_civil;
+    let sexo = req.body.sexo;
+    let foto = req.body.foto;
     let query = `UPDATE funcionarios SET nome_completo="${nome_completo}",rg="${rg}",cpf="${cpf}",data_nascimento="${data_nascimento}",estado_civil="${estado_civil}",sexo="${sexo}",foto="${foto}" WHERE matricula="${matricula}";`;
     con.query(query, (err, result) => {
-        if(err == null) {
-            res.status(200).json({...req.body}).end();
-        }else {
-            res.status(400).json({err: err.message}).end();
+        if (err == null) {
+            res.status(200).json({...req.body }).end();
+        } else {
+            res.status(400).json({ err: err.message }).end();
             // console.log(err)
         }
     })
@@ -151,7 +151,7 @@ const updateFotoFuncionario = (req, res) => {
     let string = `update funcionarios set foto = '${foto}' where cpf = '${cpf}';`
     con.query(string, (err, result) => {
         if (err == null) {
-            res.status(200).json({ ...req.body }).end();
+            res.status(200).json({...req.body }).end();
         } else {
             res.status(400).json({ err: err.message }).end();
         }
@@ -294,10 +294,10 @@ const postmultAssis = (req, res) => {
             try {
                 console.log(strinAssistencia)
                 con.beginTransaction()
-                con.query(strinAssistencia, async (err, result) => {
+                con.query(strinAssistencia, async(err, result) => {
                     if (err === null) {
                         let id_assistencia = result.insertId
-                        itens.forEach(async (item, index) => {
+                        itens.forEach(async(item, index) => {
                             stringSolicitacao = `insert into solicitacao (id_assistencia, id_item) values(${id_assistencia}, ${itens[index].id_item})`
                             console.log(stringSolicitacao)
                             asynqQuery(stringSolicitacao)
@@ -465,7 +465,7 @@ const encaminhamento = (req, res) => {
     let query = `insert into encaminhamentos (id_funcionario, id_assistido, encaminhamento,data_registro) values (${id_funcionario},${id_assistido}, "${encaminhamento}",curdate());`
     con.query(query, (err, result) => {
         console.log(result)
-        if(err === null){
+        if (err === null) {
             query = 'SELECT * FROM encaminhamentos WHERE id_encaminhamento = ' + result.insertId;
             con.query(query, (err, result) => {
                 let retorno = result[0];

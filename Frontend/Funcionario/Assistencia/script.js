@@ -23,7 +23,7 @@ function list() {
             return response.json()
         })
         .then(data => {
-    
+
             data.forEach(fun => {
 
                 var divimg = document.createElement("div")
@@ -58,8 +58,7 @@ function list() {
                 cardAssistido.appendChild(divnome)
                 cont.appendChild(cardAssistido)
 
-                cardAssistido.addEventListener("click", (e) => {
-                })
+                cardAssistido.addEventListener("click", (e) => {})
 
 
             })
