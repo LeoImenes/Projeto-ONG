@@ -10,7 +10,6 @@ function openModal() {
 
 }
 
-
 function list() {
     let names = []
     var body = document.querySelector(body)
@@ -36,7 +35,7 @@ function list() {
 
                 names.push(fun.nome_completo)
 
-
+                nomeFun.className = "buscarFiltro"
                 cardAssistido.className = "cardAssistido"
                 cardAssistido.style.cursor = "pointer"
 
@@ -69,10 +68,10 @@ function list() {
 
 function buscar() {
     let input = document.getElementById("inp").value.toLowerCase();
-    let filtro = document.querySelectorAll("h1");
+    let filtro = document.querySelectorAll(".buscarFiltro");
     let card = document.querySelectorAll(".cardAssistido")
 
     filtro.forEach((item, index) => {
-        (item.innerHTML.toLowerCase().includes(input)) ? card.style.display = "flex": card.style.display = "none";
+        (item.innerHTML.toLowerCase().includes(input)) ? card[index].style.display = "grid": card[index].style.display = "none";
     })
 }
