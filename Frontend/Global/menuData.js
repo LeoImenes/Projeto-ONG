@@ -10,7 +10,6 @@ function getfunc() {
     fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {
-            console.log(data[0].foto)
             user.innerHTML = data[0].nome_completo
             if ((data[0].foto == null)) {
                 foto.src = `../../Assets/icones/user.png`

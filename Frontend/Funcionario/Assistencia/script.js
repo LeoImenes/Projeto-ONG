@@ -1,3 +1,7 @@
+var alimentos = [];
+var outros = [];
+var assistidos = []
+
 function openModal() {
     let modal = document.querySelector(".modal");
     let close = document.querySelector(".closeRel");
@@ -8,6 +12,11 @@ function openModal() {
     //     modal.style.display = "none"
     // })
 
+}
+
+function getAll() {
+    list()
+    getCheckassistencia()
 }
 
 function list() {
@@ -36,6 +45,7 @@ function list() {
                 names.push(fun.nome_completo)
 
                 nomeFun.className = "buscarFiltro"
+                cardAssistido.className = "selected"
                 cardAssistido.className = "cardAssistido"
                 cardAssistido.style.cursor = "pointer"
 
@@ -57,7 +67,17 @@ function list() {
                 cardAssistido.appendChild(divnome)
                 cont.appendChild(cardAssistido)
 
-                cardAssistido.addEventListener("click", (e) => {})
+                cardAssistido.addEventListener("click", () => {
+                    cardAssistido.classList.toggle("selected")
+                    if (cardAssistido.className.includes("selected")) {
+                        assistidos.push(fun.id_assistido)
+
+                    } else {
+                        assistidos.pop(fun.id_assistido)
+
+                    }
+
+                })
 
 
             })
@@ -65,6 +85,70 @@ function list() {
 
         })
 }
+
+
+
+function getCheckassistencia() {
+
+    fetch(`${url}/funcionario/itens`)
+        .then(response => { return response.json() })
+        .then(data => {
+            data.forEach((item, index) => {
+                if (item.tipo === 1) {
+
+                } else {
+                    let inputOutros = document.querySelector(".inputs");
+                    let div = document.createElement("div");
+                    let input = document.createElement("input");
+
+                    input.value = item.id_item
+
+                    let p = document.createElement("p");
+                    div.className = "divOutros"
+                    input.className = "checkOutros"
+                    input.type = "checkbox"
+                    p.className = "tipoOutros"
+                    p.innerHTML = item.item
+
+                    div.appendChild(input)
+                    div.appendChild(p)
+                    inputOutros.appendChild(div)
+
+                    input.addEventListener("change", () => {
+                        if (input.checked === true) {
+                            outros.push(input.value)
+
+                        } else {
+                            outros.pop(item.id_tem)
+
+                        }
+                    })
+
+                }
+            })
+
+        })
+}
+
+
+function registrarAssistencia() {
+    data = JSON.stringify({
+        "id_funcionario": 4,
+        "assistidos": [
+            { "id_assistido": 2 }
+        ],
+        "itens": [
+            outros.forEach(item => {
+                console.log(item)
+            })
+        ]
+
+    })
+
+    console.log(data)
+
+}
+
 
 function buscar() {
     let input = document.getElementById("inp").value.toLowerCase();
