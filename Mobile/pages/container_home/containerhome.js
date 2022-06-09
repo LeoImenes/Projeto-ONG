@@ -45,21 +45,6 @@ export default function ContainerHome() {
                 .catch(err => { console.log(err) })
         }
     }
-    
-    // useEffect(async () => {
-    //     let value = await AsyncStorage.getItem('userdata');
-    //     if (value !== null) {
-    //         value = JSON.parse(value);
-
-    //         fetch(`${Url.URL}/funcionarios/${value}`)
-    //             .then(resp => { return resp.json() })
-    //             .then(data => {
-    //                 setPhoto(data[0].foto);
-    //                 setName(data[0].nome_completo);
-    //             })
-    //             .catch(err => { console.log(err) })
-    //     }
-    // }, [])
 
     return (
         <Drawer.Navigator useLegacyImplementation={true} screenOptions={{
@@ -76,7 +61,7 @@ export default function ContainerHome() {
             return (
                 <DrawerContentScrollView {...props}>
                     <View style={{ alignItems: "center", width: "100%", height: 180 }}>
-                        <Image source={(photo !== null && photo !== "" && photo !== undefined) ? { uri: photo } : require("../assets/user.png")} style={gStyle.imageUser} />
+                        <Image source={(photo === null || photo === "" || photo === undefined || photo === "undefined" || photo === "null") ? require("../assets/user.png") : { uri: photo } } style={gStyle.imageUser} />
                         <Text style={{ width: "70%", color: 'white', fontWeight: 'bold', fontSize: 16, marginTop: 10 }}>Olá, {name}</Text>
                     </View>
                     <DrawerItemList {...props} />

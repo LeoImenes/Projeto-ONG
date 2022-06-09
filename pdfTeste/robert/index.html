@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Ong Digital - V1.0.0</title>
+    <link rel="sortcut icon" href="../Assets/icones/icone_i.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <ul class="nav-bar">
+                <li>
+                    <h2>--- Fazer Encaminhamento do Assistido ---</h2>
+                </li>
+
+            </ul>
+        </div>
+
+    </header>
+    <section>
+        <div class="menuJS down" onclick="abrirMenu()">
+            <img src="../../Assets/icones/hamburger.png" alt="Teste">
+        </div>
+        <div class="menucontent">
+            <div class="user">
+                <ul class="useritens">
+                    <li onclick="closeMenu()">
+                        <h2>X</h2>
+                    </li>
+                    <li><img src="../../Assets/icones/user.png" alt="user" class="userimg"></li>
+                    <li>
+                        <p class="Username">Usuário</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul class="pageList">
+                    <li class="Assistencia">
+                        <p>Assistência</p>
+                    </li>
+                    <li class="Assistidos">
+                        <p>Assitidos</p>
+                    </li>
+                    <li class="Funcionario">
+                        <p>Funcionários</p>
+                    </li>
+                    <li class="Lancamentos">
+                        <p>Financeiro</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="imgitens">
+                <ul class="imglist">
+                    <li><img src="../../Assets/icones/gear.png" alt="" class="config"></li>
+                    <li><img src="../../Assets/icones/logout.png" alt="" class="logout"></li>
+                </ul>
+            </div>
+            </ul>
+        </div>
+        <div class="encaminhamento">
+            <div class="info">
+                <div class="funcionario">
+                    <p>Funcionário:</p>
+                    <p id="func">Nome do Funcionário</p>
+                </div>
+                <div class="assistido">
+                    <p>Assistido:</p>
+                    <div id="caixa">
+                        <input type="text" name="" id="assistido" placeholder="Pesquisar Assistido" />
+                        <div id="lista">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="FazerEncaminhamento">
+                <textarea placeholder="Escrever o encaminhamento..." wrarp="hard" name="encaminhamento" class="encami"></textarea>
+                <button type="booton" class="btnsavar" onClick="clickImprimir()">Salvar</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script src="script.js "></script>
+<script src="../../Global/menu.js "></script>
+<script src="../../Global/menuData.js "></script>
+<script src="../../Global/url.js"></script>
+
+</html>

@@ -85,7 +85,6 @@ export default function OutrasAssistencias({ navigation }) {
       "itens": sendSelected
     }
 
-    console.log(item)
     fetch(`${Url.URL}/funcionario/assistencias`, {
       "method": "POST",
       "headers": {

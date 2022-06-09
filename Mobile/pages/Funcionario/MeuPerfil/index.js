@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions, TextInput, ToastAndroid } from 'react-native';
+import {  View, Text, Image, ScrollView, TouchableOpacity, Dimensions, TextInput, ToastAndroid } from 'react-native';
 
 import gStyle from "../../global/style"
 import Url from '../../global/index'
@@ -23,7 +23,6 @@ export default function MeuPerfil({ navigation }) {
     const [estdCivil, setEstdCivil] = useState("");
     const [sexo, setSexo] = useState("");
     const [email, setEmail] = useState("");
-    // const [senha, setSenha] = useState("");
     const [nascimento, setNascimento] = useState("");
 
     useEffect(() => {
@@ -66,7 +65,7 @@ export default function MeuPerfil({ navigation }) {
             sexo: sexo,
             foto: funcionario.foto
         }
-        console.log(item)
+        
         fetch(`${Url.URL}/funcionario/dados`, {
             "method": "PUT",
             "headers": {
@@ -76,10 +75,10 @@ export default function MeuPerfil({ navigation }) {
         })
             .then(resp => { return resp.json() })
             .then(data => {
-                console.log(data)
                 ToastAndroid.show('Dados atualizados!', ToastAndroid.SHORT)
                 setAtualizar(false)
                 limpar()
+                getUser()
             })
             .catch(err => {
                 console.log(err)
@@ -94,7 +93,6 @@ export default function MeuPerfil({ navigation }) {
         setNascimento("");
         setEstdCivil("");
         setEmail("");
-        // setSenha("");
     }
 
     return (
@@ -134,11 +132,9 @@ export default function MeuPerfil({ navigation }) {
                                             <Picker.Item label="Outro" value="Outro" />
                                         </Picker>
                                     </View>
-                                    {/* <TextInput value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} /> */}
-                                    <TextInputMask type={'datetime'} options={{format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]}/>
+                                    <TextInputMask type={'datetime'} options={{ format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civíl..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TextInput value={email} onChangeText={setEmail} placeholder="E-mail..." style={[gStyle.cardInfo, gStyle.info]} />
-                                    {/* <TextInput style={[gStyle.cardInfo, gStyle.info]} placeholder="Nova senha" value={senha} onChangeText={setSenha} /> */}
                                     <TouchableOpacity style={gStyle.cardButton} onPress={() => { att() }}>
                                         <Text style={gStyle.buttonText}>Salvar</Text>
                                     </TouchableOpacity>
@@ -155,7 +151,7 @@ export default function MeuPerfil({ navigation }) {
                                     <View style={(SCREEN_HEIGHT - (gStyle.logo.height) <= 500) ? { height: SCREEN_HEIGHT - 110 } : { height: "85%" }}>
                                         <ScrollView>
                                             <View style={{ width: "100%", height: 110, flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "space-evenly" }}>
-                                                <Image source={(funcionario.foto === "null" || funcionario.foto === "" || funcionario.foto === "undefined") ? require("../../assets/user1.png") : { uri: funcionario.foto }} style={gStyle.imageUser} />
+                                                <Image source={(funcionario.foto === "null" || funcionario.foto === "" || funcionario.foto === "undefined" || funcionario.foto === null || funcionario.foto === undefined) ? require("../../assets/user1.png") : { uri: funcionario.foto }} style={gStyle.imageUser} />
                                                 <TouchableOpacity style={{ alignItems: "center" }} onPress={() => { setAtualizar(true) }}>
                                                     <MaterialCommunityIcons name="update" size={24} color="#4169E1" />
                                                     <Text style={{ color: "#4169E1", fontSize: 18, fontWeight: "bold" }}>Atualizar</Text>
@@ -211,6 +207,3 @@ export default function MeuPerfil({ navigation }) {
         </View>
     )
 }
-
-const css = StyleSheet.create({
-})
