@@ -226,7 +226,7 @@ section {
     grid-template-columns: repeat( auto-fit, minmax(200px, 1fr));
 }
 
-.divOutros {
+.divOutros,.divAlimentos {
     width: 60%;
     display: flex;
     align-items: flex-start;
@@ -235,7 +235,7 @@ section {
     color: white
 }
 
-.checkOutros {
+.checkOutros, .checkAlimentos {
     width: 20px;
     display: flex;
     margin-right: 1rem;
@@ -284,7 +284,7 @@ section {
     }
 }
 
-@media (max-width:300px) {
+@media (max-width:421px) {
     header {
         background-color: white;
     }
@@ -308,5 +308,27 @@ section {
     .AssistenciaAlimentos,
     .AssistenciaOutros {
         width: 80%;
+    }
+    .divOutros,.divAlimentos{
+        width: 100%;
+    }
+
+    .checkOutros,.checkAlimentos{
+        width: 15px;
+        height: 15px
+    }
+    .inputs{
+       grid-template-columns: repeat( auto-fit, minmax(100px, 1fr));
+    }
+    
+    #inp{
+        width: 70%;
+    }
+
+    .Reg-btn,.btnClose{
+        width: 40%;
+    }
+    .cardAssistido{
+        width: 70%;
     }
 }

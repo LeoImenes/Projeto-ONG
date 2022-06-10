@@ -45,7 +45,7 @@ section {
     display: grid;
     text-align: center;
     align-items: center;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .card li:nth-child(2) {
@@ -53,7 +53,7 @@ section {
 }
 
 .card img {
-    width: 70px;
+    width: 60px;
 }
 
 .funform {
@@ -113,6 +113,7 @@ section {
     align-items: center;
     justify-content: center;
     width: 98%;
+    padding: 1vh;
     border-radius: 5px 5px 5px 5px;
     border: 2px solid #e5e5e5;
 }
@@ -152,8 +153,22 @@ input {
     height: 5vh;
 }
 
+.getSexo, .getCargo{
+    padding: 1vh;
+    border: 0px;
+    border-bottom: 1px solid #a3a3a3;
+}
+
 .Selfoto {
-    display: none
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.DadosFuncionario input{
+    border-bottom: 1px solid #a3a3a3;
 }
 
 @media (max-width:480px) {

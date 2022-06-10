@@ -95,48 +95,64 @@
                 <div class="DadosFuncionario">
                     <ul>
                         <li>Nome: </li>
-                        <li class="getNome"></li>
+                        <input class="getNome"></input>
                     </ul>
                     <ul>
                         <li>Email: </li>
-                        <li class="getEmail"></li>
+                        <input class="getEmail"></input>
                     </ul>
                     <ul>
                         <li>Matricula: </li>
-                        <li class="getMatricula"></li>
+                        <input class="getMatricula" disabled></input>
                     </ul>
                     <ul>
                         <li>RG: </li>
-                        <li class="getRG"></li>
+                        <input class="getRG"></input>
                     </ul>
                     <ul>
                         <li>CPF: </li>
-                        <li class="getCPF"></li>
+                        <input class="getCPF"></input>
                     </ul>
                     <ul>
                         <li>Nascimento: </li>
-                        <li class="getDataNasc"></li>
+                        <input class="getDataNasc" disabled></input>
+                    </ul>
+                    <ul>
+                        <li>Estado Civil: </li>
+                        <input class="getEstadoCivil"></input>
                     </ul>
                     <ul>
                         <li>Cargo: </li>
-                        <li class="getCargo"></li>
+                        <select class="getCargo"  name="" id="" disabled>
+                            <option value="Diretor">Diretor</option>
+                            <option value="Assistente_Social">Assistente Social</option>
+                            <option value="Voluntario">Voluntario</option>
+                            <option value="Financeiro">Financeiro</option>
+                            <option value="FrontEnd">FrontEnd</option>
+                            <option value="BackEnd">Financeiro</option>
+                            <option value="Mobile">Mobile</option>
+                        </select>
                     </ul>
                     <ul>
                         <li>Sexo: </li>
-                        <li class="getSexo"></li>
+                        <select class="getSexo"  name="" id="">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Outro">Outro</option>
+                        </select>
                     </ul>
                     <ul>
                         <li>Admissão: </li>
-                        <li class="getDataAdmissao"></li>
+                        <input class="getDataAdmissao" disabled></input>
                     </ul>
                     <ul>
                         <li>Demissão: </li>
-                        <li class="getDemissao"></li>
+                        <input class="getDemissao" disabled></input>
                     </ul>
 
                 </div>
                 <div class="btn-div">
-                    <button class="btn">Editar</button>
+                    <button class="btn" onclick="editarFunc(), cadastrarFotoDepois()">Atualizar</button>
                     <button class="Demissao" onclick=" editarDados() ">Registrar Desligamento</button>
                 </div>
             </div>
