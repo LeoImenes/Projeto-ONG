@@ -20,13 +20,15 @@ function openModal() {
 }
 
 function listarRelatorios() {
+    var assis = localStorage.getItem("assistido");
     let names = []
-    fetch(`${url}/relatorio`)
+    fetch(`${url}/relatorio/assistido/get/${assis}`)
 
     .then(response => { return response.json() })
 
     .then(data => {
         data.forEach(Assist => {
+            console.log(data)
             var divimg = document.createElement("div");
             var divRela = document.createElement("div");
             var divData = document.createElement("div");
@@ -91,13 +93,13 @@ function buscarData() {
 }
 
 function modalInfo() {
-    let local = localStorage.getItem("rela");
+    let local = localStorage.getItem("assistido");
     fetch(`${url}/relatorio/assistido/get/${local}`)
         .then(res => { return res.json() })
         .then(data => {
             console.log(data)
             data.forEach(item => {
-
+                console.log(item)
                 relatorio_id = item.Numero
                 let relnum = document.querySelector(".Relnum")
                 let textarea = document.querySelector("#textarea")
@@ -122,11 +124,12 @@ function modalInfo() {
 }
 
 function updataeRelatorio() {
+    let local = localStorage.getItem("rela");
     var id_func = localStorage.getItem("userdata")
     let textarea = document.querySelector("#textarea")
 
     var data = JSON.stringify({
-        "id_relatorio": relatorio_id,
+        "id_relatorio": local,
         "id_funcionario": JSON.parse(id_func).id_funcionario,
         "relatorio": textarea.value
 

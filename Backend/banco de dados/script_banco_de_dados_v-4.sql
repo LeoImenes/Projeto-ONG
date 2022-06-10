@@ -241,7 +241,8 @@ FROM
 
 Create VIEW vw_relatorio 
 as select
- r.id_relatorio as 'Numero',
+  r.id_relatorio,
+  r.id_assistido as 'Numero',
   r.relatorio, 
   a.nome_completo as 'assistido', 
   a.foto_antes as 'foto',

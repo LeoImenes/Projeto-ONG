@@ -66,6 +66,7 @@ function clickImprimir() {
                 alert("Falha ao gerar encaminhamento")
             }
         }).then(data => {
+            window.location.href="../OpcoesAssistido"
             console.log(data)
         });
 }

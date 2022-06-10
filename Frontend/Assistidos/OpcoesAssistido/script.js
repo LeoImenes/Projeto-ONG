@@ -4,3 +4,7 @@ let infoFuncionario = document.querySelector(".infoAssistido").addEventListener(
 let adcFuncionario = document.querySelector(".addAssistido").addEventListener("click", () => {
     window.location.href = "../CadastrarAssistido/index.html"
 })
+
+let adcEncaminhamento = document.querySelector(".addEncaminhamento").addEventListener("click", () => {
+    window.location.href = "../Encaminhamento/index.html"
+})
