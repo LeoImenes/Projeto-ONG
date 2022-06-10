@@ -215,14 +215,8 @@ from
 	
 CREATE VIEW vw_saude AS
 select
-	a.data_cadastro As Data_Cadastro,
 	a.id_funcionario As Id_Funcionario,
 	a.id_assistido As Id_Assistido,
-	a.nome_completo AS Assistido,
-	a.sexo As Sexo,
-	a.cartao_cidadao As Cartao_Cidadao,
-	a.cartao_sus As Cartao_SUS,
-	a.foto_antes As Foto,
 	s.id_saude AS Id_Saude,
 	s.data_de_registro As Data_do_Registro,
 	c.comorbidade As Comorbidades,
