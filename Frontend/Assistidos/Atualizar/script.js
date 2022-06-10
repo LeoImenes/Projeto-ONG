@@ -253,6 +253,8 @@ function getComorbidades() {
                     listaDrogas.appendChild(ulDroga)
                 }
 
+                
+
             })
 
 
@@ -269,6 +271,7 @@ function getComorbidadeAssistido() {
             } else {
                 met = "PUT"
             }
+            console.log(met)
         })
 }
 

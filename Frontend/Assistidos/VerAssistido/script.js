@@ -231,12 +231,13 @@ function getComorbidadeAssistido() {
             return response.json();
         })
         .then((data) => {
+            console.log(data)
             data.forEach((item, index) => {
                 if (item.tipo === 0) {
                     var liDroga = document.createElement("li");
                     liDroga.innerHTML = item.Comorbidades;
                     ulDroga.appendChild(liDroga);
-                } else {
+                } else if (item.tipo === 1){
                     var liDoenca = document.createElement("li");
                     liDoenca.innerHTML = item.Comorbidades;
                     ulDoenca.appendChild(liDoenca);
