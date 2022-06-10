@@ -329,7 +329,7 @@ const postmultAssis = (req, res) => {
 
 // MÉTODO CONSULTAR TODAS AS ASSISTÊNCIAS PRESTADAS
 const getAllAssistencias = (req, res) => {
-    let string = `select * from vw_assistencia order by funcionario`
+    let string = `select * from vw_assistencia order by data_registro`
     con.query(string, (err, result) => {
         if (err === null) {
             res.status(200).json(result).end();

@@ -6,12 +6,15 @@ function getfunc() {
     let foto = document.querySelector(".userimg");
     user.innerHTML = funcionario.nome_completo
         // foto.src = funcionario.foto
+        
+
+        
 
     fetch(`${url}/funcionarios/${funcionario.matricula}`)
         .then(resp => { return resp.json() })
         .then(data => {
             user.innerHTML = data[0].nome_completo
-            if ((data[0].foto == null)) {
+            if ((data[0].foto == null) || data[0].foto == 'undefined') {
                 foto.src = `../../Assets/icones/user.png`
             } else {
                 foto.src = data[0].foto
@@ -87,16 +90,4 @@ function mascaraTEL(i) {
     if (v.length == 3) i.value += ")";
     if (v.length == 5) i.value += ".";
     if (v.length == 10) i.value += "-";
-}
-
-function mascaraMoeda(i) {
-    var v = i.value;
-    if (isNaN(v[v.length - 1])) {
-        i.value = v.substring(0, v.length - 1);
-        return;
-    }
-
-    i.setAttribute("maxlength", "12");
-
-    if (v.length == 3) i.value += ".";
 }

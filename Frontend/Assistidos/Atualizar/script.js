@@ -209,6 +209,7 @@ function updateAssistido() {
         })
         .then(data => {
             console.log(data)
+            window.location.href = "../VerAssistido"
         })
 }
 

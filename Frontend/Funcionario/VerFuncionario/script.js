@@ -37,12 +37,13 @@ function list() {
                 var botaoEditar = document.querySelector(".btn")
                 var Fotofuncionario = document.querySelector("#Funcfoto");
                 var liNome = document.querySelector(".getNome");
-                var liEstadoCivil = document.querySelector(".getDataNasc");
+                var liDataNasc = document.querySelector(".getDataNasc");
                 var liMatricula = document.querySelector(".getMatricula");
                 var liRg = document.querySelector(".getRG");
                 var liCpf = document.querySelector(".getCPF");
                 var liNasc = document.querySelector(".getDataNasc");
                 var liCargo = document.querySelector(".getCargo");
+                var liEstadoCivil = document.querySelector(".getEstadoCivil");
                 var liSex = document.querySelector(".getSexo");
                 var liDataAdmissao = document.querySelector(".getDataAdmissao");
                 var liDatademissao = document.querySelector(".getDemissao");
@@ -54,6 +55,8 @@ function list() {
                     Fotofuncionario.src = item.foto
                 }
 
+                
+
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
                 } else {
@@ -61,17 +64,18 @@ function list() {
                     botaoEditar.disabled = true;
                 }
 
-                liNome.innerHTML = item.nome_completo;
-                liEstadoCivil.innerHTML = item.estado_civil;
-                liMatricula.innerHTML = item.matricula;
-                liRg.innerHTML = item.rg;
-                liCpf.innerHTML = item.cpf;
+                liNome.value = item.nome_completo;
+                liDataNasc.value = item.estado_civil;
+                liMatricula.value = item.matricula;
+                liEstadoCivil.value = item.estado_civil;
+                liRg.value = item.rg;
+                liCpf.value = item.cpf;
                 cpf = item.cpf;
-                liNasc.innerHTML = `${dataCoverter(item.data_nascimento)}`;
-                liCargo.innerHTML = item.cargo;
-                liSex.innerHTML = item.sexo;
-                liEmail.innerHTML = item.email;
-                liDataAdmissao.innerHTML = `${dataCoverter(item.data_admissao)}`;
+                liNasc.value = `${dataCoverter(item.data_nascimento)}`;
+                liCargo.value = item.cargo;
+                liSex.value = item.sexo;
+                liEmail.value = item.email;
+                liDataAdmissao.value = `${dataCoverter(item.data_admissao)}`;
             });
         });
 }
@@ -134,6 +138,8 @@ function editarDados() {
     var Demissao = document.querySelector(".Demissao");
     var cargo = document.querySelector("#cargo");
     var matricula = document.querySelector("#Matricula")
+
+    
     cargo.value = getCargo
     matricula.value = getMatricula
 
@@ -147,6 +153,46 @@ function editarDados() {
     }
 }
 
+function editarFunc() {
+    var Fotofuncionario = document.querySelector("#Funcfoto");
+    var liNome = document.querySelector(".getNome");
+    var liDataNasc = document.querySelector(".getDataNasc");
+    var liMatricula = document.querySelector(".getMatricula");
+    var liRg = document.querySelector(".getRG");
+    var liCpf = document.querySelector(".getCPF");
+    var liNasc = document.querySelector(".getDataNasc");
+    var liCargo = document.querySelector(".getCargo");
+    var liEstadoCivil = document.querySelector(".getEstadoCivil");
+    var liSex = document.querySelector(".getSexo");
+    var liDataAdmissao = document.querySelector(".getDataAdmissao");
+    var liDatademissao = document.querySelector(".getDemissao");
+    var liEmail = document.querySelector(".getEmail");
+    
+
+    var data = JSON.stringify({
+        "matricula": liMatricula.value,
+		"nome_completo": liNome.value,
+		"rg": liRg.value,
+		"cpf": liCpf.value,
+		"estado_civil": liEstadoCivil.value,
+		"sexo": liSex.value
+    })
+
+    fetch(`${url}/funcionario/dados`,{
+        "method": "PUT",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body:data
+    }).then(response => {return response.json()})
+    .then(data => {
+        console.log(data)
+    })
+    
+
+
+}
+
 function Atualizar() {
     var dataDemissao = document.querySelector("#Data").value;
     var cargo = document.querySelector("#cargo").value;
@@ -158,9 +204,6 @@ function Atualizar() {
 
     cargo.placeholder = getCargo
     matricula.placeholder = getMatricula
-
-
-
 
 
     if (dataDemissao === "" || cargo === "" || matricula === "") {

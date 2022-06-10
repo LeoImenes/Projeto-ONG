@@ -1,18 +1,24 @@
 var alimentos = [];
-var outros = [];
-var assistidos = []
+var itens = [];
+var assistidos = [];
+var func = localStorage.getItem('userdata');
+
 
 function openModal() {
     let modal = document.querySelector(".modal");
-    let close = document.querySelector(".closeRel");
+    
 
     modal.style.display = "flex"
 
-    // close.addEventListener("click", () => {
-    //     modal.style.display = "none"
-    // })
+    let close = document.querySelector(".btnClose")
 
+    close.addEventListener('click',()=>{
+        window.location.reload()
+    })
+    
 }
+
+
 
 function getAll() {
     list()
@@ -70,7 +76,7 @@ function list() {
                 cardAssistido.addEventListener("click", () => {
                     cardAssistido.classList.toggle("selected")
                     if (cardAssistido.className.includes("selected")) {
-                        assistidos.push(fun.id_assistido)
+                        assistidos.push({"id_assistido": fun.id_assistido})
 
                     } else {
                         assistidos.pop(fun.id_assistido)
@@ -89,15 +95,50 @@ function list() {
 
 
 function getCheckassistencia() {
-
+    let cardAlimentos = document.querySelector(".AssistenciaAlimentos")
+    
     fetch(`${url}/funcionario/itens`)
-        .then(response => { return response.json() })
+        .then(response => { 
+            return response.json() 
+        })
         .then(data => {
             data.forEach((item, index) => {
+                cardAlimentos.addEventListener("click", () => {
+                    openModal();
+                })
                 if (item.tipo === 1) {
+                    let cardAlimentos = document.querySelector(".AssistenciaAlimentos").addEventListener ("click", () => {
+                        let inputOutros = document.querySelector(".inputs");
+                        let div = document.createElement("div");
+                        let input = document.createElement("input");
+    
+                        input.value = item.id_item
+    
+                        let p = document.createElement("p");
+                        div.className = "divAlimentos"
+                        input.className = "checkAlimentos"
+                        input.type = "checkbox"
+                        p.className = "tipoAlimentos"
+                        p.innerHTML = item.item
+    
+                        div.appendChild(input)
+                        div.appendChild(p)
+                        inputOutros.appendChild(div)
+    
+                        input.addEventListener("change", () => {
+                            if (input.checked === true) {
+                                itens.push({"id_item": parseInt(input.value)})
+    
+                            } else {
+                                itens.pop(item.id_tem)
+    
+                            }
+                        })
+                    })
 
                 } else {
-                    let inputOutros = document.querySelector(".inputs");
+                    let cardOutros = document.querySelector(".AssistenciaOutros").addEventListener("click", () => {
+                        let inputOutros = document.querySelector(".inputs");
                     let div = document.createElement("div");
                     let input = document.createElement("input");
 
@@ -116,15 +157,18 @@ function getCheckassistencia() {
 
                     input.addEventListener("change", () => {
                         if (input.checked === true) {
-                            outros.push(input.value)
+                            itens.push({"id_item": parseInt(input.value)})
 
                         } else {
-                            outros.pop(item.id_tem)
+                            itens.pop(item.id_tem)
 
                         }
                     })
+                    })
+                    
 
                 }
+
             })
 
         })
@@ -133,19 +177,29 @@ function getCheckassistencia() {
 
 function registrarAssistencia() {
     data = JSON.stringify({
-        "id_funcionario": 4,
-        "assistidos": [
-            { "id_assistido": 2 }
-        ],
-        "itens": [
-            outros.forEach(item => {
-                console.log(item)
-            })
-        ]
+        "id_funcionario": JSON.parse(func).id_funcionario,
+        "assistidos": assistidos,
+        "itens": itens
 
     })
 
-    console.log(data)
+    fetch(`${url}/funcionario/assistencias`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: data
+    }).then(response => {
+        if(response.status === 200) {
+            alert("Assistencia Cadastrada com sucesso")
+            return response.json()
+        }else {
+            alert("Falha ao Cadastrar Assistencia")
+        }
+        }
+       
+        )
+    .then(data => console.log(data))
 
 }
 
