@@ -1,0 +1,142 @@
+<html>
+
+<head>
+    <style>
+        .pdf {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 80%;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            height: 20%;
+            border-bottom: 2px solid #000;
+
+
+        }
+
+        .info {
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 10px;
+        }
+
+        #logo {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+        }
+
+        .info>p {
+            font-Size: 20px;
+            margin: 0;
+        }
+
+        .subtitulo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            width: 90%;
+            height: 15%;
+            border-bottom: 2px solid #000;
+        }
+
+        .pessoas>h2,
+        .data>h2 {
+            font-Size: 25px;
+        }
+
+        .pessoas {
+            padding: 10px;
+        }
+
+        .data {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 10px;
+        }
+
+        .encaminhamento {
+            width: 90%;
+            height: 55%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="tabela">
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Cargo</th>
+            </tr>
+            <tr>
+                <td>Macoratti</td>
+                <td>55</td>
+                <td>Programador</td>
+            </tr>
+            <tr>
+                <td>Jefferson</td>
+                <td>26</td>
+                <td>Engenheiro</td>
+            </tr>
+            <tr>
+                <td>Janice</td>
+                <td>24</td>
+                <td>Web Designer</td>
+            </tr>
+        </table>
+    </div>
+    <p>
+        <input type="button" value="Criar PDF" id="btnImprimir" />
+    </p> -->
+
+    <div id="pdf">
+        <div class="cabecalho">
+            <div class="logo">
+                <img id="logo" src="../../Assets/icones/icone_i.png">
+            </div>
+            <div class="info">
+                <h1>Casa Irmã Acolhedora Antônia</h1>
+                <p> Rua Mal. Floriano Peixoto, 443, - JD. Berlim</p>
+                <p> Telefone: (19) 2141-0082</p>
+                <p> e-mail: contato@casairmaantonia.org</p>
+                <p>WebSite: www.casairmaantonia.org</p>
+            </div>
+        </div>
+        <div class="subtitulo">
+            <div class="pessoas">
+                <h2>Funcionário: José da Silva</h2>
+                <h2>Assistido: Maria das Dores</h2>
+            </div>
+            <div class="data">
+                <h2>Data: 01/01/2022</h2>
+                <h2>Encaminhamento: 0001</h2>
+            </div>
+        </div>
+        <div class="encaminhamento">
+            <p> Aqui é onde vai ser escrito o encaminhamento</p>
+        </div>
+    </div>
+    <p>
+        <input type="button" value="Criar PDF" id="btnImprimir" />
+    </p>
+</body>
+
+<script src="index.js"></script>
+
+</html>

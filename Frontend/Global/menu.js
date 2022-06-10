@@ -51,6 +51,12 @@ sair.addEventListener("click", () => {
     localStorage.clear
 })
 
+let Assistencia = document.querySelector(".Assistencia")
+Assistencia.style.cursor = "pointer"
+Assistencia.addEventListener("click", () => {
+    window.location.href = "../../Funcionario/Assistencia"
+})
+
 let Financeiro = document.querySelector(".Lancamentos")
 Financeiro.style.cursor = "pointer"
 Financeiro.addEventListener("click", () => {

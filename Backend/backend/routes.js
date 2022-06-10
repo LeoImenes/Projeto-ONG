@@ -4,6 +4,10 @@ const route = express.Router()
 const funcionarioControll = require("./src/controller/funcionarioControll")
 const assistidoControll = require('./src/controller/assistidoControll')
 
+const teste = require("./src/controller/testesemquebrar")
+
+route.get("/foto_assistido/:id", teste.teste);
+
 // *** FUNCIONARIOS *** //
 route.post('/funcionarios', funcionarioControll.login)
 route.get('/funcionarios', funcionarioControll.getAll)
@@ -65,5 +69,6 @@ route.get("/relatorio", assistidoControll.getRelatorio)
 route.post("/relatorio/assistido", assistidoControll.relatorioPost)
 route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
 route.put("/relatorio/put", assistidoControll.updateRelatorioID)
+
 
 module.exports = route

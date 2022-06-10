@@ -31,7 +31,8 @@ section {
 }
 
 .infoAssistido,
-.addAssistido {
+.addAssistido,
+.addEncaminhamento {
     width: 60%;
     height: 30%;
     align-self: center;
@@ -46,7 +47,8 @@ section {
 }
 
 .infoAssistido:hover,
-.addAssistido:hover {
+.addAssistido:hover,
+.addEncaminhamento:hover {
     box-shadow: none;
     background: var(--casa-azul);
     /* fallback for old browsers */
@@ -102,7 +104,8 @@ section {
         display: none;
     }
     .infoAssistido,
-    .addAssistido {
+    .addAssistido,
+    .addEncaminhamento {
         width: 80%;
     }
 }
@@ -129,7 +132,8 @@ section {
         height: 100%;
     }
     .infoAssistido,
-    .addAssistido {
+    .addAssistido,
+    .addEncaminhamento {
         width: 80%;
     }
 }

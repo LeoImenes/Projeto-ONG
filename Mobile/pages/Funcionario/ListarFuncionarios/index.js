@@ -92,7 +92,7 @@ export default function ListarFuncionarios({ navigation }) {
                                                         await AsyncStorage.setItem("funcionario", JSON.stringify(item.matricula));
                                                         navigation.navigate("VerFuncionario")
                                                     }}>
-                                                        <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined") ? require("../../assets/user1.png") : { uri: item.foto }} style={gStyle.imageUser} />
+                                                        <Image source={(item.foto === null || item.foto === "" || item.foto === "undefined" || item.foto === "null" ||  item.foto === undefined) ? require("../../assets/user1.png") : { uri: item.foto }} style={gStyle.imageUser} />
                                                         <View style={gStyle.cardTxt}>
                                                             <Text style={[gStyle.headerText, { color: "black" }]}>{item.nome_completo}</Text>
                                                             <Text style={[gStyle.headerText, (item.status === 0) ? { color: "gray"} : { color: "#4169E1" }]}>{(item.status === 0) ? "Inativo" : "Ativo"}</Text>

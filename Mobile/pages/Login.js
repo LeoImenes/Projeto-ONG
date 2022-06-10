@@ -93,6 +93,7 @@ export default function Login({ navigation }) {
                     setNewPassword('')
                     setCpf('')
                     ToastAndroid.show('Senha alterada com sucesso!', ToastAndroid.SHORT);
+                    setRecpassword(false)
                 } else {
                     ToastAndroid.show('Não foi possivel alterar a senha!', ToastAndroid.SHORT);
                 }
@@ -152,7 +153,7 @@ export default function Login({ navigation }) {
                                     </LinearGradient>
                                     <Text style={[css.title]}>Login</Text>
                                     <View style={css.align}>
-                                        <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} style={gStyle.input} />
+                                        <TextInput placeholder="E-mail" placeholderTextColor="gray" color="black" value={email} onChangeText={setEmail} style={gStyle.input} />
                                         <View style={[gStyle.input, { flexDirection: "row" }]}>
                                             <TextInput placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry={show1} style={{ width: "90%", height: "100%" }} />
                                             <TouchableOpacity style={{ width: "10%", height: "100%" }} onPress={() => { setShow1(!show1) }}>
