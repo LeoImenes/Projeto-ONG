@@ -22,6 +22,7 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
+            console.log(data)
             if (data.id_funcionario !== undefined) {
                 localStorage.setItem("userdata", JSON.stringify(data));
                 window.location.href = "../../Home";

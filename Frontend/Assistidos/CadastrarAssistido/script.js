@@ -111,8 +111,8 @@ function cadastrarAssistido() {
         })
         .then(data => {
             console.log(data)
-            if (data!== null) {
-                
+            if (data !== null) {
+
                 var listaComorbidade = document.querySelectorAll(".Comorbidade");
                 listaComorbidade.forEach((item, index) => {
 

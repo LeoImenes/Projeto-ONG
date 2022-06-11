@@ -6,6 +6,8 @@ var cpf;
 var func = localStorage.getItem("userdata")
 var matriculaLogado = JSON.parse(func).matricula
 var getMatricula;
+var fotinho;
+var ftAtual;
 var getCargo;
 
 let voltar = document.querySelector(".btn-voltar").addEventListener("click", () => {
@@ -16,8 +18,13 @@ let voltar = document.querySelector(".btn-voltar").addEventListener("click", () 
 function list() {
     let local;
     if (JSON.parse(cargo).cargo.toLowerCase() === 'diretor') {
+        var getDataNasc = document.querySelector(".getDataNasc").disabled = false
+        var getCargo = document.querySelector(".getCargo").disabled = false
+        var getDataAdmissao = document.querySelector(".getDataAdmissao").disabled = false
+        var getDemissao = document.querySelector(".getDemissao ").disabled = false
+        var getMatricula = document.querySelector(".getMatricula").disabled = false
         local = localStorage.getItem("funcionario");
-   
+
     } else {
         local = JSON.parse(cargo).id_funcionario
         let demissao = document.querySelector(".Demissao");
@@ -49,13 +56,15 @@ function list() {
                 var liDatademissao = document.querySelector(".getDemissao");
                 var liEmail = document.querySelector(".getEmail");
 
+                ftAtual = item.foto;
+
                 if ((item.foto === null) || (item.foto === "undefined") || (item.foto == "null") || (item.foto == "")) {
                     Fotofuncionario.src = "../../Assets/icones/user.png"
                 } else {
                     Fotofuncionario.src = item.foto
                 }
 
-                
+
 
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
@@ -81,7 +90,7 @@ function list() {
 }
 
 var func = localStorage.getItem("userdata");
-var fotinho;
+
 var newImg = document.querySelector("#Funcfoto");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
@@ -103,10 +112,18 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFotoDepois() {
+    if (fotinho === undefined) {
+        fotinho = ftAtual
+    } else {
+        console.log("Ja tem foto")
+    }
+
     let data = JSON.stringify({
         cpf: cpf,
         foto: fotinho,
     });
+
+    console.log(fotinho)
 
     fetch(`${url}/funcionario`, {
             method: "PUT",
@@ -125,7 +142,7 @@ function cadastrarFotoDepois() {
         .then((data) => {
 
             alert("Foto Atualizada");
-            window.location.reload()
+            // window.location.reload()
 
         });
 }
@@ -139,7 +156,7 @@ function editarDados() {
     var cargo = document.querySelector("#cargo");
     var matricula = document.querySelector("#Matricula")
 
-    
+
     cargo.value = getCargo
     matricula.value = getMatricula
 
@@ -167,28 +184,29 @@ function editarFunc() {
     var liDataAdmissao = document.querySelector(".getDataAdmissao");
     var liDatademissao = document.querySelector(".getDemissao");
     var liEmail = document.querySelector(".getEmail");
-    
+
 
     var data = JSON.stringify({
         "matricula": liMatricula.value,
-		"nome_completo": liNome.value,
-		"rg": liRg.value,
-		"cpf": liCpf.value,
-		"estado_civil": liEstadoCivil.value,
-		"sexo": liSex.value
+        "nome_completo": liNome.value,
+        "rg": liRg.value,
+        "cpf": liCpf.value,
+        "estado_civil": liEstadoCivil.value,
+        "sexo": liSex.value,
+        "cargo": liCargo.value,
     })
 
-    fetch(`${url}/funcionario/dados`,{
-        "method": "PUT",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body:data
-    }).then(response => {return response.json()})
-    .then(data => {
-        console.log(data)
-    })
-    
+    // fetch(`${url}/funcionario/dados`, {
+    //         "method": "PUT",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: data
+    //     }).then(response => { return response.json() })
+    //     .then(data => {
+    //         console.log(data)
+    //     })
+
 
 
 }

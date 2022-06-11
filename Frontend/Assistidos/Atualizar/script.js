@@ -2,11 +2,14 @@ var assis = localStorage.getItem("assistido");
 var met;
 var fotoAntes;
 var getSexo;
+
+var fotoAtt;
 var fotogetAssisitdo;
 var fotinho;
 var newImg = document.querySelector(".foto");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
+
 fileInp.addEventListener("change", (e) => {
     var fr = new FileReader();
     fr.onloadend = (foto) => {
@@ -26,6 +29,8 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFotoDepois() {
+
+
 
     var local = localStorage.getItem("assistido");
     let data = JSON.stringify({
@@ -149,7 +154,15 @@ function updateAssistido() {
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
 
-    console.log(sexMasc.value)
+    if ((nome.value == "") && ((nasc.value == ""))) {
+        inpNomeCom.appendChild(nomeerr)
+        document.querySelector(".Nascimento").appendChild(nomeerr)
+    } else if ((nome.value == "")) {
+        inpNomeCom.appendChild(nomeerr)
+    } else if ((nasc.value == "") || (nasc.value == 00 / 00 / 0000)) {
+        document.querySelector(".Nascimento").appendChild(nomeerr)
+
+    }
 
     var sex = [];
 
@@ -163,6 +176,11 @@ function updateAssistido() {
         sexOutr.value = "Outro";
         sex.push(sexOutr.value);
     } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
+        alert("Selecione pelo menos uma opção (Sexo)")
+    }
+
+    if (sex.isEmpty()) {
+        sex = null;
         alert("Selecione pelo menos uma opção (Sexo)")
     }
 
@@ -186,15 +204,7 @@ function updateAssistido() {
         foto_depois: fotinho
     })
 
-    if ((nome.value == "") && ((nasc.value == ""))) {
-        inpNomeCom.appendChild(nomeerr)
-        document.querySelector(".Nascimento").appendChild(nomeerr)
-    } else if ((nome.value == "")) {
-        inpNomeCom.appendChild(nomeerr)
-    } else if ((nasc.value == "") || (nasc.value == 00 / 00 / 0000)) {
-        document.querySelector(".Nascimento").appendChild(nomeerr)
 
-    }
     console.log(nasc.value)
     fetch(`${url}/assistido/update`, {
             method: "PUT",
@@ -253,7 +263,7 @@ function getComorbidades() {
                     listaDrogas.appendChild(ulDroga)
                 }
 
-                
+
 
             })
 
