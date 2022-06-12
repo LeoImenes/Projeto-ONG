@@ -65,7 +65,7 @@ CREATE TABLE familiares(
 	endereco VARCHAR(100)
 );
 
-CREATE TABLE familiarAssistido(
+CREATE TABLE familiarassistido(
 	id_familiarAssistido INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	id_assistido INTEGER NOT NULL,
 	id_familiar INTEGER NOT NULL,
@@ -209,7 +209,7 @@ select
 	
 from
 	assistidos a
-	inner join familiarAssistido fa on a.id_assistido = fa.id_assistido
+	inner join familiarassistido fa on a.id_assistido = fa.id_assistido
 	inner join familiares f on fa.id_familiar = f.id_familiar;
 	
 	
