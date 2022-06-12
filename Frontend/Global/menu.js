@@ -1,6 +1,7 @@
 var cargo = localStorage.getItem('userdata')
 
 let menuImg = document.querySelector(".menuJS")
+menuImg.style.cursor = "pointer"
 let menuContent = document.querySelector(".menucontent")
 let pgAssistencia = document.querySelector(".Assistencia")
 let pgFuncionario = document.querySelector(".Funcionario")
