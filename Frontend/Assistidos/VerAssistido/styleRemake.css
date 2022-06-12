@@ -178,7 +178,7 @@ p {
 .familia {
     margin-left: 50%;
     transform: translate(-50%);
-    width: 60%;
+    width: 80%;
     display: grid;
     height: 100%;
     align-items: center;
@@ -195,7 +195,7 @@ p {
 }
 
 .itens {
-    width: 1000px;
+    width: 800px;
     height: 100%;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -206,7 +206,8 @@ p {
 }
 
 .itens ul {
-    width: 10vw;
+    width: 150px;
+    height: 6.2vh;
     text-align: center;
     border: 1px solid black;
     margin-bottom: 1rem;
@@ -214,7 +215,7 @@ p {
 
 .itens li {
     width: 100%;
-    height: 35%;
+    height: 60%;
 }
 
 .familia h1 {

@@ -141,8 +141,8 @@ function cadastrarFotoDepois() {
         })
         .then((data) => {
 
-            alert("Foto Atualizada");
-            // window.location.reload()
+            alert("Atualização efetuada com sucesso");
+            window.location.reload()
 
         });
 }
@@ -196,16 +196,16 @@ function editarFunc() {
         "cargo": liCargo.value,
     })
 
-    // fetch(`${url}/funcionario/dados`, {
-    //         "method": "PUT",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: data
-    //     }).then(response => { return response.json() })
-    //     .then(data => {
-    //         console.log(data)
-    //     })
+    fetch(`${url}/funcionario/dados`, {
+            "method": "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        }).then(response => { return response.json() })
+        .then(data => {
+            console.log(data)
+        })
 
 
 
