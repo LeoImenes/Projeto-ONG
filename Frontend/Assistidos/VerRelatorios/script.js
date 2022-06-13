@@ -93,7 +93,7 @@ function buscarData() {
 }
 
 function modalInfo() {
-    let local = localStorage.getItem("assistido");
+    let local = localStorage.getItem("rela");
     fetch(`${url}/relatorio/assistido/get/${local}`)
         .then(res => { return res.json() })
         .then(data => {
