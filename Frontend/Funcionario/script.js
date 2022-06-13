@@ -195,8 +195,11 @@ function registrarAssistencia() {
             return response.json()
         }else {
             alert("Falha ao Cadastrar Assistencia")
-        }})
-    .then(data => window.location.reload())
+        }
+        }
+       
+        )
+    .then(data => console.log(data))
 
 }
 

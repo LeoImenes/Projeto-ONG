@@ -185,6 +185,8 @@ function editarFunc() {
     var liDatademissao = document.querySelector(".getDemissao");
     var liEmail = document.querySelector(".getEmail");
 
+    console.log(liNasc)
+
 
     var data = JSON.stringify({
         "matricula": liMatricula.value,
@@ -194,7 +196,11 @@ function editarFunc() {
         "estado_civil": liEstadoCivil.value,
         "sexo": liSex.value,
         "cargo": liCargo.value,
+        "data_nascimento": dataUS(liNasc.value)
     })
+
+    console.log(liNasc)
+
 
     fetch(`${url}/funcionario/dados`, {
             "method": "PUT",

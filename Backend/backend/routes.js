@@ -4,9 +4,7 @@ const route = express.Router()
 const funcionarioControll = require("./src/controller/funcionarioControll")
 const assistidoControll = require('./src/controller/assistidoControll')
 
-const teste = require("./src/controller/testesemquebrar")
 
-route.get("/foto_assistido/:id", teste.teste);
 
 // *** FUNCIONARIOS *** //
 route.post('/funcionarios', funcionarioControll.login)
