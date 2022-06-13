@@ -7,17 +7,17 @@ function CriaPDF() {
     
     var conteudo = document.getElementById('pdf').innerHTML;
     var style = "<style>";
-    style = style + "body{width: 100%;height: 100%;display: flex;justify-content:center;background-color: #0045b4;overflow: hidden;margin:0;padding:0;border: 2px solid #000;}";
+    // style = style + "body{width: 100%;height: 100%;display: flex;justify-content:center;background-color: #0045b4;overflow: hidden;margin:0;padding:0;border: 2px solid #000;}";
     style = style + "#pdf{display: flex;align-items: center;flex-direction: column;width: 80%;height: 100vh;background-color:#fff;}";
-    style = style + ".cabecalho{display: flex;align-items: center;justify-content: space-between;width: 90%;height: 20%;border-bottom: 2px solid #000;}";
-    style = style + ".info {height: 50%;display: flex;justify-content: center;flex-direction: column;align-items: flex-end;padding: 10px;}";
-    style = style + "#logo {width: 150px;height: 150px;padding: 10px;}";
-    style = style + ".info>p{font-Size: 20px;margin:0;}";
-    style = style + ".subtitulo{display: grid;grid-template-columns: 1fr 1fr;align-items: center;width: 90%;height: 15%;border-bottom: 2px solid #000;}";
-    style = style + ".pessoas>h2,.data>h2{font-Size:25px;}";
-    style = style + ".pessoas{padding: 10px;}";
-    style = style + ".data{height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: flex-end;padding: 10px;}";
-    style = style + ".encaminhamento{width: 90%;height:55%;}";
+    // style = style + ".cabecalho{display: flex;align-items: center;justify-content: space-between;width: 90%;height: 20%;border-bottom: 2px solid #000;}";
+    // style = style + ".info {height: 50%;display: flex;justify-content: center;flex-direction: column;align-items: flex-end;padding: 10px;}";
+    // style = style + "#logo {width: 150px;height: 150px;padding: 10px;}";
+    // style = style + ".info>p{font-Size: 20px;margin:0;}";
+    // style = style + ".subtitulo{display: grid;grid-template-columns: 1fr 1fr;align-items: center;width: 90%;height: 15%;border-bottom: 2px solid #000;}";
+    // style = style + ".pessoas>h2,.data>h2{font-Size:25px;}";
+    // style = style + ".pessoas{padding: 10px;}";
+    // style = style + ".data{height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: flex-end;padding: 10px;}";
+    // style = style + ".encaminhamento{width: 90%;height:55%;}";
     style = style + "</style>";
     // CRIA UM OBJETO WINDOW
     var win = window.open('', '', 'height=700,width=700');

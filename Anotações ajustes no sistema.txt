@@ -1,0 +1,114 @@
+anotações finais 10/06/2022
+
+LOGIN: OK
+TROCAR SENHA: OK
+
+ASSISDO
+	VER ASSISTIDO: OK
+	EDITAR INFORMAÇÕES: OK
+	SEXO:OK
+	PSICOATIVOS: NÃO ESTA CARREGANDO, APÓS ATUALIZADO E APRESENTA ERRO NO GET, QUANDO ATUALIZA MAIS QUE 7
+	SAÚDE: 
+	PSICOATIVOS: NÃO ESTA CARREGANDO, APÓS ATUALIZADO E APRESENTA ERRO NO GET, QUANDO ATUALIZA MAIS QUE 7
+	CADASTRAR E LISTAR FAMILIAR: OK
+
+	CADASTAR E LISTAR ASSISTIDO: OK
+	
+	PRIMEIRA FOTO ASSISTIDO: PERDENDO QUANDO ATUALIZA
+	RELATÓRIO: 100%
+	FINANCEIRO: 100%
+	FUNCIONARIO: 100%
+
+	
+	
+
+
+
+---------------------------------------------
+ANOTAÇÕES 04/06/2022
+
+ATUALIZAR ASSISTIDO, APÓS ATUALIZAR VOLTAR PARA PAGINA DO ASSISTIDO:
+ATUALIZAR E LISTAR COMORBIDADES NÃO ESTA FUNCIONADO 100%:
+
+
+--------------------------------------------
+ANOTAÇÕES
+
+FUNÇÕES QUE NÃO ESTA FUNCIONANDO
+	- TELA DO ASSISTIDO, NÃO ESTA CARREGANDO PSICOATIVOS, SAÚDE, FAMIAR (UNDEFINED): OK, CARREGANDO.
+	- ATUALIZAR ASSISTIDO, NÃO ESTA ATUALIZANDO:
+	- ASSISTÊNCIAS UM ASSISTIDO NÃO ESTA FUNCIONANDO NO INSOMINIA: OK, DESATIVADO ESSA FUNÇÃO, VAI USAR A SEGUNDA, QUE FAZ TUDO.
+	- ASSISTÊNCIA MAIS DE UM ASSISTIDO, CADASTAR COM MAIS DE UM ASSISTIDO, PORÉM DA ERRO NO INSOMINIA:OK JÁ ESTA FUNCIONANDO
+	- DEMISSÃO FUNCIONÁRIO, EXECUTANDO OS DOIS ALERT(FALHA E SUCESSO):
+	- MASCARA DO TELEFONE, FAMILIAR DO ASSISTIDO: OK
+	- EDITAR ASSISTIDO: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO O BACKEND TypeError: Cannot read property 'end' of undefined: OK
+	
+	
+	
+
+AJUSTES E MELHORIAS
+
+- MUDAR A BARRA DE TITULO PARA - App Ong Digital - V1.0.0: OK
+- COLOCAR NOME NAS JANELAS: OK
+- TODOS USAR O BANCO DE DADOS V4, TODOS OS AJUSTE QUE SER FEITO, AJUSTAR SCRIPT: OK
+- * NOS CAMPOS OBRIGATÓRIOS NOT NULL.
+- ADICIONAR BOTÃO EM TODAS AS PAGINAS DIRECIONANDO PARA HOME - OK
+- ADICIONAR CONTATO DO SUPORTE NA TELA LOGIN/HOME: ti@casairmaantonia.org
+- DETALHES NA MATRICULA DO FUNCIONARIO(NO CADASTRO PODE TER DUVIDA, QUAL FOI A ULTIMA MATRICULA).
+- NO CADASTRO DO FUNCIONÁRIO, CARGO E SEXO (MASCULINO, FEMENINO, NÃO INFORMADO) USAR SELECT, DEIXAR O CAMPO SENHA PROXIMO AO EMAIL.
+- OPÇÃO PARA CADASTRAR MAIS DE UM TELEFONE, ASSISTIDO, FUNCIONÁRIO, FAMILIAR
+
+-----------------------------------------------------------------------------------------------
+					CHECKLIST
+
+TELA LOGIN: OK
+
+-----------------------------------------------------------------------------------------------
+
+TELA HOME: falta ajustar a funcionalidade de alguns botões
+-----------------------------------------------------------------------------------------------
+
+TELA ASSISTIDOS:
+	VER ASSISTIDOS: ok
+		
+	EDITAR INFORMAÇÕES: (os campos que não foi cadastrado, carrega null, com isso não da pra saber qual é a informação a ser preenchido), e ESTA CRACHANDO TypeError: Cannot read property 'end' of undefined. (pscoativos, saúde, familiares CARREGANDO UDEFINED):
+
+	RELATÓRIO: OK
+
+	CADASTRAR FAMILIAR: OK
+
+	CADASTRAR ASSITIDOS: OK
+-----------------------------------------------------------------------------------------------
+
+TELA FUNCIONÁRIOS:
+	VER FUNCIONÁRIOS: OK
+		EDITAR FUNCIONARIO/FOTO: OK
+			DEMISSÃO: não funcionando
+		
+	CADASTRAR FUNCIONÁRIO:OK
+-----------------------------------------------------------------------------------------------
+
+TELA FINANCEIRO: 100%
+	ADICINAR RECEITAS: OK
+	ADICIONAR DESPESAS: OK
+
+-----------------------------------------------------------------------------------------------
+TELA RELATÓRIO
+	VER RELATÓRIOS:terminar
+	FAZER RELATÓRIOS: OK
+	EDITAR RELATÓRIO: SEM PREORIDADE
+
+-----------------------------------------------------------------------------------------------
+TELA ASSISTÊNCIAS
+	FAZER ASSISTÊNCIAS:
+	CONSULTAR ASSISTÊNCIAS:
+	EDITAR ASSISTÊNCIA: SEM PRIORIDADE
+-----------------------------------------------------------------------------------------------
+TELA ENCAMINHAMENTO
+	FAZER ENCAMINHAMENTO:
+	CONSULTAR ENCAMINHAMENTOS:
+	EDITAR ENCAMINHAMENTOS: SEM PRIORIDADE
+
+
+
+	

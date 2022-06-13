@@ -79,10 +79,8 @@ export default function ListarAssistidos({ navigation }) {
                                             await AsyncStorage.setItem("assistido", JSON.stringify(item.id_assistido));
                                             navigation.navigate("VerAssistido")
                                         }}>
-                                            {
-                                                /*(item.foto_antes === "null" || item.foto_antes === "" || item.foto_antes === "undefined") ? require("../../assets/user1.png") : { uri: `http://10.87.207.33:3000/foto_assistido/1` }*/ 
-                                            }
-                                            <Image source={{uri: `http://10.87.207.33:3000/foto_assistido/${item.id_assistido}`}} style={gStyle.imageUser} />
+                                            <Image source={(item.foto_antes === "null" || item.foto_antes === "" || item.foto_antes === "undefined") ? require("../../assets/user1.png") : { uri: `${item.foto_antes}` }} style={gStyle.imageUser}/>
+                                            {/* <Image source={{uri: `http://10.87.207.33:3000/foto_assistido/${item.id_assistido}`}} style={gStyle.imageUser} /> */}
                                             <View style={gStyle.cardTxt}>
                                                 <Text style={[gStyle.headerText, { color: "black" }]}>{item.nome_completo}</Text>
                                             </View>

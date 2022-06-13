@@ -30,6 +30,7 @@ export default function OutrasAssistencias({ navigation }) {
 
   const getFunc = async () => {
     let value = await AsyncStorage.getItem('userdata');
+    value = JSON.parse(value);
 
     fetch(`${Url.URL}/funcionarios/${value}`)
       .then(resp => { return resp.json() })

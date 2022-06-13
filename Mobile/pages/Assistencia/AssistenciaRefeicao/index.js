@@ -23,6 +23,7 @@ export default function AssistenciaRefeicao({ navigation }) {
 
     const getFunc = async () => {
         let value = await AsyncStorage.getItem('userdata');
+        value = JSON.parse(value);
 
         fetch(`${Url.URL}/funcionarios/${value}`)
             .then(resp => { return resp.json() })
@@ -85,7 +86,6 @@ export default function AssistenciaRefeicao({ navigation }) {
             "assistidos": tempSelecionados,
             "itens": [{ "id_item": valuePicker}]
         }
-        console.log(item)
 
         fetch(`${Url.URL}/funcionario/assistencias`, {
             "method": "POST",
@@ -145,7 +145,7 @@ export default function AssistenciaRefeicao({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Text style={[css.textStyle, { fontSize: 20, marginTop: 10 }]}>Selecione:</Text>
+            <Text style={[css.textStyle, { fontSize: 20, marginTop: 10 }]}>Assistidos</Text>
             <Text style={[css.textStyle, { fontSize: 20, marginTop: 5, color: "#166B8A" }]}>- - - - - - - - - - - - - - - - - - - - - - </Text>
             <View style={{ width: "100%", height: 450 }}>
                 <ScrollView>

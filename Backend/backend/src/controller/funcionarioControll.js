@@ -128,13 +128,12 @@ const updateDadosFuncionario = (req, res) => {
     let matricula = req.body.matricula;
     let nome_completo = req.body.nome_completo;
     let rg = req.body.rg;
-    let cargo = req.body.cargo;
     let cpf = req.body.cpf;
     let data_nascimento = req.body.data_nascimento;
     let estado_civil = req.body.estado_civil;
     let sexo = req.body.sexo;
     let foto = req.body.foto;
-    let query = `UPDATE funcionarios SET nome_completo="${nome_completo}",cargo = "${cargo}",rg="${rg}",cpf="${cpf}",data_nascimento="${data_nascimento}",estado_civil="${estado_civil}",sexo="${sexo}",foto="${foto}" WHERE matricula="${matricula}";`;
+    let query = `UPDATE funcionarios SET nome_completo="${nome_completo}",rg="${rg}",cpf="${cpf}",data_nascimento="${data_nascimento}",estado_civil="${estado_civil}",sexo="${sexo}",foto="${foto}" WHERE matricula="${matricula}";`;
     con.query(query, (err, result) => {
         if (err == null) {
             res.status(200).json({...req.body }).end();

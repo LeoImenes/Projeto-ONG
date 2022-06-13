@@ -12,7 +12,6 @@ import Url from '../../global/index'
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextInputMask } from 'react-native-masked-text';
 import formatDate from '../../Components/FormatDate/index'
-import ImageResizer from 'react-native-image-resizer';
 
 import * as FileSystem from 'expo-file-system';
 
@@ -62,6 +61,7 @@ export default function CadastrarAssistido({ navigation }) {
 
     const getFunc = async () => {
         let value = await AsyncStorage.getItem('userdata');
+        value = JSON.parse(value);
 
         fetch(`${Url.URL}/funcionarios/${value}`)
             .then(resp => { return resp.json() })
@@ -184,7 +184,8 @@ export default function CadastrarAssistido({ navigation }) {
     async function takePicture() {
         if (camRef) {
             const data = await camRef.current.takePictureAsync();
-
+            data.width = 1000
+            data.height = 1000
             let base = await FileSystem.readAsStringAsync(data.uri, {
                 encoding: FileSystem.EncodingType.Base64,
             });
@@ -192,20 +193,6 @@ export default function CadastrarAssistido({ navigation }) {
             let url = data.uri.split(".");
             let b64 = `data:image/${url[url.length - 1]};base64,${base}`;
 
-            ImageResizer.createResizedImage(path, maxWidth, maxHeight, compressFormat, quality, rotation, outputPath)
-                .then(response => {
-                    // response.uri is the URI of the new image that can now be displayed, uploaded...
-                    // response.path is the path of the new image
-                    // response.name is the name of the new image with the extension
-                    // response.size is the size of the new image
-                    response.path = b64;
-                    response.size = 1000;
-                })
-                .catch(err => {
-                    // Oops, something went wrong. Check that the filename is correct and
-                    // inspect err to get more details.
-                    console.log(err);
-                });
             setFoto(b64)
             setCam(false)
         }

@@ -46,7 +46,6 @@ export default function CadastrarFuncionario({ navigation }) {
         setFoto("");
         setMatricula("");
         setEstdCivil("")
-
     }
 
     const cadastrar = () => {
@@ -75,6 +74,7 @@ export default function CadastrarFuncionario({ navigation }) {
             .then(resp => { return resp.json() })
             .then(data => {
                 if (data.err !== undefined) {
+                    console.log(data.err)
                     if (data.err.includes("Duplicate entry"))
                         ToastAndroid.show('CPF já existente!', ToastAndroid.SHORT)
                 } else {

@@ -22,7 +22,6 @@ export default function MeuPerfil({ navigation }) {
     const [cpf, setCpf] = useState("");
     const [estdCivil, setEstdCivil] = useState("");
     const [sexo, setSexo] = useState("");
-    const [email, setEmail] = useState("");
     const [nascimento, setNascimento] = useState("");
 
     useEffect(() => {
@@ -45,7 +44,6 @@ export default function MeuPerfil({ navigation }) {
                     setSexo(data[0].sexo);
                     setNascimento(formatDate.formatBr(new Date(data[0].data_nascimento)));
                     setEstdCivil(data[0].estado_civil);
-                    setEmail(data[0].email);
                 })
                 .catch(err => { console.log(err) })
         }
@@ -63,7 +61,7 @@ export default function MeuPerfil({ navigation }) {
             data_nascimento: formatDate.formatUs(nascimento),
             estado_civil: estdCivil,
             sexo: sexo,
-            foto: funcionario.foto
+            foto: funcionario.foto,
         }
         
         fetch(`${Url.URL}/funcionario/dados`, {
@@ -92,7 +90,6 @@ export default function MeuPerfil({ navigation }) {
         setSexo("");
         setNascimento("");
         setEstdCivil("");
-        setEmail("");
     }
 
     return (
@@ -119,7 +116,7 @@ export default function MeuPerfil({ navigation }) {
                                     <Text style={[gStyle.buttonText, { color: "#166B8A", marginTop: 15 }]}>Alterar informações</Text>
                                     <TextInput value={nome} onChangeText={setNome} placeholder="Nome..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TextInput value={rg} onChangeText={setRg} placeholder="RG..." style={[gStyle.cardInfo, gStyle.info]} />
-                                    <TextInput value={cpf} onChangeText={setCpf} placeholder="CPF..." style={[gStyle.cardInfo, gStyle.info]} />
+                                    <TextInputMask type={'cpf'} value={cpf} onChangeText={setCpf} placeholder="CPF..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <View style={{ height: 40, borderBottomWidth: 2, margin: 10, borderBottomColor: 'lightgray', width: "90%", alignSelf: "center", justifyContent: "center" }}>
                                         <Picker
                                             selectedValue={sexo}
@@ -134,7 +131,6 @@ export default function MeuPerfil({ navigation }) {
                                     </View>
                                     <TextInputMask type={'datetime'} options={{ format: 'DD/MM/YYYY' }} value={nascimento} onChangeText={setNascimento} placeholder="Nascimento..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TextInput value={estdCivil} onChangeText={setEstdCivil} placeholder="Estado civíl..." style={[gStyle.cardInfo, gStyle.info]} />
-                                    <TextInput value={email} onChangeText={setEmail} placeholder="E-mail..." style={[gStyle.cardInfo, gStyle.info]} />
                                     <TouchableOpacity style={gStyle.cardButton} onPress={() => { att() }}>
                                         <Text style={gStyle.buttonText}>Salvar</Text>
                                     </TouchableOpacity>
@@ -163,7 +159,7 @@ export default function MeuPerfil({ navigation }) {
                                                 <Text style={gStyle.textInfo}>{funcionario.nome_completo}</Text>
                                             </View>
                                             <View style={[gStyle.cardInfo, gStyle.info]}>
-                                                <Text style={gStyle.textInfo}>Nome:</Text>
+                                                <Text style={gStyle.textInfo}>E-mail:</Text>
                                                 <Text style={gStyle.textInfo}>{funcionario.email}</Text>
                                             </View>
                                             <View style={[gStyle.cardInfo, gStyle.info]}>
