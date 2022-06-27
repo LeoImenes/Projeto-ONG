@@ -22,7 +22,6 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
-            console.log(data)
             window.location.href = "../../Login/"
         });
 }

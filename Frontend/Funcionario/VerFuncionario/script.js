@@ -1,13 +1,11 @@
 var ulEditarDados = document.querySelector(".EditarDados");
 ulEditarDados.style.display = "none"
 
-
+var getFoto;
 var cpf;
 var func = localStorage.getItem("userdata")
 var matriculaLogado = JSON.parse(func).matricula
 var getMatricula;
-var fotinho;
-var ftAtual;
 var getCargo;
 
 let voltar = document.querySelector(".btn-voltar").addEventListener("click", () => {
@@ -56,15 +54,17 @@ function list() {
                 var liDatademissao = document.querySelector(".getDemissao");
                 var liEmail = document.querySelector(".getEmail");
 
-                ftAtual = item.foto;
+                
 
                 if ((item.foto === null) || (item.foto === "undefined") || (item.foto == "null") || (item.foto == "")) {
                     Fotofuncionario.src = "../../Assets/icones/user.png"
+                    fotinho = null
                 } else {
                     Fotofuncionario.src = item.foto
+                    fotinho = item.foto
                 }
 
-
+                
 
                 if (item.data_demissao === null) {
                     liDatademissao.innerHTML = "NDA";
@@ -90,7 +90,7 @@ function list() {
 }
 
 var func = localStorage.getItem("userdata");
-
+var fotinho;
 var newImg = document.querySelector("#Funcfoto");
 var adcFoto = document.querySelector(".adcFoto");
 var fileInp = document.querySelector("#inpFoto");
@@ -112,18 +112,10 @@ adcFoto.addEventListener("click", () => {
 });
 
 function cadastrarFotoDepois() {
-    if (fotinho === undefined) {
-        fotinho = ftAtual
-    } else {
-        console.log("Ja tem foto")
-    }
-
     let data = JSON.stringify({
         cpf: cpf,
         foto: fotinho,
     });
-
-    console.log(fotinho)
 
     fetch(`${url}/funcionario`, {
             method: "PUT",
@@ -141,7 +133,7 @@ function cadastrarFotoDepois() {
         })
         .then((data) => {
 
-            alert("Atualização efetuada com sucesso");
+            alert("Atualização realizada com sucesso");
             window.location.reload()
 
         });
@@ -156,7 +148,7 @@ function editarDados() {
     var cargo = document.querySelector("#cargo");
     var matricula = document.querySelector("#Matricula")
 
-
+    
     cargo.value = getCargo
     matricula.value = getMatricula
 
@@ -184,35 +176,30 @@ function editarFunc() {
     var liDataAdmissao = document.querySelector(".getDataAdmissao");
     var liDatademissao = document.querySelector(".getDemissao");
     var liEmail = document.querySelector(".getEmail");
-
-    console.log(liNasc)
-
+    
 
     var data = JSON.stringify({
         "matricula": liMatricula.value,
-        "nome_completo": liNome.value,
-        "rg": liRg.value,
-        "cpf": liCpf.value,
-        "estado_civil": liEstadoCivil.value,
-        "sexo": liSex.value,
-        "cargo": liCargo.value,
-        "data_nascimento": dataUS(liNasc.value)
+		"nome_completo": liNome.value,
+		"rg": liRg.value,
+		"cpf": liCpf.value,
+		"estado_civil": liEstadoCivil.value,
+		"sexo": liSex.value,
+        "data_nascimento":dataUS(liDataNasc.value),
+        "foto":fotinho
     })
 
-    console.log(liNasc)
-
-
-    fetch(`${url}/funcionario/dados`, {
-            "method": "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: data
-        }).then(response => { return response.json() })
-        .then(data => {
-            console.log(data)
-        })
-
+    fetch(`${url}/funcionario/dados`,{
+        "method": "PUT",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body:data
+    }).then(response => {return response.json()})
+    .then(data => {
+        console.log(data)
+    })
+    
 
 
 }

@@ -84,4 +84,3 @@ Home.addEventListener("click", () => {
 
 let dados = localStorage.getItem('userdata')
 let funcionario = JSON.parse(dados)
-console.log(funcionario)

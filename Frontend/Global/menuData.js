@@ -14,7 +14,7 @@ function getfunc() {
         .then(resp => { return resp.json() })
         .then(data => {
             user.innerHTML = data[0].nome_completo
-            if ((data[0].foto == null) || data[0].foto == 'undefined') {
+            if ((data[0].foto == null) || data[0].foto == 'undefined' || data[0].foto == "null") {
                 foto.src = `../../Assets/icones/user.png`
             } else {
                 foto.src = data[0].foto

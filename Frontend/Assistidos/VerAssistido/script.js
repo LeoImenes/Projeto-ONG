@@ -25,13 +25,11 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    console.log(local)
     fetch(`${url}/assistido/busca_familiar/${local}`)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-            console.log(data)
             var dadosFamilia = document.querySelector(".dadosFamilia")
             data.forEach((item, index) => {
 
@@ -150,7 +148,6 @@ function list() {
             }
         })
         .then((data) => {
-            // console.log(data)
             var antes = document.querySelector("#assistidoAntes");
             antes.src = data.foto_antes;
             antes.style.borderRadius = "50%";
@@ -231,7 +228,6 @@ function getComorbidadeAssistido() {
             return response.json();
         })
         .then((data) => {
-            console.log(data)
             data.forEach((item, index) => {
                 if (item.tipo === 0) {
                     var liDroga = document.createElement("li");

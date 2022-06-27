@@ -58,8 +58,6 @@ function cadastrarAssistido() {
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
 
-    console.log(sexMasc.value)
-
     var sex = [];
 
     if (sexMasc.checked == 1) {
@@ -92,8 +90,6 @@ function cadastrarAssistido() {
             // "foto_depois": fotinho
     })
 
-    console.log(data)
-
     fetch(`${url}/assistidos`, {
             method: "POST",
             headers: {
@@ -110,7 +106,6 @@ function cadastrarAssistido() {
             }
         })
         .then(data => {
-            console.log(data)
             if (data !== null) {
 
                 var listaComorbidade = document.querySelectorAll(".Comorbidade");
@@ -137,10 +132,7 @@ function cadastrarAssistido() {
                                     alert("Falha ao Cadastrar Comorbidades")
                                 }
                             })
-                            .then(data => {
-
-                                console.log(data)
-                            })
+                            .then(data => {})
                     }
                 });
             }

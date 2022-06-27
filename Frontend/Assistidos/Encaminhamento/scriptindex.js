@@ -67,7 +67,6 @@ function clickImprimir() {
             }
         }).then(data => {
             window.location.href="../OpcoesAssistido"
-            console.log(data)
         });
 }
 

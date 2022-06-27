@@ -17,6 +17,7 @@ section {
 
 textarea {
     width: 90%;
+    padding: 10px;
     height: 60vh;
     font-size: 20px;
     border-radius: 20px;
@@ -60,4 +61,8 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.btnLog{
+    width: 60%;
 }

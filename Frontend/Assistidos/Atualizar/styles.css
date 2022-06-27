@@ -212,15 +212,17 @@ input[type="checkbox"] {
     }
     .inputDados {
         width: 95%;
-        align-items: center;
-        justify-content: center;
-        align-self: center;
+        height: 75%;
+        align-items: flex-center;
+        justify-content:center;
+        align-self: flex-start;
         justify-self: center;
         text-align: center;
         grid-template-columns: 1fr;
     }
     .inputDados input {
         width: 90%;
+       
         display: flex;
         justify-self: center;
     }

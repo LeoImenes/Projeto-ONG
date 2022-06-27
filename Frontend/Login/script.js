@@ -6,7 +6,6 @@ function conectar() {
         senha: md5(senha.value),
     });
 
-    // console.log(data)
 
     fetch(`${url}/funcionarios`, {
             method: "POST",
@@ -22,11 +21,11 @@ function conectar() {
             return resp.json();
         })
         .then((data) => {
-            console.log(data)
+            
             if (data.id_funcionario !== undefined) {
                 localStorage.setItem("userdata", JSON.stringify(data));
                 window.location.href = "../../Home";
-                //  console.log(data)
+               
 
             } else {
                 alert("Usuario ou Senha invalidos");

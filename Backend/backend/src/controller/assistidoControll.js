@@ -590,19 +590,24 @@ const relatorioPost = (req, res) => {
 
 // MÉTODO CONSULTAR TODO OS RELARÓRIO DOS ASSISTIDOS
 const getRelatorio = (req, res) => {
-    let string = `select * from relatorios`
-    con.query(string, (err, result) => {
-        if (err === null) {
-            res.status(200).json(result).end()
-        } else {
-            res.status(400).json({ err: "Erro ao consultar relarórios" }).end();
-        }
-    })
+    let id_assistido = req.params.id_assistido
+    let string = `select * from relatorios where id_assistido = ${id_assistido}`
+    if (req.params.id_assistido !== undefined) {
+        con.query(string, (err, result) => {
+            if (err == null) {
+                res.status(200).json(result).end()
+            } else {
+                res.status(400).json({ err: err.message }).end();
+            }
+        })
+    } else {
+        res.status(400).json({ "err": "Informe o Id do Assistido" })
+    }
 }
 
 // MÉTODO CONSULTAR RELATORIO ID DO RELATÓRIO
 const getRelatorioID = (req, res) => {
-    let string = `select * from vw_relatorio where numero = ${req.params.id_assistido};`
+    let string = `select * from vw_relatorio where id_relatorio = ${req.params.id_assistido};`
     if (req.params.id_assistido !== undefined) {
         con.query(string, (err, result) => {
             if (err == null) {

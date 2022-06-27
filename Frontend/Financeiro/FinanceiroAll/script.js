@@ -32,9 +32,8 @@ function getfinanceiro() {
                     despesaCard.appendChild(div)
 
                 } else if (item.tipo === 1) {
-                    console.log("Lancamentos")
                     totalReceitas += item.valor
-                    console.log("total de despesas: ", totalDespesas, item.tipo, item.id_lancamento)
+               
 
                     var despesaCard = document.querySelector(".receitasContent")
                     var div = document.createElement("div")
@@ -135,10 +134,7 @@ function fetchReceitas() {
     var descricao = document.querySelector(".RecDesc").value;;
     var valor = document.querySelector(".valDesc").value;
 
-    console.log(descricao);
-    console.log(valor);
-
-    console.log(localStorage.getItem('userdata').id_funcionario)
+   
 
     var data = JSON.stringify({
         "id_funcionario": JSON.parse(func).id_funcionario,
@@ -206,10 +202,7 @@ function fetchDespesas() {
     var descricao = document.querySelector(".DespDesc").value;;
     var valor = document.querySelector(".valDesp").value;
 
-    console.log(descricao);
-    console.log(valor);
-
-    console.log(localStorage.getItem('userdata').id_funcionario)
+   
 
     var data = JSON.stringify({
         "id_funcionario": JSON.parse(func).id_funcionario,

@@ -22,13 +22,13 @@ function openModal() {
 function listarRelatorios() {
     var assis = localStorage.getItem("assistido");
     let names = []
-    fetch(`${url}/relatorio/assistido/get/${assis}`)
+
+    fetch(`${url}/relatorio/assistido/${assis}`)
 
     .then(response => { return response.json() })
 
     .then(data => {
         data.forEach(Assist => {
-            console.log(data)
             var divimg = document.createElement("div");
             var divRela = document.createElement("div");
             var divData = document.createElement("div");
@@ -97,9 +97,7 @@ function modalInfo() {
     fetch(`${url}/relatorio/assistido/get/${local}`)
         .then(res => { return res.json() })
         .then(data => {
-            console.log(data)
             data.forEach(item => {
-                console.log(item)
                 relatorio_id = item.Numero
                 let relnum = document.querySelector(".Relnum")
                 let textarea = document.querySelector("#textarea")
@@ -114,11 +112,10 @@ function modalInfo() {
                     relimg.src = item.foto
                 }
                 relassis.innerHTML = item.assistido
-                relnum.innerHTML = `Relatório: ${item.Numero}`
+                relnum.innerHTML = `Relatório: ${item.id_relatorio}`
                 relfunc.innerHTML = `Funcionario: ${item.funcionario}`
                 reldata.innerHTML = `Data:  ${dataCoverter(item.data_relatorio)}`
                 textarea.value = item.relatorio
-                console.log(item)
             })
         })
 }

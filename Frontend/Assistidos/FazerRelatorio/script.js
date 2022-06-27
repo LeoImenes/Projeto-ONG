@@ -21,23 +21,21 @@ function Relatorio() {
         })
         .then((resp) => {
             if (resp.ok) {
-                alert("Cadastrado com sucesso")
+                alert("Cadastrado com sucesso");
                 return resp.json();
             }
 
         })
         .then((data) => {
-            window.location.href = '../OpcoesRelatorio/'
-            console.log(data)
+            window.location.href = '../OpcoesRelatorio/';
         });
 }
 
 function getAssistido() {
-    var p = document.querySelector(".infoAssistido  p")
-    var img = document.querySelector(".ImgAssistido")
+    var p = document.querySelector(".infoAssistido  p");
+    var img = document.querySelector(".ImgAssistido");
 
     var local = localStorage.getItem("assistido");
-    // console.log(local)
 
     fetch(`${url}/assistidos/${local}`)
         .then((response) => {
@@ -45,13 +43,12 @@ function getAssistido() {
 
         })
         .then((data) => {
-            p.innerHTML = ` ${data.nome_completo}`
-            if (data.foto_depois !== null || data.foto_depois !== "null" || data.foto_depois !== undefined || data.foto_depois !== "undefined" || data.foto_depois !== "") {
-                img.src = `${data.foto_depois}`
+            p.innerHTML = ` ${data.nome_completo}`;
+            if (data.foto_depois === null || data.foto_depois === 'null' || data.foto_depois === undefined || data.foto_depois === "undefined" || data.foto_depois === "") {
+                img.src = " ../../Assets/icones/user.png";
             } else {
-                img.src = " ../../Assets/icones/user.png"
-            }
-            // console.log(data)         
+                img.src = data.foto_depois;
+            }        
 
         })
 }

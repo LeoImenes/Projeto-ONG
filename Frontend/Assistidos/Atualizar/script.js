@@ -3,6 +3,7 @@ var met;
 var fotoAntes;
 var getSexo;
 var fotogetAssisitdo;
+var fotogetAssisitdoantes;
 var fotinho;
 var newImg = document.querySelector(".foto");
 var adcFoto = document.querySelector(".adcFoto");
@@ -47,13 +48,17 @@ function getAssistido() {
             return response.json();
         })
         .then((data) => {
-            console.log(data)
+            
 
-            if (data.foto_depois === "null") {
+            if (data.foto_depois === "null" || data.foto_depois === "undefined") {
                 fotogetAssisitdo = "../../Assets/icones/user.png"
             } else {
                 fotogetAssisitdo = (data.foto_depois);
             }
+
+
+
+
 
             if (data.sexo.toLowerCase() === 'masculino') {
                 sexMasc.checked = true;
@@ -118,7 +123,6 @@ function updateAssistido() {
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
 
-    console.log(sexMasc.value)
 
     var sex = [];
 
@@ -152,7 +156,8 @@ function updateAssistido() {
         sexo: sex,
         cartao_cidadao: cartCid.value,
         cartao_sus: cartSus.value,
-        foto_depois: fotinho
+        foto_depois: fotinho,
+        foto_antes: fotoAntes
     })
 
     if ((nome.value == "") && ((nasc.value == ""))) {
@@ -164,7 +169,6 @@ function updateAssistido() {
         document.querySelector(".Nascimento").appendChild(nomeerr)
 
     }
-    console.log(nasc.value)
     fetch(`${url}/assistido/update`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -177,7 +181,6 @@ function updateAssistido() {
             }
         })
         .then(data => {
-            console.log(data)
             window.location.href = "../VerAssistido"
         })
 }
@@ -240,7 +243,7 @@ function getComorbidadeAssistido() {
             } else {
                 met = "PUT"
             }
-            console.log(met)
+            
         })
 }
 
@@ -257,7 +260,6 @@ function updateComorbidades() {
 
             }
 
-            console.log(typeof parseInt(item.value))
             fetch(`${url}/assistido/saude`, {
                     method: met,
                     headers: {
@@ -272,13 +274,8 @@ function updateComorbidades() {
                         alert("Falha ao Cadastrar Comorbidades")
                     }
                 })
-                .then(data => {
-                    console.log(data)
-
-                })
-        } else {
-
-        }
+                .then(data => { })
+        } 
     });
 }
 

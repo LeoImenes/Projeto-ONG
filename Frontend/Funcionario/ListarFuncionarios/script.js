@@ -6,7 +6,6 @@ function list() {
     fetch(`${url}/funcionarios`)
         .then(response => { return response.json() })
         .then(data => {
-            console.log(data)
             data.forEach(fun => {
                 var divimg = document.createElement("div")
                 var divnome = document.createElement("div")
@@ -29,11 +28,13 @@ function list() {
                 divimg.className = "img"
                 divnome.className = "nome"
 
-                if (fun.foto == null || fun.foto.length == 0 || fun.foto == "undefined") {
-                    img.src = "../../Assets/icones/user.png"
+                if( (fun.foto == null) || fun.foto == 'undefined' || fun.foto == "null" || fun.foto == "") {
+                    img.src = `../../Assets/icones/user.png`
                 } else {
                     img.src = fun.foto
                 }
+
+                console.log(fun)
 
                 if (!fun.status == 0) {
                     matricula.innerHTML = `Ativo`

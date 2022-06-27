@@ -63,7 +63,7 @@ route.delete("/assistido/delete_familiar/:id_familiar", assistidoControll.delete
 route.get("/assistido/busca_familiar/:id_assistido", assistidoControll.getVWFamiliar)
 
 // *** RELATÓRIO *** //
-route.get("/relatorio", assistidoControll.getRelatorio)
+route.get("/relatorio/assistido/:id_assistido", assistidoControll.getRelatorio)
 route.post("/relatorio/assistido", assistidoControll.relatorioPost)
 route.get("/relatorio/assistido/get/:id_assistido", assistidoControll.getRelatorioID)
 route.put("/relatorio/put", assistidoControll.updateRelatorioID)
