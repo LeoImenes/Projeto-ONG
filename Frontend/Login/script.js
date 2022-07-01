@@ -6,31 +6,36 @@ function conectar() {
         senha: md5(senha.value),
     });
 
+    try {
+        fetch(`${url}/funcionarios`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+            .then((resp) => {
+                if (resp.status == 400) {
+                    alert("Usuario ou senha incorretos")
+                }
+                return resp.json();
+            })
+            .then((data) => {
 
-    fetch(`${url}/funcionarios`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then((resp) => {
-            if (resp.status == 400) {
-                alert("Usuario ou senha incorretos")
-            }
-            return resp.json();
-        })
-        .then((data) => {
-            
-            if (data.id_funcionario !== undefined) {
-                localStorage.setItem("userdata", JSON.stringify(data));
-                window.location.href = "../../Home";
-               
+                if (data.id_funcionario !== undefined) {
+                    localStorage.setItem("userdata", JSON.stringify(data));
+                    window.location.href = "../../Home";
 
-            } else {
-                alert("Usuario ou Senha invalidos");
-            }
-        });
+
+                } else {
+                    alert("Usuario ou Senha invalidos");
+                }
+            });
+    } catch (e) {
+        console.log(e)
+
+
+    }
 }
 
 function olharSenha() {

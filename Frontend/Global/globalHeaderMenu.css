@@ -105,7 +105,7 @@ img {
     text-align: center;
     justify-content: center;
     background-color: #e5e5e5;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }
 
 .pageList p {
@@ -189,10 +189,10 @@ img {
     .pageList p {
         font-size: 10px
     }
-    .menuJS{
+    .menuJS {
         top: 5%
     }
-    img{
+    img {
         width: 30px
     }
 }

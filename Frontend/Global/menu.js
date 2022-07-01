@@ -52,6 +52,10 @@ sair.addEventListener("click", () => {
     localStorage.clear
 })
 
+let voltar = document.querySelector(".Voltar").addEventListener("click", () => {
+    history.back()
+})
+
 let Assistencia = document.querySelector(".Assistencia")
 Assistencia.style.cursor = "pointer"
 Assistencia.addEventListener("click", () => {

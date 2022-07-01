@@ -2,65 +2,66 @@ var listaData = [];
 
 function list() {
     let input = document.querySelector('input');
-    let filterText = input.value
-    let names = []
-    var body = document.querySelector(body)
+    let filterText = input.value;
+    let names = [];
+    var body = document.querySelector(body);
 
-    fetch(`${url}/Assistidos`)
-        .then(response => {
-            if (response.ok) {} else {
-                alert("Falha ao carregar dados")
-            }
-            return response.json()
-        })
-        .then(data => {
-            listaData.push(data)
-            data.forEach(fun => {
+    try {
+        fetch(`${url}/Assistidos`)
+            .then(response => {
+                if (!response.ok) {
+                    alert("Falha ao carregar dados");
+                    window.location.reload();
 
-                var divimg = document.createElement("div")
-                var divnome = document.createElement("div")
-                var cont = document.querySelector(".content")
-                var img = document.createElement("img");
-                var cardAssistido = document.createElement("div");
-                var nomeFun = document.createElement("h1");
-
-
-                names.push(fun.nome_completo)
-
-
-                cardAssistido.className = "cardAssistido"
-                cardAssistido.style.cursor = "pointer"
-
-                img.className = "fotoUsuario"
-                divimg.className = "img"
-                divnome.className = "nome"
-
-                if ((fun.foto_antes === null) || (fun.foto_antes === "undefined") || (fun.foto_antes === "null") || (fun.foto_antes === "")) {
-                    img.src = "../../Assets/icones/user.png"
-                } else {
-                    img.src = fun.foto_antes
-                }
-
-                nomeFun.innerHTML = `${fun.nome_completo}`
-
-                divimg.appendChild(img)
-                divnome.appendChild(nomeFun)
-                cardAssistido.appendChild(divimg)
-                cardAssistido.appendChild(divnome)
-                cont.appendChild(cardAssistido)
-
-                cardAssistido.addEventListener("click", (e) => {
-
-                    let id = fun;
-                    let store = localStorage.setItem("assistido", fun.id_assistido);
-                    window.location.href = "../VerAssistido/index.html"
-                })
-
-
+                } else return response.json();
             })
+            .then(data => {
+                listaData.push(data);
+                data.forEach(fun => {
+
+                    var divimg = document.createElement("div")
+                    var divnome = document.createElement("div")
+                    var cont = document.querySelector(".content")
+                    var img = document.createElement("img");
+                    var cardAssistido = document.createElement("div");
+                    var nomeFun = document.createElement("h1");
 
 
-        })
+                    names.push(fun.nome_completo);
+
+
+                    cardAssistido.className = "cardAssistido";
+                    cardAssistido.style.cursor = "pointer";
+
+                    img.className = "fotoUsuario";
+                    divimg.className = "img";
+                    divnome.className = "nome";
+
+                    if ((fun.foto_antes === null) || (fun.foto_antes === "undefined") || (fun.foto_antes === "null") || (fun.foto_antes === "")) {
+                        img.src = "../../Assets/icones/user.png";
+                    } else {
+                        img.src = fun.foto_antes;
+                    }
+
+                    nomeFun.innerHTML = `${fun.nome_completo}`;
+
+                    divimg.appendChild(img);
+                    divnome.appendChild(nomeFun);
+                    cardAssistido.appendChild(divimg);
+                    cardAssistido.appendChild(divnome);
+                    cont.appendChild(cardAssistido);
+
+                    cardAssistido.addEventListener("click", (e) => {
+
+                        let id = fun;
+                        let store = localStorage.setItem("assistido", fun.id_assistido);
+                        window.location.href = "../VerAssistido/index.html";
+                    });
+                });
+            });
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function buscar() {

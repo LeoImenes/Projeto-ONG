@@ -65,27 +65,29 @@ function cadastrarFunc() {
             "estado_civil": ""
         })
 
-        fetch(`${url}/funcionario`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: data,
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Cadastro efetuado com sucesso")
-                    return response.json()
+        try {
+            fetch(`${url}/funcionario`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: data,
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Cadastro efetuado com sucesso")
+                        return response.json()
 
-                } else {
-                    alert("Falha ao cadastrar, todos os campos são obrigatórios")
-                }
-
-            })
-
-        .then(data => {
-            window.location.href = '../ListarFuncionarios/'
-        })
+                    } else {
+                        alert("Falha ao cadastrar, todos os campos são obrigatórios")
+                    }
+                })
+                .then(data => {
+                    window.location.href = '../ListarFuncionarios/'
+                })
+        } catch (e) {
+            console.log(e)
+        }
 
     }
 

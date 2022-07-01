@@ -5,7 +5,6 @@ function getAll() {
 }
 
 function menuDown() {
-
     let menuAco = document.querySelector(".dadosFamilia");
     let littlearrow = document.querySelector(".faArrow");
     menuAco.classList.remove(".dadosFamilia");
@@ -25,81 +24,84 @@ function menuDown() {
 function getFamiliares() {
     let dadosFamilia = document.querySelector(".dadosFamilia");
     var local = localStorage.getItem("assistido");
-    fetch(`${url}/assistido/busca_familiar/${local}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            var dadosFamilia = document.querySelector(".dadosFamilia")
-            data.forEach((item, index) => {
 
-                var div = document.createElement("div")
-                var ul_nome = document.createElement("ul")
-                var litxtNome = document.createElement("li")
-                var litgetNome = document.createElement("li")
+    try {
+        fetch(`${url}/assistido/busca_familiar/${local}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                var dadosFamilia = document.querySelector(".dadosFamilia");
+                data.forEach((item, index) => {
 
-                var ul_rg = document.createElement("ul")
-                var litxtrg = document.createElement("li")
-                var litgetrg = document.createElement("li")
+                    var div = document.createElement("div");
+                    var ul_nome = document.createElement("ul");
+                    var litxtNome = document.createElement("li");
+                    var litgetNome = document.createElement("li");
 
-                var ul_rg = document.createElement("ul")
-                var litxtrg = document.createElement("li")
-                var litgetrg = document.createElement("li")
+                    var ul_rg = document.createElement("ul");
+                    var litxtrg = document.createElement("li");
+                    var litgetrg = document.createElement("li");
+
+                    var ul_rg = document.createElement("ul");
+                    var litxtrg = document.createElement("li");
+                    var litgetrg = document.createElement("li");
 
 
-                var ul_par = document.createElement("ul")
-                var litxtpar = document.createElement("li")
-                var litgetpar = document.createElement("li")
+                    var ul_par = document.createElement("ul");
+                    var litxtpar = document.createElement("li");
+                    var litgetpar = document.createElement("li");
 
-                var ul_tel = document.createElement("ul")
-                var litxttel = document.createElement("li")
-                var litgettel = document.createElement("li")
+                    var ul_tel = document.createElement("ul");
+                    var litxttel = document.createElement("li");
+                    var litgettel = document.createElement("li");
 
-                var ul_email = document.createElement("ul")
-                var litxtemail = document.createElement("li")
-                var litgetemail = document.createElement("li")
+                    var ul_email = document.createElement("ul");
+                    var litxtemail = document.createElement("li");
+                    var litgetemail = document.createElement("li");
 
-                var ul_end = document.createElement("ul")
-                var litxtend = document.createElement("li")
-                var litgeend = document.createElement("li")
+                    var ul_end = document.createElement("ul");
+                    var litxtend = document.createElement("li");
+                    var litgeend = document.createElement("li");
 
-                litxtNome.innerHTML = "Nome: "
-                litgetNome.innerHTML = item.Familiar
-                litxtrg.innerHTML = "RG: "
-                litgetrg.innerHTML = item.RG
-                litxtpar.innerHTML = "Parentesco: "
-                litgetpar.innerHTML = item.Parentesco
-                litxttel.innerHTML = "Telefone: "
-                litgettel.innerHTML = item.Telefone_familiar
-                litxtemail.innerHTML = "Email: "
-                litgetemail.innerHTML = item.Email_Familiar
-                litxtend.innerHTML = "Endereço: "
-                litgeend.innerHTML = item.Endereco_Familiar
+                    litxtNome.innerHTML = "Nome: ";
+                    litgetNome.innerHTML = item.Familiar;
+                    litxtrg.innerHTML = "RG: ";
+                    litgetrg.innerHTML = item.RG;
+                    litxtpar.innerHTML = "Parentesco: ";
+                    litgetpar.innerHTML = item.Parentesco;
+                    litxttel.innerHTML = "Telefone: ";
+                    litgettel.innerHTML = item.Telefone_familiar;
+                    litxtemail.innerHTML = "Email: ";
+                    litgetemail.innerHTML = item.Email_Familiar;
+                    litxtend.innerHTML = "Endereço: ";
+                    litgeend.innerHTML = item.Endereco_Familiar;
 
-                ul_email.appendChild(litxtemail)
-                ul_email.appendChild(litgetemail)
-                ul_end.appendChild(litxtend)
-                ul_end.appendChild(litgeend)
-                ul_tel.appendChild(litxttel)
-                ul_tel.appendChild(litgettel)
-                ul_par.appendChild(litxtpar)
-                ul_par.appendChild(litgetpar)
-                ul_rg.appendChild(litxtrg)
-                ul_rg.appendChild(litgetrg)
-                ul_nome.appendChild(litxtNome)
-                ul_nome.appendChild(litgetNome)
-                div.appendChild(ul_nome)
-                div.appendChild(ul_rg)
-                div.appendChild(ul_par)
-                div.appendChild(ul_tel)
-                div.appendChild(ul_email)
-                div.appendChild(ul_end)
-                dadosFamilia.appendChild(div)
-                div.className = "itens"
+                    ul_email.appendChild(litxtemail);
+                    ul_email.appendChild(litgetemail);
+                    ul_end.appendChild(litxtend);
+                    ul_end.appendChild(litgeend);
+                    ul_tel.appendChild(litxttel);
+                    ul_tel.appendChild(litgettel);
+                    ul_par.appendChild(litxtpar);
+                    ul_par.appendChild(litgetpar);
+                    ul_rg.appendChild(litxtrg);
+                    ul_rg.appendChild(litgetrg);
+                    ul_nome.appendChild(litxtNome);
+                    ul_nome.appendChild(litgetNome);
+                    div.appendChild(ul_nome);
+                    div.appendChild(ul_rg);
+                    div.appendChild(ul_par);
+                    div.appendChild(ul_tel);
+                    div.appendChild(ul_email);
+                    div.appendChild(ul_end);
+                    dadosFamilia.appendChild(div);
+                    div.className = "itens";
+                });
             });
-
-
-        });
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function menuDownPsco() {
@@ -233,7 +235,7 @@ function getComorbidadeAssistido() {
                     var liDroga = document.createElement("li");
                     liDroga.innerHTML = item.Comorbidades;
                     ulDroga.appendChild(liDroga);
-                } else if (item.tipo === 1){
+                } else if (item.tipo === 1) {
                     var liDoenca = document.createElement("li");
                     liDoenca.innerHTML = item.Comorbidades;
                     ulDoenca.appendChild(liDoenca);

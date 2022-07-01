@@ -27,12 +27,11 @@ adcFoto.addEventListener("click", () => {
 });
 
 
-
 function getAll() {
     getComorbidades();
     getComorbidadeAssistido()
     getAssistido();
-    // getComorbidadeAssistido();
+
 }
 
 
@@ -42,59 +41,57 @@ function getAssistido() {
     var sexFem = document.querySelector("#Feminino");
     var sexOutr = document.querySelector("#Outro");
 
-
-    fetch(`${url}/assistidos/${assis}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            
-
-            if (data.foto_depois === "null" || data.foto_depois === "undefined") {
-                fotogetAssisitdo = "../../Assets/icones/user.png"
-            } else {
-                fotogetAssisitdo = (data.foto_depois);
-            }
+    try {
+        fetch(`${url}/assistidos/${assis}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
 
 
+                if (data.foto_depois === "null" || data.foto_depois === "undefined") {
+                    fotogetAssisitdo = "../../Assets/icones/user.png"
+                } else {
+                    fotogetAssisitdo = (data.foto_depois);
+                }
+                if (data.sexo.toLowerCase() === 'masculino') {
+                    sexMasc.checked = true;
+                } else if (data.sexo.toLowerCase() === 'feminino') {
+                    sexFem.checked = true;
+                } else {
+                    sexOutr.checked = true;
+                }
+
+                fotoAntes = data.foto_antes;
+                getSexo = data.sexo;
+                var newImg = document.querySelector(".foto").src = fotogetAssisitdo;
+                var inpNomeCom = document.querySelector(".nome-Completo");
+                var nome = document.querySelector(".nome");
+                var nomesoc = document.querySelector(".nome-soc");
+                var rg = document.querySelector(".rg");
+                var cpf = document.querySelector(".cpf");
+                var est = document.querySelector(".estado");
+                var nat = document.querySelector(".naturalidade");
+                var nasc = document.querySelector(".nasc");
+                var cartCid = document.querySelector(".cartCid");
+                var cartSus = document.querySelector(".cartSus");
+                var ante = document.querySelector(".ant");
 
 
-
-            if (data.sexo.toLowerCase() === 'masculino') {
-                sexMasc.checked = true;
-            } else if (data.sexo.toLowerCase() === 'feminino') {
-                sexFem.checked = true;
-            } else {
-                sexOutr.checked = true;
-            }
-
-            fotoAntes = data.foto_antes;
-            getSexo = data.sexo;
-            var newImg = document.querySelector(".foto").src = fotogetAssisitdo;
-            var inpNomeCom = document.querySelector(".nome-Completo");
-            var nome = document.querySelector(".nome");
-            var nomesoc = document.querySelector(".nome-soc");
-            var rg = document.querySelector(".rg");
-            var cpf = document.querySelector(".cpf");
-            var est = document.querySelector(".estado");
-            var nat = document.querySelector(".naturalidade");
-            var nasc = document.querySelector(".nasc");
-            var cartCid = document.querySelector(".cartCid");
-            var cartSus = document.querySelector(".cartSus");
-            var ante = document.querySelector(".ant");
-
-
-            nome.value = data.nome_completo;
-            nomesoc.value = data.nome_social;
-            rg.value = data.rg;
-            cpf.value = data.cpf;
-            est.value = data.estado_civil;
-            nat.value = data.naturalidade;
-            nasc.value = `${dataCoverter(data.data_nascimento)}`;
-            cartCid.value = data.cartao_cidadao;
-            cartSus.value = data.cartao_sus;
-            ante.value = data.antecedente_criminal;
-        });
+                nome.value = data.nome_completo;
+                nomesoc.value = data.nome_social;
+                rg.value = data.rg;
+                cpf.value = data.cpf;
+                est.value = data.estado_civil;
+                nat.value = data.naturalidade;
+                nasc.value = `${dataCoverter(data.data_nascimento)}`;
+                cartCid.value = data.cartao_cidadao;
+                cartSus.value = data.cartao_sus;
+                ante.value = data.antecedente_criminal;
+            });
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function updateAssistido() {
@@ -138,7 +135,6 @@ function updateAssistido() {
     } else if ((sexOutr.checked == 0) && (sexMasc.checked == 0) && (sexFem.checked == 0)) {
         alert("Selecione pelo menos uma opção (Sexo)")
     }
-
     if (fotinho === undefined) {
         fotinho = fotogetAssisitdo
     }
@@ -167,22 +163,26 @@ function updateAssistido() {
         inpNomeCom.appendChild(nomeerr)
     } else if ((nasc.value == "") || (nasc.value == 00 / 00 / 0000)) {
         document.querySelector(".Nascimento").appendChild(nomeerr)
-
     }
-    fetch(`${url}/assistido/update`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: dadosAtt
-        })
-        .then(response => {
-            if ((nome.value !== "") && ((nasc.value !== ""))) {
-                alert('Dados Atualizados com Sucesso')
-                return response.json()
-            }
-        })
-        .then(data => {
-            window.location.href = "../VerAssistido"
-        })
+
+    try {
+        fetch(`${url}/assistido/update`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: dadosAtt
+            })
+            .then(response => {
+                if ((nome.value !== "") && ((nasc.value !== ""))) {
+                    alert('Dados Atualizados com Sucesso')
+                    return response.json()
+                }
+            })
+            .then(data => {
+                window.location.href = "../VerAssistido"
+            })
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 
@@ -194,57 +194,55 @@ function getComorbidades() {
     let ulDroga = document.createElement("ul")
     let liDoenca = document.createElement("p")
     let liDroga = document.createElement("p")
+    try {
+        fetch(`${url}/assistido/comorbidade`)
+            .then(response => { return response.json() })
+            .then(data => {
+                data.forEach((item) => {
+                    let inpDoenca = document.createElement("input")
+                    let inpDroga = document.createElement("input")
 
-    fetch(`${url}/assistido/comorbidade`)
-        .then(response => { return response.json() })
-        .then(data => {
-            data.forEach((item) => {
-                let inpDoenca = document.createElement("input")
-                let inpDroga = document.createElement("input")
+                    inpDroga.type = "checkbox"
+                    inpDoenca.type = "checkbox"
+                    inpDroga.className = "Comorbidade"
+                    inpDoenca.className = "Comorbidade"
+                    liDoenca.className = "doenca"
+                    liDroga.className = 'droga'
 
-                inpDroga.type = "checkbox"
-                inpDoenca.type = "checkbox"
-                inpDroga.className = "Comorbidade"
-                inpDoenca.className = "Comorbidade"
-                liDoenca.className = "doenca"
-                liDroga.className = 'droga'
-
-                if (item.tipo === 1) {
-                    liDoenca.innerHTML = item.comorbidade
-                    inpDoenca.value = item.id_comorbidade
-                    liDoenca.appendChild(inpDoenca)
-                    ulDoenca.appendChild(liDoenca.cloneNode(true));
-                    // ul.appendChild(liinp.cloneNode(true));
-                    listaDoencas.appendChild(ulDoenca)
-                } else if (item.tipo === 0) {
-                    inpDroga.value = item.id_comorbidade
-                    liDroga.innerHTML = item.comorbidade
-                    liDroga.appendChild(inpDroga)
-                    ulDroga.appendChild(liDroga.cloneNode(true));
-                    // ul.appendChild(liinp.cloneNode(true));
-                    listaDrogas.appendChild(ulDroga)
-                }
-
-                
-
-            })
-
-
-        })
+                    if (item.tipo === 1) {
+                        liDoenca.innerHTML = item.comorbidade
+                        inpDoenca.value = item.id_comorbidade
+                        liDoenca.appendChild(inpDoenca)
+                        ulDoenca.appendChild(liDoenca.cloneNode(true));
+                        // ul.appendChild(liinp.cloneNode(true));
+                        listaDoencas.appendChild(ulDoenca)
+                    } else if (item.tipo === 0) {
+                        inpDroga.value = item.id_comorbidade
+                        liDroga.innerHTML = item.comorbidade
+                        liDroga.appendChild(inpDroga)
+                        ulDroga.appendChild(liDroga.cloneNode(true));
+                        // ul.appendChild(liinp.cloneNode(true));
+                        listaDrogas.appendChild(ulDroga)
+                    }
+                });
+            });
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
 function getComorbidadeAssistido() {
-    fetch(`${url}/assistido/saudeID/${assis}`)
-        .then(response => { return response.json() })
-        .then(data => {
-            if (data.length <= 0) {
-                met = "POST"
-            } else {
-                met = "PUT"
-            }
-            
-        })
+    try {
+        fetch(`${url}/assistido/saudeID/${assis}`)
+            .then(response => { return response.json() })
+            .then(data => {
+                if (data.length <= 0) met = "POST"
+                else met = "PUT"
+            })
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function updateComorbidades() {
@@ -254,28 +252,26 @@ function updateComorbidades() {
         if (item.checked === true) {
             var comor = {
                 "id_assistido": JSON.parse(assis),
-                "comorbidades": [{
-                    "value": parseInt(item.value)
-                }]
-
+                "comorbidades": [{ "value": parseInt(item.value) }]
             }
 
-            fetch(`${url}/assistido/saude`, {
+            try {
+                fetch(`${url}/assistido/saude`, {
                     method: met,
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(comor)
-                })
-                .then(response => {
+                }).then(response => {
                     if (response.ok) {
-                        return response.json()
+                        return response.json();
                     } else {
-                        alert("Falha ao Cadastrar Comorbidades")
+                        alert("Falha ao Cadastrar Comorbidades");
                     }
-                })
-                .then(data => { })
-        } 
+                }).then(data => {});
+
+            } catch (e) { console.log(e) }
+        }
     });
 }
 
@@ -325,20 +321,18 @@ function cadastrarFotoDepois() {
         alert("foto atualizada")
     }
 
-    fetch(`${url}/assistido_foto_depois`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-
-            // window.location.href = "http://127.0.0.1:5500/Assistidos/VerAssistido/index.html"
-
-        });
+    try {
+        fetch(`${url}/assistido_foto_depois`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data));
+    } catch (e) { console.log(e) }
 
 }

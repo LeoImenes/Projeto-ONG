@@ -6,22 +6,23 @@ function getfunc() {
     let foto = document.querySelector(".userimg");
     user.innerHTML = funcionario.nome_completo
         // foto.src = funcionario.foto
-        
-
-        
-
-    fetch(`${url}/funcionarios/${funcionario.matricula}`)
-        .then(resp => { return resp.json() })
-        .then(data => {
-            user.innerHTML = data[0].nome_completo
-            if ((data[0].foto == null) || data[0].foto == 'undefined' || data[0].foto == "null") {
-                foto.src = `../../Assets/icones/user.png`
-            } else {
-                foto.src = data[0].foto
-            }
+    try {
+        fetch(`${url}/funcionarios/${funcionario.matricula}`)
+            .then(resp => { return resp.json() })
+            .then(data => {
+                user.innerHTML = data[0].nome_completo
+                if ((data[0].foto == null) || data[0].foto == 'undefined' || data[0].foto == "null" || data[0].foto == "") {
+                    foto.src = `../../Assets/icones/user.png`
+                } else {
+                    foto.src = data[0].foto
+                }
 
 
-        })
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
 }
 
 function dataCoverter(data) {

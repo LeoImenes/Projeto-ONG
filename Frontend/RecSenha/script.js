@@ -7,23 +7,24 @@ function conectar() {
         cpf: cpf.value,
         nova_senha: md5(nova_senha.value),
     });
-
-    fetch(`${url}/funcionario/reset_senha`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then((resp) => {
-            if (resp.status == 401) {
-                alert("Email ou Senha Invalido");
-            }
-            return resp.json();
-        })
-        .then((data) => {
-            window.location.href = "../../Login/"
-        });
+    try {
+        fetch(`${url}/funcionario/reset_senha`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+            .then((resp) => {
+                if (resp.status == 401) {
+                    alert("Email ou Senha Invalido");
+                }
+                return resp.json();
+            })
+            .then((data) => {
+                window.location.href = "../../Login/"
+            });
+    } catch (e) { console.log(e) }
 }
 
 function olharSenha() {
